@@ -1,9 +1,10 @@
 package com.fangbaba.basic.mappers;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-import com.fangbaba.basic.po.ProvinceModel;
+import com.fangbaba.basic.face.bean.ProvinceModel;
 import com.fangbaba.basic.po.ProvinceModelExample;
 
 public interface ProvinceModelMapper {

@@ -1,10 +1,10 @@
-package com.fangbaba.basic.service;
+package com.fangbaba.basic.face.service;
 
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.fangbaba.basic.po.RoomtypeModel;
+import com.fangbaba.basic.face.bean.RoomtypeModel;
 
 public interface RoomtypeService {
 	/**

@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.RoomModel;
+import com.fangbaba.basic.face.service.RoomService;
 import com.fangbaba.basic.mappers.RoomModelMapper;
-import com.fangbaba.basic.po.RoomModel;
 import com.fangbaba.basic.po.RoomModelExample;
-import com.fangbaba.basic.service.RoomService;
 
 /**
  * @author he

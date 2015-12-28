@@ -1,9 +1,11 @@
 package com.fangbaba.basic.mappers;
 
-import com.fangbaba.basic.po.HotelModel;
-import com.fangbaba.basic.po.HotelModelExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.fangbaba.basic.face.bean.HotelModel;
+import com.fangbaba.basic.po.HotelModelExample;
 
 public interface HotelModelMapper {
     int countByExample(HotelModelExample example);
