@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fangbaba.basic.mappers.CityModelMapper" >
+  <resultMap id="BaseResultMap" type="com.fangbaba.basic.po.CityModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="proid" property="proid" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="simplename" property="simplename" jdbcType="VARCHAR" />
+    <result column="ishotcity" property="ishotcity" jdbcType="VARCHAR" />
+    <result column="range" property="range" jdbcType="DOUBLE" />
+    <result column="isselect" property="isselect" jdbcType="VARCHAR" />
+    <result column="querycityname" property="querycityname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, proid, sort, latitude, longitude, simplename, ishotcity, `range`, isselect, 
+    querycityname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.CityModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from city
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from city
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fangbaba.basic.po.CityModelExample" >
+    delete from city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fangbaba.basic.po.CityModel" >
+    insert into city (id, code, name, 
+      proid, sort, latitude, 
+      longitude, simplename, ishotcity, 
+      range, isselect, querycityname
+      )
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{proid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DECIMAL}, 
+      #{longitude,jdbcType=DECIMAL}, #{simplename,jdbcType=VARCHAR}, #{ishotcity,jdbcType=VARCHAR}, 
+      #{range,jdbcType=DOUBLE}, #{isselect,jdbcType=VARCHAR}, #{querycityname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangbaba.basic.po.CityModel" >
+    insert into city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="proid != null" >
+        proid,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="simplename != null" >
+        simplename,
+      </if>
+      <if test="ishotcity != null" >
+        ishotcity,
+      </if>
+      <if test="range != null" >
+        range,
+      </if>
+      <if test="isselect != null" >
+        isselect,
+      </if>
+      <if test="querycityname != null" >
+        querycityname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="simplename != null" >
+        #{simplename,jdbcType=VARCHAR},
+      </if>
+      <if test="ishotcity != null" >
+        #{ishotcity,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null" >
+        #{range,jdbcType=DOUBLE},
+      </if>
+      <if test="isselect != null" >
+        #{isselect,jdbcType=VARCHAR},
+      </if>
+      <if test="querycityname != null" >
+        #{querycityname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fangbaba.basic.po.CityModelExample" resultType="java.lang.Integer" >
+    select count(*) from city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update city
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proid != null" >
+        proid = #{record.proid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.simplename != null" >
+        simplename = #{record.simplename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishotcity != null" >
+        ishotcity = #{record.ishotcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.range != null" >
+        range = #{record.range,jdbcType=DOUBLE},
+      </if>
+      <if test="record.isselect != null" >
+        isselect = #{record.isselect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.querycityname != null" >
+        querycityname = #{record.querycityname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update city
+    set id = #{record.id,jdbcType=BIGINT},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      proid = #{record.proid,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      latitude = #{record.latitude,jdbcType=DECIMAL},
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      simplename = #{record.simplename,jdbcType=VARCHAR},
+      ishotcity = #{record.ishotcity,jdbcType=VARCHAR},
+      range = #{record.range,jdbcType=DOUBLE},
+      isselect = #{record.isselect,jdbcType=VARCHAR},
+      querycityname = #{record.querycityname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangbaba.basic.po.CityModel" >
+    update city
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        proid = #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="simplename != null" >
+        simplename = #{simplename,jdbcType=VARCHAR},
+      </if>
+      <if test="ishotcity != null" >
+        ishotcity = #{ishotcity,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null" >
+        range = #{range,jdbcType=DOUBLE},
+      </if>
+      <if test="isselect != null" >
+        isselect = #{isselect,jdbcType=VARCHAR},
+      </if>
+      <if test="querycityname != null" >
+        querycityname = #{querycityname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangbaba.basic.po.CityModel" >
+    update city
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      proid = #{proid,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      simplename = #{simplename,jdbcType=VARCHAR},
+      ishotcity = #{ishotcity,jdbcType=VARCHAR},
+      range = #{range,jdbcType=DOUBLE},
+      isselect = #{isselect,jdbcType=VARCHAR},
+      querycityname = #{querycityname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

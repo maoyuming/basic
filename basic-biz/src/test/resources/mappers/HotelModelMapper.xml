@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fangbaba.basic.mappers.HotelModelMapper" >
+  <resultMap id="BaseResultMap" type="com.fangbaba.basic.po.HotelModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hotelname" property="hotelname" jdbcType="VARCHAR" />
+    <result column="hotelcontactname" property="hotelcontactname" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="detailaddr" property="detailaddr" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="opentime" property="opentime" jdbcType="TIMESTAMP" />
+    <result column="repairtime" property="repairtime" jdbcType="TIMESTAMP" />
+    <result column="roomnum" property="roomnum" jdbcType="INTEGER" />
+    <result column="businesslicensefront" property="businesslicensefront" jdbcType="VARCHAR" />
+    <result column="businesslicenseback" property="businesslicenseback" jdbcType="VARCHAR" />
+    <result column="hotelpms" property="hotelpms" jdbcType="VARCHAR" />
+    <result column="isvisible" property="isvisible" jdbcType="CHAR" />
+    <result column="isonline" property="isonline" jdbcType="CHAR" />
+    <result column="idcardfront" property="idcardfront" jdbcType="VARCHAR" />
+    <result column="idcardback" property="idcardback" jdbcType="VARCHAR" />
+    <result column="retentiontime" property="retentiontime" jdbcType="CHAR" />
+    <result column="defaultleavetime" property="defaultleavetime" jdbcType="CHAR" />
+    <result column="hotelphone" property="hotelphone" jdbcType="VARCHAR" />
+    <result column="hoteltype" property="hoteltype" jdbcType="INTEGER" />
+    <result column="discode" property="discode" jdbcType="INTEGER" />
+    <result column="qtphone" property="qtphone" jdbcType="VARCHAR" />
+    <result column="citycode" property="citycode" jdbcType="INTEGER" />
+    <result column="provcode" property="provcode" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fangbaba.basic.po.HotelModel" extends="BaseResultMap" >
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, hotelname, hotelcontactname, regtime, detailaddr, longitude, latitude, opentime, 
+    repairtime, roomnum, businesslicensefront, businesslicenseback, hotelpms, isvisible, 
+    isonline, idcardfront, idcardback, retentiontime, defaultleavetime, hotelphone, hoteltype, 
+    discode, qtphone, citycode, provcode
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hotel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hotel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    delete from hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fangbaba.basic.po.HotelModel" >
+    insert into hotel (id, hotelname, hotelcontactname, 
+      regtime, detailaddr, longitude, 
+      latitude, opentime, repairtime, 
+      roomnum, businesslicensefront, businesslicenseback, 
+      hotelpms, isvisible, isonline, 
+      idcardfront, idcardback, retentiontime, 
+      defaultleavetime, hotelphone, hoteltype, 
+      discode, qtphone, citycode, 
+      provcode, introduction)
+    values (#{id,jdbcType=BIGINT}, #{hotelname,jdbcType=VARCHAR}, #{hotelcontactname,jdbcType=VARCHAR}, 
+      #{regtime,jdbcType=TIMESTAMP}, #{detailaddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{opentime,jdbcType=TIMESTAMP}, #{repairtime,jdbcType=TIMESTAMP}, 
+      #{roomnum,jdbcType=INTEGER}, #{businesslicensefront,jdbcType=VARCHAR}, #{businesslicenseback,jdbcType=VARCHAR}, 
+      #{hotelpms,jdbcType=VARCHAR}, #{isvisible,jdbcType=CHAR}, #{isonline,jdbcType=CHAR}, 
+      #{idcardfront,jdbcType=VARCHAR}, #{idcardback,jdbcType=VARCHAR}, #{retentiontime,jdbcType=CHAR}, 
+      #{defaultleavetime,jdbcType=CHAR}, #{hotelphone,jdbcType=VARCHAR}, #{hoteltype,jdbcType=INTEGER}, 
+      #{discode,jdbcType=INTEGER}, #{qtphone,jdbcType=VARCHAR}, #{citycode,jdbcType=INTEGER}, 
+      #{provcode,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangbaba.basic.po.HotelModel" >
+    insert into hotel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hotelname != null" >
+        hotelname,
+      </if>
+      <if test="hotelcontactname != null" >
+        hotelcontactname,
+      </if>
+      <if test="regtime != null" >
+        regtime,
+      </if>
+      <if test="detailaddr != null" >
+        detailaddr,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="opentime != null" >
+        opentime,
+      </if>
+      <if test="repairtime != null" >
+        repairtime,
+      </if>
+      <if test="roomnum != null" >
+        roomnum,
+      </if>
+      <if test="businesslicensefront != null" >
+        businesslicensefront,
+      </if>
+      <if test="businesslicenseback != null" >
+        businesslicenseback,
+      </if>
+      <if test="hotelpms != null" >
+        hotelpms,
+      </if>
+      <if test="isvisible != null" >
+        isvisible,
+      </if>
+      <if test="isonline != null" >
+        isonline,
+      </if>
+      <if test="idcardfront != null" >
+        idcardfront,
+      </if>
+      <if test="idcardback != null" >
+        idcardback,
+      </if>
+      <if test="retentiontime != null" >
+        retentiontime,
+      </if>
+      <if test="defaultleavetime != null" >
+        defaultleavetime,
+      </if>
+      <if test="hotelphone != null" >
+        hotelphone,
+      </if>
+      <if test="hoteltype != null" >
+        hoteltype,
+      </if>
+      <if test="discode != null" >
+        discode,
+      </if>
+      <if test="qtphone != null" >
+        qtphone,
+      </if>
+      <if test="citycode != null" >
+        citycode,
+      </if>
+      <if test="provcode != null" >
+        provcode,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hotelname != null" >
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelcontactname != null" >
+        #{hotelcontactname,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailaddr != null" >
+        #{detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="opentime != null" >
+        #{opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repairtime != null" >
+        #{repairtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomnum != null" >
+        #{roomnum,jdbcType=INTEGER},
+      </if>
+      <if test="businesslicensefront != null" >
+        #{businesslicensefront,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicenseback != null" >
+        #{businesslicenseback,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpms != null" >
+        #{hotelpms,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisible != null" >
+        #{isvisible,jdbcType=CHAR},
+      </if>
+      <if test="isonline != null" >
+        #{isonline,jdbcType=CHAR},
+      </if>
+      <if test="idcardfront != null" >
+        #{idcardfront,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardback != null" >
+        #{idcardback,jdbcType=VARCHAR},
+      </if>
+      <if test="retentiontime != null" >
+        #{retentiontime,jdbcType=CHAR},
+      </if>
+      <if test="defaultleavetime != null" >
+        #{defaultleavetime,jdbcType=CHAR},
+      </if>
+      <if test="hotelphone != null" >
+        #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null" >
+        #{hoteltype,jdbcType=INTEGER},
+      </if>
+      <if test="discode != null" >
+        #{discode,jdbcType=INTEGER},
+      </if>
+      <if test="qtphone != null" >
+        #{qtphone,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=INTEGER},
+      </if>
+      <if test="provcode != null" >
+        #{provcode,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fangbaba.basic.po.HotelModelExample" resultType="java.lang.Integer" >
+    select count(*) from hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hotel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotelname != null" >
+        hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelcontactname != null" >
+        hotelcontactname = #{record.hotelcontactname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regtime != null" >
+        regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailaddr != null" >
+        detailaddr = #{record.detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.opentime != null" >
+        opentime = #{record.opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repairtime != null" >
+        repairtime = #{record.repairtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roomnum != null" >
+        roomnum = #{record.roomnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.businesslicensefront != null" >
+        businesslicensefront = #{record.businesslicensefront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicenseback != null" >
+        businesslicenseback = #{record.businesslicenseback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelpms != null" >
+        hotelpms = #{record.hotelpms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvisible != null" >
+        isvisible = #{record.isvisible,jdbcType=CHAR},
+      </if>
+      <if test="record.isonline != null" >
+        isonline = #{record.isonline,jdbcType=CHAR},
+      </if>
+      <if test="record.idcardfront != null" >
+        idcardfront = #{record.idcardfront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcardback != null" >
+        idcardback = #{record.idcardback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.retentiontime != null" >
+        retentiontime = #{record.retentiontime,jdbcType=CHAR},
+      </if>
+      <if test="record.defaultleavetime != null" >
+        defaultleavetime = #{record.defaultleavetime,jdbcType=CHAR},
+      </if>
+      <if test="record.hotelphone != null" >
+        hotelphone = #{record.hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoteltype != null" >
+        hoteltype = #{record.hoteltype,jdbcType=INTEGER},
+      </if>
+      <if test="record.discode != null" >
+        discode = #{record.discode,jdbcType=INTEGER},
+      </if>
+      <if test="record.qtphone != null" >
+        qtphone = #{record.qtphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citycode != null" >
+        citycode = #{record.citycode,jdbcType=INTEGER},
+      </if>
+      <if test="record.provcode != null" >
+        provcode = #{record.provcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update hotel
+    set id = #{record.id,jdbcType=BIGINT},
+      hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      hotelcontactname = #{record.hotelcontactname,jdbcType=VARCHAR},
+      regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      detailaddr = #{record.detailaddr,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      latitude = #{record.latitude,jdbcType=DECIMAL},
+      opentime = #{record.opentime,jdbcType=TIMESTAMP},
+      repairtime = #{record.repairtime,jdbcType=TIMESTAMP},
+      roomnum = #{record.roomnum,jdbcType=INTEGER},
+      businesslicensefront = #{record.businesslicensefront,jdbcType=VARCHAR},
+      businesslicenseback = #{record.businesslicenseback,jdbcType=VARCHAR},
+      hotelpms = #{record.hotelpms,jdbcType=VARCHAR},
+      isvisible = #{record.isvisible,jdbcType=CHAR},
+      isonline = #{record.isonline,jdbcType=CHAR},
+      idcardfront = #{record.idcardfront,jdbcType=VARCHAR},
+      idcardback = #{record.idcardback,jdbcType=VARCHAR},
+      retentiontime = #{record.retentiontime,jdbcType=CHAR},
+      defaultleavetime = #{record.defaultleavetime,jdbcType=CHAR},
+      hotelphone = #{record.hotelphone,jdbcType=VARCHAR},
+      hoteltype = #{record.hoteltype,jdbcType=INTEGER},
+      discode = #{record.discode,jdbcType=INTEGER},
+      qtphone = #{record.qtphone,jdbcType=VARCHAR},
+      citycode = #{record.citycode,jdbcType=INTEGER},
+      provcode = #{record.provcode,jdbcType=INTEGER},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hotel
+    set id = #{record.id,jdbcType=BIGINT},
+      hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      hotelcontactname = #{record.hotelcontactname,jdbcType=VARCHAR},
+      regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      detailaddr = #{record.detailaddr,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      latitude = #{record.latitude,jdbcType=DECIMAL},
+      opentime = #{record.opentime,jdbcType=TIMESTAMP},
+      repairtime = #{record.repairtime,jdbcType=TIMESTAMP},
+      roomnum = #{record.roomnum,jdbcType=INTEGER},
+      businesslicensefront = #{record.businesslicensefront,jdbcType=VARCHAR},
+      businesslicenseback = #{record.businesslicenseback,jdbcType=VARCHAR},
+      hotelpms = #{record.hotelpms,jdbcType=VARCHAR},
+      isvisible = #{record.isvisible,jdbcType=CHAR},
+      isonline = #{record.isonline,jdbcType=CHAR},
+      idcardfront = #{record.idcardfront,jdbcType=VARCHAR},
+      idcardback = #{record.idcardback,jdbcType=VARCHAR},
+      retentiontime = #{record.retentiontime,jdbcType=CHAR},
+      defaultleavetime = #{record.defaultleavetime,jdbcType=CHAR},
+      hotelphone = #{record.hotelphone,jdbcType=VARCHAR},
+      hoteltype = #{record.hoteltype,jdbcType=INTEGER},
+      discode = #{record.discode,jdbcType=INTEGER},
+      qtphone = #{record.qtphone,jdbcType=VARCHAR},
+      citycode = #{record.citycode,jdbcType=INTEGER},
+      provcode = #{record.provcode,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangbaba.basic.po.HotelModel" >
+    update hotel
+    <set >
+      <if test="hotelname != null" >
+        hotelname = #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelcontactname != null" >
+        hotelcontactname = #{hotelcontactname,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regtime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailaddr != null" >
+        detailaddr = #{detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="opentime != null" >
+        opentime = #{opentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repairtime != null" >
+        repairtime = #{repairtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomnum != null" >
+        roomnum = #{roomnum,jdbcType=INTEGER},
+      </if>
+      <if test="businesslicensefront != null" >
+        businesslicensefront = #{businesslicensefront,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicenseback != null" >
+        businesslicenseback = #{businesslicenseback,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpms != null" >
+        hotelpms = #{hotelpms,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisible != null" >
+        isvisible = #{isvisible,jdbcType=CHAR},
+      </if>
+      <if test="isonline != null" >
+        isonline = #{isonline,jdbcType=CHAR},
+      </if>
+      <if test="idcardfront != null" >
+        idcardfront = #{idcardfront,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardback != null" >
+        idcardback = #{idcardback,jdbcType=VARCHAR},
+      </if>
+      <if test="retentiontime != null" >
+        retentiontime = #{retentiontime,jdbcType=CHAR},
+      </if>
+      <if test="defaultleavetime != null" >
+        defaultleavetime = #{defaultleavetime,jdbcType=CHAR},
+      </if>
+      <if test="hotelphone != null" >
+        hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null" >
+        hoteltype = #{hoteltype,jdbcType=INTEGER},
+      </if>
+      <if test="discode != null" >
+        discode = #{discode,jdbcType=INTEGER},
+      </if>
+      <if test="qtphone != null" >
+        qtphone = #{qtphone,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        citycode = #{citycode,jdbcType=INTEGER},
+      </if>
+      <if test="provcode != null" >
+        provcode = #{provcode,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fangbaba.basic.po.HotelModel" >
+    update hotel
+    set hotelname = #{hotelname,jdbcType=VARCHAR},
+      hotelcontactname = #{hotelcontactname,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      detailaddr = #{detailaddr,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      opentime = #{opentime,jdbcType=TIMESTAMP},
+      repairtime = #{repairtime,jdbcType=TIMESTAMP},
+      roomnum = #{roomnum,jdbcType=INTEGER},
+      businesslicensefront = #{businesslicensefront,jdbcType=VARCHAR},
+      businesslicenseback = #{businesslicenseback,jdbcType=VARCHAR},
+      hotelpms = #{hotelpms,jdbcType=VARCHAR},
+      isvisible = #{isvisible,jdbcType=CHAR},
+      isonline = #{isonline,jdbcType=CHAR},
+      idcardfront = #{idcardfront,jdbcType=VARCHAR},
+      idcardback = #{idcardback,jdbcType=VARCHAR},
+      retentiontime = #{retentiontime,jdbcType=CHAR},
+      defaultleavetime = #{defaultleavetime,jdbcType=CHAR},
+      hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      hoteltype = #{hoteltype,jdbcType=INTEGER},
+      discode = #{discode,jdbcType=INTEGER},
+      qtphone = #{qtphone,jdbcType=VARCHAR},
+      citycode = #{citycode,jdbcType=INTEGER},
+      provcode = #{provcode,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangbaba.basic.po.HotelModel" >
+    update hotel
+    set hotelname = #{hotelname,jdbcType=VARCHAR},
+      hotelcontactname = #{hotelcontactname,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      detailaddr = #{detailaddr,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      opentime = #{opentime,jdbcType=TIMESTAMP},
+      repairtime = #{repairtime,jdbcType=TIMESTAMP},
+      roomnum = #{roomnum,jdbcType=INTEGER},
+      businesslicensefront = #{businesslicensefront,jdbcType=VARCHAR},
+      businesslicenseback = #{businesslicenseback,jdbcType=VARCHAR},
+      hotelpms = #{hotelpms,jdbcType=VARCHAR},
+      isvisible = #{isvisible,jdbcType=CHAR},
+      isonline = #{isonline,jdbcType=CHAR},
+      idcardfront = #{idcardfront,jdbcType=VARCHAR},
+      idcardback = #{idcardback,jdbcType=VARCHAR},
+      retentiontime = #{retentiontime,jdbcType=CHAR},
+      defaultleavetime = #{defaultleavetime,jdbcType=CHAR},
+      hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      hoteltype = #{hoteltype,jdbcType=INTEGER},
+      discode = #{discode,jdbcType=INTEGER},
+      qtphone = #{qtphone,jdbcType=VARCHAR},
+      citycode = #{citycode,jdbcType=INTEGER},
+      provcode = #{provcode,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
