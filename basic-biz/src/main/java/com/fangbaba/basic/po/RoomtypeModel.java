@@ -1,9 +1,12 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class RoomtypeModel {
-    private Long id;
+public class RoomtypeModel implements Serializable{
+	private static final long serialVersionUID = 3781280423818289399L;
+
+	private Long id;
 
     private Long hotelid;
 

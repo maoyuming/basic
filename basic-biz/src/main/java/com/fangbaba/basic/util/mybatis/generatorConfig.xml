@@ -32,11 +32,6 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="city" domainObjectName="CityModel"></table>
-        <table tableName="district" domainObjectName="DistrictModel"></table>
         <table tableName="hotel" domainObjectName="HotelModel"></table>
-        <table tableName="province" domainObjectName="ProvinceModel"></table>
-        <table tableName="room" domainObjectName="RoomModel"></table>
-        <table tableName="roomtype" domainObjectName="RoomtypeModel"></table>
 	</context>
 </generatorConfiguration>

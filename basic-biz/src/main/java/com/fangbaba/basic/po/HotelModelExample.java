@@ -1745,6 +1745,76 @@ public class HotelModelExample {
             addCriterion("provcode not between", value1, value2, "provcode");
             return (Criteria) this;
         }
+
+        public Criteria andPmstypeIsNull() {
+            addCriterion("pmstype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeIsNotNull() {
+            addCriterion("pmstype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeEqualTo(String value) {
+            addCriterion("pmstype =", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeNotEqualTo(String value) {
+            addCriterion("pmstype <>", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeGreaterThan(String value) {
+            addCriterion("pmstype >", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeGreaterThanOrEqualTo(String value) {
+            addCriterion("pmstype >=", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeLessThan(String value) {
+            addCriterion("pmstype <", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeLessThanOrEqualTo(String value) {
+            addCriterion("pmstype <=", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeLike(String value) {
+            addCriterion("pmstype like", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeNotLike(String value) {
+            addCriterion("pmstype not like", value, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeIn(List<String> values) {
+            addCriterion("pmstype in", values, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeNotIn(List<String> values) {
+            addCriterion("pmstype not in", values, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeBetween(String value1, String value2) {
+            addCriterion("pmstype between", value1, value2, "pmstype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPmstypeNotBetween(String value1, String value2) {
+            addCriterion("pmstype not between", value1, value2, "pmstype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -27,6 +27,7 @@
     <result column="qtphone" property="qtphone" jdbcType="VARCHAR" />
     <result column="citycode" property="citycode" jdbcType="INTEGER" />
     <result column="provcode" property="provcode" jdbcType="INTEGER" />
+    <result column="pmstype" property="pmstype" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.fangbaba.basic.po.HotelModel" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
@@ -93,7 +94,7 @@
     id, hotelname, hotelcontactname, regtime, detailaddr, longitude, latitude, opentime, 
     repairtime, roomnum, businesslicensefront, businesslicenseback, hotelpms, isvisible, 
     isonline, idcardfront, idcardback, retentiontime, defaultleavetime, hotelphone, hoteltype, 
-    discode, qtphone, citycode, provcode
+    discode, qtphone, citycode, provcode, pmstype
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -155,7 +156,8 @@
       idcardfront, idcardback, retentiontime, 
       defaultleavetime, hotelphone, hoteltype, 
       discode, qtphone, citycode, 
-      provcode, introduction)
+      provcode, pmstype, introduction
+      )
     values (#{id,jdbcType=BIGINT}, #{hotelname,jdbcType=VARCHAR}, #{hotelcontactname,jdbcType=VARCHAR}, 
       #{regtime,jdbcType=TIMESTAMP}, #{detailaddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
       #{latitude,jdbcType=DECIMAL}, #{opentime,jdbcType=TIMESTAMP}, #{repairtime,jdbcType=TIMESTAMP}, 
@@ -164,7 +166,8 @@
       #{idcardfront,jdbcType=VARCHAR}, #{idcardback,jdbcType=VARCHAR}, #{retentiontime,jdbcType=CHAR}, 
       #{defaultleavetime,jdbcType=CHAR}, #{hotelphone,jdbcType=VARCHAR}, #{hoteltype,jdbcType=INTEGER}, 
       #{discode,jdbcType=INTEGER}, #{qtphone,jdbcType=VARCHAR}, #{citycode,jdbcType=INTEGER}, 
-      #{provcode,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
+      #{provcode,jdbcType=INTEGER}, #{pmstype,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.fangbaba.basic.po.HotelModel" >
     insert into hotel
@@ -243,6 +246,9 @@
       </if>
       <if test="provcode != null" >
         provcode,
+      </if>
+      <if test="pmstype != null" >
+        pmstype,
       </if>
       <if test="introduction != null" >
         introduction,
@@ -323,6 +329,9 @@
       </if>
       <if test="provcode != null" >
         #{provcode,jdbcType=INTEGER},
+      </if>
+      <if test="pmstype != null" >
+        #{pmstype,jdbcType=VARCHAR},
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
@@ -413,6 +422,9 @@
       <if test="record.provcode != null" >
         provcode = #{record.provcode,jdbcType=INTEGER},
       </if>
+      <if test="record.pmstype != null" >
+        pmstype = #{record.pmstype,jdbcType=VARCHAR},
+      </if>
       <if test="record.introduction != null" >
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -448,6 +460,7 @@
       qtphone = #{record.qtphone,jdbcType=VARCHAR},
       citycode = #{record.citycode,jdbcType=INTEGER},
       provcode = #{record.provcode,jdbcType=INTEGER},
+      pmstype = #{record.pmstype,jdbcType=VARCHAR},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -479,7 +492,8 @@
       discode = #{record.discode,jdbcType=INTEGER},
       qtphone = #{record.qtphone,jdbcType=VARCHAR},
       citycode = #{record.citycode,jdbcType=INTEGER},
-      provcode = #{record.provcode,jdbcType=INTEGER}
+      provcode = #{record.provcode,jdbcType=INTEGER},
+      pmstype = #{record.pmstype,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -559,6 +573,9 @@
       <if test="provcode != null" >
         provcode = #{provcode,jdbcType=INTEGER},
       </if>
+      <if test="pmstype != null" >
+        pmstype = #{pmstype,jdbcType=VARCHAR},
+      </if>
       <if test="introduction != null" >
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -591,6 +608,7 @@
       qtphone = #{qtphone,jdbcType=VARCHAR},
       citycode = #{citycode,jdbcType=INTEGER},
       provcode = #{provcode,jdbcType=INTEGER},
+      pmstype = #{pmstype,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -619,7 +637,8 @@
       discode = #{discode,jdbcType=INTEGER},
       qtphone = #{qtphone,jdbcType=VARCHAR},
       citycode = #{citycode,jdbcType=INTEGER},
-      provcode = #{provcode,jdbcType=INTEGER}
+      provcode = #{provcode,jdbcType=INTEGER},
+      pmstype = #{pmstype,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

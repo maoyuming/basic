@@ -1,12 +1,13 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.elasticsearch.common.geo.GeoPoint;
+public class HotelModel implements Serializable{
+	private static final long serialVersionUID = -4229485247567019702L;
 
-public class HotelModel {
-    private Long id;
+	private Long id;
 
     private String hotelname;
 
@@ -56,57 +57,11 @@ public class HotelModel {
 
     private Integer provcode;
 
+    private String pmstype;
+
     private String introduction;
-    
-    //新增
-    private String provincename;//省
-    private String cityname;//市
-    private String districtname;//县
-    private GeoPoint pin;//坐标
 
-	public GeoPoint getPin() {
-		return pin;
-	}
-    private Double range=5000d;//搜索范围，默认5000m
-    
-    public Double getRange() {
-		return range;
-	}
-
-	public void setRange(Double range) {
-		this.range = range;
-	}
-
-
-	public void setPin(GeoPoint pin) {
-		this.pin = pin;
-	}
-
-	public String getProvincename() {
-		return provincename;
-	}
-
-	public void setProvincename(String provincename) {
-		this.provincename = provincename;
-	}
-
-	public String getCityname() {
-		return cityname;
-	}
-
-	public void setCityname(String cityname) {
-		this.cityname = cityname;
-	}
-
-	public String getDistrictname() {
-		return districtname;
-	}
-
-	public void setDistrictname(String districtname) {
-		this.districtname = districtname;
-	}
-
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -304,6 +259,14 @@ public class HotelModel {
 
     public void setProvcode(Integer provcode) {
         this.provcode = provcode;
+    }
+
+    public String getPmstype() {
+        return pmstype;
+    }
+
+    public void setPmstype(String pmstype) {
+        this.pmstype = pmstype == null ? null : pmstype.trim();
     }
 
     public String getIntroduction() {

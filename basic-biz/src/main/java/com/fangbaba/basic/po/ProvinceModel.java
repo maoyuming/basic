@@ -1,9 +1,12 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProvinceModel {
-    private Long id;
+public class ProvinceModel implements Serializable{
+	private static final long serialVersionUID = 3809653629700525035L;
+
+	private Long id;
 
     private String code;
 

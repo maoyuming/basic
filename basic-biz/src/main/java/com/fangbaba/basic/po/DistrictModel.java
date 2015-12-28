@@ -1,9 +1,13 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class DistrictModel {
-    private Long id;
+public class DistrictModel implements Serializable{
+
+	private static final long serialVersionUID = 866820776098522259L;
+
+	private Long id;
 
     private String code;
 

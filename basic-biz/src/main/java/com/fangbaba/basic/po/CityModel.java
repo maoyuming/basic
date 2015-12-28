@@ -1,9 +1,12 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CityModel {
-    private Long id;
+public class CityModel implements Serializable{
+	private static final long serialVersionUID = -7226149863084657284L;
+
+	private Long id;
 
     private String code;
 

@@ -1,7 +1,11 @@
 package com.fangbaba.basic.po;
 
-public class RoomModel {
-    private Long id;
+import java.io.Serializable;
+
+public class RoomModel implements Serializable{
+	private static final long serialVersionUID = -5183985737197386300L;
+
+	private Long id;
 
     private Long roomtypeid;
 
