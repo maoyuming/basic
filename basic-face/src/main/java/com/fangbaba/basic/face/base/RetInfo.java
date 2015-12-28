@@ -1,13 +1,15 @@
 package com.fangbaba.basic.face.base;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 /**
  * 公共返回值
  */
-public class RetInfo<T> {
-    public boolean result = true;//true成功，false失败
+public class RetInfo<T> implements Serializable {
+	private static final long serialVersionUID = -4737817121454976870L;
+	public boolean result = true;//true成功，false失败
     public String code;//错误编码
     public String msg;//错误信息
     private T obj;
