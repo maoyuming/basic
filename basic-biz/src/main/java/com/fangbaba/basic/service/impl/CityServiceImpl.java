@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.CityModel;
+import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.mappers.CityModelMapper;
-import com.fangbaba.basic.po.CityModel;
-import com.fangbaba.basic.service.CityService;
 
 /**
  * @author he

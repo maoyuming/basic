@@ -1,4 +1,4 @@
-package com.fangbaba.basic.po;
+package com.fangbaba.basic.face.bean;
 
 import java.io.Serializable;
 

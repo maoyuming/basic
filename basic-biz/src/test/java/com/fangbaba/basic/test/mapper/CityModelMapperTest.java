@@ -1,7 +1,6 @@
 package com.fangbaba.basic.test.mapper;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fangbaba.basic.face.bean.CityModel;
 import com.fangbaba.basic.mappers.CityModelMapper;
-import com.fangbaba.basic.po.CityModel;
 
 
 /**

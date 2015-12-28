@@ -1,9 +1,10 @@
 package com.fangbaba.basic.mappers;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-import com.fangbaba.basic.po.RoomtypeModel;
+import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.po.RoomtypeModelExample;
 
 public interface RoomtypeModelMapper {

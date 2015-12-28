@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.DistrictModel;
+import com.fangbaba.basic.face.service.DistrictService;
 import com.fangbaba.basic.mappers.DistrictModelMapper;
-import com.fangbaba.basic.po.DistrictModel;
-import com.fangbaba.basic.service.DistrictService;
 
 /**
  * @author he

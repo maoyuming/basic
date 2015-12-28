@@ -1,18 +1,15 @@
 package com.fangbaba.basic.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.HotelModel;
+import com.fangbaba.basic.face.service.HotelService;
+import com.fangbaba.basic.face.service.RoomService;
+import com.fangbaba.basic.face.service.RoomtypeService;
 import com.fangbaba.basic.mappers.HotelModelMapper;
-import com.fangbaba.basic.po.HotelModel;
-import com.fangbaba.basic.po.RoomModel;
-import com.fangbaba.basic.po.RoomtypeModel;
-import com.fangbaba.basic.service.HotelService;
-import com.fangbaba.basic.service.RoomService;
-import com.fangbaba.basic.service.RoomtypeService;
 
 /**
  * @author he

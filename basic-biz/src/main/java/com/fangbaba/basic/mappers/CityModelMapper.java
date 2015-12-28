@@ -1,9 +1,10 @@
 package com.fangbaba.basic.mappers;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-import com.fangbaba.basic.po.CityModel;
+import com.fangbaba.basic.face.bean.CityModel;
 import com.fangbaba.basic.po.CityModelExample;
 
 public interface CityModelMapper {

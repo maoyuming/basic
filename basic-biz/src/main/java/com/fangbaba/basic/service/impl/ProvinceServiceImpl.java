@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.ProvinceModel;
+import com.fangbaba.basic.face.service.ProvinceService;
 import com.fangbaba.basic.mappers.ProvinceModelMapper;
-import com.fangbaba.basic.po.ProvinceModel;
-import com.fangbaba.basic.service.ProvinceService;
 
 /**
  * @author he

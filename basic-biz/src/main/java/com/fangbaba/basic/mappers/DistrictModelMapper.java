@@ -1,9 +1,10 @@
 package com.fangbaba.basic.mappers;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-import com.fangbaba.basic.po.DistrictModel;
+import com.fangbaba.basic.face.bean.DistrictModel;
 import com.fangbaba.basic.po.DistrictModelExample;
 
 public interface DistrictModelMapper {

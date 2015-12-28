@@ -1,8 +1,8 @@
-package com.fangbaba.basic.service;
+package com.fangbaba.basic.face.service;
 
 import java.util.List;
 
-import com.fangbaba.basic.po.HotelModel;
+import com.fangbaba.basic.face.bean.HotelModel;
 
 public interface HotelService {
 	/**

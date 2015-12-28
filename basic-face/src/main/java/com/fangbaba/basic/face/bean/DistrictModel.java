@@ -1,10 +1,11 @@
-package com.fangbaba.basic.po;
+package com.fangbaba.basic.face.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProvinceModel implements Serializable{
-	private static final long serialVersionUID = 3809653629700525035L;
+public class DistrictModel implements Serializable{
+
+	private static final long serialVersionUID = 866820776098522259L;
 
 	private Long id;
 
@@ -12,9 +13,9 @@ public class ProvinceModel implements Serializable{
 
     private String name;
 
-    private Integer sort;
+    private Integer cityid;
 
-    private String remark;
+    private Integer sort;
 
     private BigDecimal latitude;
 
@@ -44,20 +45,20 @@ public class ProvinceModel implements Serializable{
         this.name = name == null ? null : name.trim();
     }
 
+    public Integer getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(Integer cityid) {
+        this.cityid = cityid;
+    }
+
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
     }
 
     public BigDecimal getLatitude() {
