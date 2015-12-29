@@ -16,6 +16,7 @@
 		<junit.version>4.11</junit.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
+        <powermock.version>1.4.6</powermock.version>
 	</properties>
 	
 
@@ -54,6 +55,22 @@
     </distributionManagement>
 
 	<dependencies>
+	
+	     
+        <dependency>  
+	          <groupId>org.powermock</groupId>  
+	          <artifactId>powermock-module-junit4</artifactId>  
+	          <version>${powermock.version}</version>  
+	          <scope>test</scope>  
+	    </dependency>  
+	
+	    
+        <dependency>  
+          <groupId>org.powermock</groupId>  
+          <artifactId>powermock-module-junit4</artifactId>  
+          <version>${powermock.version}</version>  
+          <scope>test</scope>  
+       </dependency>  
 	
 	     <dependency>
             <groupId>com.alibaba</groupId>
@@ -448,6 +465,9 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+				
+				<dubbo_basic_group>basic_dev</dubbo_basic_group>
+				
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>192.168.0.17:2181</config.zk>
@@ -482,6 +502,8 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+				
+				<dubbo_basic_group>basic</dubbo_basic_group>
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>10.4.36.125:2181,10.4.37.39:2181,10.4.39.92:2181</config.zk>
@@ -515,6 +537,10 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+
+				<dubbo_basic_group>basic_test</dubbo_basic_group>
+				
+				
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>192.168.0.17:2181</config.zk>
