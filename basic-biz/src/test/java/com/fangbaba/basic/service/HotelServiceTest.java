@@ -57,7 +57,7 @@ public class HotelServiceTest extends AbstractTransactionalJUnit4SpringContextTe
 //  @Rollback(false)
     @Test
     void testSyncHotelInfo(){
-    	String json = 
+    	//String json = 
     }
 
     
