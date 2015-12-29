@@ -21,7 +21,6 @@ public class DistrictServiceImpl implements DistrictService {
 
 	@Override
 	public List<DistrictModel> queryAllDistricts() {
-		// TODO Auto-generated method stub
 		return districtModelMapper.selectByExample(null);
 	}
 

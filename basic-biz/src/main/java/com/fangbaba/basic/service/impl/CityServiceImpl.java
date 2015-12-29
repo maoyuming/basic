@@ -21,7 +21,6 @@ public class CityServiceImpl implements CityService {
 
 	@Override
 	public List<CityModel> queryAllCitys() {
-		// TODO Auto-generated method stub
 		return cityModelMapper.selectByExample(null);
 	}
 

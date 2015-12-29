@@ -21,7 +21,6 @@ public class ProvinceServiceImpl implements ProvinceService {
 
 	@Override
 	public List<ProvinceModel> queryAllProvinces() {
-		// TODO Auto-generated method stub
 		return provinceModelMapper.selectByExample(null);
 	}
 
