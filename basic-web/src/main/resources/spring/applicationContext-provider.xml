@@ -24,12 +24,16 @@
     <!-- 声明需要暴露的服务接口 -->  
      <dubbo:service interface="com.fangbaba.basic.face.service.HotelService" ref="hotelService"  timeout="${dubbo.timeout}"  group="${dubbo.basic.group}" version="1.0.0" />  
      
-     <dubbo:service interface="com.fangbaba.basic.face.service.RoomtypeService" ref="roomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />    
+     <dubbo:service interface="com.fangbaba.basic.face.service.RoomtypeService" ref="roomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+     
+     <dubbo:service interface="com.fangbaba.basic.face.service.RoomService" ref="roomService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />        
     
     <!-- 具体的实现bean -->  
      <bean id="hotelService" class="com.fangbaba.basic.service.impl.HotelServiceImpl" /> 
      
      <bean id="roomtypeService" class="com.fangbaba.basic.service.impl.RoomtypeServiceImpl" /> 
+     
+      <bean id="roomService" class="com.fangbaba.basic.service.impl.RoomServiceImpl" /> 
     
       
 </beans>  
