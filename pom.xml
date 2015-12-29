@@ -448,6 +448,9 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+				
+				<dubbo_basic_group>basic_dev</dubbo_basic_group>
+				
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>192.168.0.17:2181</config.zk>
@@ -482,6 +485,8 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+				
+				<dubbo_basic_group>basic</dubbo_basic_group>
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>10.4.36.125:2181,10.4.37.39:2181,10.4.39.92:2181</config.zk>
@@ -515,6 +520,10 @@
 				<!-- dubbo_setting -->
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
+
+				<dubbo_basic_group>basic_test</dubbo_basic_group>
+				
+				
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>192.168.0.17:2181</config.zk>
