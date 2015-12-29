@@ -22,10 +22,14 @@
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
    
     <!-- 声明需要暴露的服务接口 -->  
-    <!-- <dubbo:service interface="com.fangbaba.basic.face.service.IHotelOnsaleService" ref="hotelOnsaleServiceImpl" /> -->  
+     <dubbo:service interface="com.fangbaba.basic.face.service.HotelService" ref="hotelService" />  
+     
+     <dubbo:service interface="com.fangbaba.basic.face.service.RoomtypeService" ref="roomtypeService" />    
     
     <!-- 具体的实现bean -->  
-    <!-- <bean id="hotelOnsaleServiceImpl" class="com.fangbaba.basic.service.impl.HotelOnsaleServiceImpl" /> -->
+     <bean id="hotelService" class="com.fangbaba.basic.service.impl.HotelServiceImpl" /> 
+     
+     <bean id="roomtypeService" class="com.fangbaba.basic.service.impl.RoomtypeServiceImpl" /> 
     
       
 </beans>  
