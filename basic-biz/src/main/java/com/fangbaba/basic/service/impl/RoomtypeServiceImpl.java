@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
+import com.fangbaba.basic.face.service.RoomService;
 import com.fangbaba.basic.face.service.RoomtypeService;
 import com.fangbaba.basic.mappers.RoomtypeModelMapper;
 import com.fangbaba.basic.po.RoomtypeModelExample;
-import com.google.gson.Gson;
 
 /**
  * @author he
@@ -23,7 +23,8 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 
 	@Autowired
 	private RoomtypeModelMapper roomtypeModelMapper;
-	private Gson gson = new Gson();
+	@Autowired
+	private RoomService roomService;
 	
 	@Override
 	public BigDecimal queryPriceByRoomTypeId(Long id) {
@@ -65,6 +66,7 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 					roomtypeModel.setName(pmsRoomtypeJsonBean.getName());
 					roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRooms().size());
 					updateById(roomtypeModel);
+					roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRooms());
 					updateidlist.add(pmsRoomtypeJsonBean.getId());
 					isexits = true;
 					break;
@@ -73,6 +75,8 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 			if(!isexits){
 				//delete
 				delRoomtypeById(roomtypeModel.getId());
+				//delete room
+				roomService.delRoomByRoomtypeid(roomtypeModel.getId());
 			}
 		}
 	    for (PmsRoomtypeJsonBean pmsRoomtypeJsonBean:roomtypes) {
@@ -92,9 +96,9 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 				roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRooms().size());
 				roomtypeModel.setHotelid(hotelid);
 				addRoomtype(roomtypeModel);
+				roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRooms());
 			}
 		}
-	    
 		
 	}
 	private void updateById(RoomtypeModel roomtypeModel){

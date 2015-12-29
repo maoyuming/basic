@@ -22,4 +22,8 @@ public interface RoomService {
 	 * @param json
 	 */
 	void syncRoomInfo(Long roomtypeid,List<PmsRoomJsonBean> rooms);
+	/**
+	 * 根据房型删除房间
+	 */
+	void delRoomByRoomtypeid(Long roomtypeid);
 }

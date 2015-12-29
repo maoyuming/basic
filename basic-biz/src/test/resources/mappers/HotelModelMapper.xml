@@ -169,7 +169,7 @@
       #{provcode,jdbcType=INTEGER}, #{pmstype,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.HotelModel" >
+  <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.HotelModel" useGeneratedKeys="true" keyProperty="id">
     insert into hotel
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
