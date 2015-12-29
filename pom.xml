@@ -16,6 +16,7 @@
 		<junit.version>4.11</junit.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
+        <powermock.version>1.4.6</powermock.version>
 	</properties>
 	
 
@@ -54,6 +55,22 @@
     </distributionManagement>
 
 	<dependencies>
+	
+	     
+        <dependency>  
+	          <groupId>org.powermock</groupId>  
+	          <artifactId>powermock-module-junit4</artifactId>  
+	          <version>${powermock.version}</version>  
+	          <scope>test</scope>  
+	    </dependency>  
+	
+	    
+        <dependency>  
+          <groupId>org.powermock</groupId>  
+          <artifactId>powermock-module-junit4</artifactId>  
+          <version>${powermock.version}</version>  
+          <scope>test</scope>  
+       </dependency>  
 	
 	     <dependency>
             <groupId>com.alibaba</groupId>
