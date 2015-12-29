@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class RetInfo<T> implements Serializable {
 	private static final long serialVersionUID = -4737817121454976870L;
-	public boolean result = true;//true成功，false失败
-    public String code;//错误编码
-    public String msg;//错误信息
+	private boolean result = true;//true成功，false失败
+	private String code;//错误编码
+    private String msg;//错误信息
     private T obj;
     private List<T> list;
     
