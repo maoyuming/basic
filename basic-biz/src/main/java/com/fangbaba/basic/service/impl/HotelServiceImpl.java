@@ -28,10 +28,7 @@ public class HotelServiceImpl implements HotelService {
 	private HotelModelMapper hotelModelMapper;
 	@Autowired
 	private RoomtypeService roomtypeService;
-	@Autowired
-	private RoomService roomService;
-	@Autowired
-	private Gson gson;
+	private Gson gson = new Gson();
 
 	@Override
 	public List<HotelModel> queryAllHotels() {

@@ -53,5 +53,12 @@ public class HotelServiceTest extends AbstractTransactionalJUnit4SpringContextTe
 		Assert.assertNotNull(hotelModel);
 		Assert.assertEquals(hotelModel.getHotelname().equals("上轩商务酒店"),true);
 	}
+
+//  @Rollback(false)
+    @Test
+    void testSyncHotelInfo(){
+    	String json = 
+    }
+
     
 }

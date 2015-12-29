@@ -23,8 +23,7 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 
 	@Autowired
 	private RoomtypeModelMapper roomtypeModelMapper;
-	@Autowired
-	private Gson gson;
+	private Gson gson = new Gson();
 	
 	@Override
 	public BigDecimal queryPriceByRoomTypeId(Long id) {
