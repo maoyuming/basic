@@ -65,6 +65,7 @@ public class HotelServiceImpl implements HotelService {
 			hotelModel.setRoomnum(countRoomNum(roomtypes));
 			hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
 			hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
+			hotelModel.setHotelpms(pmsHotelJsonBean.getHotelid());
 			addHotel(hotelModel);
 		}
 		//同步房型房间信息
@@ -80,8 +81,8 @@ public class HotelServiceImpl implements HotelService {
 	private void updateById(HotelModel hotelModel){
 		hotelModelMapper.updateByPrimaryKeySelective(hotelModel);
 	}
-	private void addHotel(HotelModel hotelModel){
-		hotelModelMapper.insertSelective(hotelModel);
+	private int addHotel(HotelModel hotelModel){
+		return hotelModelMapper.insertSelective(hotelModel);
 	}
 	
 

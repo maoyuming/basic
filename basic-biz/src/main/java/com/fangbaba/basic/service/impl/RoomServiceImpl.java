@@ -91,4 +91,11 @@ public class RoomServiceImpl implements RoomService {
 		roomModelMapper.deleteByPrimaryKey(roomid);
 	}
 
+	@Override
+	public void delRoomByRoomtypeid(Long roomtypeid) {
+		RoomModelExample example = new RoomModelExample();
+		example.createCriteria().andRoomtypeidEqualTo(roomtypeid);
+		roomModelMapper.deleteByExample(example);
+	}
+
 }

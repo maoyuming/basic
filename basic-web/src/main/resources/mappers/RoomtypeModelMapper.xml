@@ -108,7 +108,7 @@
       #{roomtypepms,jdbcType=VARCHAR}, #{roomnum,jdbcType=INTEGER}, #{cost,jdbcType=DECIMAL}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.RoomtypeModel" >
+  <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.RoomtypeModel" useGeneratedKeys="true" keyProperty="id">
     insert into roomtype
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
