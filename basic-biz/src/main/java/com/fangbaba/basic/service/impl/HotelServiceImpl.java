@@ -1,15 +1,19 @@
 package com.fangbaba.basic.service.impl;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.HotelModel;
+import com.fangbaba.basic.face.bean.RoomModel;
+import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.bean.jsonbean.PmsHotelJsonBean;
-import com.fangbaba.basic.face.bean.jsonbean.PmsRoomJsonBean;
 import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
+import com.fangbaba.basic.face.bean.vo.HotelVo;
+import com.fangbaba.basic.face.bean.vo.HotelVo.RoomVo;
+import com.fangbaba.basic.face.bean.vo.HotelVo.RoomtypeVo;
 import com.fangbaba.basic.face.service.HotelService;
 import com.fangbaba.basic.face.service.RoomService;
 import com.fangbaba.basic.face.service.RoomtypeService;
@@ -28,6 +32,8 @@ public class HotelServiceImpl implements HotelService {
 	private HotelModelMapper hotelModelMapper;
 	@Autowired
 	private RoomtypeService roomtypeService;
+	@Autowired
+	private RoomService roomService;
 	private Gson gson = new Gson();
 
 	@Override
@@ -84,6 +90,59 @@ public class HotelServiceImpl implements HotelService {
 	private int addHotel(HotelModel hotelModel){
 		return hotelModelMapper.insertSelective(hotelModel);
 	}
-	
+
+	@Override
+	public HotelVo queryDetail(Long id, String begintime, String endtime) {
+		HotelModel hotelModel = queryById(id);
+		HotelVo hotelVo = new HotelVo();
+		hotelVo.setId(hotelModel.getId());
+		hotelVo.setHotelname(hotelModel.getHotelname());
+		hotelVo.setHotelcontactname(hotelModel.getHotelcontactname());
+		hotelVo.setDetailaddr(hotelModel.getDetailaddr());
+		hotelVo.setLongitude(hotelModel.getLongitude());
+		hotelVo.setLatitude(hotelModel.getLatitude());
+		hotelVo.setRoomnum(hotelModel.getRoomnum());
+		hotelVo.setIsvisible(hotelModel.getIsvisible());
+		hotelVo.setIsonline(hotelModel.getIsonline());
+		hotelVo.setRetentiontime(hotelModel.getRetentiontime());
+		hotelVo.setDefaultleavetime(hotelModel.getDefaultleavetime());
+		hotelVo.setHotelphone(hotelModel.getHotelphone());
+		hotelVo.setHoteltype(hotelModel.getHoteltype());
+		hotelVo.setDiscode(hotelModel.getDiscode());
+		hotelVo.setQtphone(hotelModel.getQtphone());
+		hotelVo.setCitycode(hotelModel.getCitycode());
+		hotelVo.setProvcode(hotelModel.getProvcode());
+		hotelVo.setIntroduction(hotelModel.getIntroduction());
+		hotelVo.setProvincename(hotelModel.getProvincename());
+		hotelVo.setCityname(hotelModel.getCityname());
+		hotelVo.setDistrictname(hotelModel.getDistrictname());
+		List<RoomtypeModel> roomtypemodels = roomtypeService.queryByHotelId(id);
+		List<RoomtypeVo> roomtypes = new ArrayList<RoomtypeVo>();
+		for (RoomtypeModel roomtypeModel:roomtypemodels) {
+			RoomtypeVo roomtypeVo = hotelVo.new RoomtypeVo();
+			roomtypeVo.setId(roomtypeModel.getId());
+			roomtypeVo.setHotelid(roomtypeModel.getHotelid());
+			roomtypeVo.setCost(roomtypeModel.getCost());
+			roomtypeVo.setName(roomtypeModel.getName());
+			roomtypeVo.setRoomnum(roomtypeModel.getRoomnum());
+			roomtypeVo.setRoomtypepms(roomtypeModel.getRoomtypepms());
+			List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
+			List<RoomVo> rooms = new ArrayList<RoomVo>();
+			for (RoomModel roomModel : roommodels) {
+				RoomVo roomVo = hotelVo.new RoomVo();
+				roomVo.setId(roomModel.getId());
+				roomVo.setRemark(roomModel.getRemark());
+				roomVo.setRoomno(roomModel.getRoomno());
+				roomVo.setRoompms(roomModel.getRoompms());
+				roomVo.setRoomtypeid(roomModel.getRoomtypeid());
+				roomVo.setTel(roomModel.getTel());
+				rooms.add(roomVo);
+			}
+			roomtypeVo.setRooms(rooms);
+			roomtypes.add(roomtypeVo);
+		}
+		hotelVo.setRoomtypes(roomtypes);
+		return hotelVo;
+	}
 
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.elasticsearch.common.geo.GeoPoint;
+
 public class HotelModel implements Serializable{
 	private static final long serialVersionUID = -4229485247567019702L;
 
@@ -60,8 +62,54 @@ public class HotelModel implements Serializable{
     private String pmstype;
 
     private String introduction;
+    
+    private String provincename;//省名称
+    private String cityname;//市
+    private String districtname;//县
+    private GeoPoint pin;//坐标
+    private Double range=5000d;//搜索范围，默认5000m
+    
+    public Double getRange() {
+		return range;
+	}
 
-    public Long getId() {
+	public void setRange(Double range) {
+		this.range = range;
+	}
+
+	public String getProvincename() {
+		return provincename;
+	}
+
+	public void setProvincename(String provincename) {
+		this.provincename = provincename;
+	}
+
+	public String getCityname() {
+		return cityname;
+	}
+
+	public void setCityname(String cityname) {
+		this.cityname = cityname;
+	}
+
+	public String getDistrictname() {
+		return districtname;
+	}
+
+	public void setDistrictname(String districtname) {
+		this.districtname = districtname;
+	}
+
+	public GeoPoint getPin() {
+		return pin;
+	}
+
+	public void setPin(GeoPoint pin) {
+		this.pin = pin;
+	}
+
+	public Long getId() {
         return id;
     }
 

@@ -3,6 +3,7 @@ package com.fangbaba.basic.face.service;
 import java.util.List;
 
 import com.fangbaba.basic.face.bean.HotelModel;
+import com.fangbaba.basic.face.bean.vo.HotelVo;
 
 public interface HotelService {
 	/**
@@ -26,4 +27,9 @@ public interface HotelService {
 	 * @param json
 	 */
 	void syncHotelInfo(String json);
+	
+	/**
+	 * 返回酒店详情(包括酒店房型房间房态)
+	 */
+	HotelVo queryDetail(Long id,String begintime,String endtime);
 }
