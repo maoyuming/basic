@@ -4,9 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fangbaba.basic.face.service.HotelService;
-import com.fangbaba.basic.face.service.RoomService;
-import com.fangbaba.basic.face.service.RoomtypeService;
+import com.fangbaba.basic.service.HotelService;
 import com.mk.kafka.client.stereotype.MkMessageService;
 import com.mk.kafka.client.stereotype.MkTopicConsumer;
 
@@ -15,10 +13,6 @@ import com.mk.kafka.client.stereotype.MkTopicConsumer;
 public class StandardKafkaConsumer {
 	@Autowired
 	private HotelService hotelService;
-	@Autowired
-	private RoomtypeService roomtypeService;
-	@Autowired
-	private RoomService roomService;
 	
 
 	private Logger logger = LoggerFactory.getLogger(StandardKafkaConsumer.class);

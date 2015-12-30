@@ -17,13 +17,4 @@ public interface RoomService {
 	 * 通过pms号查询
 	 */
 	RoomModel queryByPms(String pms);
-	/**
-	 * 同步房间信息
-	 * @param json
-	 */
-	void syncRoomInfo(Long roomtypeid,List<PmsRoomJsonBean> rooms);
-	/**
-	 * 根据房型删除房间
-	 */
-	void delRoomByRoomtypeid(Long roomtypeid);
 }

@@ -23,12 +23,6 @@ public interface HotelService {
 	HotelModel queryByPms(String pms);
 	
 	/**
-	 * 同步酒店信息
-	 * @param json
-	 */
-	void syncHotelInfo(String json);
-	
-	/**
 	 * 返回酒店详情(包括酒店房型房间房态)
 	 */
 	HotelVo queryDetail(Long id,String begintime,String endtime);

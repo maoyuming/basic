@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
-import com.fangbaba.basic.face.service.RoomService;
-import com.fangbaba.basic.face.service.RoomtypeService;
 import com.fangbaba.basic.mappers.RoomtypeModelMapper;
 import com.fangbaba.basic.po.RoomtypeModelExample;
+import com.fangbaba.basic.service.RoomService;
+import com.fangbaba.basic.service.RoomtypeService;
 
 /**
  * @author he

@@ -24,9 +24,4 @@ public interface RoomtypeService {
 	 * 通过pms号查询
 	 */
 	RoomtypeModel queryByPms(String pms);
-	/**
-	 * 同步房型信息
-	 * @param json
-	 */
-	void syncRoomtypeInfo(Long hotelid,List<PmsRoomtypeJsonBean> roomtypes);
 }
