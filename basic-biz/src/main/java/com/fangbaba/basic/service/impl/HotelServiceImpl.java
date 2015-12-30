@@ -56,7 +56,7 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public void syncHotelInfo(String json) {
 		PmsHotelJsonBean pmsHotelJsonBean = gson.fromJson(json, PmsHotelJsonBean.class);
-		List<PmsRoomtypeJsonBean> roomtypes = pmsHotelJsonBean.getRoomtypes();
+		List<PmsRoomtypeJsonBean> roomtypes = pmsHotelJsonBean.getRoomtype();
 		HotelModel hotelModel = queryByPms(pmsHotelJsonBean.getHotelid());
 		//同步酒店信息
 		if(hotelModel!=null){
@@ -80,7 +80,7 @@ public class HotelServiceImpl implements HotelService {
 	private int countRoomNum(List<PmsRoomtypeJsonBean> roomtypes){
 		int roomNum = 0;
 		for (PmsRoomtypeJsonBean pmsRoomtypeJsonBean: roomtypes){
-			roomNum += pmsRoomtypeJsonBean.getRooms().size();
+			roomNum += pmsRoomtypeJsonBean.getRoom().size();
 		}
 		return roomNum;
 	}

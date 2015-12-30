@@ -1,16 +1,22 @@
 package com.fangbaba.basic.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fangbaba.basic.service.HotelService;
 
 @Controller
 @RequestMapping(value = "/hotel")
 public class HotelController {
 
-	/*@Autowired
-	private HotelSearchService hotelSearchService;
 	@Autowired
 	private HotelService hotelService;
+	/*@Autowired
+	private HotelSearchService hotelSearchService;
 
 	@RequestMapping(value = "/inites", method = RequestMethod.GET)
 	public ResponseEntity<RetInfo> inites() {
@@ -76,20 +82,11 @@ public class HotelController {
 		}
 		return new ResponseEntity<RetInfo>(retInfo, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/searches", method = RequestMethod.POST)
-	public ResponseEntity<RetInfo> searchES(HotelModel hotelModel,int page,int size) {
-		HotelModel hotelModel=new HotelModel();
-		hotelModel.setHotelname("万鑫全时尚宾馆");
-		hotelModel.setProvincename("S 上海市");
-		hotelModel.setCityname("S 上海市");
-		hotelModel.setDistrictname("P 浦东新区");
-		List<HotelModel> list=hotelSearchService.searchHotelFromES(hotelModel,page,size);
-		RetInfo retInfo=new RetInfo();
-		retInfo.setList(list);
-		retInfo.setResult(list!=null &&list.size()>0);
-		
-		return new ResponseEntity<RetInfo>(retInfo, HttpStatus.OK);
-	}*/
+	*/
+	@RequestMapping(value = "/synchotel", method = RequestMethod.POST)
+	public ResponseEntity<String> searchES(String json) {
+		hotelService.syncHotelInfo(json);
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
 	
 }

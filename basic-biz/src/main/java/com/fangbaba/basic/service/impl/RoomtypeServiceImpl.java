@@ -68,9 +68,9 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 					//update
 					roomtypeModel.setCost(new BigDecimal(pmsRoomtypeJsonBean.getPrice()));
 					roomtypeModel.setName(pmsRoomtypeJsonBean.getName());
-					roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRooms().size());
+					roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRoom().size());
 					updateById(roomtypeModel);
-					roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRooms());
+					roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRoom());
 					updateidlist.add(pmsRoomtypeJsonBean.getId());
 					isexits = true;
 					break;
@@ -97,10 +97,10 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 				roomtypeModel.setRoomtypepms(pmsRoomtypeJsonBean.getId());
 				roomtypeModel.setCost(new BigDecimal(pmsRoomtypeJsonBean.getPrice()));
 				roomtypeModel.setName(pmsRoomtypeJsonBean.getName());
-				roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRooms().size());
+				roomtypeModel.setRoomnum(pmsRoomtypeJsonBean.getRoom().size());
 				roomtypeModel.setHotelid(hotelid);
 				addRoomtype(roomtypeModel);
-				roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRooms());
+				roomService.syncRoomInfo(roomtypeModel.getId(), pmsRoomtypeJsonBean.getRoom());
 			}
 		}
 		

@@ -24,13 +24,13 @@ public class PmsHotelJsonBean implements Serializable {
 	private String pmstypeid;//酒店厂商
 	private String hotelid;//酒店pmsid
 	private String phone;//电话
-	private List<PmsRoomtypeJsonBean> roomtypes = new ArrayList<PmsRoomtypeJsonBean>();//房型列表
+	private List<PmsRoomtypeJsonBean> roomtype = new ArrayList<PmsRoomtypeJsonBean>();//房型列表
 	
-	public List<PmsRoomtypeJsonBean> getRoomtypes() {
-		return roomtypes;
+	public List<PmsRoomtypeJsonBean> getRoomtype() {
+		return roomtype;
 	}
-	public void setRoomtypes(List<PmsRoomtypeJsonBean> roomtypes) {
-		this.roomtypes = roomtypes;
+	public void setRoomtype(List<PmsRoomtypeJsonBean> roomtype) {
+		this.roomtype = roomtype;
 	}
 	public String getPmstypeid() {
 		return pmstypeid;

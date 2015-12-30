@@ -10,7 +10,7 @@ public class PmsRoomtypeJsonBean implements Serializable {
 	private String id;  //房型pmsid
 	private String name;  //房型名称
 	private String price;  //门市价
-	private List<PmsRoomJsonBean> rooms = new ArrayList<PmsRoomJsonBean>();
+	private List<PmsRoomJsonBean> room = new ArrayList<PmsRoomJsonBean>();
 	public String getId() {
 		return id;
 	}
@@ -29,11 +29,11 @@ public class PmsRoomtypeJsonBean implements Serializable {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	public List<PmsRoomJsonBean> getRooms() {
-		return rooms;
+	public List<PmsRoomJsonBean> getRoom() {
+		return room;
 	}
-	public void setRooms(List<PmsRoomJsonBean> rooms) {
-		this.rooms = rooms;
+	public void setRoom(List<PmsRoomJsonBean> room) {
+		this.room = room;
 	}
-
+	
 }
