@@ -10,7 +10,7 @@
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread][line:%L]) %-5level %logger{80} - %msg%n</pattern>
 		</layout>
 	</appender>
 
