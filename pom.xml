@@ -15,7 +15,7 @@
 		<spring.version>4.1.5.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
         <commons-collections.version>3.2.1</commons-collections.version>
-        <basic-face.version>0.0.1-RELEASE</basic-face.version>
+        <basic-face.version>1.1.2</basic-face.version>
         <powermock.version>1.4.6</powermock.version>
 	</properties>
 	
@@ -466,7 +466,7 @@
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
 				
-				<dubbo_basic_group>jt</dubbo_basic_group>
+				<dubbo_basic_group>basic_dev</dubbo_basic_group>
 				
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
