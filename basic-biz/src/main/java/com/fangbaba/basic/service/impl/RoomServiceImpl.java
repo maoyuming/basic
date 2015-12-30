@@ -3,6 +3,7 @@ package com.fangbaba.basic.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,12 @@ public class RoomServiceImpl implements RoomService {
 	public RoomModel queryByPms(String pms) {
 		RoomModelExample example = new RoomModelExample();
 		example.createCriteria().andRoompmsEqualTo(pms);
-		return roomModelMapper.selectByExample(example).size()>0?roomModelMapper.selectByExample(example).get(0):null;
+		List<RoomModel> list = roomModelMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	}
 	@Override
 	public RoomModel queryById(Long id) {

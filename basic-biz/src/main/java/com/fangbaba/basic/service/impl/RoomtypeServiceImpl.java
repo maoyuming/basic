@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +52,12 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	public RoomtypeModel queryByPms(String pms) {
 		RoomtypeModelExample example = new RoomtypeModelExample();
 		example.createCriteria().andRoomtypepmsEqualTo(pms);
-		return roomtypeModelMapper.selectByExample(example).size()>0?roomtypeModelMapper.selectByExample(example).get(0):null;
+		List<RoomtypeModel> list = roomtypeModelMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	}
 
 	@Override

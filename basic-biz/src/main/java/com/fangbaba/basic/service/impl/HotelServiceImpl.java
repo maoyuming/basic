@@ -3,6 +3,7 @@ package com.fangbaba.basic.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,12 @@ public class HotelServiceImpl implements HotelService {
 	public HotelModel queryByPms(String pms) {
 		HotelModelExample example = new HotelModelExample();
 		example.createCriteria().andHotelpmsEqualTo(pms);
-		return hotelModelMapper.selectByExample(example).size()>0?hotelModelMapper.selectByExample(example).get(0):null;
+		List<HotelModel> list = hotelModelMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 	@Override
