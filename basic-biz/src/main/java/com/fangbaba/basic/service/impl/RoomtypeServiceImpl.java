@@ -34,6 +34,10 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 		}
 		return bean.getCost();
 	}
+	@Override
+	public RoomtypeModel queryById(Long id) {
+		return roomtypeModelMapper.selectByPrimaryKey(id);
+	}
 
 	@Override
 	public List<RoomtypeModel> queryByHotelId(Long hotelid) {

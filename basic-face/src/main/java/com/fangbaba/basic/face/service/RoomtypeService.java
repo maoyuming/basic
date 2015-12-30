@@ -11,7 +11,7 @@ import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
 public interface RoomtypeService {
 	/**
 	 * @param id
-	 * 通过房型查门市价
+	 * 通过房型id查门市价
 	 */
 	BigDecimal queryPriceByRoomTypeId(Long id);
 	/**
@@ -24,4 +24,9 @@ public interface RoomtypeService {
 	 * 通过pms号查询
 	 */
 	RoomtypeModel queryByPms(String pms);
+	/**
+	 * @param id
+	 * 通过房型id查询
+	 */
+	RoomtypeModel queryById(Long id);
 }

@@ -17,4 +17,9 @@ public interface RoomService {
 	 * 通过pms号查询
 	 */
 	RoomModel queryByPms(String pms);
+	/**
+	 * @param id
+	 * 通过id查询
+	 */
+	RoomModel queryById(Long id);
 }

@@ -36,6 +36,10 @@ public class RoomServiceImpl implements RoomService {
 		example.createCriteria().andRoompmsEqualTo(pms);
 		return roomModelMapper.selectByExample(example).size()>0?roomModelMapper.selectByExample(example).get(0):null;
 	}
+	@Override
+	public RoomModel queryById(Long id) {
+		return roomModelMapper.selectByPrimaryKey(id);
+	}
 
 	@Override
 	public void syncRoomInfo(Long roomtypeid,List<PmsRoomJsonBean> rooms) {
