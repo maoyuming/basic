@@ -12,8 +12,8 @@ import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.bean.jsonbean.PmsHotelJsonBean;
 import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
 import com.fangbaba.basic.face.bean.vo.HotelVo;
-import com.fangbaba.basic.face.bean.vo.HotelVo.RoomVo;
-import com.fangbaba.basic.face.bean.vo.HotelVo.RoomtypeVo;
+import com.fangbaba.basic.face.bean.vo.RoomVo;
+import com.fangbaba.basic.face.bean.vo.RoomtypeVo;
 import com.fangbaba.basic.face.service.RoomService;
 import com.fangbaba.basic.mappers.HotelModelMapper;
 import com.fangbaba.basic.po.HotelModelExample;
@@ -119,7 +119,7 @@ public class HotelServiceImpl implements HotelService {
 		List<RoomtypeModel> roomtypemodels = roomtypeService.queryByHotelId(id);
 		List<RoomtypeVo> roomtypes = new ArrayList<RoomtypeVo>();
 		for (RoomtypeModel roomtypeModel:roomtypemodels) {
-			RoomtypeVo roomtypeVo = hotelVo.new RoomtypeVo();
+			RoomtypeVo roomtypeVo = new RoomtypeVo();
 			roomtypeVo.setId(roomtypeModel.getId());
 			roomtypeVo.setHotelid(roomtypeModel.getHotelid());
 			roomtypeVo.setCost(roomtypeModel.getCost());
@@ -129,7 +129,7 @@ public class HotelServiceImpl implements HotelService {
 			List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
 			List<RoomVo> rooms = new ArrayList<RoomVo>();
 			for (RoomModel roomModel : roommodels) {
-				RoomVo roomVo = hotelVo.new RoomVo();
+				RoomVo roomVo = new RoomVo();
 				roomVo.setId(roomModel.getId());
 				roomVo.setRemark(roomModel.getRemark());
 				roomVo.setRoomno(roomModel.getRoomno());
