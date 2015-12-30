@@ -18,8 +18,8 @@
     <dubbo:registry address="${dubbo.registry.address}"/>   
     
     <!-- 用dubbo协议在20880端口暴露服务 -->  
-<!--     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" /> -->
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="192.168.0.106"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
+    <!-- <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="192.168.0.106"/> -->
    
     <!-- 声明需要暴露的服务接口 -->  
      <dubbo:service interface="com.fangbaba.basic.face.service.HotelService" ref="hotelService"  timeout="${dubbo.timeout}"  group="${dubbo.basic.group}" version="1.0.0" />  
