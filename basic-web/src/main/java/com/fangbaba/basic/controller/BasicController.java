@@ -1,5 +1,6 @@
 package com.fangbaba.basic.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import com.fangbaba.basic.face.bean.DistrictModel;
 import com.fangbaba.basic.face.bean.HotelModel;
 import com.fangbaba.basic.face.bean.ProvinceModel;
 import com.fangbaba.basic.face.bean.RoomModel;
+import com.fangbaba.basic.face.bean.RoomtypeModel;
+import com.fangbaba.basic.face.bean.jsonbean.PmsRoomJsonBean;
+import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
 import com.fangbaba.basic.face.bean.vo.HotelVo;
 import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.face.service.DistrictService;
@@ -102,5 +106,42 @@ public class BasicController {
 		return new ResponseEntity<RoomModel>(roomService.queryById(id), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/syncroominfo", method = RequestMethod.POST)
+	public ResponseEntity<String>  syncRoomInfo(Long roomtypeid,List<PmsRoomJsonBean> rooms){
+		roomService.syncRoomInfo(roomtypeid,rooms);
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
+	}
 	
+	@RequestMapping(value = "/delroombyroomtypeid", method = RequestMethod.POST)
+	public ResponseEntity<String>  delRoomByRoomtypeid(Long roomtypeid){
+		roomService.delRoomByRoomtypeid(roomtypeid);
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/querypricebyroomtypeid", method = RequestMethod.POST)
+	public ResponseEntity<BigDecimal>  queryPriceByRoomTypeId(Long id){
+		return new ResponseEntity<BigDecimal>(roomtypeService.queryPriceByRoomTypeId(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/querybyhotelid", method = RequestMethod.POST)
+	public ResponseEntity<List<RoomtypeModel>>  queryByHotelId(Long id){
+		return new ResponseEntity<List<RoomtypeModel>>(roomtypeService.queryByHotelId(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/querybypms", method = RequestMethod.POST)
+	public ResponseEntity<RoomtypeModel>  queryByPms(String pms){
+		return new ResponseEntity<RoomtypeModel>(roomtypeService.queryByPms(pms), HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value = "/queryroomtypebyid", method = RequestMethod.POST)
+	public ResponseEntity<RoomtypeModel>  queryRoomTypeById(Long id){
+		return new ResponseEntity<RoomtypeModel>(roomtypeService.queryById(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/syncroomtypeinfo", method = RequestMethod.POST)
+	public ResponseEntity<String>  syncRoomtypeInfo(Long hotelid,List<PmsRoomtypeJsonBean> roomtypes){
+		roomtypeService.syncRoomtypeInfo(hotelid,roomtypes);
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
+	}
 }
