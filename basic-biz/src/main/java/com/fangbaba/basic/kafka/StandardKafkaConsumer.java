@@ -17,7 +17,7 @@ public class StandardKafkaConsumer {
 
 	private Logger logger = LoggerFactory.getLogger(StandardKafkaConsumer.class);
 
-	@MkTopicConsumer(topic = "Switch_PmsSyncHotel_test",  group = "Basic_Switch_PmsSyncHotel",serializerClass = "com.mk.kafka.client.serializer.StringDecoder")
+	@MkTopicConsumer(topic = "Switch_PmsSyncHotel",  group = "Basic_Switch_PmsSyncHotel",serializerClass = "com.mk.kafka.client.serializer.StringDecoder")
 	public void consumeHotel(String json) {
 		logger.info("Switch_PmsSyncHotel consume begin:" + json);
 		hotelService.syncHotelInfo(json);

@@ -84,7 +84,7 @@ public class HotelController {
 	}
 	*/
 	@RequestMapping(value = "/synchotel", method = RequestMethod.POST)
-	public ResponseEntity<String> searchES(String json) {
+	public ResponseEntity<String> synchotel(String json) {
 		hotelService.syncHotelInfo(json);
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
 	}
