@@ -106,12 +106,6 @@ public class BasicController {
 		return new ResponseEntity<RoomModel>(roomService.queryById(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/syncroominfo", method = RequestMethod.POST)
-	public ResponseEntity<String>  syncRoomInfo(Long roomtypeid,List<PmsRoomJsonBean> rooms){
-		roomService.syncRoomInfo(roomtypeid,rooms);
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
-	}
-	
 	@RequestMapping(value = "/delroombyroomtypeid", method = RequestMethod.POST)
 	public ResponseEntity<String>  delRoomByRoomtypeid(Long roomtypeid){
 		roomService.delRoomByRoomtypeid(roomtypeid);
@@ -139,9 +133,4 @@ public class BasicController {
 		return new ResponseEntity<RoomtypeModel>(roomtypeService.queryById(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/syncroomtypeinfo", method = RequestMethod.POST)
-	public ResponseEntity<String>  syncRoomtypeInfo(Long hotelid,List<PmsRoomtypeJsonBean> roomtypes){
-		roomtypeService.syncRoomtypeInfo(hotelid,roomtypes);
-		return new ResponseEntity<String>("OK", HttpStatus.OK);
-	}
 }
