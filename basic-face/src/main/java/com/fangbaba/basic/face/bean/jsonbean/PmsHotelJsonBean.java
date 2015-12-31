@@ -7,11 +7,11 @@ import java.util.List;
     pmstypeid:””//酒店厂商
     hotelid:’’,  //酒店id
     phone: ‘’, //电话
-    roomtypes:[{
+    roomtype:[{
       id:’’,  //房型id
       name:’’,  //房型名称
       price:’’, //门市价
-      rooms:[{
+      room:[{
         id:’’,  //房间id
         roomno:’’,  //房间号
       }],//房间
