@@ -9,7 +9,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
-		<spring.version>4.1.5.RELEASE</spring.version>
 	</properties>
 	
 	
@@ -65,18 +64,4 @@
             </plugin>  
         </plugins>  
     </build>  
-    <dependencies>
-	    <dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring.version}</version>
-				<exclusions>
-					<!-- Exclude Commons Logging in favor of SLF4j -->
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-	</dependencies>	
 </project>

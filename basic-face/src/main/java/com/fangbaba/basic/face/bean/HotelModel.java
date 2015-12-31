@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class HotelModel implements Serializable{
 	private static final long serialVersionUID = -4229485247567019702L;
 
@@ -15,7 +13,6 @@ public class HotelModel implements Serializable{
 
     private String hotelcontactname;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date regtime;
 
     private String detailaddr;
@@ -24,10 +21,8 @@ public class HotelModel implements Serializable{
 
     private BigDecimal latitude;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date opentime;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date repairtime;
 
     private Integer roomnum;
