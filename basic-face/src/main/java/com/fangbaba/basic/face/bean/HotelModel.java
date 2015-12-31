@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.elasticsearch.common.geo.GeoPoint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class HotelModel implements Serializable{
@@ -70,7 +69,6 @@ public class HotelModel implements Serializable{
     private String provincename;//省名称
     private String cityname;//市
     private String districtname;//县
-    private GeoPoint pin;//坐标
     private Double range=5000d;//搜索范围，默认5000m
     
     public Double getRange() {
@@ -103,14 +101,6 @@ public class HotelModel implements Serializable{
 
 	public void setDistrictname(String districtname) {
 		this.districtname = districtname;
-	}
-
-	public GeoPoint getPin() {
-		return pin;
-	}
-
-	public void setPin(GeoPoint pin) {
-		this.pin = pin;
 	}
 
 	public Long getId() {
