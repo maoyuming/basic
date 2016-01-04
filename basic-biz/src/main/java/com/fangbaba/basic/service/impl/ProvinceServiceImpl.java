@@ -2,6 +2,8 @@ package com.fangbaba.basic.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,20 @@ import com.fangbaba.basic.mappers.ProvinceModelMapper;
 @Service
 public class ProvinceServiceImpl implements ProvinceService {
 	
+	private static Logger logger = LoggerFactory.getLogger(ProvinceServiceImpl.class);
+	
 	@Autowired
 	private ProvinceModelMapper provinceModelMapper;
 
 	@Override
 	public List<ProvinceModel> queryAllProvinces() {
-		return provinceModelMapper.selectByExample(null);
+		logger.info(ProvinceServiceImpl.class.getName()+":queryAllProvinces begin");
+		try {
+			return provinceModelMapper.selectByExample(null);
+		} catch (Exception e) {
+			logger.error(ProvinceServiceImpl.class.getName()+":queryAllProvinces error",e);
+			throw e;
+		}
 	}
 
 }

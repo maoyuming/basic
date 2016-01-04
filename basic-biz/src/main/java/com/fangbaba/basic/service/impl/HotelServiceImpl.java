@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,7 @@ import com.google.gson.Gson;
 @Service
 public class HotelServiceImpl implements HotelService {
 	
+	private static Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
 	@Autowired
 	private HotelModelMapper hotelModelMapper;
 	@Autowired
@@ -39,49 +42,73 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public List<HotelModel> queryAllHotels() {
-		return hotelModelMapper.selectByExampleWithBLOBs(null);
+		logger.info(HotelServiceImpl.class.getName()+":queryAllHotels begin");
+		try {
+			return hotelModelMapper.selectByExampleWithBLOBs(null);
+		} catch (Exception e) {
+			logger.error(HotelServiceImpl.class.getName()+":queryAllHotels error",e);
+			throw e;
+		}
 	}
 
 	@Override
 	public HotelModel queryById(Long id) {
-		return hotelModelMapper.selectByPrimaryKey(id);
+		logger.info(HotelServiceImpl.class.getName()+":queryById begin");
+		try {
+			return hotelModelMapper.selectByPrimaryKey(id);
+		} catch (Exception e) {
+			logger.error(HotelServiceImpl.class.getName()+":queryById error",e);
+			throw e;
+		}
 	}
 
 	@Override
 	public HotelModel queryByPms(String pms) {
-		HotelModelExample example = new HotelModelExample();
-		example.createCriteria().andHotelpmsEqualTo(pms);
-		List<HotelModel> list = hotelModelMapper.selectByExample(example);
-		if(CollectionUtils.isNotEmpty(list)){
-			return list.get(0);
-		}else{
-			return null;
+		logger.info(HotelServiceImpl.class.getName()+":queryByPms begin");
+		try {
+			HotelModelExample example = new HotelModelExample();
+			example.createCriteria().andHotelpmsEqualTo(pms);
+			List<HotelModel> list = hotelModelMapper.selectByExample(example);
+			if(CollectionUtils.isNotEmpty(list)){
+				return list.get(0);
+			}else{
+				return null;
+			}
+		} catch (Exception e) {
+			logger.error(HotelServiceImpl.class.getName()+":queryByPms error",e);
+			throw e;
 		}
 	}
 	
 	@Override
 	public void syncHotelInfo(String json) {
-		PmsHotelJsonBean pmsHotelJsonBean = gson.fromJson(json, PmsHotelJsonBean.class);
-		List<PmsRoomtypeJsonBean> roomtypes = pmsHotelJsonBean.getRoomtype();
-		HotelModel hotelModel = queryByPms(pmsHotelJsonBean.getHotelid());
-		//同步酒店信息
-		if(hotelModel!=null){
-			//已存在
-			hotelModel.setRoomnum(countRoomNum(roomtypes));
-			hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
-			hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
-			updateById(hotelModel);
-		}else{
-			//不存在
-			hotelModel = new HotelModel();
-			hotelModel.setRoomnum(countRoomNum(roomtypes));
-			hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
-			hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
-			hotelModel.setHotelpms(pmsHotelJsonBean.getHotelid());
-			addHotel(hotelModel);
+		logger.info(HotelServiceImpl.class.getName()+":syncHotelInfo begin");
+		try {
+			PmsHotelJsonBean pmsHotelJsonBean = gson.fromJson(json, PmsHotelJsonBean.class);
+			List<PmsRoomtypeJsonBean> roomtypes = pmsHotelJsonBean.getRoomtype();
+			HotelModel hotelModel = queryByPms(pmsHotelJsonBean.getHotelid());
+			//同步酒店信息
+			if(hotelModel!=null){
+				//已存在
+				hotelModel.setRoomnum(countRoomNum(roomtypes));
+				hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
+				hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
+				updateById(hotelModel);
+			}else{
+				//不存在
+				hotelModel = new HotelModel();
+				hotelModel.setRoomnum(countRoomNum(roomtypes));
+				hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
+				hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
+				hotelModel.setHotelpms(pmsHotelJsonBean.getHotelid());
+				addHotel(hotelModel);
+			}
+			//同步房型房间信息
+			roomtypeService.syncRoomtypeInfo(hotelModel.getId(),roomtypes);
+		} catch (Exception e) {
+			logger.error(HotelServiceImpl.class.getName()+":syncHotelInfo error",e);
+			throw e;
 		}
-		//同步房型房间信息
-		roomtypeService.syncRoomtypeInfo(hotelModel.getId(),roomtypes);
 	}
 	private int countRoomNum(List<PmsRoomtypeJsonBean> roomtypes){
 		int roomNum = 0;
@@ -99,56 +126,62 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public HotelVo queryDetail(Long id, String begintime, String endtime) {
-		HotelModel hotelModel = queryById(id);
-		HotelVo hotelVo = new HotelVo();
-		hotelVo.setId(hotelModel.getId());
-		hotelVo.setHotelname(hotelModel.getHotelname());
-		hotelVo.setHotelcontactname(hotelModel.getHotelcontactname());
-		hotelVo.setDetailaddr(hotelModel.getDetailaddr());
-		hotelVo.setLongitude(hotelModel.getLongitude());
-		hotelVo.setLatitude(hotelModel.getLatitude());
-		hotelVo.setRoomnum(hotelModel.getRoomnum());
-		hotelVo.setIsvisible(hotelModel.getIsvisible());
-		hotelVo.setIsonline(hotelModel.getIsonline());
-		hotelVo.setRetentiontime(hotelModel.getRetentiontime());
-		hotelVo.setDefaultleavetime(hotelModel.getDefaultleavetime());
-		hotelVo.setHotelphone(hotelModel.getHotelphone());
-		hotelVo.setHoteltype(hotelModel.getHoteltype());
-		hotelVo.setDiscode(hotelModel.getDiscode());
-		hotelVo.setQtphone(hotelModel.getQtphone());
-		hotelVo.setCitycode(hotelModel.getCitycode());
-		hotelVo.setProvcode(hotelModel.getProvcode());
-		hotelVo.setIntroduction(hotelModel.getIntroduction());
-		hotelVo.setProvincename(hotelModel.getProvincename());
-		hotelVo.setCityname(hotelModel.getCityname());
-		hotelVo.setDistrictname(hotelModel.getDistrictname());
-		List<RoomtypeModel> roomtypemodels = roomtypeService.queryByHotelId(id);
-		List<RoomtypeVo> roomtypes = new ArrayList<RoomtypeVo>();
-		for (RoomtypeModel roomtypeModel:roomtypemodels) {
-			RoomtypeVo roomtypeVo = new RoomtypeVo();
-			roomtypeVo.setId(roomtypeModel.getId());
-			roomtypeVo.setHotelid(roomtypeModel.getHotelid());
-			roomtypeVo.setCost(roomtypeModel.getCost());
-			roomtypeVo.setName(roomtypeModel.getName());
-			roomtypeVo.setRoomnum(roomtypeModel.getRoomnum());
-			roomtypeVo.setRoomtypepms(roomtypeModel.getRoomtypepms());
-			List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
-			List<RoomVo> rooms = new ArrayList<RoomVo>();
-			for (RoomModel roomModel : roommodels) {
-				RoomVo roomVo = new RoomVo();
-				roomVo.setId(roomModel.getId());
-				roomVo.setRemark(roomModel.getRemark());
-				roomVo.setRoomno(roomModel.getRoomno());
-				roomVo.setRoompms(roomModel.getRoompms());
-				roomVo.setRoomtypeid(roomModel.getRoomtypeid());
-				roomVo.setTel(roomModel.getTel());
-				rooms.add(roomVo);
+		logger.info(HotelServiceImpl.class.getName()+":queryDetail begin");
+		try {
+			HotelModel hotelModel = queryById(id);
+			HotelVo hotelVo = new HotelVo();
+			hotelVo.setId(hotelModel.getId());
+			hotelVo.setHotelname(hotelModel.getHotelname());
+			hotelVo.setHotelcontactname(hotelModel.getHotelcontactname());
+			hotelVo.setDetailaddr(hotelModel.getDetailaddr());
+			hotelVo.setLongitude(hotelModel.getLongitude());
+			hotelVo.setLatitude(hotelModel.getLatitude());
+			hotelVo.setRoomnum(hotelModel.getRoomnum());
+			hotelVo.setIsvisible(hotelModel.getIsvisible());
+			hotelVo.setIsonline(hotelModel.getIsonline());
+			hotelVo.setRetentiontime(hotelModel.getRetentiontime());
+			hotelVo.setDefaultleavetime(hotelModel.getDefaultleavetime());
+			hotelVo.setHotelphone(hotelModel.getHotelphone());
+			hotelVo.setHoteltype(hotelModel.getHoteltype());
+			hotelVo.setDiscode(hotelModel.getDiscode());
+			hotelVo.setQtphone(hotelModel.getQtphone());
+			hotelVo.setCitycode(hotelModel.getCitycode());
+			hotelVo.setProvcode(hotelModel.getProvcode());
+			hotelVo.setIntroduction(hotelModel.getIntroduction());
+			hotelVo.setProvincename(hotelModel.getProvincename());
+			hotelVo.setCityname(hotelModel.getCityname());
+			hotelVo.setDistrictname(hotelModel.getDistrictname());
+			List<RoomtypeModel> roomtypemodels = roomtypeService.queryByHotelId(id);
+			List<RoomtypeVo> roomtypes = new ArrayList<RoomtypeVo>();
+			for (RoomtypeModel roomtypeModel:roomtypemodels) {
+				RoomtypeVo roomtypeVo = new RoomtypeVo();
+				roomtypeVo.setId(roomtypeModel.getId());
+				roomtypeVo.setHotelid(roomtypeModel.getHotelid());
+				roomtypeVo.setCost(roomtypeModel.getCost());
+				roomtypeVo.setName(roomtypeModel.getName());
+				roomtypeVo.setRoomnum(roomtypeModel.getRoomnum());
+				roomtypeVo.setRoomtypepms(roomtypeModel.getRoomtypepms());
+				List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
+				List<RoomVo> rooms = new ArrayList<RoomVo>();
+				for (RoomModel roomModel : roommodels) {
+					RoomVo roomVo = new RoomVo();
+					roomVo.setId(roomModel.getId());
+					roomVo.setRemark(roomModel.getRemark());
+					roomVo.setRoomno(roomModel.getRoomno());
+					roomVo.setRoompms(roomModel.getRoompms());
+					roomVo.setRoomtypeid(roomModel.getRoomtypeid());
+					roomVo.setTel(roomModel.getTel());
+					rooms.add(roomVo);
+				}
+				roomtypeVo.setRooms(rooms);
+				roomtypes.add(roomtypeVo);
 			}
-			roomtypeVo.setRooms(rooms);
-			roomtypes.add(roomtypeVo);
+			hotelVo.setRoomtypes(roomtypes);
+			return hotelVo;
+		} catch (Exception e) {
+			logger.error(HotelServiceImpl.class.getName()+":queryDetail error",e);
+			throw e;
 		}
-		hotelVo.setRoomtypes(roomtypes);
-		return hotelVo;
 	}
 
 }
