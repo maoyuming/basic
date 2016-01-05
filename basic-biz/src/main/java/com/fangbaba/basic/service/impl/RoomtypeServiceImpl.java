@@ -153,6 +153,8 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	private void delRoomtypeById(Long roomtypeid){
 		roomtypeModelMapper.deleteByPrimaryKey(roomtypeid);
 	}
-	
+	public void setRoomtypeModelMapper(RoomtypeModelMapper roomtypeModelMapper) {
+		this.roomtypeModelMapper = roomtypeModelMapper;
+	}
 	
 }
