@@ -37,4 +37,16 @@
 		<property name="propertiesLocation" value="classpath:standard_config.properties"></property>
 	</bean>
 
+    
+<!-- bean映射框架dozerMapper在spring中的配置 -->
+    <bean id="dozerMapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles">
+            <list>
+                <value>classpath*:dozer-BeanMapping.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    
+
 </beans>

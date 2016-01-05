@@ -46,4 +46,21 @@
       <bean id="provinceService" class="com.fangbaba.basic.service.impl.ProvinceServiceImpl" />
        
       <bean id="districtService" class="com.fangbaba.basic.service.impl.DistrictServiceImpl" />
+      
+      
+      
+      
+      <dubbo:service interface="com.fangbaba.basic.face.service.OtaHotelService" ref="OtaHotelServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+    
+    <!-- 具体的实现bean -->  
+     <bean id="OtaHotelServiceImpl" class="com.fangbaba.basic.service.impl.OtaHotelServiceImpl" /> 
+     
+     
+     
+     <dubbo:service interface="com.fangbaba.basic.face.service.OtaRoomtypeService" ref="OtaRoomtypeServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+    
+    <!-- 具体的实现bean -->  
+     <bean id="OtaRoomtypeServiceImpl" class="com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl" /> 
+     
+      
 </beans>  
