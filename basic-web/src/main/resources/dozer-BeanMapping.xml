@@ -11,12 +11,12 @@
     <!-- 如果两个bean的field名称和类型都一样，则不需要指明映射 -->
 
     <!--结果集映射 --> 
-    <mapping date-format="yyyy年MM月dd日">
-        <class-a>com.fangbaba.gds.face.bean.OtaHotel</class-a>
-        <class-b>com.fangbaba.gds.po.OtaHotel</class-b>
+   <mapping date-format="yyyy年MM月dd日">
+        <class-a>com.fangbaba.basic.face.bean.OtaHotel</class-a>
+        <class-b>com.fangbaba.basic.po.OtaHotel</class-b>
     </mapping>
     <mapping date-format="yyyy年MM月dd日">
-        <class-a>com.fangbaba.gds.face.bean.OtaRoomtype</class-a>
-        <class-b>com.fangbaba.gds.po.OtaRoomtype</class-b>
+        <class-a>com.fangbaba.basic.face.bean.OtaRoomtype</class-a>
+        <class-b>com.fangbaba.basic.po.OtaRoomtype</class-b>
     </mapping>
 </mappings>

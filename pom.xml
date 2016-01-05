@@ -17,6 +17,7 @@
         <commons-collections.version>3.2.1</commons-collections.version>
         <basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
         <powermock.version>1.4.6</powermock.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
 	</properties>
 	
 
@@ -63,6 +64,12 @@
             <artifactId>dozer</artifactId>
             <version>5.3.2</version>
         </dependency>
+		<dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+        
 	     
         <dependency>  
 	          <groupId>org.powermock</groupId>  

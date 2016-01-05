@@ -1,8 +1,9 @@
 package com.fangbaba.basic.face.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OtaRoomtype {
+public class OtaRoomtype implements Serializable{
     private Long id;
 
     private Long hotelid;
