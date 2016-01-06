@@ -23,7 +23,18 @@ public class OtaRoomtype implements Serializable{
     private Date updatetime;
 
     private String updateuser;
+    
+    private String mark;
+    
+    
 
+    public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
     public Long getId() {
         return id;
     }

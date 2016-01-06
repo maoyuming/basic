@@ -12,6 +12,7 @@
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, hotelid, roomtypeid, isdeploy, otatype, num, createtime, createuser, updatetime, 
+    id, hotelid, roomtypeid, isdeploy, otatype, num, createtime, createuser, updatetime, mark,
     updateuser
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.OtaRoomtypeExample" >
@@ -109,11 +110,11 @@
     insert into ota_roomtype (id, hotelid, roomtypeid, 
       isdeploy, otatype, num, 
       createtime, createuser, updatetime, 
-      updateuser)
+      updateuser,mark)
     values (#{id,jdbcType=BIGINT}, #{hotelid,jdbcType=BIGINT}, #{roomtypeid,jdbcType=BIGINT}, 
       #{isdeploy,jdbcType=INTEGER}, #{otatype,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{updateuser,jdbcType=VARCHAR})
+      #{updateuser,jdbcType=VARCHAR},#{mark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fangbaba.basic.po.OtaRoomtype" >
     insert into ota_roomtype
@@ -148,6 +149,9 @@
       <if test="updateuser != null" >
         updateuser,
       </if>
+      <if test="mark != null" >
+        mark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -179,6 +183,9 @@
       </if>
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
+      </if>
+       <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -221,6 +228,9 @@
       <if test="record.updateuser != null" >
         updateuser = #{record.updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="record.mark != null" >
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +247,8 @@
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+      updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +283,9 @@
       <if test="updateuser != null" >
         updateuser = #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -285,7 +299,8 @@
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{updateuser,jdbcType=VARCHAR}
+      updateuser = #{updateuser,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

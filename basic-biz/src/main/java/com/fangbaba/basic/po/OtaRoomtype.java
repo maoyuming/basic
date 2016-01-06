@@ -23,6 +23,17 @@ public class OtaRoomtype {
 
     private String updateuser;
 
+    private String mark;
+    
+    
+
+    public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
     public Long getId() {
         return id;
     }
