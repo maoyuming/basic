@@ -54,10 +54,9 @@ public class OtaHotelServiceImpl implements OtaHotelService{
 	 * 更新状态
 	 * @return
 	 */
-	public Integer 	updateStatus(OtaHotel otaHotel,OtaDeployStatusEnum deployStatusEnum){
+	public Integer 	updateOtaHotel(OtaHotel otaHotel){
 		
 		com.fangbaba.basic.po.OtaHotel record =  dozerMapper.map(otaHotel, com.fangbaba.basic.po.OtaHotel.class);
-		record.setIsdeploy(deployStatusEnum.getId());
 		record.setOtatype(1);
 		OtaHotelExample example = new OtaHotelExample();
 

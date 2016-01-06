@@ -7,5 +7,5 @@ import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 
 public interface OtaRoomtypeService {
 	public List<OtaRoomtype> queryOtaRoomtypeByDeploy(OtaDeployStatusEnum deployStatusEnum);
-	public Integer 	updateStatus(OtaRoomtype otaRoomtype,OtaDeployStatusEnum deployStatusEnum);
+	public Integer 	updateOtaRoomtype(OtaRoomtype otaRoomtype);
 }

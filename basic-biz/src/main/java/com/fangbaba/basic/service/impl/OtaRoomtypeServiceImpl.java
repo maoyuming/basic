@@ -58,10 +58,9 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 	 * 更新状态
 	 * @return
 	 */
-	public Integer 	updateStatus(OtaRoomtype otaRoomtype,OtaDeployStatusEnum deployStatusEnum){
+	public Integer 	updateOtaRoomtype(OtaRoomtype otaRoomtype){
 		
 		com.fangbaba.basic.po.OtaRoomtype record =  dozerMapper.map(otaRoomtype, com.fangbaba.basic.po.OtaRoomtype.class);
-		record.setIsdeploy(deployStatusEnum.getId());
 		record.setOtatype(1);
 		OtaRoomtypeExample example = new OtaRoomtypeExample();
 
