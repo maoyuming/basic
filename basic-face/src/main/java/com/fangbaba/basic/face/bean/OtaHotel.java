@@ -19,8 +19,20 @@ public class OtaHotel implements Serializable{
     private Date updatetime;
 
     private String updateuser;
+    
+    private String mark;
+    
+    
 
-    public Long getId() {
+    public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
+
+	public Long getId() {
         return id;
     }
 

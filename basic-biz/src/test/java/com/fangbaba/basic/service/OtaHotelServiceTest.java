@@ -48,4 +48,19 @@ public class OtaHotelServiceTest extends AbstractTransactionalJUnit4SpringContex
 		}
 		
     }
+    
+    @Test
+    public void testUpdateStatus(){
+    	String sql = "INSERT INTO `ota_hotel` (`id`, `hotelid`, `isdeploy`, `otatype`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
+    			+ "VALUES ('1', '11', '1', '1', NULL, NULL, NULL, NULL);";
+    	jdbcTemplate.update(sql);
+    	OtaHotel otaHotel=new OtaHotel();
+    	otaHotel.setId(1L);
+    	otaHotel.setHotelid(11L);
+    	otaHotel.setIsdeploy(OtaDeployStatusEnum.fail.getId());
+    	otaHotel.setOtatype(1);
+    	Integer result=otaHotelServiceImpl.updateStatus(otaHotel);
+    	
+    	Assert.assertEquals(result==1, true);
+    }
 }

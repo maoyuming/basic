@@ -49,4 +49,24 @@ public class OtaRoomtypeServiceTest extends AbstractTransactionalJUnit4SpringCon
 		}
 		
     }
+    
+    @Test
+   	public  void testUpdateStatus() {
+       	String sql = "INSERT INTO `ota_roomtype` (`id`, `hotelid`, `roomtypeid`, `isdeploy`, `otatype`, `num`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
+       			+ "VALUES ('1', '1', '1', '1', '1', '1', NULL, NULL, NULL, NULL);";
+       	jdbcTemplate.update(sql);
+       	
+       	OtaRoomtype otaRoomtype=new OtaRoomtype();
+       	otaRoomtype.setId(1L);
+       	otaRoomtype.setHotelid(1L);
+       	otaRoomtype.setRoomtypeid(1L);
+       	otaRoomtype.setIsdeploy(OtaDeployStatusEnum.fail.getId());
+       	otaRoomtype.setNum(1);
+       	otaRoomtype.setOtatype(1);
+       	Integer result=  otaRoomtypeServiceImpl.updateStatus(otaRoomtype);
+
+       	Assert.assertEquals(result==1, true);
+       	
+       	
+       }
 }
