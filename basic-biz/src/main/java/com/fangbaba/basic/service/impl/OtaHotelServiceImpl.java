@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.OtaHotel;
+import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 import com.fangbaba.basic.mappers.OtaHotelMapper;
 import com.fangbaba.basic.po.OtaHotelExample;
 import com.fangbaba.basic.po.OtaHotelExample.Criteria;
@@ -27,12 +28,12 @@ public class OtaHotelServiceImpl implements OtaHotelService{
 	 * 查询待发布酒店
 	 * @return
 	 */
-	public List<OtaHotel> queryWaitDeploy(){
+	public List<OtaHotel> queryOtaHotelByDeploy(OtaDeployStatusEnum deployStatusEnum){
 
 		OtaHotelExample example = new OtaHotelExample();
 
 		Criteria criteria = example.createCriteria();
-		criteria.andIsdeployEqualTo(1);
+		criteria.andIsdeployEqualTo(deployStatusEnum.getId());
 		criteria.andOtatypeEqualTo(1);
 		
 		List<OtaHotel> newList = new ArrayList<OtaHotel>();
@@ -47,5 +48,23 @@ public class OtaHotelServiceImpl implements OtaHotelService{
 		}
 		
 		return newList;
+	}
+	
+	/**
+	 * 更新状态
+	 * @return
+	 */
+	public Integer 	updateStatus(OtaHotel otaHotel,OtaDeployStatusEnum deployStatusEnum){
+		
+		com.fangbaba.basic.po.OtaHotel record =  dozerMapper.map(otaHotel, com.fangbaba.basic.po.OtaHotel.class);
+		record.setIsdeploy(deployStatusEnum.getId());
+		record.setOtatype(1);
+		OtaHotelExample example = new OtaHotelExample();
+
+		Criteria criteria = example.createCriteria();
+		criteria.andOtatypeEqualTo(1);
+		criteria.andHotelidEqualTo(otaHotel.getHotelid());
+		
+		return otaHotelMapper.updateByExampleSelective(record, example);
 	}
 }

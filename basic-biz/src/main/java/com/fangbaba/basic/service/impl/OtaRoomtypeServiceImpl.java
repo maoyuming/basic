@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.lucene.util.CollectionUtil;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.OtaRoomtype;
+import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 import com.fangbaba.basic.mappers.OtaRoomtypeMapper;
 import com.fangbaba.basic.po.OtaRoomtypeExample;
 import com.fangbaba.basic.po.OtaRoomtypeExample.Criteria;
@@ -29,7 +29,7 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 	 * 查询待发布房型
 	 * @return
 	 */
-	public List<OtaRoomtype> queryWaitDeploy(){
+	public List<OtaRoomtype> queryOtaRoomtypeByDeploy(OtaDeployStatusEnum deployStatusEnum){
 
 		OtaRoomtypeExample example = new OtaRoomtypeExample();
 
@@ -49,5 +49,27 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 		}
 		
 		return newList;
+	}
+	
+	
+	
+	
+	/**
+	 * 更新状态
+	 * @return
+	 */
+	public Integer 	updateStatus(OtaRoomtype otaRoomtype,OtaDeployStatusEnum deployStatusEnum){
+		
+		com.fangbaba.basic.po.OtaRoomtype record =  dozerMapper.map(otaRoomtype, com.fangbaba.basic.po.OtaRoomtype.class);
+		record.setIsdeploy(deployStatusEnum.getId());
+		record.setOtatype(1);
+		OtaRoomtypeExample example = new OtaRoomtypeExample();
+
+		Criteria criteria = example.createCriteria();
+		criteria.andOtatypeEqualTo(1);
+		criteria.andHotelidEqualTo(otaRoomtype.getHotelid());
+		criteria.andRoomtypeidEqualTo(otaRoomtype.getRoomtypeid());
+		
+		return otaRoomtypeMapper.updateByExampleSelective(record, example);
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fangbaba.basic.face.bean.OtaHotel;
+import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 import com.fangbaba.basic.service.impl.OtaHotelServiceImpl;
 
 
@@ -36,7 +37,7 @@ public class OtaHotelServiceTest extends AbstractTransactionalJUnit4SpringContex
     	String sql = "INSERT INTO `ota_hotel` (`id`, `hotelid`, `isdeploy`, `otatype`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
     			+ "VALUES ('1', '11', '1', '1', NULL, NULL, NULL, NULL);";
     	jdbcTemplate.update(sql);
-    	List<OtaHotel> list =  otaHotelServiceImpl.queryWaitDeploy();
+    	List<OtaHotel> list =  otaHotelServiceImpl.queryOtaHotelByDeploy(OtaDeployStatusEnum.un);
 
 		Assert.assertNotNull(list);
 		Assert.assertEquals(list.size()==1,true);

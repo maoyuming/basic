@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fangbaba.basic.face.bean.OtaHotel;
 import com.fangbaba.basic.face.bean.OtaRoomtype;
+import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 import com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl;
 
 
@@ -37,7 +38,7 @@ public class OtaRoomtypeServiceTest extends AbstractTransactionalJUnit4SpringCon
     	String sql = "INSERT INTO `ota_roomtype` (`id`, `hotelid`, `roomtypeid`, `isdeploy`, `otatype`, `num`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
     			+ "VALUES ('1', '1', '1', '1', '1', '1', NULL, NULL, NULL, NULL);";
     	jdbcTemplate.update(sql);
-    	List<OtaRoomtype> list =  otaRoomtypeServiceImpl.queryWaitDeploy();
+    	List<OtaRoomtype> list =  otaRoomtypeServiceImpl.queryOtaRoomtypeByDeploy(OtaDeployStatusEnum.un);
 
 		Assert.assertNotNull(list);
 		Assert.assertEquals(list.size()==1,true);
