@@ -63,7 +63,7 @@ public class OtaRoomtypeServiceTest extends AbstractTransactionalJUnit4SpringCon
        	otaRoomtype.setIsdeploy(OtaDeployStatusEnum.fail.getId());
        	otaRoomtype.setNum(1);
        	otaRoomtype.setOtatype(1);
-       	Integer result=  otaRoomtypeServiceImpl.updateStatus(otaRoomtype);
+       	Integer result=  otaRoomtypeServiceImpl.updateOtaRoomtype(otaRoomtype);
 
        	Assert.assertEquals(result==1, true);
        	

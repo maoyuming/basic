@@ -59,7 +59,7 @@ public class OtaHotelServiceTest extends AbstractTransactionalJUnit4SpringContex
     	otaHotel.setHotelid(11L);
     	otaHotel.setIsdeploy(OtaDeployStatusEnum.fail.getId());
     	otaHotel.setOtatype(1);
-    	Integer result=otaHotelServiceImpl.updateStatus(otaHotel);
+    	Integer result=otaHotelServiceImpl.updateOtaHotel(otaHotel);
     	
     	Assert.assertEquals(result==1, true);
     }
