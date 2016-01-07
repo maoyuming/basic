@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.base.RetInfo;
 import com.fangbaba.basic.face.bean.HotelModel;
 import com.fangbaba.basic.face.bean.RoomModel;
 import com.fangbaba.basic.face.bean.RoomtypeModel;
@@ -124,6 +125,11 @@ public class HotelServiceImpl implements HotelService {
 		return hotelModelMapper.insertSelective(hotelModel);
 	}
 
+	
+	
+	/**
+	 * 查询酒店详情
+	 */
 	@Override
 	public HotelVo queryDetail(Long id, String begintime, String endtime) {
 		logger.info(HotelServiceImpl.class.getName()+":queryDetail begin");
@@ -157,12 +163,15 @@ public class HotelServiceImpl implements HotelService {
 				RoomtypeVo roomtypeVo = new RoomtypeVo();
 				roomtypeVo.setId(roomtypeModel.getId());
 				roomtypeVo.setHotelid(roomtypeModel.getHotelid());
+				//need  封装价格
 				roomtypeVo.setCost(roomtypeModel.getCost());
 				roomtypeVo.setName(roomtypeModel.getName());
+				//need 可用房间数
 				roomtypeVo.setRoomnum(roomtypeModel.getRoomnum());
 				roomtypeVo.setRoomtypepms(roomtypeModel.getRoomtypepms());
 				List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
 				List<RoomVo> rooms = new ArrayList<RoomVo>();
+				//TODO:是否返回具体房间
 				for (RoomModel roomModel : roommodels) {
 					RoomVo roomVo = new RoomVo();
 					roomVo.setId(roomModel.getId());
@@ -183,5 +192,6 @@ public class HotelServiceImpl implements HotelService {
 			throw e;
 		}
 	}
+	
 
 }

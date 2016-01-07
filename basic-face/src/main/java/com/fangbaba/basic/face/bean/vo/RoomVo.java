@@ -19,6 +19,8 @@ public class RoomVo implements Serializable{
     private String tel;
 
     private String remark;
+    
+    private boolean islock;
 
 	public Long getId() {
 		return id;
@@ -67,5 +69,15 @@ public class RoomVo implements Serializable{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public boolean isIslock() {
+		return islock;
+	}
+
+	public void setIslock(boolean islock) {
+		this.islock = islock;
+	}
+	
+	
 	
 }
