@@ -66,4 +66,25 @@ public class OtaHotelServiceImpl implements OtaHotelService{
 		
 		return otaHotelMapper.updateByExampleSelective(record, example);
 	}
+
+	/**
+	 * 查询全部
+	 */
+	@Override
+	public List<OtaHotel> queryAll() {
+		List<OtaHotel> newList = new ArrayList<OtaHotel>();
+		List<com.fangbaba.basic.po.OtaHotel> list = otaHotelMapper.selectByExample(null);
+		
+		
+		if(CollectionUtils.isNotEmpty(list)){
+			for (com.fangbaba.basic.po.OtaHotel otaHotel : list) {
+				OtaHotel otaHotel2 = dozerMapper.map(otaHotel, OtaHotel.class);
+				newList.add(otaHotel2);
+			}
+		}
+		
+		return newList;
+	}
+	
+	
 }
