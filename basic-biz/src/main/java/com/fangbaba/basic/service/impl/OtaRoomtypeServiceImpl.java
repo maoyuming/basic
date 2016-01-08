@@ -36,8 +36,6 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 	@Autowired
 	private RoomService roomService;
 	
-	@Autowired
-	private RoomtypeService roomtypeService;
 	/**
 	 * 查询待发布房型
 	 * @return
@@ -124,7 +122,7 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 				logger.info("roomno is bigger than all room count.roomno:{},roomcount:{}",roomno,roomModels.size());
 			}else {
 				//判断当前酒店房型是否发布过
-				if (null==otaRoomtype) {
+				if (null==otaRoomtype ||null==otaRoomtype.getId()) {
 					otaRoomtype.setNum(roomno);
 					otaRoomtype.setOtatype(otatype);
 					otaRoomtype.setRoomtypeid(roomtypeid);
@@ -148,8 +146,6 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService{
 		}
 		return result;
 	}
-
-
 
 
 	@Override

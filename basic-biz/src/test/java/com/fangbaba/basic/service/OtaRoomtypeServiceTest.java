@@ -69,4 +69,73 @@ public class OtaRoomtypeServiceTest extends AbstractTransactionalJUnit4SpringCon
        	
        	
        }
+    
+    @Test
+    public void testGetOtaRoomtypeByRoomtype(){
+    	String sql = "INSERT INTO `ota_roomtype` (`id`, `hotelid`, `roomtypeid`, `isdeploy`, `otatype`, `num`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
+       			+ "VALUES ('1', '1', '1', '1', '1', '1', NULL, NULL, NULL, NULL);";
+       	jdbcTemplate.update(sql);
+       	
+    	OtaRoomtype otaRoomtype=otaRoomtypeServiceImpl.getOtaRoomtypeByOtaRoomtype(1L, 1L, 1);
+    	Assert.assertNotNull(otaRoomtype);
+    }
+    
+    @Test
+    public void testUpdateOtaRoomNoNull(){
+    	String sql1 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(1,1,'no1','pms1','tel01','remark1') ;";
+    	jdbcTemplate.update(sql1);
+    	String sql2 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(2,1,'no2','pms2','tel02','remark2') ;";
+    	jdbcTemplate.update(sql2);
+    	
+    	Integer result=otaRoomtypeServiceImpl.updateOtaRoomNo(1L, 1L, 1, 2);
+       	
+       	Assert.assertTrue(result==1);
+    	
+       	
+       	com.fangbaba.basic.po.OtaRoomtype otaRoomtype=otaRoomtypeServiceImpl.getOtaRoomtypeByRoomtype(1L, 1L, 1);
+       	Assert.assertNotNull(otaRoomtype);
+       	Assert.assertTrue(otaRoomtype.getNum()==2);
+    }
+    
+    @Test
+    public void testUpdateOtaRoomNoBig(){
+    	String sql1 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(1,1,'no1','pms1','tel01','remark1') ;";
+    	jdbcTemplate.update(sql1);
+    	String sql2 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(2,1,'no2','pms2','tel02','remark2') ;";
+    	jdbcTemplate.update(sql2);
+    	
+    	Integer result=otaRoomtypeServiceImpl.updateOtaRoomNo(1L, 1L, 1, 200);
+       	
+       	Assert.assertTrue(result==0);
+    	
+    }
+    
+    @Test
+    public void testUpdateOtaRoomNoRoomEmpty(){
+    	
+    	Integer result=otaRoomtypeServiceImpl.updateOtaRoomNo(1L, 1L, 1, 200);
+       	
+       	Assert.assertTrue(result==0);
+    	
+    }
+    
+    @Test
+    public void testUpdateOtaRoomNo(){
+    	String sql1 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(1,1,'no1','pms1','tel01','remark1') ;";
+    	jdbcTemplate.update(sql1);
+    	String sql2 = "INSERT INTO `room` (`id`,`roomtypeid`,`roomno`,`roompms`,`tel`,`remark`) VALUES(2,1,'no2','pms2','tel02','remark2') ;";
+    	jdbcTemplate.update(sql2);
+    	
+    	String sql = "INSERT INTO `ota_roomtype` (`id`, `hotelid`, `roomtypeid`, `isdeploy`, `otatype`, `num`, `createtime`, `createuser`, `updatetime`, `updateuser`) "
+       			+ "VALUES ('1', '1', '1', '1', '1', '1', NULL, NULL, NULL, NULL);";
+       	jdbcTemplate.update(sql);
+    	
+    	Integer result=otaRoomtypeServiceImpl.updateOtaRoomNo(1L, 1L, 1, 2);
+       	
+       	Assert.assertTrue(result==1);
+       	
+       	com.fangbaba.basic.po.OtaRoomtype otaRoomtype=otaRoomtypeServiceImpl.getOtaRoomtypeByRoomtype(1L, 1L, 1);
+       	Assert.assertNotNull(otaRoomtype);
+       	Assert.assertTrue(otaRoomtype.getNum()==2);
+    }
 }
