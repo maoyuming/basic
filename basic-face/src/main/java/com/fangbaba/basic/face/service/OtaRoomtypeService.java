@@ -8,4 +8,6 @@ import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 public interface OtaRoomtypeService {
 	public List<OtaRoomtype> queryOtaRoomtypeByDeploy(OtaDeployStatusEnum deployStatusEnum);
 	public Integer 	updateOtaRoomtype(OtaRoomtype otaRoomtype);
+	public Integer updateOtaRoomNo(Long hotelid,Long roomtypeid,Integer otatype,Integer roomno);
+
 }
