@@ -147,7 +147,7 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	private void updateById(RoomtypeModel roomtypeModel){
 		roomtypeModelMapper.updateByPrimaryKeySelective(roomtypeModel);
 	}
-	private void addRoomtype(RoomtypeModel roomtypeModel){
+	public void addRoomtype(RoomtypeModel roomtypeModel){
 		roomtypeModelMapper.insertSelective(roomtypeModel);
 	}
 	private void delRoomtypeById(Long roomtypeid){

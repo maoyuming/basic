@@ -29,4 +29,9 @@ public interface RoomtypeService {
 	 * 通过房型id查询
 	 */
 	RoomtypeModel queryById(Long id);
+	/**
+	 * 增加房型
+	 * @param roomtypeModel
+	 */
+	public void addRoomtype(RoomtypeModel roomtypeModel);
 }
