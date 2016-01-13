@@ -26,7 +26,7 @@ import com.fangbaba.basic.po.OtaRoomtypeExample.Criteria;
 import com.fangbaba.basic.service.OtaRoomtypeService;
 import com.fangbaba.basic.util.MathUtil;
 
-@Service
+//@Service
 public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 
 	private static Logger logger = LoggerFactory.getLogger(OtaRoomtypeServiceImpl.class);
