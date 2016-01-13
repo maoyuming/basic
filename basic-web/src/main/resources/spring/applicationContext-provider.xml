@@ -32,7 +32,9 @@
      
      <dubbo:service interface="com.fangbaba.basic.face.service.ProvinceService" ref="provinceService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />  
      
-      <dubbo:service interface="com.fangbaba.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+      <dubbo:service interface="com.fangbaba.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+                       
+      <dubbo:service interface="com.fangbaba.basic.face.service.HotelSaleConfigService" ref="hotelSaleConfigServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
     
     <!-- 具体的实现bean -->  
      <bean id="hotelService" class="com.fangbaba.basic.service.impl.HotelServiceImpl" /> 
@@ -46,6 +48,8 @@
       <bean id="provinceService" class="com.fangbaba.basic.service.impl.ProvinceServiceImpl" />
        
       <bean id="districtService" class="com.fangbaba.basic.service.impl.DistrictServiceImpl" />
+      
+      <bean id="hotelSaleConfigServiceImpl" class="com.fangbaba.basic.service.impl.HotelSaleConfigServiceImpl" />
       
       
       
