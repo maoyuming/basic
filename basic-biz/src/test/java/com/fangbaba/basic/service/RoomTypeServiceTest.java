@@ -38,7 +38,7 @@ public class RoomTypeServiceTest extends AbstractTransactionalJUnit4SpringContex
     }
     @Test
 	public  void testQueryByHotelId() {
-    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117);";
+    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117,1);";
     	jdbcTemplate.update(sql);
     	List<RoomtypeModel> list =  roomtypeServiceImpl.queryByHotelId(1L);
 
@@ -48,7 +48,7 @@ public class RoomTypeServiceTest extends AbstractTransactionalJUnit4SpringContex
     }
     @Test
 	public  void testQueryPriceByRoomTypeId() {
-    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117);";
+    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117,1);";
     	jdbcTemplate.update(sql);
     	BigDecimal price =  roomtypeServiceImpl.queryPriceByRoomTypeId(1L);
 
@@ -56,7 +56,7 @@ public class RoomTypeServiceTest extends AbstractTransactionalJUnit4SpringContex
     }
     @Test
     public  void testQueryById() {
-    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117);";
+    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117,1);";
     	jdbcTemplate.update(sql);
     	RoomtypeModel bean =  roomtypeServiceImpl.queryById(1L);
 
@@ -64,7 +64,7 @@ public class RoomTypeServiceTest extends AbstractTransactionalJUnit4SpringContex
     }
     @Test
     public  void testQueryByPms() {
-    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117);";
+    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117,1);";
     	jdbcTemplate.update(sql);
     	RoomtypeModel bean =  roomtypeServiceImpl.queryByPms("pms1");
 
@@ -72,9 +72,9 @@ public class RoomTypeServiceTest extends AbstractTransactionalJUnit4SpringContex
     }
     @Test
     public  void testSyncRoomtypeInfo() {
-    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117);";
-    	String sql2 = "INSERT INTO `roomtype`  VALUES (2, 1, 'type2', 'pms2', 6, 118);";
-    	String sql3 = "INSERT INTO `roomtype`  VALUES (3, 1, 'type3', 'pms3', 7, 119);";
+    	String sql = "INSERT INTO `roomtype`  VALUES (1, 1, 'type1', 'pms1', 5, 117,1);";
+    	String sql2 = "INSERT INTO `roomtype`  VALUES (2, 1, 'type2', 'pms2', 6, 118,1);";
+    	String sql3 = "INSERT INTO `roomtype`  VALUES (3, 1, 'type3', 'pms3', 7, 119,1);";
     	jdbcTemplate.update(sql);
     	jdbcTemplate.update(sql2);
     	jdbcTemplate.update(sql3);
