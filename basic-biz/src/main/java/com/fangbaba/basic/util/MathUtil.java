@@ -19,10 +19,10 @@ public class MathUtil {
 		return b1.subtract(b2).doubleValue();
 	}
 
-	public static int mul(double d1, int d2) { // 进行乘法运算
+	public static double mul(double d1, int d2) { // 进行乘法运算
 		BigDecimal b1 = new BigDecimal(d1);
 		BigDecimal b2 = new BigDecimal(d2);
-		return b1.multiply(b2).intValue();
+		return b1.multiply(b2).doubleValue();
 	}
 
 	public static double div(int d1, int d2, int len) {// 进行除法运算

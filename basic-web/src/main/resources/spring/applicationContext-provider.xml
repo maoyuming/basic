@@ -34,7 +34,7 @@
      
       <dubbo:service interface="com.fangbaba.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
                        
-      <dubbo:service interface="com.fangbaba.basic.face.service.HotelSaleConfigService" ref="hotelSaleConfigServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+      <dubbo:service interface="com.fangbaba.basic.face.service.HotelSaleConfigService" ref="hotelSaleConfigService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
     
     <!-- 具体的实现bean -->  
      <bean id="hotelService" class="com.fangbaba.basic.service.impl.HotelServiceImpl" /> 
@@ -49,22 +49,22 @@
        
       <bean id="districtService" class="com.fangbaba.basic.service.impl.DistrictServiceImpl" />
       
-      <bean id="hotelSaleConfigServiceImpl" class="com.fangbaba.basic.service.impl.HotelSaleConfigServiceImpl" />
+      <bean id="hotelSaleConfigService" class="com.fangbaba.basic.service.impl.HotelSaleConfigServiceImpl" />
       
       
       
       
-      <dubbo:service interface="com.fangbaba.basic.face.service.OtaHotelService" ref="OtaHotelService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+      <dubbo:service interface="com.fangbaba.basic.face.service.OtaHotelService" ref="otaHotelService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
     
     <!-- 具体的实现bean -->  
-     <bean id="OtaHotelService" class="com.fangbaba.basic.service.impl.OtaHotelServiceImpl" /> 
+     <bean id="otaHotelService" class="com.fangbaba.basic.service.impl.OtaHotelServiceImpl" /> 
      
      
      
-     <dubbo:service interface="com.fangbaba.basic.face.service.OtaRoomtypeService" ref="OtaRoomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+     <dubbo:service interface="com.fangbaba.basic.face.service.OtaRoomtypeService" ref="otaRoomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
     
     <!-- 具体的实现bean -->  
-     <bean id="OtaRoomtypeService" class="com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl" /> 
+     <bean id="otaRoomtypeService" class="com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl" /> 
      
       
 </beans>  

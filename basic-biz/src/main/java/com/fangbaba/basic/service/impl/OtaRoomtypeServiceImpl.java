@@ -26,7 +26,7 @@ import com.fangbaba.basic.po.OtaRoomtypeExample.Criteria;
 import com.fangbaba.basic.service.OtaRoomtypeService;
 import com.fangbaba.basic.util.MathUtil;
 
-//@Service
+@Service
 public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 
 	private static Logger logger = LoggerFactory.getLogger(OtaRoomtypeServiceImpl.class);
@@ -187,16 +187,21 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 					roomsum = roomsum + roomtypeModel.getRoomnum();
 					roomtypeMap.put(roomtypeModel.getId(), roomtypeModel.getRoomnum());
 				}
+				if(salenum>roomsum){
+					salenum = roomsum;
+				}
 				for (Long roomtypeid : roomtypeMap.keySet()) {
 					Integer roomnum = roomtypeMap.get(roomtypeid);
 					double percent = MathUtil.div(roomnum, roomsum, 2);
-					int roomsalenum = MathUtil.mul(percent, salenum);
-					roomtypeconfigMap.put(roomtypeid, roomsalenum);
+					double roomsalenum = MathUtil.mul(percent, salenum);
+					
+					if(roomsalenum!=0)
+						roomtypeconfigMap.put(roomtypeid, (int)Math.round(roomsalenum));
 				}
 				int result = 0;
 				//插入ota_roomtype
 				for (Long roomtypeid : roomtypeconfigMap.keySet()) {
-					Integer roomnum = roomtypeMap.get(roomtypeid);
+					Integer roomnum = roomtypeconfigMap.get(roomtypeid);
 					//遍历otatype枚举
 					for (OtaTypeEnum otaTypeEnum:OtaTypeEnum.values()) {
 						int otatype = otaTypeEnum.getId();

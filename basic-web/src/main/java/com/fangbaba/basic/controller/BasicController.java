@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -135,7 +137,7 @@ public class BasicController {
 	}
 	
 	@RequestMapping(value = "/initotaroomtype/{hotelid}/{salenum}", method = RequestMethod.GET)
-	public ResponseEntity<Integer>  queryRoomTypeById(Long hotelid,Integer salenum){
+	public ResponseEntity<Integer>  queryRoomTypeById(@PathVariable Long hotelid,@PathVariable Integer salenum){
 		return new ResponseEntity<Integer>(otaRoomtypeService.initOtaRoomtype(hotelid, salenum), HttpStatus.OK);
 	}
 	
