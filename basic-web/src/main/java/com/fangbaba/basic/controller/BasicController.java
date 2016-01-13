@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,7 @@ import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.bean.vo.HotelVo;
 import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.face.service.DistrictService;
+import com.fangbaba.basic.face.service.HotelSaleConfigService;
 import com.fangbaba.basic.face.service.OtaRoomtypeService;
 import com.fangbaba.basic.face.service.ProvinceService;
 import com.fangbaba.basic.service.HotelService;
@@ -50,6 +50,8 @@ public class BasicController {
 	private ProvinceService provinceService;
 	@Autowired
 	private OtaRoomtypeService otaRoomtypeService;
+	@Autowired
+	private HotelSaleConfigService hotelSaleConfigService;
 	
 
 	@RequestMapping(value = "/synchotel", method = RequestMethod.POST)
@@ -136,9 +138,11 @@ public class BasicController {
 		return new ResponseEntity<RoomtypeModel>(roomtypeService.queryById(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/initotaroomtype/{hotelid}/{salenum}", method = RequestMethod.GET)
-	public ResponseEntity<Integer>  queryRoomTypeById(@PathVariable Long hotelid,@PathVariable Integer salenum){
-		return new ResponseEntity<Integer>(otaRoomtypeService.initOtaRoomtype(hotelid, salenum), HttpStatus.OK);
+	@RequestMapping(value = "/savehotelconfig/{hotelid}/{salenum}", method = RequestMethod.GET)
+	public ResponseEntity<String>  savehotelconfig(@PathVariable Long hotelid,@PathVariable Integer salenum){
+		String s = "success";
+		hotelSaleConfigService.saveConfig(hotelid, salenum);
+		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 	
 }
