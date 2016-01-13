@@ -16,11 +16,10 @@ import com.fangbaba.basic.face.bean.HotelModel;
 import com.fangbaba.basic.face.bean.ProvinceModel;
 import com.fangbaba.basic.face.bean.RoomModel;
 import com.fangbaba.basic.face.bean.RoomtypeModel;
-import com.fangbaba.basic.face.bean.jsonbean.PmsRoomJsonBean;
-import com.fangbaba.basic.face.bean.jsonbean.PmsRoomtypeJsonBean;
 import com.fangbaba.basic.face.bean.vo.HotelVo;
 import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.face.service.DistrictService;
+import com.fangbaba.basic.face.service.OtaRoomtypeService;
 import com.fangbaba.basic.face.service.ProvinceService;
 import com.fangbaba.basic.service.HotelService;
 import com.fangbaba.basic.service.RoomService;
@@ -47,6 +46,8 @@ public class BasicController {
 	
 	@Autowired
 	private ProvinceService provinceService;
+	@Autowired
+	private OtaRoomtypeService otaRoomtypeService;
 	
 
 	@RequestMapping(value = "/synchotel", method = RequestMethod.POST)
@@ -131,6 +132,11 @@ public class BasicController {
 	@RequestMapping(value = "/queryroomtypebyid", method = RequestMethod.POST)
 	public ResponseEntity<RoomtypeModel>  queryRoomTypeById(Long id){
 		return new ResponseEntity<RoomtypeModel>(roomtypeService.queryById(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/initotaroomtype/{hotelid}/{salenum}", method = RequestMethod.GET)
+	public ResponseEntity<Integer>  queryRoomTypeById(Long hotelid,Integer salenum){
+		return new ResponseEntity<Integer>(otaRoomtypeService.initOtaRoomtype(hotelid, salenum), HttpStatus.OK);
 	}
 	
 }

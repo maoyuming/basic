@@ -6,6 +6,7 @@ import com.fangbaba.basic.face.bean.OtaRoomtype;
 import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
 
 public interface OtaRoomtypeService {
+	public Integer initOtaRoomtype(Long hotelid,Integer salenum);
 	public List<OtaRoomtype> queryOtaRoomtypeByDeploy(OtaDeployStatusEnum deployStatusEnum);
 	public Integer 	updateOtaRoomtype(OtaRoomtype otaRoomtype);
 	
