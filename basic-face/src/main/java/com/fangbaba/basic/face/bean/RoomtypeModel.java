@@ -17,6 +17,9 @@ public class RoomtypeModel implements Serializable{
     private Integer roomnum;
 
     private BigDecimal cost;
+    
+    
+    private Integer type;
 
     public Long getId() {
         return id;
@@ -65,4 +68,14 @@ public class RoomtypeModel implements Serializable{
     public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+    
+    
 }

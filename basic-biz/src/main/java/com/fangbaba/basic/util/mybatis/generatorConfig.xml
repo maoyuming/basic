@@ -32,7 +32,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="ota_hotel" domainObjectName="OtaHotel"></table>
-        <table tableName="ota_roomtype" domainObjectName="OtaRoomtype"></table>
+<!--         <table tableName="ota_hotel" domainObjectName="OtaHotel"></table> -->
+        <table tableName="roomtype" domainObjectName="RoomtypeModel"></table>
 	</context>
 </generatorConfiguration>

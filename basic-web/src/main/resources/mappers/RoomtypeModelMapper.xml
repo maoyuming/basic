@@ -8,6 +8,7 @@
     <result column="roomtypepms" property="roomtypepms" jdbcType="VARCHAR" />
     <result column="roomnum" property="roomnum" jdbcType="INTEGER" />
     <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, hotelid, name, roomtypepms, roomnum, cost
+    id, hotelid, name, roomtypepms, roomnum, cost, type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.RoomtypeModelExample" >
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.fangbaba.basic.face.bean.RoomtypeModel" >
     insert into roomtype (id, hotelid, name, 
-      roomtypepms, roomnum, cost
-      )
+      roomtypepms, roomnum, cost, 
+      type)
     values (#{id,jdbcType=BIGINT}, #{hotelid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{roomtypepms,jdbcType=VARCHAR}, #{roomnum,jdbcType=INTEGER}, #{cost,jdbcType=DECIMAL}
-      )
+      #{roomtypepms,jdbcType=VARCHAR}, #{roomnum,jdbcType=INTEGER}, #{cost,jdbcType=DECIMAL}, 
+      #{type,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.RoomtypeModel" useGeneratedKeys="true" keyProperty="id">
     insert into roomtype
@@ -129,6 +130,9 @@
       <if test="cost != null" >
         cost,
       </if>
+      <if test="type != null" >
+        type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +152,9 @@
       </if>
       <if test="cost != null" >
         #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.cost != null" >
         cost = #{record.cost,jdbcType=DECIMAL},
       </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       name = #{record.name,jdbcType=VARCHAR},
       roomtypepms = #{record.roomtypepms,jdbcType=VARCHAR},
       roomnum = #{record.roomnum,jdbcType=INTEGER},
-      cost = #{record.cost,jdbcType=DECIMAL}
+      cost = #{record.cost,jdbcType=DECIMAL},
+      type = #{record.type,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="cost != null" >
         cost = #{cost,jdbcType=DECIMAL},
       </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -222,7 +236,8 @@
       name = #{name,jdbcType=VARCHAR},
       roomtypepms = #{roomtypepms,jdbcType=VARCHAR},
       roomnum = #{roomnum,jdbcType=INTEGER},
-      cost = #{cost,jdbcType=DECIMAL}
+      cost = #{cost,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
