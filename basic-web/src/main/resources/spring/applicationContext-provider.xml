@@ -66,5 +66,10 @@
     <!-- 具体的实现bean -->  
      <bean id="otaRoomtypeService" class="com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl" /> 
      
+     <dubbo:service interface="com.fangbaba.basic.face.service.GdsTypeService" ref="gdsTypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
+    
+    <!-- 具体的实现bean -->  
+     <bean id="gdsTypeService" class="com.fangbaba.basic.service.impl.GdsTypeServiceImpl" /> 
+     
       
 </beans>  
