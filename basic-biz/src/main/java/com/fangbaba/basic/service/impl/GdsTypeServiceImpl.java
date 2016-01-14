@@ -42,6 +42,18 @@ public class GdsTypeServiceImpl implements IGdsTypeService {
 		return null;
 	}
 
+
+
+	@Override
+	public List<GdsType> queryGdsTypeByChannelid(Integer channelid) {
+
+		GdsTypeExample example = new GdsTypeExample();
+		Criteria criteria = 	example.createCriteria();
+		criteria.andChannelidEqualTo(channelid);
+		List<GdsType> list = gdsTypeMapper.selectByExample(example);
+		return list;
+	}
+
 	
 	
 	

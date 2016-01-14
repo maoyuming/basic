@@ -1,5 +1,7 @@
 package com.fangbaba.basic.face.service;
 
+import java.util.List;
+
 import com.fangbaba.basic.face.bean.GdsType;
 
 public interface GdsTypeService {
@@ -17,4 +19,10 @@ public interface GdsTypeService {
      * @return
      */
     public GdsType queryGdsTypeByOtatype(Integer otatype);
+    /**
+     * 根据渠道id获取分销商类型
+     * @param otatype
+     * @return
+     */
+    public List<GdsType> queryGdsTypeByChannelid(Integer channelid);
 }
