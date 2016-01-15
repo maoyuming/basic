@@ -19,7 +19,7 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		
-		<javaModelGenerator targetPackage="com.fangbaba.basic.face.bean" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.fangbaba.basic.po" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
