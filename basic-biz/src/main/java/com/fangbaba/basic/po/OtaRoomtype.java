@@ -1,8 +1,10 @@
 package com.fangbaba.basic.po;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class OtaRoomtype {
+public class OtaRoomtype implements Serializable{
     private Long id;
 
     private Long hotelid;
@@ -12,6 +14,10 @@ public class OtaRoomtype {
     private Integer isdeploy;
 
     private Integer otatype;
+
+    private BigDecimal hotelprice;
+
+    private BigDecimal saleprice;
 
     private Integer num;
 
@@ -24,16 +30,7 @@ public class OtaRoomtype {
     private String updateuser;
 
     private String mark;
-    
-    
 
-    public String getMark() {
-		return mark;
-	}
-
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
     public Long getId() {
         return id;
     }
@@ -74,6 +71,22 @@ public class OtaRoomtype {
         this.otatype = otatype;
     }
 
+    public BigDecimal getHotelprice() {
+        return hotelprice;
+    }
+
+    public void setHotelprice(BigDecimal hotelprice) {
+        this.hotelprice = hotelprice;
+    }
+
+    public BigDecimal getSaleprice() {
+        return saleprice;
+    }
+
+    public void setSaleprice(BigDecimal saleprice) {
+        this.saleprice = saleprice;
+    }
+
     public Integer getNum() {
         return num;
     }
@@ -112,5 +125,13 @@ public class OtaRoomtype {
 
     public void setUpdateuser(String updateuser) {
         this.updateuser = updateuser == null ? null : updateuser.trim();
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark == null ? null : mark.trim();
     }
 }

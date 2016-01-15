@@ -1,9 +1,11 @@
 package com.fangbaba.basic.mappers;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.fangbaba.basic.po.OtaRoomtype;
 import com.fangbaba.basic.po.OtaRoomtypeExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface OtaRoomtypeMapper {
     int countByExample(OtaRoomtypeExample example);

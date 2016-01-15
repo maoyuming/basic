@@ -1,5 +1,6 @@
 package com.fangbaba.basic.po;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -405,6 +406,126 @@ public class OtaRoomtypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andHotelpriceIsNull() {
+            addCriterion("hotelprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceIsNotNull() {
+            addCriterion("hotelprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceEqualTo(BigDecimal value) {
+            addCriterion("hotelprice =", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceNotEqualTo(BigDecimal value) {
+            addCriterion("hotelprice <>", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceGreaterThan(BigDecimal value) {
+            addCriterion("hotelprice >", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("hotelprice >=", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceLessThan(BigDecimal value) {
+            addCriterion("hotelprice <", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("hotelprice <=", value, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceIn(List<BigDecimal> values) {
+            addCriterion("hotelprice in", values, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceNotIn(List<BigDecimal> values) {
+            addCriterion("hotelprice not in", values, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("hotelprice between", value1, value2, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotelpriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("hotelprice not between", value1, value2, "hotelprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceIsNull() {
+            addCriterion("saleprice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceIsNotNull() {
+            addCriterion("saleprice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceEqualTo(BigDecimal value) {
+            addCriterion("saleprice =", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceNotEqualTo(BigDecimal value) {
+            addCriterion("saleprice <>", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceGreaterThan(BigDecimal value) {
+            addCriterion("saleprice >", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("saleprice >=", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceLessThan(BigDecimal value) {
+            addCriterion("saleprice <", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("saleprice <=", value, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceIn(List<BigDecimal> values) {
+            addCriterion("saleprice in", values, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceNotIn(List<BigDecimal> values) {
+            addCriterion("saleprice not in", values, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("saleprice between", value1, value2, "saleprice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalepriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("saleprice not between", value1, value2, "saleprice");
+            return (Criteria) this;
+        }
+
         public Criteria andNumIsNull() {
             addCriterion("num is null");
             return (Criteria) this;
@@ -722,6 +843,76 @@ public class OtaRoomtypeExample {
 
         public Criteria andUpdateuserNotBetween(String value1, String value2) {
             addCriterion("updateuser not between", value1, value2, "updateuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIsNull() {
+            addCriterion("mark is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIsNotNull() {
+            addCriterion("mark is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkEqualTo(String value) {
+            addCriterion("mark =", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotEqualTo(String value) {
+            addCriterion("mark <>", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkGreaterThan(String value) {
+            addCriterion("mark >", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkGreaterThanOrEqualTo(String value) {
+            addCriterion("mark >=", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLessThan(String value) {
+            addCriterion("mark <", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLessThanOrEqualTo(String value) {
+            addCriterion("mark <=", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLike(String value) {
+            addCriterion("mark like", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotLike(String value) {
+            addCriterion("mark not like", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIn(List<String> values) {
+            addCriterion("mark in", values, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotIn(List<String> values) {
+            addCriterion("mark not in", values, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkBetween(String value1, String value2) {
+            addCriterion("mark between", value1, value2, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotBetween(String value1, String value2) {
+            addCriterion("mark not between", value1, value2, "mark");
             return (Criteria) this;
         }
     }
