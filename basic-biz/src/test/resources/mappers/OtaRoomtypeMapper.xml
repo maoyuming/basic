@@ -7,6 +7,8 @@
     <result column="roomtypeid" property="roomtypeid" jdbcType="BIGINT" />
     <result column="isdeploy" property="isdeploy" jdbcType="INTEGER" />
     <result column="otatype" property="otatype" jdbcType="INTEGER" />
+    <result column="hotelprice" property="hotelprice" jdbcType="DECIMAL" />
+    <result column="saleprice" property="saleprice" jdbcType="DECIMAL" />
     <result column="num" property="num" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, hotelid, roomtypeid, isdeploy, otatype, num, createtime, createuser, updatetime, mark,
-    updateuser
+    id, hotelid, roomtypeid, isdeploy, otatype, hotelprice, saleprice, num, createtime, 
+    createuser, updatetime, updateuser, mark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.OtaRoomtypeExample" >
     select
@@ -108,13 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.fangbaba.basic.po.OtaRoomtype" >
     insert into ota_roomtype (id, hotelid, roomtypeid, 
-      isdeploy, otatype, num, 
-      createtime, createuser, updatetime, 
-      updateuser,mark)
+      isdeploy, otatype, hotelprice, 
+      saleprice, num, createtime, 
+      createuser, updatetime, updateuser, 
+      mark)
     values (#{id,jdbcType=BIGINT}, #{hotelid,jdbcType=BIGINT}, #{roomtypeid,jdbcType=BIGINT}, 
-      #{isdeploy,jdbcType=INTEGER}, #{otatype,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{updateuser,jdbcType=VARCHAR},#{mark,jdbcType=VARCHAR})
+      #{isdeploy,jdbcType=INTEGER}, #{otatype,jdbcType=INTEGER}, #{hotelprice,jdbcType=DECIMAL}, 
+      #{saleprice,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, 
+      #{mark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fangbaba.basic.po.OtaRoomtype" >
     insert into ota_roomtype
@@ -133,6 +137,12 @@
       </if>
       <if test="otatype != null" >
         otatype,
+      </if>
+      <if test="hotelprice != null" >
+        hotelprice,
+      </if>
+      <if test="saleprice != null" >
+        saleprice,
       </if>
       <if test="num != null" >
         num,
@@ -169,6 +179,12 @@
       <if test="otatype != null" >
         #{otatype,jdbcType=INTEGER},
       </if>
+      <if test="hotelprice != null" >
+        #{hotelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleprice != null" >
+        #{saleprice,jdbcType=DECIMAL},
+      </if>
       <if test="num != null" >
         #{num,jdbcType=INTEGER},
       </if>
@@ -184,7 +200,7 @@
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
       </if>
-       <if test="mark != null" >
+      <if test="mark != null" >
         #{mark,jdbcType=VARCHAR},
       </if>
     </trim>
@@ -212,6 +228,12 @@
       </if>
       <if test="record.otatype != null" >
         otatype = #{record.otatype,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotelprice != null" >
+        hotelprice = #{record.hotelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.saleprice != null" >
+        saleprice = #{record.saleprice,jdbcType=DECIMAL},
       </if>
       <if test="record.num != null" >
         num = #{record.num,jdbcType=INTEGER},
@@ -243,6 +265,8 @@
       roomtypeid = #{record.roomtypeid,jdbcType=BIGINT},
       isdeploy = #{record.isdeploy,jdbcType=INTEGER},
       otatype = #{record.otatype,jdbcType=INTEGER},
+      hotelprice = #{record.hotelprice,jdbcType=DECIMAL},
+      saleprice = #{record.saleprice,jdbcType=DECIMAL},
       num = #{record.num,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
@@ -267,6 +291,12 @@
       </if>
       <if test="otatype != null" >
         otatype = #{otatype,jdbcType=INTEGER},
+      </if>
+      <if test="hotelprice != null" >
+        hotelprice = #{hotelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleprice != null" >
+        saleprice = #{saleprice,jdbcType=DECIMAL},
       </if>
       <if test="num != null" >
         num = #{num,jdbcType=INTEGER},
@@ -295,6 +325,8 @@
       roomtypeid = #{roomtypeid,jdbcType=BIGINT},
       isdeploy = #{isdeploy,jdbcType=INTEGER},
       otatype = #{otatype,jdbcType=INTEGER},
+      hotelprice = #{hotelprice,jdbcType=DECIMAL},
+      saleprice = #{saleprice,jdbcType=DECIMAL},
       num = #{num,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
