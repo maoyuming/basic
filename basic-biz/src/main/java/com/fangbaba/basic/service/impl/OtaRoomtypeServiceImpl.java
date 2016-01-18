@@ -194,9 +194,10 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 					Integer roomnum = roomtypeMap.get(roomtypeid);
 					double percent = MathUtil.div(roomnum, roomsum, 2);
 					double roomsalenum = MathUtil.mul(percent, salenum);
+					int value = (int)Math.round(roomsalenum);
 					
-					if(roomsalenum!=0)
-						roomtypeconfigMap.put(roomtypeid, (int)Math.round(roomsalenum));
+					if(value!=0)
+						roomtypeconfigMap.put(roomtypeid, value);
 				}
 				int result = 0;
 				//插入ota_roomtype

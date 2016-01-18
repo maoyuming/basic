@@ -44,13 +44,15 @@ public class HotelSaleConfigServiceImpl implements HotelSaleConfigService {
 				hotelSaleConfig.setHotelid(hotelid);
 				hotelSaleConfig.setSaleNum(salenum);
 				hotelSaleConfig.setUpdatetime(new Date());
+				hotelSaleConfig.setRemark(hotelSaleConfig.getRemark()+salenum+",");
 				hotelSaleConfigMapper.updateByPrimaryKeySelective(hotelSaleConfig);
 			}else{
 				hotelSaleConfig = new HotelSaleConfig();
 				hotelSaleConfig.setHotelid(hotelid);
 				hotelSaleConfig.setSaleNum(salenum);
 				hotelSaleConfig.setCreatetime(new Date());
-				hotelSaleConfigMapper.updateByPrimaryKeySelective(hotelSaleConfig);
+				hotelSaleConfig.setRemark(salenum+",");
+				hotelSaleConfigMapper.insertSelective(hotelSaleConfig);
 			}
 			//创建ota_roomtype数据
 			int i = otaRoomtypeService.initOtaRoomtype(hotelid, salenum);
