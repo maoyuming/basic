@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fangbaba.basic.face.bean.GdsType;
 import com.fangbaba.basic.mappers.GdsTypeMapper;
@@ -11,6 +12,7 @@ import com.fangbaba.basic.po.GdsTypeExample;
 import com.fangbaba.basic.po.GdsTypeExample.Criteria;
 import com.fangbaba.basic.service.IGdsTypeService;
 
+@Service
 public class GdsTypeServiceImpl implements IGdsTypeService {
 	
 	@Autowired
