@@ -6,6 +6,8 @@
 <generatorConfiguration>
 
 	<context id="otsTables" targetRuntime="MyBatis3">
+	
+		<plugin type="com.fangbaba.basic.util.mybatis.PaginationPlugin"></plugin>
 
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
@@ -32,7 +34,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="ota_roomtype" domainObjectName="OtaRoomtype"></table>
+        <table tableName="code_dictionary" domainObjectName="CodeDictionary"></table>
 <!--         <table tableName="gds_type" domainObjectName="GdsType"></table> -->
 	</context>
 </generatorConfiguration>
