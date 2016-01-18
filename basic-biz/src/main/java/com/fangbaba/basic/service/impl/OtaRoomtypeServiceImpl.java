@@ -130,6 +130,7 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 			} else {
 				// 判断当前酒店房型是否发布过
 				if (null == otaRoomtype || null == otaRoomtype.getId()) {
+					otaRoomtype = new com.fangbaba.basic.po.OtaRoomtype();
 					otaRoomtype.setNum(roomno);
 					otaRoomtype.setOtatype(otatype);
 					otaRoomtype.setRoomtypeid(roomtypeid);
