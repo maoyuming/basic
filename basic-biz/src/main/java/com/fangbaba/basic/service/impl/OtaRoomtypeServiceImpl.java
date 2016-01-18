@@ -157,8 +157,12 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 	@Override
 	public OtaRoomtype getOtaRoomtypeByOtaRoomtype(Long hotelid, Long roomtypeid, Integer otatype) {
 		com.fangbaba.basic.po.OtaRoomtype otaRoomtype = getOtaRoomtypeByRoomtype(hotelid, roomtypeid, otatype);
-		OtaRoomtype oRoomtype = dozerMapper.map(otaRoomtype, OtaRoomtype.class);
-		return oRoomtype;
+		if(otaRoomtype!=null){
+    		OtaRoomtype oRoomtype = dozerMapper.map(otaRoomtype, OtaRoomtype.class);
+    		return oRoomtype;
+		}else{
+		    return null;
+		}
 	}
 	
 	public int saveRecord(com.fangbaba.basic.po.OtaRoomtype otaRoomtype){
