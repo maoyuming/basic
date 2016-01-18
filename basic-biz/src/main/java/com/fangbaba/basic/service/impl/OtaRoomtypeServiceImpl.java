@@ -97,7 +97,7 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 	 * @return
 	 */
 	public com.fangbaba.basic.po.OtaRoomtype getOtaRoomtypeByRoomtype(Long hotelid, Long roomtypeid, Integer otatype) {
-		com.fangbaba.basic.po.OtaRoomtype otaRoomtype = new com.fangbaba.basic.po.OtaRoomtype();
+		com.fangbaba.basic.po.OtaRoomtype otaRoomtype = null;
 		OtaRoomtypeExample example = new OtaRoomtypeExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andOtatypeEqualTo(otatype);
