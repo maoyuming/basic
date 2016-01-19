@@ -5,7 +5,13 @@ package com.fangbaba.basic.face.enums;
  * ota_roomtype otatype 枚举
  */
 public enum OtaTypeEnum {
+	/**
+	 * 10000001   眯客
+	 */
 	imike(10000001, "眯客"), 
+	/**
+	 * 10000002   阿里旅游
+	 */
 	alitrip(10000002, "阿里旅游");
 	
 	private final Integer id;
