@@ -13,17 +13,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.face.bean.GdsType;
 import com.fangbaba.basic.face.bean.OtaRoomtype;
 import com.fangbaba.basic.face.bean.RoomModel;
 import com.fangbaba.basic.face.bean.RoomtypeModel;
 import com.fangbaba.basic.face.enums.OtaDeployStatusEnum;
-import com.fangbaba.basic.face.enums.OtaTypeEnum;
+import com.fangbaba.basic.face.service.GdsTypeService;
+//import com.fangbaba.basic.face.enums.OtaTypeEnum;
 import com.fangbaba.basic.face.service.RoomService;
 import com.fangbaba.basic.face.service.RoomtypeService;
 import com.fangbaba.basic.mappers.OtaRoomtypeMapper;
 import com.fangbaba.basic.po.OtaRoomtypeExample;
 import com.fangbaba.basic.po.OtaRoomtypeExample.Criteria;
 import com.fangbaba.basic.service.OtaRoomtypeService;
+import com.fangbaba.basic.util.Config;
 import com.fangbaba.basic.util.MathUtil;
 
 @Service
@@ -41,6 +44,8 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 	private RoomService roomService;
 	@Autowired
 	private RoomtypeService roomtypeService;
+	@Autowired
+	private GdsTypeService gdsTypeService;
 
 	/**
 	 * 查询待发布房型
@@ -208,19 +213,26 @@ public class OtaRoomtypeServiceImpl implements OtaRoomtypeService {
 				//插入ota_roomtype
 				for (Long roomtypeid : roomtypeconfigMap.keySet()) {
 					Integer roomnum = roomtypeconfigMap.get(roomtypeid);
-					//遍历otatype枚举
-					for (OtaTypeEnum otaTypeEnum:OtaTypeEnum.values()) {
-						int otatype = otaTypeEnum.getId();
-						com.fangbaba.basic.po.OtaRoomtype otaRoomtype = new com.fangbaba.basic.po.OtaRoomtype();
-						otaRoomtype.setCreatetime(new Date());
-						otaRoomtype.setCreateuser("");
-						otaRoomtype.setHotelid(hotelid);
-						otaRoomtype.setRoomtypeid(roomtypeid);
-						otaRoomtype.setIsdeploy(OtaDeployStatusEnum.un.getId());
-						otaRoomtype.setOtatype(otatype);
-						otaRoomtype.setNum(roomnum);
-						result = result+saveRecord(otaRoomtype);
+					
+					String[] channels = Config.getValue("hotel.channelid").split(";");
+					for (String channelid : channels) {
+						List<GdsType> list = gdsTypeService.queryGdsTypeByChannelid(Integer.valueOf(channelid));
+						for (GdsType gdsType : list) {
+
+							int otatype = gdsType.getOtatype();
+							com.fangbaba.basic.po.OtaRoomtype otaRoomtype = new com.fangbaba.basic.po.OtaRoomtype();
+							otaRoomtype.setCreatetime(new Date());
+							otaRoomtype.setCreateuser("");
+							otaRoomtype.setHotelid(hotelid);
+							otaRoomtype.setRoomtypeid(roomtypeid);
+							otaRoomtype.setIsdeploy(OtaDeployStatusEnum.un.getId());
+							otaRoomtype.setOtatype(otatype);
+							otaRoomtype.setNum(roomnum);
+							result = result+saveRecord(otaRoomtype);
+						
+						}
 					}
+					//查询所有的gdstype
 				}
 				return result;
 			}else{
