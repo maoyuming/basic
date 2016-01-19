@@ -71,7 +71,7 @@ public class PaginationPlugin extends PluginAdapter {
 
          isNotNullElement.addAttribute(new Attribute("test","limitStart != null and limitStart >=0"));//$NON-NLS-1$ //$NON-NLS-2$
 
-         isNotNullElement.addElement(new TextElement("limit${limitStart} , ${limitEnd}"));
+         isNotNullElement.addElement(new TextElement("limit ${limitStart} , ${limitEnd}"));
 
          element.addElement(isNotNullElement);
 
