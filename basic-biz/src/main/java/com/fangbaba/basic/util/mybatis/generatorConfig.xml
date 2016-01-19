@@ -35,6 +35,7 @@
 		</javaClientGenerator>
         
 <!--         <table tableName="code_dictionary" domainObjectName="CodeDictionary"></table> -->
-        <table tableName="gds_type" domainObjectName="GdsType"></table>
+<!--         <table tableName="gds_type" domainObjectName="GdsType"></table> -->
+        <table tableName="gds_channel" domainObjectName="GdsChannel"></table>
 	</context>
 </generatorConfiguration>

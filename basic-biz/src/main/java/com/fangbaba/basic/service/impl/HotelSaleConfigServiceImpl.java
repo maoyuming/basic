@@ -13,7 +13,7 @@ import com.fangbaba.basic.face.bean.HotelSaleConfig;
 import com.fangbaba.basic.face.service.HotelSaleConfigService;
 import com.fangbaba.basic.mappers.HotelSaleConfigMapper;
 import com.fangbaba.basic.po.HotelSaleConfigExample;
-import com.fangbaba.basic.service.OtaRoomtypeService;
+//import com.fangbaba.basic.service.OtaRoomtypeService;
 
 /**
  * @author he
@@ -25,8 +25,8 @@ public class HotelSaleConfigServiceImpl implements HotelSaleConfigService {
 	private static Logger logger = LoggerFactory.getLogger(HotelSaleConfigServiceImpl.class);
 	@Autowired
 	private HotelSaleConfigMapper hotelSaleConfigMapper;
-	@Autowired
-	private OtaRoomtypeService otaRoomtypeService;
+//	@Autowired
+//	private OtaRoomtypeService otaRoomtypeService;
 	
 	
 	/**
@@ -55,8 +55,9 @@ public class HotelSaleConfigServiceImpl implements HotelSaleConfigService {
 				hotelSaleConfigMapper.insertSelective(hotelSaleConfig);
 			}
 			//创建ota_roomtype数据
-			int i = otaRoomtypeService.initOtaRoomtype(hotelid, salenum);
-			logger.info("创建ota_roomtype记录{}条",i);
+			//TODO:预留是否设置
+//			int i = otaRoomtypeService.initOtaRoomtype(hotelid, salenum);
+//			logger.info("创建ota_roomtype记录{}条",i);
 		} catch (Exception e) {
 			logger.error(HotelSaleConfigServiceImpl.class.getName()+":saveOrUpdate error",e);
 			throw e;

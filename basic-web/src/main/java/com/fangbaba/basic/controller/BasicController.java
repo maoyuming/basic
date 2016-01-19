@@ -21,7 +21,7 @@ import com.fangbaba.basic.face.bean.vo.HotelVo;
 import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.face.service.DistrictService;
 import com.fangbaba.basic.face.service.HotelSaleConfigService;
-import com.fangbaba.basic.face.service.OtaRoomtypeService;
+//import com.fangbaba.basic.face.service.OtaRoomtypeService;
 import com.fangbaba.basic.face.service.ProvinceService;
 import com.fangbaba.basic.service.HotelService;
 import com.fangbaba.basic.service.RoomService;
@@ -48,8 +48,8 @@ public class BasicController {
 	
 	@Autowired
 	private ProvinceService provinceService;
-	@Autowired
-	private OtaRoomtypeService otaRoomtypeService;
+//	@Autowired
+//	private OtaRoomtypeService otaRoomtypeService;
 	@Autowired
 	private HotelSaleConfigService hotelSaleConfigService;
 	
