@@ -7,6 +7,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="channelid" property="channelid" jdbcType="INTEGER" />
+    <result column="is_visible" property="isVisible" jdbcType="CHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
@@ -71,9 +72,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, otatype, name, state, channelid, createtime, createuser, updatetime, updateuser
+    id, otatype, name, state, channelid, is_visible, createtime, createuser, updatetime, 
+    updateuser
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.GdsTypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.face.bean.GdsTypeExample" >
     select
     <if test="distinct" >
       distinct
@@ -86,6 +88,9 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit${limitStart} , ${limitEnd}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -97,7 +102,7 @@
     delete from gds_type
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fangbaba.basic.po.GdsTypeExample" >
+  <delete id="deleteByExample" parameterType="com.fangbaba.basic.face.bean.GdsTypeExample" >
     delete from gds_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -105,13 +110,13 @@
   </delete>
   <insert id="insert" parameterType="com.fangbaba.basic.face.bean.GdsType" >
     insert into gds_type (id, otatype, name, 
-      state, channelid, createtime, 
-      createuser, updatetime, updateuser
-      )
+      state, channelid, is_visible, 
+      createtime, createuser, updatetime, 
+      updateuser)
     values (#{id,jdbcType=BIGINT}, #{otatype,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{channelid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}
-      )
+      #{state,jdbcType=INTEGER}, #{channelid,jdbcType=INTEGER}, #{isVisible,jdbcType=CHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{updateuser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fangbaba.basic.face.bean.GdsType" >
     insert into gds_type
@@ -130,6 +135,9 @@
       </if>
       <if test="channelid != null" >
         channelid,
+      </if>
+      <if test="isVisible != null" >
+        is_visible,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -160,6 +168,9 @@
       <if test="channelid != null" >
         #{channelid,jdbcType=INTEGER},
       </if>
+      <if test="isVisible != null" >
+        #{isVisible,jdbcType=CHAR},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -174,7 +185,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fangbaba.basic.po.GdsTypeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.fangbaba.basic.face.bean.GdsTypeExample" resultType="java.lang.Integer" >
     select count(*) from gds_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -197,6 +208,9 @@
       </if>
       <if test="record.channelid != null" >
         channelid = #{record.channelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isVisible != null" >
+        is_visible = #{record.isVisible,jdbcType=CHAR},
       </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -222,6 +236,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       channelid = #{record.channelid,jdbcType=INTEGER},
+      is_visible = #{record.isVisible,jdbcType=CHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
@@ -245,6 +260,9 @@
       <if test="channelid != null" >
         channelid = #{channelid,jdbcType=INTEGER},
       </if>
+      <if test="isVisible != null" >
+        is_visible = #{isVisible,jdbcType=CHAR},
+      </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -266,6 +284,7 @@
       name = #{name,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       channelid = #{channelid,jdbcType=INTEGER},
+      is_visible = #{isVisible,jdbcType=CHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
