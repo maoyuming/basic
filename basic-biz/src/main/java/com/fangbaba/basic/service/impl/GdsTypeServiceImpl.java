@@ -6,6 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fangbaba.basic.enums.IsEnabledEnum;
 import com.fangbaba.basic.face.bean.GdsType;
 import com.fangbaba.basic.mappers.GdsTypeMapper;
 import com.fangbaba.basic.po.GdsTypeExample;
@@ -37,6 +38,7 @@ public class GdsTypeServiceImpl implements IGdsTypeService {
 		GdsTypeExample example = new GdsTypeExample();
 		Criteria criteria = 	example.createCriteria();
 		criteria.andOtatypeEqualTo(otatype);
+		criteria.andIsVisibleEqualTo(IsEnabledEnum.use.getId());
 		List<GdsType> list = gdsTypeMapper.selectByExample(example);
 		if(CollectionUtils.isNotEmpty(list)){
 			return list.get(0);
@@ -52,6 +54,7 @@ public class GdsTypeServiceImpl implements IGdsTypeService {
 		GdsTypeExample example = new GdsTypeExample();
 		Criteria criteria = 	example.createCriteria();
 		criteria.andChannelidEqualTo(channelid);
+		criteria.andIsVisibleEqualTo(IsEnabledEnum.use.getId());
 		List<GdsType> list = gdsTypeMapper.selectByExample(example);
 		return list;
 	}

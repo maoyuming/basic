@@ -13,6 +13,8 @@ public class GdsType {
 
     private Integer channelid;
 
+    private String isVisible;
+
     private Date createtime;
 
     private String createuser;
@@ -59,6 +61,14 @@ public class GdsType {
 
     public void setChannelid(Integer channelid) {
         this.channelid = channelid;
+    }
+
+    public String getIsVisible() {
+        return isVisible;
+    }
+
+    public void setIsVisible(String isVisible) {
+        this.isVisible = isVisible == null ? null : isVisible.trim();
     }
 
     public Date getCreatetime() {

@@ -34,7 +34,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="code_dictionary" domainObjectName="CodeDictionary"></table>
-<!--         <table tableName="gds_type" domainObjectName="GdsType"></table> -->
+<!--         <table tableName="code_dictionary" domainObjectName="CodeDictionary"></table> -->
+        <table tableName="gds_type" domainObjectName="GdsType"></table>
 	</context>
 </generatorConfiguration>

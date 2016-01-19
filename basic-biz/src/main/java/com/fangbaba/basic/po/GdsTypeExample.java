@@ -11,6 +11,10 @@ public class GdsTypeExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected int limitStart = -1;
+
+    protected int limitEnd = -1;
+
     public GdsTypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -62,6 +66,22 @@ public class GdsTypeExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setLimitStart(int limitStart) {
+        this.limitStart=limitStart;
+    }
+
+    public int getLimitStart() {
+        return limitStart;
+    }
+
+    public void setLimitEnd(int limitEnd) {
+        this.limitEnd=limitEnd;
+    }
+
+    public int getLimitEnd() {
+        return limitEnd;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -412,6 +432,76 @@ public class GdsTypeExample {
 
         public Criteria andChannelidNotBetween(Integer value1, Integer value2) {
             addCriterion("channelid not between", value1, value2, "channelid");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleIsNull() {
+            addCriterion("is_visible is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleIsNotNull() {
+            addCriterion("is_visible is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleEqualTo(String value) {
+            addCriterion("is_visible =", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleNotEqualTo(String value) {
+            addCriterion("is_visible <>", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleGreaterThan(String value) {
+            addCriterion("is_visible >", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleGreaterThanOrEqualTo(String value) {
+            addCriterion("is_visible >=", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleLessThan(String value) {
+            addCriterion("is_visible <", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleLessThanOrEqualTo(String value) {
+            addCriterion("is_visible <=", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleLike(String value) {
+            addCriterion("is_visible like", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleNotLike(String value) {
+            addCriterion("is_visible not like", value, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleIn(List<String> values) {
+            addCriterion("is_visible in", values, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleNotIn(List<String> values) {
+            addCriterion("is_visible not in", values, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleBetween(String value1, String value2) {
+            addCriterion("is_visible between", value1, value2, "isVisible");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsVisibleNotBetween(String value1, String value2) {
+            addCriterion("is_visible not between", value1, value2, "isVisible");
             return (Criteria) this;
         }
 
