@@ -8,31 +8,33 @@ import com.fangbaba.basic.face.bean.HotelModel;
 import com.fangbaba.basic.po.HotelModelExample;
 
 public interface HotelModelMapper {
-    int countByExample(HotelModelExample example);
+	int countByExample(HotelModelExample example);
 
-    int deleteByExample(HotelModelExample example);
+	int deleteByExample(HotelModelExample example);
 
-    int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(Long id);
 
-    int insert(HotelModel record);
+	int insert(HotelModel record);
 
-    int insertSelective(HotelModel record);
+	int insertSelective(HotelModel record);
 
-    List<HotelModel> selectByExampleWithBLOBs(HotelModelExample example);
+	List<HotelModel> selectByExampleWithBLOBs(HotelModelExample example);
 
-    List<HotelModel> selectByExample(HotelModelExample example);
+	List<HotelModel> selectAll(HotelModelExample example);
 
-    HotelModel selectByPrimaryKey(Long id);
+	List<HotelModel> selectByExample(HotelModelExample example);
 
-    int updateByExampleSelective(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
+	HotelModel selectByPrimaryKey(Long id);
 
-    int updateByExampleWithBLOBs(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
+	int updateByExampleSelective(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
 
-    int updateByExample(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
+	int updateByExampleWithBLOBs(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
 
-    int updateByPrimaryKeySelective(HotelModel record);
+	int updateByExample(@Param("record") HotelModel record, @Param("example") HotelModelExample example);
 
-    int updateByPrimaryKeyWithBLOBs(HotelModel record);
+	int updateByPrimaryKeySelective(HotelModel record);
 
-    int updateByPrimaryKey(HotelModel record);
+	int updateByPrimaryKeyWithBLOBs(HotelModel record);
+
+	int updateByPrimaryKey(HotelModel record);
 }

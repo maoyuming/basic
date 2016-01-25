@@ -4,70 +4,88 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class HotelModel implements Serializable{
+public class HotelModel implements Serializable {
 	private static final long serialVersionUID = -4229485247567019702L;
 
 	private Long id;
 
-    private String hotelname;
+	private String hotelname;
 
-    private String hotelcontactname;
+	private String hotelcontactname;
 
-    private Date regtime;
+	private Date regtime;
 
-    private String detailaddr;
+	private String detailaddr;
 
-    private BigDecimal longitude;
+	private BigDecimal longitude;
 
-    private BigDecimal latitude;
+	private BigDecimal latitude;
 
-    private Date opentime;
+	private Date opentime;
 
-    private Date repairtime;
+	private Date repairtime;
 
-    private Integer roomnum;
+	private Integer roomnum;
 
-    private String businesslicensefront;
+	private String businesslicensefront;
 
-    private String businesslicenseback;
+	private String businesslicenseback;
 
-    private String hotelpms;
+	private String hotelpms;
 
-    private String isvisible;
+	private String isvisible;
 
-    private String isonline;
+	private String isonline;
 
-    private String idcardfront;
+	private String idcardfront;
 
-    private String idcardback;
+	private String idcardback;
 
-    private String retentiontime;
+	private String retentiontime;
 
-    private String defaultleavetime;
+	private String defaultleavetime;
 
-    private String hotelphone;
+	private String hotelphone;
 
-    private Integer hoteltype;
+	private Integer hoteltype;
 
-    private Integer discode;
+	private Integer discode;
 
-    private String qtphone;
+	private String qtphone;
 
-    private Integer citycode;
+	private Integer citycode;
 
-    private Integer provcode;
+	private Integer provcode;
 
-    private String pmstype;
+	private String pmstype;
 
-    private String introduction;
-    
-    private String provincename;//省名称
-    private String cityname;//市
-    private String districtname;//县
-    private Double range=5000d;//搜索范围，默认5000m
-    
-    public Double getRange() {
-		return range;
+	private String introduction;
+
+	private String provincename;// 省名称
+	private String cityname;// 市
+	private String districtname;// 县
+	private Double range = 5000d;// 搜索范围，默认5000m
+	private BigDecimal minprice;
+	private BigDecimal maxprice;
+
+	public BigDecimal getMinprice() {
+		return this.minprice;
+	}
+
+	public void setMinprice(BigDecimal minprice) {
+		this.minprice = minprice;
+	}
+
+	public BigDecimal getMaxprice() {
+		return this.maxprice;
+	}
+
+	public void setMaxprice(BigDecimal maxprice) {
+		this.maxprice = maxprice;
+	}
+
+	public Double getRange() {
+		return this.range;
 	}
 
 	public void setRange(Double range) {
@@ -75,7 +93,7 @@ public class HotelModel implements Serializable{
 	}
 
 	public String getProvincename() {
-		return provincename;
+		return this.provincename;
 	}
 
 	public void setProvincename(String provincename) {
@@ -83,7 +101,7 @@ public class HotelModel implements Serializable{
 	}
 
 	public String getCityname() {
-		return cityname;
+		return this.cityname;
 	}
 
 	public void setCityname(String cityname) {
@@ -91,7 +109,7 @@ public class HotelModel implements Serializable{
 	}
 
 	public String getDistrictname() {
-		return districtname;
+		return this.districtname;
 	}
 
 	public void setDistrictname(String districtname) {
@@ -99,218 +117,218 @@ public class HotelModel implements Serializable{
 	}
 
 	public Long getId() {
-        return id;
-    }
+		return this.id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getHotelname() {
-        return hotelname;
-    }
+	public String getHotelname() {
+		return this.hotelname;
+	}
 
-    public void setHotelname(String hotelname) {
-        this.hotelname = hotelname == null ? null : hotelname.trim();
-    }
+	public void setHotelname(String hotelname) {
+		this.hotelname = hotelname == null ? null : hotelname.trim();
+	}
 
-    public String getHotelcontactname() {
-        return hotelcontactname;
-    }
+	public String getHotelcontactname() {
+		return this.hotelcontactname;
+	}
 
-    public void setHotelcontactname(String hotelcontactname) {
-        this.hotelcontactname = hotelcontactname == null ? null : hotelcontactname.trim();
-    }
+	public void setHotelcontactname(String hotelcontactname) {
+		this.hotelcontactname = hotelcontactname == null ? null : hotelcontactname.trim();
+	}
 
-    public Date getRegtime() {
-        return regtime;
-    }
+	public Date getRegtime() {
+		return this.regtime;
+	}
 
-    public void setRegtime(Date regtime) {
-        this.regtime = regtime;
-    }
+	public void setRegtime(Date regtime) {
+		this.regtime = regtime;
+	}
 
-    public String getDetailaddr() {
-        return detailaddr;
-    }
+	public String getDetailaddr() {
+		return this.detailaddr;
+	}
 
-    public void setDetailaddr(String detailaddr) {
-        this.detailaddr = detailaddr == null ? null : detailaddr.trim();
-    }
+	public void setDetailaddr(String detailaddr) {
+		this.detailaddr = detailaddr == null ? null : detailaddr.trim();
+	}
 
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
+	public BigDecimal getLongitude() {
+		return this.longitude;
+	}
 
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
-    }
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
 
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
+	public BigDecimal getLatitude() {
+		return this.latitude;
+	}
 
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
 
-    public Date getOpentime() {
-        return opentime;
-    }
+	public Date getOpentime() {
+		return this.opentime;
+	}
 
-    public void setOpentime(Date opentime) {
-        this.opentime = opentime;
-    }
+	public void setOpentime(Date opentime) {
+		this.opentime = opentime;
+	}
 
-    public Date getRepairtime() {
-        return repairtime;
-    }
+	public Date getRepairtime() {
+		return this.repairtime;
+	}
 
-    public void setRepairtime(Date repairtime) {
-        this.repairtime = repairtime;
-    }
+	public void setRepairtime(Date repairtime) {
+		this.repairtime = repairtime;
+	}
 
-    public Integer getRoomnum() {
-        return roomnum;
-    }
+	public Integer getRoomnum() {
+		return this.roomnum;
+	}
 
-    public void setRoomnum(Integer roomnum) {
-        this.roomnum = roomnum;
-    }
+	public void setRoomnum(Integer roomnum) {
+		this.roomnum = roomnum;
+	}
 
-    public String getBusinesslicensefront() {
-        return businesslicensefront;
-    }
+	public String getBusinesslicensefront() {
+		return this.businesslicensefront;
+	}
 
-    public void setBusinesslicensefront(String businesslicensefront) {
-        this.businesslicensefront = businesslicensefront == null ? null : businesslicensefront.trim();
-    }
+	public void setBusinesslicensefront(String businesslicensefront) {
+		this.businesslicensefront = businesslicensefront == null ? null : businesslicensefront.trim();
+	}
 
-    public String getBusinesslicenseback() {
-        return businesslicenseback;
-    }
+	public String getBusinesslicenseback() {
+		return this.businesslicenseback;
+	}
 
-    public void setBusinesslicenseback(String businesslicenseback) {
-        this.businesslicenseback = businesslicenseback == null ? null : businesslicenseback.trim();
-    }
+	public void setBusinesslicenseback(String businesslicenseback) {
+		this.businesslicenseback = businesslicenseback == null ? null : businesslicenseback.trim();
+	}
 
-    public String getHotelpms() {
-        return hotelpms;
-    }
+	public String getHotelpms() {
+		return this.hotelpms;
+	}
 
-    public void setHotelpms(String hotelpms) {
-        this.hotelpms = hotelpms == null ? null : hotelpms.trim();
-    }
+	public void setHotelpms(String hotelpms) {
+		this.hotelpms = hotelpms == null ? null : hotelpms.trim();
+	}
 
-    public String getIsvisible() {
-        return isvisible;
-    }
+	public String getIsvisible() {
+		return this.isvisible;
+	}
 
-    public void setIsvisible(String isvisible) {
-        this.isvisible = isvisible == null ? null : isvisible.trim();
-    }
+	public void setIsvisible(String isvisible) {
+		this.isvisible = isvisible == null ? null : isvisible.trim();
+	}
 
-    public String getIsonline() {
-        return isonline;
-    }
+	public String getIsonline() {
+		return this.isonline;
+	}
 
-    public void setIsonline(String isonline) {
-        this.isonline = isonline == null ? null : isonline.trim();
-    }
+	public void setIsonline(String isonline) {
+		this.isonline = isonline == null ? null : isonline.trim();
+	}
 
-    public String getIdcardfront() {
-        return idcardfront;
-    }
+	public String getIdcardfront() {
+		return this.idcardfront;
+	}
 
-    public void setIdcardfront(String idcardfront) {
-        this.idcardfront = idcardfront == null ? null : idcardfront.trim();
-    }
+	public void setIdcardfront(String idcardfront) {
+		this.idcardfront = idcardfront == null ? null : idcardfront.trim();
+	}
 
-    public String getIdcardback() {
-        return idcardback;
-    }
+	public String getIdcardback() {
+		return this.idcardback;
+	}
 
-    public void setIdcardback(String idcardback) {
-        this.idcardback = idcardback == null ? null : idcardback.trim();
-    }
+	public void setIdcardback(String idcardback) {
+		this.idcardback = idcardback == null ? null : idcardback.trim();
+	}
 
-    public String getRetentiontime() {
-        return retentiontime;
-    }
+	public String getRetentiontime() {
+		return this.retentiontime;
+	}
 
-    public void setRetentiontime(String retentiontime) {
-        this.retentiontime = retentiontime == null ? null : retentiontime.trim();
-    }
+	public void setRetentiontime(String retentiontime) {
+		this.retentiontime = retentiontime == null ? null : retentiontime.trim();
+	}
 
-    public String getDefaultleavetime() {
-        return defaultleavetime;
-    }
+	public String getDefaultleavetime() {
+		return this.defaultleavetime;
+	}
 
-    public void setDefaultleavetime(String defaultleavetime) {
-        this.defaultleavetime = defaultleavetime == null ? null : defaultleavetime.trim();
-    }
+	public void setDefaultleavetime(String defaultleavetime) {
+		this.defaultleavetime = defaultleavetime == null ? null : defaultleavetime.trim();
+	}
 
-    public String getHotelphone() {
-        return hotelphone;
-    }
+	public String getHotelphone() {
+		return this.hotelphone;
+	}
 
-    public void setHotelphone(String hotelphone) {
-        this.hotelphone = hotelphone == null ? null : hotelphone.trim();
-    }
+	public void setHotelphone(String hotelphone) {
+		this.hotelphone = hotelphone == null ? null : hotelphone.trim();
+	}
 
-    public Integer getHoteltype() {
-        return hoteltype;
-    }
+	public Integer getHoteltype() {
+		return this.hoteltype;
+	}
 
-    public void setHoteltype(Integer hoteltype) {
-        this.hoteltype = hoteltype;
-    }
+	public void setHoteltype(Integer hoteltype) {
+		this.hoteltype = hoteltype;
+	}
 
-    public Integer getDiscode() {
-        return discode;
-    }
+	public Integer getDiscode() {
+		return this.discode;
+	}
 
-    public void setDiscode(Integer discode) {
-        this.discode = discode;
-    }
+	public void setDiscode(Integer discode) {
+		this.discode = discode;
+	}
 
-    public String getQtphone() {
-        return qtphone;
-    }
+	public String getQtphone() {
+		return this.qtphone;
+	}
 
-    public void setQtphone(String qtphone) {
-        this.qtphone = qtphone == null ? null : qtphone.trim();
-    }
+	public void setQtphone(String qtphone) {
+		this.qtphone = qtphone == null ? null : qtphone.trim();
+	}
 
-    public Integer getCitycode() {
-        return citycode;
-    }
+	public Integer getCitycode() {
+		return this.citycode;
+	}
 
-    public void setCitycode(Integer citycode) {
-        this.citycode = citycode;
-    }
+	public void setCitycode(Integer citycode) {
+		this.citycode = citycode;
+	}
 
-    public Integer getProvcode() {
-        return provcode;
-    }
+	public Integer getProvcode() {
+		return this.provcode;
+	}
 
-    public void setProvcode(Integer provcode) {
-        this.provcode = provcode;
-    }
+	public void setProvcode(Integer provcode) {
+		this.provcode = provcode;
+	}
 
-    public String getPmstype() {
-        return pmstype;
-    }
+	public String getPmstype() {
+		return this.pmstype;
+	}
 
-    public void setPmstype(String pmstype) {
-        this.pmstype = pmstype == null ? null : pmstype.trim();
-    }
+	public void setPmstype(String pmstype) {
+		this.pmstype = pmstype == null ? null : pmstype.trim();
+	}
 
-    public String getIntroduction() {
-        return introduction;
-    }
+	public String getIntroduction() {
+		return this.introduction;
+	}
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
-    }
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction == null ? null : introduction.trim();
+	}
 }

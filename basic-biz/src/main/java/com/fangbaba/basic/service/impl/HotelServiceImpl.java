@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fangbaba.basic.face.base.RetInfo;
 import com.fangbaba.basic.face.bean.HotelModel;
 import com.fangbaba.basic.face.bean.RoomModel;
 import com.fangbaba.basic.face.bean.RoomtypeModel;
@@ -26,12 +25,11 @@ import com.fangbaba.basic.service.RoomtypeService;
 import com.google.gson.Gson;
 
 /**
- * @author he
- * 酒店相关接口
+ * @author he 酒店相关接口
  */
 @Service
 public class HotelServiceImpl implements HotelService {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
 	@Autowired
 	private HotelModelMapper hotelModelMapper;
@@ -43,98 +41,100 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public List<HotelModel> queryAllHotels() {
-		logger.info(HotelServiceImpl.class.getName()+":queryAllHotels begin");
+		HotelServiceImpl.logger.info(HotelServiceImpl.class.getName() + ":queryAllHotels begin");
 		try {
-			return hotelModelMapper.selectByExampleWithBLOBs(null);
+			// return hotelModelMapper.selectByExampleWithBLOBs(null);
+			return this.hotelModelMapper.selectAll(null);
 		} catch (Exception e) {
-			logger.error(HotelServiceImpl.class.getName()+":queryAllHotels error",e);
+			HotelServiceImpl.logger.error(HotelServiceImpl.class.getName() + ":queryAllHotels error", e);
 			throw e;
 		}
 	}
 
 	@Override
 	public HotelModel queryById(Long id) {
-		logger.info(HotelServiceImpl.class.getName()+":queryById begin");
+		HotelServiceImpl.logger.info(HotelServiceImpl.class.getName() + ":queryById begin");
 		try {
-			return hotelModelMapper.selectByPrimaryKey(id);
+			return this.hotelModelMapper.selectByPrimaryKey(id);
 		} catch (Exception e) {
-			logger.error(HotelServiceImpl.class.getName()+":queryById error",e);
+			HotelServiceImpl.logger.error(HotelServiceImpl.class.getName() + ":queryById error", e);
 			throw e;
 		}
 	}
 
 	@Override
 	public HotelModel queryByPms(String pms) {
-		logger.info(HotelServiceImpl.class.getName()+":queryByPms begin");
+		HotelServiceImpl.logger.info(HotelServiceImpl.class.getName() + ":queryByPms begin");
 		try {
 			HotelModelExample example = new HotelModelExample();
 			example.createCriteria().andHotelpmsEqualTo(pms);
-			List<HotelModel> list = hotelModelMapper.selectByExample(example);
-			if(CollectionUtils.isNotEmpty(list)){
+			List<HotelModel> list = this.hotelModelMapper.selectByExample(example);
+			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
-			}else{
+			} else {
 				return null;
 			}
 		} catch (Exception e) {
-			logger.error(HotelServiceImpl.class.getName()+":queryByPms error",e);
+			HotelServiceImpl.logger.error(HotelServiceImpl.class.getName() + ":queryByPms error", e);
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public void syncHotelInfo(String json) {
-		logger.info(HotelServiceImpl.class.getName()+":syncHotelInfo begin");
+		HotelServiceImpl.logger.info(HotelServiceImpl.class.getName() + ":syncHotelInfo begin");
 		try {
-			PmsHotelJsonBean pmsHotelJsonBean = gson.fromJson(json, PmsHotelJsonBean.class);
+			PmsHotelJsonBean pmsHotelJsonBean = this.gson.fromJson(json, PmsHotelJsonBean.class);
 			List<PmsRoomtypeJsonBean> roomtypes = pmsHotelJsonBean.getRoomtype();
-			HotelModel hotelModel = queryByPms(pmsHotelJsonBean.getHotelid());
-			//同步酒店信息
-			if(hotelModel!=null){
-				//已存在
-				hotelModel.setRoomnum(countRoomNum(roomtypes));
+			HotelModel hotelModel = this.queryByPms(pmsHotelJsonBean.getHotelid());
+			// 同步酒店信息
+			if (hotelModel != null) {
+				// 已存在
+				hotelModel.setRoomnum(this.countRoomNum(roomtypes));
 				hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
 				hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
-				updateById(hotelModel);
-			}else{
-				//不存在
+				this.updateById(hotelModel);
+			} else {
+				// 不存在
 				hotelModel = new HotelModel();
-				hotelModel.setRoomnum(countRoomNum(roomtypes));
+				hotelModel.setRoomnum(this.countRoomNum(roomtypes));
 				hotelModel.setHotelphone(pmsHotelJsonBean.getPhone());
 				hotelModel.setPmstype(pmsHotelJsonBean.getPmstypeid());
 				hotelModel.setHotelpms(pmsHotelJsonBean.getHotelid());
-				addHotel(hotelModel);
+				this.addHotel(hotelModel);
 			}
-			//同步房型房间信息
-			roomtypeService.syncRoomtypeInfo(hotelModel.getId(),roomtypes);
+			// 同步房型房间信息
+			this.roomtypeService.syncRoomtypeInfo(hotelModel.getId(), roomtypes);
 		} catch (Exception e) {
-			logger.error(HotelServiceImpl.class.getName()+":syncHotelInfo error",e);
+			HotelServiceImpl.logger.error(HotelServiceImpl.class.getName() + ":syncHotelInfo error", e);
 			throw e;
 		}
 	}
-	private int countRoomNum(List<PmsRoomtypeJsonBean> roomtypes){
+
+	private int countRoomNum(List<PmsRoomtypeJsonBean> roomtypes) {
 		int roomNum = 0;
-		for (PmsRoomtypeJsonBean pmsRoomtypeJsonBean: roomtypes){
+		for (PmsRoomtypeJsonBean pmsRoomtypeJsonBean : roomtypes) {
 			roomNum += pmsRoomtypeJsonBean.getRoom().size();
 		}
 		return roomNum;
 	}
-	private void updateById(HotelModel hotelModel){
-		hotelModelMapper.updateByPrimaryKeySelective(hotelModel);
-	}
-	private int addHotel(HotelModel hotelModel){
-		return hotelModelMapper.insertSelective(hotelModel);
+
+	private void updateById(HotelModel hotelModel) {
+		this.hotelModelMapper.updateByPrimaryKeySelective(hotelModel);
 	}
 
-	
-	
+	private int addHotel(HotelModel hotelModel) {
+		return this.hotelModelMapper.insertSelective(hotelModel);
+	}
+
 	/**
 	 * 查询酒店详情
 	 */
 	@Override
 	public HotelVo queryDetail(Long id, String begintime, String endtime) {
-		logger.info(HotelServiceImpl.class.getName()+":queryDetail begin");
+		HotelServiceImpl.logger.info(HotelServiceImpl.class.getName() + ":queryDetail begin");
 		try {
-			HotelModel hotelModel = queryById(id);
+			HotelModel hotelModel = this.queryById(id);
 			HotelVo hotelVo = new HotelVo();
 			hotelVo.setId(hotelModel.getId());
 			hotelVo.setHotelname(hotelModel.getHotelname());
@@ -157,21 +157,21 @@ public class HotelServiceImpl implements HotelService {
 			hotelVo.setProvincename(hotelModel.getProvincename());
 			hotelVo.setCityname(hotelModel.getCityname());
 			hotelVo.setDistrictname(hotelModel.getDistrictname());
-			List<RoomtypeModel> roomtypemodels = roomtypeService.queryByHotelId(id);
+			List<RoomtypeModel> roomtypemodels = this.roomtypeService.queryByHotelId(id);
 			List<RoomtypeVo> roomtypes = new ArrayList<RoomtypeVo>();
-			for (RoomtypeModel roomtypeModel:roomtypemodels) {
+			for (RoomtypeModel roomtypeModel : roomtypemodels) {
 				RoomtypeVo roomtypeVo = new RoomtypeVo();
 				roomtypeVo.setId(roomtypeModel.getId());
 				roomtypeVo.setHotelid(roomtypeModel.getHotelid());
-				//need  封装价格
+				// need 封装价格
 				roomtypeVo.setCost(roomtypeModel.getCost());
 				roomtypeVo.setName(roomtypeModel.getName());
-				//need 可用房间数
+				// need 可用房间数
 				roomtypeVo.setRoomnum(roomtypeModel.getRoomnum());
 				roomtypeVo.setRoomtypepms(roomtypeModel.getRoomtypepms());
-				List<RoomModel> roommodels = roomService.queryByRoomTypeId(roomtypeModel.getId());
+				List<RoomModel> roommodels = this.roomService.queryByRoomTypeId(roomtypeModel.getId());
 				List<RoomVo> rooms = new ArrayList<RoomVo>();
-				//TODO:是否返回具体房间
+				// TODO:是否返回具体房间
 				for (RoomModel roomModel : roommodels) {
 					RoomVo roomVo = new RoomVo();
 					roomVo.setId(roomModel.getId());
@@ -188,10 +188,9 @@ public class HotelServiceImpl implements HotelService {
 			hotelVo.setRoomtypes(roomtypes);
 			return hotelVo;
 		} catch (Exception e) {
-			logger.error(HotelServiceImpl.class.getName()+":queryDetail error",e);
+			HotelServiceImpl.logger.error(HotelServiceImpl.class.getName() + ":queryDetail error", e);
 			throw e;
 		}
 	}
-	
 
 }

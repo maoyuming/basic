@@ -96,6 +96,12 @@
     isonline, idcardfront, idcardback, retentiontime, defaultleavetime, hotelphone, hoteltype, 
     discode, qtphone, citycode, provcode, pmstype
   </sql>
+    <sql id="Join_Column_List" >
+    h.id, h.hotelname, h.hotelcontactname, h.regtime, h.detailaddr, h.longitude, h.latitude, h.opentime, 
+    h.repairtime, h.roomnum, h.businesslicensefront, h.businesslicenseback, h.hotelpms, h.isvisible, 
+    h.isonline, h.idcardfront, h.idcardback, h.retentiontime, h.defaultleavetime, h.hotelphone, h.hoteltype, 
+    h.discode, h.qtphone, h.citycode, h.provcode, h.pmstype,h.introduction
+  </sql>
   <sql id="Blob_Column_List" >
     introduction
   </sql>
@@ -114,6 +120,16 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  </select>
+  
+    <select id="selectAll"  resultMap="com.fangbaba.basic.face.bean.HotelModel" parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    SELECT MAX(cost) AS maxcost,MIN(cost) AS mincost,
+    <include refid="Join_Column_List" />
+     FROM hotel h LEFT JOIN  roomtype r ON h.`id`=r.`hotelid` 
+     <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+     GROUP BY r.`hotelid`
   </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.HotelModelExample" >
     select
