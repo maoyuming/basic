@@ -27,7 +27,7 @@ public class HotelExtensionServiceImpl implements HotelExtensionService {
 			HotelExtensionExample hotelExtensionExample = new HotelExtensionExample();
 			Criteria hoCriteria = hotelExtensionExample.createCriteria();
 			hoCriteria.andHotelidEqualTo(hotelid);
-			List<HotelExtension> list = this.hotelExtensionMapper.selectByExample(hotelExtensionExample);
+			List<HotelExtension> list = this.hotelExtensionMapper.selectByExampleWithBLOBs(hotelExtensionExample);
 			if (CollectionUtils.isNotEmpty(list)) {
 				return list.get(0);
 			} else {
