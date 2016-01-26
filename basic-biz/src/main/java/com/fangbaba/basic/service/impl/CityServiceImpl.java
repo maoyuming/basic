@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fangbaba.basic.face.bean.CityModel;
 import com.fangbaba.basic.face.service.CityService;
 import com.fangbaba.basic.mappers.CityModelMapper;
+import com.fangbaba.basic.po.CityModelExample;
 
 /**
  * @author he
@@ -33,5 +34,14 @@ public class CityServiceImpl implements CityService {
 			throw e;
 		}
 	}
+
+	@Override
+	public List<CityModel> queryAllCitysByProvinceCode(Integer proid) {
+		CityModelExample example = new CityModelExample();
+		example.createCriteria().andProidEqualTo(proid);
+		example.setOrderByClause("sort asc");
+		return cityModelMapper.selectByExample(example);
+	}
+	
 
 }

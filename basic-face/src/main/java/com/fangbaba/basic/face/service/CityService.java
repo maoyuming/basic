@@ -6,4 +6,5 @@ import com.fangbaba.basic.face.bean.CityModel;
 
 public interface CityService {
 	List<CityModel> queryAllCitys();
+	List<CityModel> queryAllCitysByProvinceCode(Integer proid);
 }

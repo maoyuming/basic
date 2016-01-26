@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fangbaba.basic.face.bean.ProvinceModel;
 import com.fangbaba.basic.face.service.ProvinceService;
 import com.fangbaba.basic.mappers.ProvinceModelMapper;
+import com.fangbaba.basic.po.ProvinceModelExample;
 
 /**
  * @author he
@@ -27,7 +28,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 	public List<ProvinceModel> queryAllProvinces() {
 		logger.info(ProvinceServiceImpl.class.getName()+":queryAllProvinces begin");
 		try {
-			return provinceModelMapper.selectByExample(null);
+			ProvinceModelExample example = new ProvinceModelExample();
+			example.setOrderByClause("sort asc");
+			return provinceModelMapper.selectByExample(example);
 		} catch (Exception e) {
 			logger.error(ProvinceServiceImpl.class.getName()+":queryAllProvinces error",e);
 			throw e;
