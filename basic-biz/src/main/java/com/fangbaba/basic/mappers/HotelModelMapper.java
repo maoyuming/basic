@@ -18,6 +18,8 @@ public interface HotelModelMapper {
 
 	int insertSelective(HotelModel record);
 
+	HotelModel getPrice(HotelModel record);
+
 	List<HotelModel> selectByExampleWithBLOBs(HotelModelExample example);
 
 	List<HotelModel> selectAll(HotelModelExample example);

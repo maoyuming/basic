@@ -122,13 +122,20 @@
     </if>
   </select>
   
-    <select id="selectAll"  resultMap="com.fangbaba.basic.face.bean.HotelModel" parameterType="com.fangbaba.basic.po.HotelModelExample" >
-    SELECT MAX(cost) AS maxcost,MIN(cost) AS mincost,
+    <select id="selectAll" resultType="com.fangbaba.basic.face.bean.HotelModel"  parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    SELECT MAX(cost) AS maxprice,MIN(cost) AS minprice,
     <include refid="Join_Column_List" />
      FROM hotel h LEFT JOIN  roomtype r ON h.`id`=r.`hotelid` 
      <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
+     GROUP BY r.`hotelid`
+  </select>
+   <select id="getPrice" resultType="com.fangbaba.basic.face.bean.HotelModel"  parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    SELECT MAX(cost) AS maxprice,MIN(cost) AS minprice,
+    <include refid="Join_Column_List" />
+     FROM hotel h LEFT JOIN  roomtype r ON h.`id`=r.`hotelid` 
+     where r.`hotelid`=#{id,jdbcType=BIGINT}
      GROUP BY r.`hotelid`
   </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.HotelModelExample" >

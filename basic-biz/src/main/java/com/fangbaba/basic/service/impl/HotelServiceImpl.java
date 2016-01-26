@@ -193,4 +193,17 @@ public class HotelServiceImpl implements HotelService {
 		}
 	}
 
+	@Override
+	public HotelModel getPrice(HotelModel hotelModel) {
+		/*
+		 * HotelModelExample example = new HotelModelExample();
+		 * com.fangbaba.basic.po.HotelModelExample.Criteria criteria =
+		 * example.createCriteria(); criteria.andIdEqualTo(hotelModel.getId());
+		 * List<HotelModel> list = this.hotelModelMapper.selectAll(example); if
+		 * (CollectionUtils.isNotEmpty(list)) { return list.get(0); } else {
+		 * return null; }
+		 */
+		return this.hotelModelMapper.getPrice(hotelModel);
+	}
+
 }
