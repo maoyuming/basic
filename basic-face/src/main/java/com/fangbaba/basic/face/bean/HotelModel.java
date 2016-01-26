@@ -67,6 +67,15 @@ public class HotelModel implements Serializable {
 	private Double range = 5000d;// 搜索范围，默认5000m
 	private BigDecimal minprice;
 	private BigDecimal maxprice;
+	private String hotelpic;
+
+	public String getHotelpic() {
+		return this.hotelpic;
+	}
+
+	public void setHotelpic(String hotelpic) {
+		this.hotelpic = hotelpic;
+	}
 
 	public BigDecimal getMinprice() {
 		return this.minprice;
