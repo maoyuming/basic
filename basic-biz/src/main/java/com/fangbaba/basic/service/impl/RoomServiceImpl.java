@@ -156,4 +156,23 @@ public class RoomServiceImpl implements RoomService {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean syncRoomForHMS(List<RoomModel> roomModels) {
+		if (CollectionUtils.isNotEmpty(roomModels)) {
+			for (RoomModel roomModel : roomModels) {
+				RoomModel roomModel2 = this.queryById(roomModel.getId());
+				if (null != roomModel2) {
+					this.delRoomById(roomModel.getId());
+					this.addRoom(roomModel);
+				} else {
+					RoomServiceImpl.logger.info("can't find room with id:{}", roomModel.getId());
+				}
+			}
+			return true;
+		} else {
+			RoomServiceImpl.logger.info("syncRoomForHMS received nothing.");
+		}
+		return false;
+	}
 }

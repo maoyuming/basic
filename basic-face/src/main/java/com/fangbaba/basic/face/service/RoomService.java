@@ -25,10 +25,18 @@ public interface RoomService {
 
 	/**
 	 * 根据房型id和房间号返回房间信息
-	 * 
+	 *
 	 * @param roomtypeid
 	 * @param roomnoLong
 	 * @return
 	 */
 	RoomModel getRoomByRoomTypeidAndRoomNo(Long roomtypeid, String roomnoLong);
+
+	/**
+	 * 同步HMS房间信息
+	 * 
+	 * @param roomModels
+	 * @return
+	 */
+	boolean syncRoomForHMS(List<RoomModel> roomModels);
 }

@@ -8,7 +8,7 @@ import com.fangbaba.basic.face.bean.vo.HotelVo;
 public interface HotelService {
 	/**
 	 * 查询所有酒店
-	 * 
+	 *
 	 * @return
 	 */
 	List<HotelModel> queryAllHotels();
@@ -37,4 +37,12 @@ public interface HotelService {
 	 * @return
 	 */
 	HotelModel getPrice(HotelModel hotelModel);
+
+	/**
+	 * 同步hms基本酒店信息
+	 *
+	 * @param hotelModels
+	 * @return
+	 */
+	boolean syncHotelForHMS(List<HotelModel> hotelModels);
 }

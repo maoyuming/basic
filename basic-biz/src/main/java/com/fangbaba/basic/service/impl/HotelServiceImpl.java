@@ -206,4 +206,20 @@ public class HotelServiceImpl implements HotelService {
 		return this.hotelModelMapper.getPrice(hotelModel);
 	}
 
+	@Override
+	public boolean syncHotelForHMS(List<HotelModel> hotelModels) {
+		if (CollectionUtils.isNotEmpty(hotelModels)) {
+			for (HotelModel hotelModel : hotelModels) {
+				HotelModel hotelModel2 = this.queryById(hotelModel.getId());
+				if (null != hotelModel2) {
+					this.updateById(hotelModel);
+				}
+			}
+			return true;
+		} else {
+			HotelServiceImpl.logger.info("syncHotelForHMS received nothing.");
+		}
+		return false;
+	}
+
 }
