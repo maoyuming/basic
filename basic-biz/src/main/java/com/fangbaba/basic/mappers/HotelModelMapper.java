@@ -39,4 +39,6 @@ public interface HotelModelMapper {
 	int updateByPrimaryKeyWithBLOBs(HotelModel record);
 
 	int updateByPrimaryKey(HotelModel record);
+	
+	List<HotelModel> selectByExampleByPage(HotelModelExample example,@Param("limitstart") Integer limitstart,@Param("limitend") Integer limitend);
 }

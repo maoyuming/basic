@@ -150,6 +150,20 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  <select id="selectByExampleByPage" resultMap="BaseResultMap" parameterType="com.fangbaba.basic.po.HotelModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    limit ${limitstart},${limitend}
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
