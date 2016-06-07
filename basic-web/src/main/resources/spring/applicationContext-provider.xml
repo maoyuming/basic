@@ -21,6 +21,17 @@
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
     <!-- <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="192.168.0.106"/> -->
    
+     <dubbo:service interface="com.duantuke.basic.face.service.CityService" ref="cityService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" /> 
      
+	<dubbo:service interface="com.duantuke.basic.face.service.ProvinceService" ref="provinceService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />  
+     
+	<dubbo:service interface="com.duantuke.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+	
+	
+	  <bean id="cityService" class="com.duantuke.basic.service.impl.CityServiceImpl" /> 
+      
+    <bean id="provinceService" class="com.duantuke.basic.service.impl.ProvinceServiceImpl" />
+       
+    <bean id="districtService" class="com.duantuke.basic.service.impl.DistrictServiceImpl" />
       
 </beans>  

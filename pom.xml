@@ -497,7 +497,7 @@
 				<dubbo_basic_group>basic_dev</dubbo_basic_group>
 				
 				<!-- config_center -->
-				<config.localMode>false</config.localMode>
+				<config.localMode>true</config.localMode>
 				<config.zk>211.157.155.198:2181</config.zk>
 				<cat.app.name>${project.name}</cat.app.name>
 				<!-- elasticsearch -->

@@ -34,6 +34,8 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-<!--         <table tableName="code_dictionary" domainObjectName="CodeDictionary"></table> -->
+        <table tableName="province" domainObjectName="Province"></table>
+        <table tableName="city" domainObjectName="City"></table>
+        <table tableName="district" domainObjectName="District"></table>
 	</context>
 </generatorConfiguration>
