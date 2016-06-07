@@ -3,7 +3,9 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class City  implements Serializable {
+public class City  implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
     private Long id;
 
     private String code;

@@ -1,8 +1,10 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class JourneyRank {
+public class JourneyRank implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long journeyRankId;
 
     private Long journeyId;

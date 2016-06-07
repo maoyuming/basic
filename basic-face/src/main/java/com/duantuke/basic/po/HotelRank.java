@@ -1,8 +1,10 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HotelRank {
+public class HotelRank implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long hotelRankId;
 
     private Long hotelId;

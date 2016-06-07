@@ -1,8 +1,10 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tag {
+public class Tag implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long tagId;
 
     private String tagName;

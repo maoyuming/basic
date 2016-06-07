@@ -1,9 +1,12 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Boss {
-    private Long bossId;
+public class Boss implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	private Long bossId;
 
     private String loginName;
 
