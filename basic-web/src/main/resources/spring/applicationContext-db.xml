@@ -59,7 +59,7 @@
 	</tx:advice>
 
 	<aop:config expose-proxy="true">
-		<aop:pointcut id="txPointcut" expression="execution(* com.mk..*.service.*.*(..))" />
+		<aop:pointcut id="txPointcut" expression="execution(* com.duantuke..*.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 	</aop:config>
 </beans>
