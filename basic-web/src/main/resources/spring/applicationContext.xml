@@ -33,7 +33,7 @@
 	<bean name="mkConfigManager" class="com.mk.config.client.MkConfigManager">
 		<property name="localMode" value="${config.localMode}"></property>
 		<property name="zkConnectStr" value="${config.zk}"></property>
-		<property name="domainName" value="gds"></property>
+		<property name="domainName" value="otc"></property>
 		<property name="propertiesLocation" value="classpath:standard_config.properties"></property>
 	</bean>
 
