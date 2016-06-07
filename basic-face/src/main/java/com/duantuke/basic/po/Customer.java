@@ -3,8 +3,8 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Boss implements Serializable{
-    private Long bossId;
+public class Customer  implements Serializable{
+    private Long customerId;
 
     private String loginName;
 
@@ -20,18 +20,6 @@ public class Boss implements Serializable{
 
     private String devicInfo;
 
-    private String bankCode;
-
-    private String bank;
-
-    private String bankBranch;
-
-    private Short transferType;
-
-    private String nameBank;
-
-    private String account;
-
     private String alipay;
 
     private String weixin;
@@ -46,12 +34,12 @@ public class Boss implements Serializable{
 
     private String isvisible;
 
-    public Long getBossId() {
-        return bossId;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setBossId(Long bossId) {
-        this.bossId = bossId;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public String getLoginName() {
@@ -108,54 +96,6 @@ public class Boss implements Serializable{
 
     public void setDevicInfo(String devicInfo) {
         this.devicInfo = devicInfo == null ? null : devicInfo.trim();
-    }
-
-    public String getBankCode() {
-        return bankCode;
-    }
-
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode == null ? null : bankCode.trim();
-    }
-
-    public String getBank() {
-        return bank;
-    }
-
-    public void setBank(String bank) {
-        this.bank = bank == null ? null : bank.trim();
-    }
-
-    public String getBankBranch() {
-        return bankBranch;
-    }
-
-    public void setBankBranch(String bankBranch) {
-        this.bankBranch = bankBranch == null ? null : bankBranch.trim();
-    }
-
-    public Short getTransferType() {
-        return transferType;
-    }
-
-    public void setTransferType(Short transferType) {
-        this.transferType = transferType;
-    }
-
-    public String getNameBank() {
-        return nameBank;
-    }
-
-    public void setNameBank(String nameBank) {
-        this.nameBank = nameBank == null ? null : nameBank.trim();
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
     }
 
     public String getAlipay() {

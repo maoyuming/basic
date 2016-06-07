@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BossExample {
+public class SaleExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class BossExample {
 
     protected int limitEnd = -1;
 
-    public BossExample() {
+    public SaleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -125,63 +125,63 @@ public class BossExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBossIdIsNull() {
-            addCriterion("boss_id is null");
+        public Criteria andSalesIdIsNull() {
+            addCriterion("sales_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdIsNotNull() {
-            addCriterion("boss_id is not null");
+        public Criteria andSalesIdIsNotNull() {
+            addCriterion("sales_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdEqualTo(Long value) {
-            addCriterion("boss_id =", value, "bossId");
+        public Criteria andSalesIdEqualTo(Long value) {
+            addCriterion("sales_id =", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdNotEqualTo(Long value) {
-            addCriterion("boss_id <>", value, "bossId");
+        public Criteria andSalesIdNotEqualTo(Long value) {
+            addCriterion("sales_id <>", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdGreaterThan(Long value) {
-            addCriterion("boss_id >", value, "bossId");
+        public Criteria andSalesIdGreaterThan(Long value) {
+            addCriterion("sales_id >", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("boss_id >=", value, "bossId");
+        public Criteria andSalesIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("sales_id >=", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdLessThan(Long value) {
-            addCriterion("boss_id <", value, "bossId");
+        public Criteria andSalesIdLessThan(Long value) {
+            addCriterion("sales_id <", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdLessThanOrEqualTo(Long value) {
-            addCriterion("boss_id <=", value, "bossId");
+        public Criteria andSalesIdLessThanOrEqualTo(Long value) {
+            addCriterion("sales_id <=", value, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdIn(List<Long> values) {
-            addCriterion("boss_id in", values, "bossId");
+        public Criteria andSalesIdIn(List<Long> values) {
+            addCriterion("sales_id in", values, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdNotIn(List<Long> values) {
-            addCriterion("boss_id not in", values, "bossId");
+        public Criteria andSalesIdNotIn(List<Long> values) {
+            addCriterion("sales_id not in", values, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdBetween(Long value1, Long value2) {
-            addCriterion("boss_id between", value1, value2, "bossId");
+        public Criteria andSalesIdBetween(Long value1, Long value2) {
+            addCriterion("sales_id between", value1, value2, "salesId");
             return (Criteria) this;
         }
 
-        public Criteria andBossIdNotBetween(Long value1, Long value2) {
-            addCriterion("boss_id not between", value1, value2, "bossId");
+        public Criteria andSalesIdNotBetween(Long value1, Long value2) {
+            addCriterion("sales_id not between", value1, value2, "salesId");
             return (Criteria) this;
         }
 
