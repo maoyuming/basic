@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
 		
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
 	</properties>
 	
 	
@@ -22,14 +22,14 @@
 			</snapshots>
 			<id>public</id>
 			<name>Public Repositories</name>
-			<url>http://192.168.0.21:8020/nexus/content/groups/public/</url>
+			<url>http://repo.fangbaba.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>public</id>
 			<name>Public Repositories</name>
-			<url>http://192.168.0.21:8020/nexus/content/groups/public/</url>
+			<url>http://repo.fangbaba.com/nexus/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
 	
@@ -38,13 +38,13 @@
         <snapshotRepository>
             <id>user-snapshot</id>
             <name>User Porject Snapshot</name>
-            <url>http://192.168.0.21:8020/nexus/content/repositories/snapshots/</url>
+            <url>http://repo.fangbaba.com/nexus/content/repositories/snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>
             <id>user-release</id>
             <name>User Porject Release</name>
-            <url>http://192.168.0.21:8020/nexus/content/repositories/releases/</url>
+            <url>http://repo.fangbaba.com/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 	 <build>
