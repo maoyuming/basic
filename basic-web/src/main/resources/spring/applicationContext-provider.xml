@@ -21,57 +21,6 @@
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
     <!-- <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="192.168.0.106"/> -->
    
-    <!-- 声明需要暴露的服务接口 -->  
-     <dubbo:service interface="com.fangbaba.basic.face.service.HotelService" ref="hotelService"  timeout="${dubbo.timeout}"  group="${dubbo.basic.group}" version="1.0.0" />  
-     
-     <dubbo:service interface="com.fangbaba.basic.face.service.RoomtypeService" ref="roomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-     
-     <dubbo:service interface="com.fangbaba.basic.face.service.RoomService" ref="roomService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" /> 
-     
-     <dubbo:service interface="com.fangbaba.basic.face.service.CityService" ref="cityService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" /> 
-     
-     <dubbo:service interface="com.fangbaba.basic.face.service.ProvinceService" ref="provinceService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />  
-     
-      <dubbo:service interface="com.fangbaba.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-                       
-      <dubbo:service interface="com.fangbaba.basic.face.service.HotelSaleConfigService" ref="hotelSaleConfigService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
-      
-      <dubbo:service interface="com.fangbaba.basic.face.service.HotelExtensionService" ref="hotelExtensionService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                 
-    
-    <!-- 具体的实现bean -->  
-     <bean id="hotelService" class="com.fangbaba.basic.service.impl.HotelServiceImpl" /> 
-     
-     <bean id="roomtypeService" class="com.fangbaba.basic.service.impl.RoomtypeServiceImpl" /> 
-     
-      <bean id="roomService" class="com.fangbaba.basic.service.impl.RoomServiceImpl" /> 
-    
-      <bean id="cityService" class="com.fangbaba.basic.service.impl.CityServiceImpl" /> 
-      
-      <bean id="provinceService" class="com.fangbaba.basic.service.impl.ProvinceServiceImpl" />
-       
-      <bean id="districtService" class="com.fangbaba.basic.service.impl.DistrictServiceImpl" />
-      
-      <bean id="hotelSaleConfigService" class="com.fangbaba.basic.service.impl.HotelSaleConfigServiceImpl" />
-      
-      <bean id="hotelExtensionService" class="com.fangbaba.basic.service.impl.HotelExtensionServiceImpl" /> 
-      
-      
-<!--       <dubbo:service interface="com.fangbaba.basic.face.service.OtaHotelService" ref="otaHotelService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                  -->
-    
-<!--     具体的实现bean   -->
-<!--      <bean id="otaHotelService" class="com.fangbaba.basic.service.impl.OtaHotelServiceImpl" />  -->
-     
-     
-     
-<!--      <dubbo:service interface="com.fangbaba.basic.face.service.OtaRoomtypeService" ref="otaRoomtypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                  -->
-    
-<!--     具体的实现bean   -->
-<!--      <bean id="otaRoomtypeService" class="com.fangbaba.basic.service.impl.OtaRoomtypeServiceImpl" />  -->
-     
-<!--      <dubbo:service interface="com.fangbaba.basic.face.service.GdsTypeService" ref="gdsTypeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />                  -->
-    
-<!--     具体的实现bean   -->
-<!--      <bean id="gdsTypeService" class="com.fangbaba.basic.service.impl.GdsTypeServiceImpl" />  -->
      
       
 </beans>  
