@@ -3,10 +3,8 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Boss implements Serializable{
-	private static final long serialVersionUID = 1L;
-
-	private Long bossId;
+public class Sale  implements Serializable{
+    private Long salesId;
 
     private String loginName;
 
@@ -48,12 +46,12 @@ public class Boss implements Serializable{
 
     private String isvisible;
 
-    public Long getBossId() {
-        return bossId;
+    public Long getSalesId() {
+        return salesId;
     }
 
-    public void setBossId(Long bossId) {
-        this.bossId = bossId;
+    public void setSalesId(Long salesId) {
+        this.salesId = salesId;
     }
 
     public String getLoginName() {

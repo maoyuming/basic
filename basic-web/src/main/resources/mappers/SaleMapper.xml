@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.duantuke.basic.mappers.CoustomerMapper" >
-  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Coustomer" >
-    <id column="customer_id" property="customerId" jdbcType="BIGINT" />
+<mapper namespace="com.duantuke.basic.mappers.SaleMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Sale" >
+    <id column="sales_id" property="salesId" jdbcType="BIGINT" />
     <result column="login_name" property="loginName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -10,12 +10,19 @@
     <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
     <result column="login_devic" property="loginDevic" jdbcType="VARCHAR" />
     <result column="devic_info" property="devicInfo" jdbcType="VARCHAR" />
+    <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="bank_branch" property="bankBranch" jdbcType="VARCHAR" />
+    <result column="transfer_type" property="transferType" jdbcType="SMALLINT" />
+    <result column="name_bank" property="nameBank" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="alipay" property="alipay" jdbcType="VARCHAR" />
     <result column="weixin" property="weixin" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="isvisible" property="isvisible" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,16 +83,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    customer_id, login_name, password, phone, member_name, channel_id, login_devic, devic_info, 
-    alipay, weixin, createtime, createuser, updatetime, updateuser
+    sales_id, login_name, password, phone, member_name, channel_id, login_devic, devic_info, 
+    bank_code, bank, bank_branch, transfer_type, name_bank, account, alipay, weixin, 
+    createtime, createuser, updatetime, updateuser, isvisible
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.CoustomerExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.SaleExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from customers
+    from sales
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -99,36 +107,42 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from customers
-    where customer_id = #{customerId,jdbcType=BIGINT}
+    from sales
+    where sales_id = #{salesId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from customers
-    where customer_id = #{customerId,jdbcType=BIGINT}
+    delete from sales
+    where sales_id = #{salesId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.CoustomerExample" >
-    delete from customers
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.SaleExample" >
+    delete from sales
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.duantuke.basic.po.Coustomer" >
-    insert into customers (customer_id, login_name, password, 
+  <insert id="insert" parameterType="com.duantuke.basic.po.Sale" >
+    insert into sales (sales_id, login_name, password, 
       phone, member_name, channel_id, 
-      login_devic, devic_info, alipay, 
+      login_devic, devic_info, bank_code, 
+      bank, bank_branch, transfer_type, 
+      name_bank, account, alipay, 
       weixin, createtime, createuser, 
-      updatetime, updateuser)
-    values (#{customerId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      updatetime, updateuser, isvisible
+      )
+    values (#{salesId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, 
-      #{loginDevic,jdbcType=VARCHAR}, #{devicInfo,jdbcType=VARCHAR}, #{alipay,jdbcType=VARCHAR}, 
+      #{loginDevic,jdbcType=VARCHAR}, #{devicInfo,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{bankBranch,jdbcType=VARCHAR}, #{transferType,jdbcType=SMALLINT}, 
+      #{nameBank,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{alipay,jdbcType=VARCHAR}, 
       #{weixin,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR})
+      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{isvisible,jdbcType=CHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Coustomer" >
-    insert into customers
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Sale" >
+    insert into sales
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="customerId != null" >
-        customer_id,
+      <if test="salesId != null" >
+        sales_id,
       </if>
       <if test="loginName != null" >
         login_name,
@@ -151,6 +165,24 @@
       <if test="devicInfo != null" >
         devic_info,
       </if>
+      <if test="bankCode != null" >
+        bank_code,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="bankBranch != null" >
+        bank_branch,
+      </if>
+      <if test="transferType != null" >
+        transfer_type,
+      </if>
+      <if test="nameBank != null" >
+        name_bank,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
       <if test="alipay != null" >
         alipay,
       </if>
@@ -169,10 +201,13 @@
       <if test="updateuser != null" >
         updateuser,
       </if>
+      <if test="isvisible != null" >
+        isvisible,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="customerId != null" >
-        #{customerId,jdbcType=BIGINT},
+      <if test="salesId != null" >
+        #{salesId,jdbcType=BIGINT},
       </if>
       <if test="loginName != null" >
         #{loginName,jdbcType=VARCHAR},
@@ -195,6 +230,24 @@
       <if test="devicInfo != null" >
         #{devicInfo,jdbcType=VARCHAR},
       </if>
+      <if test="bankCode != null" >
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranch != null" >
+        #{bankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        #{transferType,jdbcType=SMALLINT},
+      </if>
+      <if test="nameBank != null" >
+        #{nameBank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
       <if test="alipay != null" >
         #{alipay,jdbcType=VARCHAR},
       </if>
@@ -213,19 +266,22 @@
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="isvisible != null" >
+        #{isvisible,jdbcType=CHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.duantuke.basic.po.CoustomerExample" resultType="java.lang.Integer" >
-    select count(*) from customers
+  <select id="countByExample" parameterType="com.duantuke.basic.po.SaleExample" resultType="java.lang.Integer" >
+    select count(*) from sales
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update customers
+    update sales
     <set >
-      <if test="record.customerId != null" >
-        customer_id = #{record.customerId,jdbcType=BIGINT},
+      <if test="record.salesId != null" >
+        sales_id = #{record.salesId,jdbcType=BIGINT},
       </if>
       <if test="record.loginName != null" >
         login_name = #{record.loginName,jdbcType=VARCHAR},
@@ -248,6 +304,24 @@
       <if test="record.devicInfo != null" >
         devic_info = #{record.devicInfo,jdbcType=VARCHAR},
       </if>
+      <if test="record.bankCode != null" >
+        bank_code = #{record.bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankBranch != null" >
+        bank_branch = #{record.bankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferType != null" >
+        transfer_type = #{record.transferType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.nameBank != null" >
+        name_bank = #{record.nameBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
       <if test="record.alipay != null" >
         alipay = #{record.alipay,jdbcType=VARCHAR},
       </if>
@@ -266,14 +340,17 @@
       <if test="record.updateuser != null" >
         updateuser = #{record.updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="record.isvisible != null" >
+        isvisible = #{record.isvisible,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update customers
-    set customer_id = #{record.customerId,jdbcType=BIGINT},
+    update sales
+    set sales_id = #{record.salesId,jdbcType=BIGINT},
       login_name = #{record.loginName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
@@ -281,18 +358,25 @@
       channel_id = #{record.channelId,jdbcType=VARCHAR},
       login_devic = #{record.loginDevic,jdbcType=VARCHAR},
       devic_info = #{record.devicInfo,jdbcType=VARCHAR},
+      bank_code = #{record.bankCode,jdbcType=VARCHAR},
+      bank = #{record.bank,jdbcType=VARCHAR},
+      bank_branch = #{record.bankBranch,jdbcType=VARCHAR},
+      transfer_type = #{record.transferType,jdbcType=SMALLINT},
+      name_bank = #{record.nameBank,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
       alipay = #{record.alipay,jdbcType=VARCHAR},
       weixin = #{record.weixin,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+      updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      isvisible = #{record.isvisible,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.Coustomer" >
-    update customers
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.Sale" >
+    update sales
     <set >
       <if test="loginName != null" >
         login_name = #{loginName,jdbcType=VARCHAR},
@@ -315,6 +399,24 @@
       <if test="devicInfo != null" >
         devic_info = #{devicInfo,jdbcType=VARCHAR},
       </if>
+      <if test="bankCode != null" >
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranch != null" >
+        bank_branch = #{bankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        transfer_type = #{transferType,jdbcType=SMALLINT},
+      </if>
+      <if test="nameBank != null" >
+        name_bank = #{nameBank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
       <if test="alipay != null" >
         alipay = #{alipay,jdbcType=VARCHAR},
       </if>
@@ -333,11 +435,14 @@
       <if test="updateuser != null" >
         updateuser = #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="isvisible != null" >
+        isvisible = #{isvisible,jdbcType=CHAR},
+      </if>
     </set>
-    where customer_id = #{customerId,jdbcType=BIGINT}
+    where sales_id = #{salesId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.Coustomer" >
-    update customers
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.Sale" >
+    update sales
     set login_name = #{loginName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
@@ -345,12 +450,19 @@
       channel_id = #{channelId,jdbcType=VARCHAR},
       login_devic = #{loginDevic,jdbcType=VARCHAR},
       devic_info = #{devicInfo,jdbcType=VARCHAR},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      bank_branch = #{bankBranch,jdbcType=VARCHAR},
+      transfer_type = #{transferType,jdbcType=SMALLINT},
+      name_bank = #{nameBank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
       alipay = #{alipay,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{updateuser,jdbcType=VARCHAR}
-    where customer_id = #{customerId,jdbcType=BIGINT}
+      updateuser = #{updateuser,jdbcType=VARCHAR},
+      isvisible = #{isvisible,jdbcType=CHAR}
+    where sales_id = #{salesId,jdbcType=BIGINT}
   </update>
 </mapper>
