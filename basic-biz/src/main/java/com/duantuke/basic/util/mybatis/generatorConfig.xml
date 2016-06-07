@@ -34,8 +34,20 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="province" domainObjectName="Province"></table>
-        <table tableName="city" domainObjectName="City"></table>
-        <table tableName="district" domainObjectName="District"></table>
+        <table tableName="tag" domainObjectName="Tag"></table>
+        <table tableName="tag_group" domainObjectName="TagGroup"></table>
+        <table tableName="sight" domainObjectName="Sight"></table>
+        <table tableName="sight_rank" domainObjectName="SightRank"></table>
+        <table tableName="meal" domainObjectName="Meal"></table>
+        <table tableName="meal_rank" domainObjectName="MealRank"></table>
+        <table tableName="hotel" domainObjectName="Hotel"></table>
+        <table tableName="hotel_price_config" domainObjectName="HotelPriceConfig"></table>
+        <table tableName="hotel_r_tag" domainObjectName="HotelRTag"></table>
+        <table tableName="hotel_rank" domainObjectName="HotelRank"></table>
+        <table tableName="journey" domainObjectName="Journey"></table>
+        <table tableName="journey_r_hotel" domainObjectName="JourneyRHotel"></table>
+        <table tableName="journey_r_sight" domainObjectName="JourneyRSight"></table>
+        <table tableName="journey_rank" domainObjectName="JourneyRank"></table>
+        <table tableName="room_type" domainObjectName="RoomType"></table>
 	</context>
 </generatorConfiguration>

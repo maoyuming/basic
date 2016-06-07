@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.HotelPriceConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.HotelPriceConfig" >
+    <id column="hotel_price_config_id" property="hotelPriceConfigId" jdbcType="BIGINT" />
+    <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
+    <result column="rack" property="rack" jdbcType="DOUBLE" />
+    <result column="daily" property="daily" jdbcType="DOUBLE" />
+    <result column="weekend" property="weekend" jdbcType="DOUBLE" />
+    <result column="rack_type" property="rackType" jdbcType="SMALLINT" />
+    <result column="daily_type" property="dailyType" jdbcType="SMALLINT" />
+    <result column="weekend_type" property="weekendType" jdbcType="SMALLINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hotel_price_config_id, hotel_id, rack, daily, weekend, rack_type, daily_type, weekend_type, 
+    createtime, createuser, updatetime, updateuser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.HotelPriceConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotel_price_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hotel_price_config
+    where hotel_price_config_id = #{hotelPriceConfigId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hotel_price_config
+    where hotel_price_config_id = #{hotelPriceConfigId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.HotelPriceConfigExample" >
+    delete from hotel_price_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duantuke.basic.po.HotelPriceConfig" >
+    insert into hotel_price_config (hotel_price_config_id, hotel_id, rack, 
+      daily, weekend, rack_type, 
+      daily_type, weekend_type, createtime, 
+      createuser, updatetime, updateuser
+      )
+    values (#{hotelPriceConfigId,jdbcType=BIGINT}, #{hotelId,jdbcType=BIGINT}, #{rack,jdbcType=DOUBLE}, 
+      #{daily,jdbcType=DOUBLE}, #{weekend,jdbcType=DOUBLE}, #{rackType,jdbcType=SMALLINT}, 
+      #{dailyType,jdbcType=SMALLINT}, #{weekendType,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.HotelPriceConfig" >
+    insert into hotel_price_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotelPriceConfigId != null" >
+        hotel_price_config_id,
+      </if>
+      <if test="hotelId != null" >
+        hotel_id,
+      </if>
+      <if test="rack != null" >
+        rack,
+      </if>
+      <if test="daily != null" >
+        daily,
+      </if>
+      <if test="weekend != null" >
+        weekend,
+      </if>
+      <if test="rackType != null" >
+        rack_type,
+      </if>
+      <if test="dailyType != null" >
+        daily_type,
+      </if>
+      <if test="weekendType != null" >
+        weekend_type,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="updateuser != null" >
+        updateuser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotelPriceConfigId != null" >
+        #{hotelPriceConfigId,jdbcType=BIGINT},
+      </if>
+      <if test="hotelId != null" >
+        #{hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="rack != null" >
+        #{rack,jdbcType=DOUBLE},
+      </if>
+      <if test="daily != null" >
+        #{daily,jdbcType=DOUBLE},
+      </if>
+      <if test="weekend != null" >
+        #{weekend,jdbcType=DOUBLE},
+      </if>
+      <if test="rackType != null" >
+        #{rackType,jdbcType=SMALLINT},
+      </if>
+      <if test="dailyType != null" >
+        #{dailyType,jdbcType=SMALLINT},
+      </if>
+      <if test="weekendType != null" >
+        #{weekendType,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duantuke.basic.po.HotelPriceConfigExample" resultType="java.lang.Integer" >
+    select count(*) from hotel_price_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hotel_price_config
+    <set >
+      <if test="record.hotelPriceConfigId != null" >
+        hotel_price_config_id = #{record.hotelPriceConfigId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotelId != null" >
+        hotel_id = #{record.hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rack != null" >
+        rack = #{record.rack,jdbcType=DOUBLE},
+      </if>
+      <if test="record.daily != null" >
+        daily = #{record.daily,jdbcType=DOUBLE},
+      </if>
+      <if test="record.weekend != null" >
+        weekend = #{record.weekend,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rackType != null" >
+        rack_type = #{record.rackType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.dailyType != null" >
+        daily_type = #{record.dailyType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.weekendType != null" >
+        weekend_type = #{record.weekendType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        createuser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuser != null" >
+        updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hotel_price_config
+    set hotel_price_config_id = #{record.hotelPriceConfigId,jdbcType=BIGINT},
+      hotel_id = #{record.hotelId,jdbcType=BIGINT},
+      rack = #{record.rack,jdbcType=DOUBLE},
+      daily = #{record.daily,jdbcType=DOUBLE},
+      weekend = #{record.weekend,jdbcType=DOUBLE},
+      rack_type = #{record.rackType,jdbcType=SMALLINT},
+      daily_type = #{record.dailyType,jdbcType=SMALLINT},
+      weekend_type = #{record.weekendType,jdbcType=SMALLINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      createuser = #{record.createuser,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.HotelPriceConfig" >
+    update hotel_price_config
+    <set >
+      <if test="hotelId != null" >
+        hotel_id = #{hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="rack != null" >
+        rack = #{rack,jdbcType=DOUBLE},
+      </if>
+      <if test="daily != null" >
+        daily = #{daily,jdbcType=DOUBLE},
+      </if>
+      <if test="weekend != null" >
+        weekend = #{weekend,jdbcType=DOUBLE},
+      </if>
+      <if test="rackType != null" >
+        rack_type = #{rackType,jdbcType=SMALLINT},
+      </if>
+      <if test="dailyType != null" >
+        daily_type = #{dailyType,jdbcType=SMALLINT},
+      </if>
+      <if test="weekendType != null" >
+        weekend_type = #{weekendType,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        updateuser = #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hotel_price_config_id = #{hotelPriceConfigId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.HotelPriceConfig" >
+    update hotel_price_config
+    set hotel_id = #{hotelId,jdbcType=BIGINT},
+      rack = #{rack,jdbcType=DOUBLE},
+      daily = #{daily,jdbcType=DOUBLE},
+      weekend = #{weekend,jdbcType=DOUBLE},
+      rack_type = #{rackType,jdbcType=SMALLINT},
+      daily_type = #{dailyType,jdbcType=SMALLINT},
+      weekend_type = #{weekendType,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=VARCHAR}
+    where hotel_price_config_id = #{hotelPriceConfigId,jdbcType=BIGINT}
+  </update>
+</mapper>
