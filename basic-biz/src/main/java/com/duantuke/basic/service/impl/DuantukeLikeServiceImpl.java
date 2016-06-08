@@ -6,6 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.DuantukeLikeService;
 import com.duantuke.basic.mappers.DuantukeLikeMapper;
 import com.duantuke.basic.po.DuantukeLike;
@@ -24,6 +25,9 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 	 */
 	@Override
 	public int countDuantukeLike(DuantukeLike duantukeLike) {
+		if(duantukeLike.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeLikeExample example = new DuantukeLikeExample();
 		DuantukeLikeExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
@@ -34,7 +38,9 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 
 	@Override
 	public int deleteDuantukeLike(DuantukeLike duantukeLike) {
-
+		if(duantukeLike.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeLikeExample example = new DuantukeLikeExample();
 		DuantukeLikeExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
@@ -67,7 +73,9 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 	@Override
 	public List<DuantukeLike> selectByDuantukeLike(
 			DuantukeLike duantukeLike) {
-
+		if(duantukeLike.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeLikeExample example = new DuantukeLikeExample();
 		DuantukeLikeExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
