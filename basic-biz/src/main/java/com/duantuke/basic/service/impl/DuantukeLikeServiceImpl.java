@@ -2,6 +2,7 @@ package com.duantuke.basic.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,18 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
 		hoCriteria.andFidEqualTo(duantukeLike.getFid());
 		hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
-		return duantukeLikeMapper.deleteByExample(example);
+		
+		int count = 0;
+		List<DuantukeLike> list = duantukeLikeMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			for (DuantukeLike duantukeLike2 : list) {
+				 int subcount = duantukeLikeMapper.deleteByPrimaryKey(duantukeLike2.getDuantukeLikeId());
+				 count =count+subcount;
+			}
+		}
+		
+		return count;
+		
 	}
 
 	@Override
