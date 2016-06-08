@@ -29,12 +29,22 @@ public class SightQueryBean implements Serializable{
 
     private Integer discode;
     
-    private Integer page=1;//当前页 默认为1
-    private Integer pagesize=10;//每页分页数 默认为10
+    private Integer page;//当前页
+    private Integer pagesize;//每页分页数
     
     private String sortby;//排序字段
-    private String sortorder = "ASC"; //默认升序
-    private Double range = 5000d;// 搜索范围，默认5000m
+    private String sortorder; //默认升序
+    private Double range;// 搜索范围，默认5000m
+    
+    
+    /** 搜索默认页码 */
+    public final static Integer SEARCH_PAGE_DEFAULT = 1;
+    
+    /** 搜索默认条数 */
+    public final static Integer SEARCH_LIMIT_DEFAULT = 10;
+    
+    /** 搜索默认搜索半径（单位: 米） */
+    public final static Integer SEARCH_RANGE_DEFAULT = 5000;
     
     
 
