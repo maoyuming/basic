@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.DuantukeCommentService;
 import com.duantuke.basic.mappers.DuantukeCommentMapper;
 import com.duantuke.basic.po.DuantukeComment;
@@ -22,6 +23,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 	 */
 	@Override
 	public int countDuantukeComment(DuantukeComment duantukeComment) {
+		if(duantukeComment.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
@@ -31,7 +35,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 
 	@Override
 	public int deleteDuantukeComment(DuantukeComment duantukeComment) {
-
+		if(duantukeComment.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
@@ -52,7 +58,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 	@Override
 	public List<DuantukeComment> selectByDuantukeComment(
 			DuantukeComment duantukeComment) {
-
+		if(duantukeComment.getBusinessType()==null){
+			throw new OpenException("请求类型为空");
+		}
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
