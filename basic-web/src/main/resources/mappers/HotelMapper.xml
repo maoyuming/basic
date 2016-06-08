@@ -5,7 +5,7 @@
     <id column="hotel_id" property="hotelId" jdbcType="BIGINT" />
     <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
     <result column="hotel_contact_name" property="hotelContactName" jdbcType="VARCHAR" />
-    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
     <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
     <result column="longitude" property="longitude" jdbcType="DECIMAL" />
     <result column="latitude" property="latitude" jdbcType="DECIMAL" />
@@ -20,10 +20,10 @@
     <result column="default_leave_time" property="defaultLeaveTime" jdbcType="CHAR" />
     <result column="hotel_phone" property="hotelPhone" jdbcType="VARCHAR" />
     <result column="qt_phone" property="qtPhone" jdbcType="VARCHAR" />
-    <result column="provcode" property="provcode" jdbcType="INTEGER" />
-    <result column="citycode" property="citycode" jdbcType="INTEGER" />
-    <result column="discode" property="discode" jdbcType="INTEGER" />
-    <result column="hotelfax" property="hotelfax" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="INTEGER" />
+    <result column="city_code" property="cityCode" jdbcType="INTEGER" />
+    <result column="district_code" property="districtCode" jdbcType="INTEGER" />
+    <result column="hotel_fax" property="hotelFax" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="pics" property="pics" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
@@ -93,11 +93,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    hotel_id, hotel_name, hotel_contact_name, regtime, detail_addr, longitude, latitude, 
+    hotel_id, hotel_name, hotel_contact_name, reg_time, detail_addr, longitude, latitude, 
     open_time, repair_time, business_license_front, business_license_back, isvisible, 
     idcardfront, idcardback, retention_time, default_leave_time, hotel_phone, qt_phone, 
-    provcode, citycode, discode, hotelfax, state, pics, createtime, createuser, updatetime, 
-    updateuser
+    province_code, city_code, district_code, hotel_fax, state, pics, createtime, createuser, 
+    updatetime, updateuser
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -155,24 +155,24 @@
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.Hotel" >
     insert into hotel (hotel_id, hotel_name, hotel_contact_name, 
-      regtime, detail_addr, longitude, 
+      reg_time, detail_addr, longitude, 
       latitude, open_time, repair_time, 
       business_license_front, business_license_back, 
       isvisible, idcardfront, idcardback, 
       retention_time, default_leave_time, hotel_phone, 
-      qt_phone, provcode, citycode, 
-      discode, hotelfax, state, 
+      qt_phone, province_code, city_code, 
+      district_code, hotel_fax, state, 
       pics, createtime, createuser, 
       updatetime, updateuser, introduction
       )
     values (#{hotelId,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{hotelContactName,jdbcType=VARCHAR}, 
-      #{regtime,jdbcType=TIMESTAMP}, #{detailAddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{regTime,jdbcType=TIMESTAMP}, #{detailAddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
       #{latitude,jdbcType=DECIMAL}, #{openTime,jdbcType=TIMESTAMP}, #{repairTime,jdbcType=TIMESTAMP}, 
       #{businessLicenseFront,jdbcType=VARCHAR}, #{businessLicenseBack,jdbcType=VARCHAR}, 
       #{isvisible,jdbcType=CHAR}, #{idcardfront,jdbcType=VARCHAR}, #{idcardback,jdbcType=VARCHAR}, 
       #{retentionTime,jdbcType=CHAR}, #{defaultLeaveTime,jdbcType=CHAR}, #{hotelPhone,jdbcType=VARCHAR}, 
-      #{qtPhone,jdbcType=VARCHAR}, #{provcode,jdbcType=INTEGER}, #{citycode,jdbcType=INTEGER}, 
-      #{discode,jdbcType=INTEGER}, #{hotelfax,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{qtPhone,jdbcType=VARCHAR}, #{provinceCode,jdbcType=INTEGER}, #{cityCode,jdbcType=INTEGER}, 
+      #{districtCode,jdbcType=INTEGER}, #{hotelFax,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{pics,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
       )
@@ -189,8 +189,8 @@
       <if test="hotelContactName != null" >
         hotel_contact_name,
       </if>
-      <if test="regtime != null" >
-        regtime,
+      <if test="regTime != null" >
+        reg_time,
       </if>
       <if test="detailAddr != null" >
         detail_addr,
@@ -234,17 +234,17 @@
       <if test="qtPhone != null" >
         qt_phone,
       </if>
-      <if test="provcode != null" >
-        provcode,
+      <if test="provinceCode != null" >
+        province_code,
       </if>
-      <if test="citycode != null" >
-        citycode,
+      <if test="cityCode != null" >
+        city_code,
       </if>
-      <if test="discode != null" >
-        discode,
+      <if test="districtCode != null" >
+        district_code,
       </if>
-      <if test="hotelfax != null" >
-        hotelfax,
+      <if test="hotelFax != null" >
+        hotel_fax,
       </if>
       <if test="state != null" >
         state,
@@ -278,8 +278,8 @@
       <if test="hotelContactName != null" >
         #{hotelContactName,jdbcType=VARCHAR},
       </if>
-      <if test="regtime != null" >
-        #{regtime,jdbcType=TIMESTAMP},
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
       </if>
       <if test="detailAddr != null" >
         #{detailAddr,jdbcType=VARCHAR},
@@ -323,17 +323,17 @@
       <if test="qtPhone != null" >
         #{qtPhone,jdbcType=VARCHAR},
       </if>
-      <if test="provcode != null" >
-        #{provcode,jdbcType=INTEGER},
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=INTEGER},
       </if>
-      <if test="citycode != null" >
-        #{citycode,jdbcType=INTEGER},
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=INTEGER},
       </if>
-      <if test="discode != null" >
-        #{discode,jdbcType=INTEGER},
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=INTEGER},
       </if>
-      <if test="hotelfax != null" >
-        #{hotelfax,jdbcType=VARCHAR},
+      <if test="hotelFax != null" >
+        #{hotelFax,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
@@ -376,8 +376,8 @@
       <if test="record.hotelContactName != null" >
         hotel_contact_name = #{record.hotelContactName,jdbcType=VARCHAR},
       </if>
-      <if test="record.regtime != null" >
-        regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      <if test="record.regTime != null" >
+        reg_time = #{record.regTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.detailAddr != null" >
         detail_addr = #{record.detailAddr,jdbcType=VARCHAR},
@@ -421,17 +421,17 @@
       <if test="record.qtPhone != null" >
         qt_phone = #{record.qtPhone,jdbcType=VARCHAR},
       </if>
-      <if test="record.provcode != null" >
-        provcode = #{record.provcode,jdbcType=INTEGER},
+      <if test="record.provinceCode != null" >
+        province_code = #{record.provinceCode,jdbcType=INTEGER},
       </if>
-      <if test="record.citycode != null" >
-        citycode = #{record.citycode,jdbcType=INTEGER},
+      <if test="record.cityCode != null" >
+        city_code = #{record.cityCode,jdbcType=INTEGER},
       </if>
-      <if test="record.discode != null" >
-        discode = #{record.discode,jdbcType=INTEGER},
+      <if test="record.districtCode != null" >
+        district_code = #{record.districtCode,jdbcType=INTEGER},
       </if>
-      <if test="record.hotelfax != null" >
-        hotelfax = #{record.hotelfax,jdbcType=VARCHAR},
+      <if test="record.hotelFax != null" >
+        hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null" >
         state = #{record.state,jdbcType=INTEGER},
@@ -464,7 +464,7 @@
     set hotel_id = #{record.hotelId,jdbcType=BIGINT},
       hotel_name = #{record.hotelName,jdbcType=VARCHAR},
       hotel_contact_name = #{record.hotelContactName,jdbcType=VARCHAR},
-      regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      reg_time = #{record.regTime,jdbcType=TIMESTAMP},
       detail_addr = #{record.detailAddr,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=DECIMAL},
       latitude = #{record.latitude,jdbcType=DECIMAL},
@@ -479,10 +479,10 @@
       default_leave_time = #{record.defaultLeaveTime,jdbcType=CHAR},
       hotel_phone = #{record.hotelPhone,jdbcType=VARCHAR},
       qt_phone = #{record.qtPhone,jdbcType=VARCHAR},
-      provcode = #{record.provcode,jdbcType=INTEGER},
-      citycode = #{record.citycode,jdbcType=INTEGER},
-      discode = #{record.discode,jdbcType=INTEGER},
-      hotelfax = #{record.hotelfax,jdbcType=VARCHAR},
+      province_code = #{record.provinceCode,jdbcType=INTEGER},
+      city_code = #{record.cityCode,jdbcType=INTEGER},
+      district_code = #{record.districtCode,jdbcType=INTEGER},
+      hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       pics = #{record.pics,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -499,7 +499,7 @@
     set hotel_id = #{record.hotelId,jdbcType=BIGINT},
       hotel_name = #{record.hotelName,jdbcType=VARCHAR},
       hotel_contact_name = #{record.hotelContactName,jdbcType=VARCHAR},
-      regtime = #{record.regtime,jdbcType=TIMESTAMP},
+      reg_time = #{record.regTime,jdbcType=TIMESTAMP},
       detail_addr = #{record.detailAddr,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=DECIMAL},
       latitude = #{record.latitude,jdbcType=DECIMAL},
@@ -514,10 +514,10 @@
       default_leave_time = #{record.defaultLeaveTime,jdbcType=CHAR},
       hotel_phone = #{record.hotelPhone,jdbcType=VARCHAR},
       qt_phone = #{record.qtPhone,jdbcType=VARCHAR},
-      provcode = #{record.provcode,jdbcType=INTEGER},
-      citycode = #{record.citycode,jdbcType=INTEGER},
-      discode = #{record.discode,jdbcType=INTEGER},
-      hotelfax = #{record.hotelfax,jdbcType=VARCHAR},
+      province_code = #{record.provinceCode,jdbcType=INTEGER},
+      city_code = #{record.cityCode,jdbcType=INTEGER},
+      district_code = #{record.districtCode,jdbcType=INTEGER},
+      hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       pics = #{record.pics,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -537,8 +537,8 @@
       <if test="hotelContactName != null" >
         hotel_contact_name = #{hotelContactName,jdbcType=VARCHAR},
       </if>
-      <if test="regtime != null" >
-        regtime = #{regtime,jdbcType=TIMESTAMP},
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
       </if>
       <if test="detailAddr != null" >
         detail_addr = #{detailAddr,jdbcType=VARCHAR},
@@ -582,17 +582,17 @@
       <if test="qtPhone != null" >
         qt_phone = #{qtPhone,jdbcType=VARCHAR},
       </if>
-      <if test="provcode != null" >
-        provcode = #{provcode,jdbcType=INTEGER},
+      <if test="provinceCode != null" >
+        province_code = #{provinceCode,jdbcType=INTEGER},
       </if>
-      <if test="citycode != null" >
-        citycode = #{citycode,jdbcType=INTEGER},
+      <if test="cityCode != null" >
+        city_code = #{cityCode,jdbcType=INTEGER},
       </if>
-      <if test="discode != null" >
-        discode = #{discode,jdbcType=INTEGER},
+      <if test="districtCode != null" >
+        district_code = #{districtCode,jdbcType=INTEGER},
       </if>
-      <if test="hotelfax != null" >
-        hotelfax = #{hotelfax,jdbcType=VARCHAR},
+      <if test="hotelFax != null" >
+        hotel_fax = #{hotelFax,jdbcType=VARCHAR},
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
@@ -622,7 +622,7 @@
     update hotel
     set hotel_name = #{hotelName,jdbcType=VARCHAR},
       hotel_contact_name = #{hotelContactName,jdbcType=VARCHAR},
-      regtime = #{regtime,jdbcType=TIMESTAMP},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
       detail_addr = #{detailAddr,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DECIMAL},
       latitude = #{latitude,jdbcType=DECIMAL},
@@ -637,10 +637,10 @@
       default_leave_time = #{defaultLeaveTime,jdbcType=CHAR},
       hotel_phone = #{hotelPhone,jdbcType=VARCHAR},
       qt_phone = #{qtPhone,jdbcType=VARCHAR},
-      provcode = #{provcode,jdbcType=INTEGER},
-      citycode = #{citycode,jdbcType=INTEGER},
-      discode = #{discode,jdbcType=INTEGER},
-      hotelfax = #{hotelfax,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=INTEGER},
+      city_code = #{cityCode,jdbcType=INTEGER},
+      district_code = #{districtCode,jdbcType=INTEGER},
+      hotel_fax = #{hotelFax,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       pics = #{pics,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -654,7 +654,7 @@
     update hotel
     set hotel_name = #{hotelName,jdbcType=VARCHAR},
       hotel_contact_name = #{hotelContactName,jdbcType=VARCHAR},
-      regtime = #{regtime,jdbcType=TIMESTAMP},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
       detail_addr = #{detailAddr,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DECIMAL},
       latitude = #{latitude,jdbcType=DECIMAL},
@@ -669,10 +669,10 @@
       default_leave_time = #{defaultLeaveTime,jdbcType=CHAR},
       hotel_phone = #{hotelPhone,jdbcType=VARCHAR},
       qt_phone = #{qtPhone,jdbcType=VARCHAR},
-      provcode = #{provcode,jdbcType=INTEGER},
-      citycode = #{citycode,jdbcType=INTEGER},
-      discode = #{discode,jdbcType=INTEGER},
-      hotelfax = #{hotelfax,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=INTEGER},
+      city_code = #{cityCode,jdbcType=INTEGER},
+      district_code = #{districtCode,jdbcType=INTEGER},
+      hotel_fax = #{hotelFax,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       pics = #{pics,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},

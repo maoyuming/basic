@@ -36,6 +36,14 @@
     
 	<dubbo:service interface="com.duantuke.basic.face.service.BossService" ref="bossService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="bossService" class="com.duantuke.basic.service.impl.BossServiceImpl" />
+	
+	<!-- 评论 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeCommentService" ref="duantukeCommentService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="duantukeCommentService" class="com.duantuke.basic.service.impl.DuantukeCommentServiceImpl" />
+	
+	<!-- 点赞 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeLikeService" ref="duantukeLikeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="duantukeLikeService" class="com.duantuke.basic.service.impl.DuantukeLikeServiceImpl" />
      
       
 </beans>  

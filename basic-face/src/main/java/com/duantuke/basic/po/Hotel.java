@@ -1,18 +1,16 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Hotel implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Hotel {
     private Long hotelId;
 
     private String hotelName;
 
     private String hotelContactName;
 
-    private Date regtime;
+    private Date regTime;
 
     private String detailAddr;
 
@@ -42,13 +40,13 @@ public class Hotel implements Serializable{
 
     private String qtPhone;
 
-    private Integer provcode;
+    private Integer provinceCode;
 
-    private Integer citycode;
+    private Integer cityCode;
 
-    private Integer discode;
+    private Integer districtCode;
 
-    private String hotelfax;
+    private String hotelFax;
 
     private Integer state;
 
@@ -88,12 +86,12 @@ public class Hotel implements Serializable{
         this.hotelContactName = hotelContactName == null ? null : hotelContactName.trim();
     }
 
-    public Date getRegtime() {
-        return regtime;
+    public Date getRegTime() {
+        return regTime;
     }
 
-    public void setRegtime(Date regtime) {
-        this.regtime = regtime;
+    public void setRegTime(Date regTime) {
+        this.regTime = regTime;
     }
 
     public String getDetailAddr() {
@@ -208,36 +206,36 @@ public class Hotel implements Serializable{
         this.qtPhone = qtPhone == null ? null : qtPhone.trim();
     }
 
-    public Integer getProvcode() {
-        return provcode;
+    public Integer getProvinceCode() {
+        return provinceCode;
     }
 
-    public void setProvcode(Integer provcode) {
-        this.provcode = provcode;
+    public void setProvinceCode(Integer provinceCode) {
+        this.provinceCode = provinceCode;
     }
 
-    public Integer getCitycode() {
-        return citycode;
+    public Integer getCityCode() {
+        return cityCode;
     }
 
-    public void setCitycode(Integer citycode) {
-        this.citycode = citycode;
+    public void setCityCode(Integer cityCode) {
+        this.cityCode = cityCode;
     }
 
-    public Integer getDiscode() {
-        return discode;
+    public Integer getDistrictCode() {
+        return districtCode;
     }
 
-    public void setDiscode(Integer discode) {
-        this.discode = discode;
+    public void setDistrictCode(Integer districtCode) {
+        this.districtCode = districtCode;
     }
 
-    public String getHotelfax() {
-        return hotelfax;
+    public String getHotelFax() {
+        return hotelFax;
     }
 
-    public void setHotelfax(String hotelfax) {
-        this.hotelfax = hotelfax == null ? null : hotelfax.trim();
+    public void setHotelFax(String hotelFax) {
+        this.hotelFax = hotelFax == null ? null : hotelFax.trim();
     }
 
     public Integer getState() {

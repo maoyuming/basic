@@ -1,5 +1,6 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -12,8 +13,13 @@ import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.face.base.RetInfo;
 import com.duantuke.basic.face.service.BossService;
 import com.duantuke.basic.mappers.BossMapper;
+import com.duantuke.basic.mappers.BossesRHotelMapper;
+import com.duantuke.basic.mappers.HotelMapper;
 import com.duantuke.basic.po.Boss;
 import com.duantuke.basic.po.BossExample;
+import com.duantuke.basic.po.BossesRHotel;
+import com.duantuke.basic.po.BossesRHotelExample;
+import com.duantuke.basic.po.Hotel;
 import com.google.gson.Gson;
 
 /**
@@ -27,6 +33,10 @@ public class BossServiceImpl implements BossService {
 	
 	@Autowired
 	private BossMapper bossMapper;
+	@Autowired
+	private HotelMapper hotelMapper;
+	@Autowired
+	private BossesRHotelMapper bossesRHotelMapper;
 
 	@Override
 	public Boss queryBossByPhone(String phone) {
@@ -111,6 +121,42 @@ public class BossServiceImpl implements BossService {
 			info.setMsg("保存老板信息失败");
 		}
 		return info;
+	}
+
+
+	/**
+	 * 根据老板id查询酒店信息
+	 */
+	@Override
+	public List<Hotel> queryHotelByBoss(Long bossid) {
+		List<Hotel>  hotels = new ArrayList<Hotel>();
+		//根据老板id查询出酒店id，
+		BossesRHotelExample example = new BossesRHotelExample();
+		BossesRHotelExample.Criteria hoCriteria = example.createCriteria();
+		hoCriteria.andBossIdEqualTo(bossid);
+		List<BossesRHotel> models =  bossesRHotelMapper.selectByExample(example);
+		//根据酒店id查询出酒店信息
+		if(CollectionUtils.isNotEmpty(models)){
+			for (BossesRHotel bossesRHotel : models) {
+				Hotel hotel = hotelMapper.selectByPrimaryKey(bossesRHotel.getHotelId());
+				hotels.add(hotel);
+			}
+		}
+		
+		return hotels;
+	}
+
+
+	/**
+	 * 根据登录名称查询酒店信息
+	 */
+	@Override
+	public List<Hotel> queryHotelByBossLoginName(String loginName) {
+		Boss boss = this.queryBossByLoginName(loginName);
+		if(boss!=null){
+			return queryHotelByBoss(boss.getBossId());
+		}
+		return new ArrayList<Hotel>();
 	}
 
 

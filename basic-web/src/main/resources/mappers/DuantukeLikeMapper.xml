@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.DuantukeLikeMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.DuantukeLike" >
+    <id column="duantuke_like_id" property="duantukeLikeId" jdbcType="BIGINT" />
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="duantuke_like" property="duantukeLike" jdbcType="INTEGER" />
+    <result column="follow" property="follow" jdbcType="INTEGER" />
+    <result column="opt_type" property="optType" jdbcType="SMALLINT" />
+    <result column="business_type" property="businessType" jdbcType="SMALLINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    duantuke_like_id, fid, customer_id, duantuke_like, follow, opt_type, business_type, 
+    createtime, createuser, updatetime, updateuser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.DuantukeLikeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from duantuke_like
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from duantuke_like
+    where duantuke_like_id = #{duantukeLikeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from duantuke_like
+    where duantuke_like_id = #{duantukeLikeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.DuantukeLikeExample" >
+    delete from duantuke_like
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duantuke.basic.po.DuantukeLike" >
+    insert into duantuke_like (duantuke_like_id, fid, customer_id, 
+      duantuke_like, follow, opt_type, 
+      business_type, createtime, createuser, 
+      updatetime, updateuser)
+    values (#{duantukeLikeId,jdbcType=BIGINT}, #{fid,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, 
+      #{duantukeLike,jdbcType=INTEGER}, #{follow,jdbcType=INTEGER}, #{optType,jdbcType=SMALLINT}, 
+      #{businessType,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.DuantukeLike" >
+    insert into duantuke_like
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="duantukeLikeId != null" >
+        duantuke_like_id,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="duantukeLike != null" >
+        duantuke_like,
+      </if>
+      <if test="follow != null" >
+        follow,
+      </if>
+      <if test="optType != null" >
+        opt_type,
+      </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="updateuser != null" >
+        updateuser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="duantukeLikeId != null" >
+        #{duantukeLikeId,jdbcType=BIGINT},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="duantukeLike != null" >
+        #{duantukeLike,jdbcType=INTEGER},
+      </if>
+      <if test="follow != null" >
+        #{follow,jdbcType=INTEGER},
+      </if>
+      <if test="optType != null" >
+        #{optType,jdbcType=SMALLINT},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duantuke.basic.po.DuantukeLikeExample" resultType="java.lang.Integer" >
+    select count(*) from duantuke_like
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update duantuke_like
+    <set >
+      <if test="record.duantukeLikeId != null" >
+        duantuke_like_id = #{record.duantukeLikeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.duantukeLike != null" >
+        duantuke_like = #{record.duantukeLike,jdbcType=INTEGER},
+      </if>
+      <if test="record.follow != null" >
+        follow = #{record.follow,jdbcType=INTEGER},
+      </if>
+      <if test="record.optType != null" >
+        opt_type = #{record.optType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.businessType != null" >
+        business_type = #{record.businessType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        createuser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuser != null" >
+        updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update duantuke_like
+    set duantuke_like_id = #{record.duantukeLikeId,jdbcType=BIGINT},
+      fid = #{record.fid,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      duantuke_like = #{record.duantukeLike,jdbcType=INTEGER},
+      follow = #{record.follow,jdbcType=INTEGER},
+      opt_type = #{record.optType,jdbcType=SMALLINT},
+      business_type = #{record.businessType,jdbcType=SMALLINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      createuser = #{record.createuser,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.DuantukeLike" >
+    update duantuke_like
+    <set >
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="duantukeLike != null" >
+        duantuke_like = #{duantukeLike,jdbcType=INTEGER},
+      </if>
+      <if test="follow != null" >
+        follow = #{follow,jdbcType=INTEGER},
+      </if>
+      <if test="optType != null" >
+        opt_type = #{optType,jdbcType=SMALLINT},
+      </if>
+      <if test="businessType != null" >
+        business_type = #{businessType,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        updateuser = #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where duantuke_like_id = #{duantukeLikeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.DuantukeLike" >
+    update duantuke_like
+    set fid = #{fid,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      duantuke_like = #{duantukeLike,jdbcType=INTEGER},
+      follow = #{follow,jdbcType=INTEGER},
+      opt_type = #{optType,jdbcType=SMALLINT},
+      business_type = #{businessType,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=VARCHAR}
+    where duantuke_like_id = #{duantukeLikeId,jdbcType=BIGINT}
+  </update>
+</mapper>

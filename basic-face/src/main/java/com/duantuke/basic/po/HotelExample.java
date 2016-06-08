@@ -326,63 +326,63 @@ public class HotelExample {
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeIsNull() {
-            addCriterion("regtime is null");
+        public Criteria andRegTimeIsNull() {
+            addCriterion("reg_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeIsNotNull() {
-            addCriterion("regtime is not null");
+        public Criteria andRegTimeIsNotNull() {
+            addCriterion("reg_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeEqualTo(Date value) {
-            addCriterion("regtime =", value, "regtime");
+        public Criteria andRegTimeEqualTo(Date value) {
+            addCriterion("reg_time =", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeNotEqualTo(Date value) {
-            addCriterion("regtime <>", value, "regtime");
+        public Criteria andRegTimeNotEqualTo(Date value) {
+            addCriterion("reg_time <>", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeGreaterThan(Date value) {
-            addCriterion("regtime >", value, "regtime");
+        public Criteria andRegTimeGreaterThan(Date value) {
+            addCriterion("reg_time >", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("regtime >=", value, "regtime");
+        public Criteria andRegTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("reg_time >=", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeLessThan(Date value) {
-            addCriterion("regtime <", value, "regtime");
+        public Criteria andRegTimeLessThan(Date value) {
+            addCriterion("reg_time <", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeLessThanOrEqualTo(Date value) {
-            addCriterion("regtime <=", value, "regtime");
+        public Criteria andRegTimeLessThanOrEqualTo(Date value) {
+            addCriterion("reg_time <=", value, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeIn(List<Date> values) {
-            addCriterion("regtime in", values, "regtime");
+        public Criteria andRegTimeIn(List<Date> values) {
+            addCriterion("reg_time in", values, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeNotIn(List<Date> values) {
-            addCriterion("regtime not in", values, "regtime");
+        public Criteria andRegTimeNotIn(List<Date> values) {
+            addCriterion("reg_time not in", values, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeBetween(Date value1, Date value2) {
-            addCriterion("regtime between", value1, value2, "regtime");
+        public Criteria andRegTimeBetween(Date value1, Date value2) {
+            addCriterion("reg_time between", value1, value2, "regTime");
             return (Criteria) this;
         }
 
-        public Criteria andRegtimeNotBetween(Date value1, Date value2) {
-            addCriterion("regtime not between", value1, value2, "regtime");
+        public Criteria andRegTimeNotBetween(Date value1, Date value2) {
+            addCriterion("reg_time not between", value1, value2, "regTime");
             return (Criteria) this;
         }
 
@@ -1326,253 +1326,253 @@ public class HotelExample {
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeIsNull() {
-            addCriterion("provcode is null");
+        public Criteria andProvinceCodeIsNull() {
+            addCriterion("province_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeIsNotNull() {
-            addCriterion("provcode is not null");
+        public Criteria andProvinceCodeIsNotNull() {
+            addCriterion("province_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeEqualTo(Integer value) {
-            addCriterion("provcode =", value, "provcode");
+        public Criteria andProvinceCodeEqualTo(Integer value) {
+            addCriterion("province_code =", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeNotEqualTo(Integer value) {
-            addCriterion("provcode <>", value, "provcode");
+        public Criteria andProvinceCodeNotEqualTo(Integer value) {
+            addCriterion("province_code <>", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeGreaterThan(Integer value) {
-            addCriterion("provcode >", value, "provcode");
+        public Criteria andProvinceCodeGreaterThan(Integer value) {
+            addCriterion("province_code >", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("provcode >=", value, "provcode");
+        public Criteria andProvinceCodeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("province_code >=", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeLessThan(Integer value) {
-            addCriterion("provcode <", value, "provcode");
+        public Criteria andProvinceCodeLessThan(Integer value) {
+            addCriterion("province_code <", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeLessThanOrEqualTo(Integer value) {
-            addCriterion("provcode <=", value, "provcode");
+        public Criteria andProvinceCodeLessThanOrEqualTo(Integer value) {
+            addCriterion("province_code <=", value, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeIn(List<Integer> values) {
-            addCriterion("provcode in", values, "provcode");
+        public Criteria andProvinceCodeIn(List<Integer> values) {
+            addCriterion("province_code in", values, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeNotIn(List<Integer> values) {
-            addCriterion("provcode not in", values, "provcode");
+        public Criteria andProvinceCodeNotIn(List<Integer> values) {
+            addCriterion("province_code not in", values, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeBetween(Integer value1, Integer value2) {
-            addCriterion("provcode between", value1, value2, "provcode");
+        public Criteria andProvinceCodeBetween(Integer value1, Integer value2) {
+            addCriterion("province_code between", value1, value2, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andProvcodeNotBetween(Integer value1, Integer value2) {
-            addCriterion("provcode not between", value1, value2, "provcode");
+        public Criteria andProvinceCodeNotBetween(Integer value1, Integer value2) {
+            addCriterion("province_code not between", value1, value2, "provinceCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeIsNull() {
-            addCriterion("citycode is null");
+        public Criteria andCityCodeIsNull() {
+            addCriterion("city_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeIsNotNull() {
-            addCriterion("citycode is not null");
+        public Criteria andCityCodeIsNotNull() {
+            addCriterion("city_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeEqualTo(Integer value) {
-            addCriterion("citycode =", value, "citycode");
+        public Criteria andCityCodeEqualTo(Integer value) {
+            addCriterion("city_code =", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeNotEqualTo(Integer value) {
-            addCriterion("citycode <>", value, "citycode");
+        public Criteria andCityCodeNotEqualTo(Integer value) {
+            addCriterion("city_code <>", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeGreaterThan(Integer value) {
-            addCriterion("citycode >", value, "citycode");
+        public Criteria andCityCodeGreaterThan(Integer value) {
+            addCriterion("city_code >", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("citycode >=", value, "citycode");
+        public Criteria andCityCodeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("city_code >=", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeLessThan(Integer value) {
-            addCriterion("citycode <", value, "citycode");
+        public Criteria andCityCodeLessThan(Integer value) {
+            addCriterion("city_code <", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeLessThanOrEqualTo(Integer value) {
-            addCriterion("citycode <=", value, "citycode");
+        public Criteria andCityCodeLessThanOrEqualTo(Integer value) {
+            addCriterion("city_code <=", value, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeIn(List<Integer> values) {
-            addCriterion("citycode in", values, "citycode");
+        public Criteria andCityCodeIn(List<Integer> values) {
+            addCriterion("city_code in", values, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeNotIn(List<Integer> values) {
-            addCriterion("citycode not in", values, "citycode");
+        public Criteria andCityCodeNotIn(List<Integer> values) {
+            addCriterion("city_code not in", values, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeBetween(Integer value1, Integer value2) {
-            addCriterion("citycode between", value1, value2, "citycode");
+        public Criteria andCityCodeBetween(Integer value1, Integer value2) {
+            addCriterion("city_code between", value1, value2, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andCitycodeNotBetween(Integer value1, Integer value2) {
-            addCriterion("citycode not between", value1, value2, "citycode");
+        public Criteria andCityCodeNotBetween(Integer value1, Integer value2) {
+            addCriterion("city_code not between", value1, value2, "cityCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeIsNull() {
-            addCriterion("discode is null");
+        public Criteria andDistrictCodeIsNull() {
+            addCriterion("district_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeIsNotNull() {
-            addCriterion("discode is not null");
+        public Criteria andDistrictCodeIsNotNull() {
+            addCriterion("district_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeEqualTo(Integer value) {
-            addCriterion("discode =", value, "discode");
+        public Criteria andDistrictCodeEqualTo(Integer value) {
+            addCriterion("district_code =", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeNotEqualTo(Integer value) {
-            addCriterion("discode <>", value, "discode");
+        public Criteria andDistrictCodeNotEqualTo(Integer value) {
+            addCriterion("district_code <>", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeGreaterThan(Integer value) {
-            addCriterion("discode >", value, "discode");
+        public Criteria andDistrictCodeGreaterThan(Integer value) {
+            addCriterion("district_code >", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("discode >=", value, "discode");
+        public Criteria andDistrictCodeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("district_code >=", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeLessThan(Integer value) {
-            addCriterion("discode <", value, "discode");
+        public Criteria andDistrictCodeLessThan(Integer value) {
+            addCriterion("district_code <", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeLessThanOrEqualTo(Integer value) {
-            addCriterion("discode <=", value, "discode");
+        public Criteria andDistrictCodeLessThanOrEqualTo(Integer value) {
+            addCriterion("district_code <=", value, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeIn(List<Integer> values) {
-            addCriterion("discode in", values, "discode");
+        public Criteria andDistrictCodeIn(List<Integer> values) {
+            addCriterion("district_code in", values, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeNotIn(List<Integer> values) {
-            addCriterion("discode not in", values, "discode");
+        public Criteria andDistrictCodeNotIn(List<Integer> values) {
+            addCriterion("district_code not in", values, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeBetween(Integer value1, Integer value2) {
-            addCriterion("discode between", value1, value2, "discode");
+        public Criteria andDistrictCodeBetween(Integer value1, Integer value2) {
+            addCriterion("district_code between", value1, value2, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiscodeNotBetween(Integer value1, Integer value2) {
-            addCriterion("discode not between", value1, value2, "discode");
+        public Criteria andDistrictCodeNotBetween(Integer value1, Integer value2) {
+            addCriterion("district_code not between", value1, value2, "districtCode");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxIsNull() {
-            addCriterion("hotelfax is null");
+        public Criteria andHotelFaxIsNull() {
+            addCriterion("hotel_fax is null");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxIsNotNull() {
-            addCriterion("hotelfax is not null");
+        public Criteria andHotelFaxIsNotNull() {
+            addCriterion("hotel_fax is not null");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxEqualTo(String value) {
-            addCriterion("hotelfax =", value, "hotelfax");
+        public Criteria andHotelFaxEqualTo(String value) {
+            addCriterion("hotel_fax =", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxNotEqualTo(String value) {
-            addCriterion("hotelfax <>", value, "hotelfax");
+        public Criteria andHotelFaxNotEqualTo(String value) {
+            addCriterion("hotel_fax <>", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxGreaterThan(String value) {
-            addCriterion("hotelfax >", value, "hotelfax");
+        public Criteria andHotelFaxGreaterThan(String value) {
+            addCriterion("hotel_fax >", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxGreaterThanOrEqualTo(String value) {
-            addCriterion("hotelfax >=", value, "hotelfax");
+        public Criteria andHotelFaxGreaterThanOrEqualTo(String value) {
+            addCriterion("hotel_fax >=", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxLessThan(String value) {
-            addCriterion("hotelfax <", value, "hotelfax");
+        public Criteria andHotelFaxLessThan(String value) {
+            addCriterion("hotel_fax <", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxLessThanOrEqualTo(String value) {
-            addCriterion("hotelfax <=", value, "hotelfax");
+        public Criteria andHotelFaxLessThanOrEqualTo(String value) {
+            addCriterion("hotel_fax <=", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxLike(String value) {
-            addCriterion("hotelfax like", value, "hotelfax");
+        public Criteria andHotelFaxLike(String value) {
+            addCriterion("hotel_fax like", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxNotLike(String value) {
-            addCriterion("hotelfax not like", value, "hotelfax");
+        public Criteria andHotelFaxNotLike(String value) {
+            addCriterion("hotel_fax not like", value, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxIn(List<String> values) {
-            addCriterion("hotelfax in", values, "hotelfax");
+        public Criteria andHotelFaxIn(List<String> values) {
+            addCriterion("hotel_fax in", values, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxNotIn(List<String> values) {
-            addCriterion("hotelfax not in", values, "hotelfax");
+        public Criteria andHotelFaxNotIn(List<String> values) {
+            addCriterion("hotel_fax not in", values, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxBetween(String value1, String value2) {
-            addCriterion("hotelfax between", value1, value2, "hotelfax");
+        public Criteria andHotelFaxBetween(String value1, String value2) {
+            addCriterion("hotel_fax between", value1, value2, "hotelFax");
             return (Criteria) this;
         }
 
-        public Criteria andHotelfaxNotBetween(String value1, String value2) {
-            addCriterion("hotelfax not between", value1, value2, "hotelfax");
+        public Criteria andHotelFaxNotBetween(String value1, String value2) {
+            addCriterion("hotel_fax not between", value1, value2, "hotelFax");
             return (Criteria) this;
         }
 
