@@ -34,7 +34,16 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-        <table tableName="bosses_r_hotel" domainObjectName="BossesRHotel"></table>
+<!--         <table tableName="meal_like" domainObjectName="MealLike"></table> -->
+<!--         <table tableName="hotel_like" domainObjectName="HotelLike"></table> -->
+<!--         <table tableName="journey_like" domainObjectName="JournetLike"></table> -->
+<!--         <table tableName="sight_like" domainObjectName="SightLike"></table> -->
+        
+        <table tableName="duantuke_comment" domainObjectName="DuantukeComment"></table>
+        <table tableName="duantuke_like" domainObjectName="DuantukeLike"></table>
+<!--         <table tableName="journey_comment" domainObjectName="JourneyComment"></table> -->
+<!--         <table tableName="sight_comment" domainObjectName="SightComment"></table> -->
+<!--         <table tableName="bosses_r_hotel" domainObjectName="BossesRHotel"></table> -->
 <!--         <table tableName="sales" domainObjectName="Sale"></table> -->
 <!--         <table tableName="bosses" domainObjectName="Boss"></table> -->
 <!--         <table tableName="sales_r_hotel" domainObjectName="SalesRHotel"></table> -->
