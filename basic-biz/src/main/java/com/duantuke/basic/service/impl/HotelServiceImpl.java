@@ -1,10 +1,16 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.face.service.HotelService;
+import com.duantuke.basic.mappers.HotelMapper;
+import com.duantuke.basic.po.Hotel;
+import com.duantuke.basic.po.HotelExample;
 
 /**
  * @author he
@@ -14,6 +20,55 @@ import com.duantuke.basic.face.service.HotelService;
 public class HotelServiceImpl implements HotelService {
 	
 	private static Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
+	
+	@Autowired
+	private HotelMapper hotelmapper;
+
+	@Override
+	public int addHotel(Hotel hotel) {
+		return hotelmapper.insertSelective(hotel);
+	}
+
+	@Override
+	public int updateHotel(Hotel hotel) {
+		return hotelmapper.updateByPrimaryKeySelective(hotel);
+	}
+
+	@Override
+	public int delHotelById(Long id) {
+		return hotelmapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Hotel> queryHotels(Hotel hotel) {
+		HotelExample example = new HotelExample();
+		HotelExample.Criteria criteria = example.createCriteria();
+		if(hotel.getHotelName()!=null){
+			criteria.andHotelNameLike("%"+hotel.getHotelName()+"%");
+		}
+		if(hotel.getIsvisible()!=null){
+			criteria.andIsvisibleEqualTo(hotel.getIsvisible());
+		}
+		if(hotel.getHotelPhone()!=null){
+			criteria.andHotelPhoneEqualTo(hotel.getHotelPhone());
+		}
+		if(hotel.getProvcode()!=null){
+			criteria.andProvcodeEqualTo(hotel.getProvcode());
+		}
+		if(hotel.getCitycode()!=null){
+			criteria.andCitycodeEqualTo(hotel.getCitycode());
+		}
+		if(hotel.getDiscode()!=null){
+			criteria.andDiscodeEqualTo(hotel.getDiscode());
+		}
+		return hotelmapper.selectByExampleWithBLOBs(example);
+	}
+
+	@Override
+	public Hotel queryHotelById(Long id) {
+		// TODO Auto-generated method stub
+		return hotelmapper.selectByPrimaryKey(id);
+	}
 	
 
 }
