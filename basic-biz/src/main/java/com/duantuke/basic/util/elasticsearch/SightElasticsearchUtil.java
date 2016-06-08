@@ -49,7 +49,6 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeFilterBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -57,28 +56,24 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import com.fangbaba.gds.bean.HotelBean;
-import com.fangbaba.gds.enums.ChannelEnum;
-import com.fangbaba.gds.face.bean.HotelModelEsBean;
-import com.fangbaba.gds.face.bean.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 /**
- * Elasticsearch  餐饮搜索工具类
+ * Elasticsearch  景点搜索工具类
  */
 @Repository
-public class MealElasticsearchUtil {
+public class SightElasticsearchUtil {
     /**
      * 默认index
      */
-    public final static String OTS_INDEX_DEFAULT = "gds";
+    public final static String ES_INDEX = "otc";
     /**
      * 默认type
      */
-    public final static String HOTEL_TYPE_DEFAULT = "guesthouse";
+    public final static String ES_TYPE = "sight";
     
-    private Logger logger = org.slf4j.LoggerFactory.getLogger(MealElasticsearchUtil.class);
+    private Logger logger = org.slf4j.LoggerFactory.getLogger(SightElasticsearchUtil.class);
     
     private Gson gson = new Gson();
     
@@ -89,11 +84,11 @@ public class MealElasticsearchUtil {
     /**
      *
      */
-    public HotelElasticsearchUtil() {
+    public SightElasticsearchUtil() {
         try {
             this.initClient();
-        } catch (IOException e) {
-            this.logger.error(e.getLocalizedMessage(), e);
+        } catch (Exception e) {
+            logger.error("SightElasticsearchUtil error",e);
             e.printStackTrace();
         }
     }
@@ -109,7 +104,7 @@ public class MealElasticsearchUtil {
                 client.close();
             }
         } catch (Exception e) {
-            this.logger.error(e.getLocalizedMessage(), e);
+            logger.error("SightElasticsearchUtil close",e);
             e.printStackTrace();
         }
     }
