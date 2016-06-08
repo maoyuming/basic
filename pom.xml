@@ -503,8 +503,6 @@
 				<!-- elasticsearch -->
 				<elasticsearch.clusterhosts>211.157.155.198:9300</elasticsearch.clusterhosts>
 				<elasticsearch.clustername>dtk-es</elasticsearch.clustername>
-				<elasticsearch.index>otc</elasticsearch.index>
-				<elasticsearch.type>guesthouse</elasticsearch.type>
 			</properties>
 		</profile>
 
@@ -541,8 +539,6 @@
 				<!-- elasticsearch -->
 				<elasticsearch.clusterhosts>211.157.155.198:9300</elasticsearch.clusterhosts>
 				<elasticsearch.clustername>dtk-es</elasticsearch.clustername>
-				<elasticsearch.index>otc</elasticsearch.index>
-				<elasticsearch.type>guesthouse</elasticsearch.type>
 			</properties>
 		</profile>
 	</profiles>
