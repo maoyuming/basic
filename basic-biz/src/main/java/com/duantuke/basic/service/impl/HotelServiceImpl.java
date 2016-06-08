@@ -52,14 +52,14 @@ public class HotelServiceImpl implements HotelService {
 		if(hotel.getHotelPhone()!=null){
 			criteria.andHotelPhoneEqualTo(hotel.getHotelPhone());
 		}
-		if(hotel.getProvcode()!=null){
-			criteria.andProvcodeEqualTo(hotel.getProvcode());
+		if(hotel.getProvinceCode()!=null){
+			criteria.andProvinceCodeEqualTo(hotel.getProvinceCode());
 		}
-		if(hotel.getCitycode()!=null){
-			criteria.andCitycodeEqualTo(hotel.getCitycode());
+		if(hotel.getCityCode()!=null){
+			criteria.andCityCodeEqualTo(hotel.getCityCode());
 		}
-		if(hotel.getDiscode()!=null){
-			criteria.andDiscodeEqualTo(hotel.getDiscode());
+		if(hotel.getDistrictCode()!=null){
+			criteria.andDistrictCodeEqualTo(hotel.getDistrictCode());
 		}
 		return hotelmapper.selectByExampleWithBLOBs(example);
 	}
