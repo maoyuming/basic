@@ -42,9 +42,58 @@ public class SightInputBean implements Serializable{
 
     private String updateuser;
     
+    private Long sightRankId;//景点评级id
+    private Integer rank;//评级
+    private Integer follow;//关注数
+    private Integer comment;//评论数
+    private Integer travel;//游记数
+    
+    
     private GeoPoint pin;// 坐标
+    
+    
 
-    public Long getSightId() {
+    public Long getSightRankId() {
+		return sightRankId;
+	}
+
+	public void setSightRankId(Long sightRankId) {
+		this.sightRankId = sightRankId;
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	public Integer getFollow() {
+		return follow;
+	}
+
+	public void setFollow(Integer follow) {
+		this.follow = follow;
+	}
+
+	public Integer getComment() {
+		return comment;
+	}
+
+	public void setComment(Integer comment) {
+		this.comment = comment;
+	}
+
+	public Integer getTravel() {
+		return travel;
+	}
+
+	public void setTravel(Integer travel) {
+		this.travel = travel;
+	}
+
+	public Long getSightId() {
         return sightId;
     }
 

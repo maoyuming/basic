@@ -1,5 +1,6 @@
 package com.duantuke.basic.mappers;
 
+import com.duantuke.basic.esbean.input.SightInputBean;
 import com.duantuke.basic.po.Sight;
 import com.duantuke.basic.po.SightExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface SightMapper {
     int updateByPrimaryKeySelective(Sight record);
 
     int updateByPrimaryKey(Sight record);
+    
+    List<SightInputBean> queryEsInputSights(@Param("sightId") Long sightId);
 }

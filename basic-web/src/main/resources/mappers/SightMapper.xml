@@ -82,6 +82,10 @@
     sight_id, sight_name, longitude, latitude, open_time, phone, traffic, price, pics, 
     memo, provcode, citycode, discode, createtime, createuser, updatetime, updateuser
   </sql>
+  <sql id="Join_Column_List" >
+    s.sight_id, s.sight_name, s.longitude, s.latitude, s.open_time, s.phone, s.traffic, s.price, s.pics, 
+    s.memo, s.provcode, s.citycode, s.discode, s.createtime, s.createuser, s.updatetime, s.updateuser
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.SightExample" >
     select
     <if test="distinct" >
@@ -400,4 +404,13 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where sight_id = #{sightId,jdbcType=BIGINT}
   </update>
+  <select id="queryEsInputSights" resultType="com.duantuke.basic.esbean.input.SightInputBean"  >
+    SELECT 
+    <include refid="Join_Column_List" />
+    ,r.sight_rank_id,r.rank,r.follow,r.comment,r.travel
+    from sight s,sight_rank r where s.sight_id = r.sight_id
+    <if test="sightId != null" >
+      and s.sight_id = #{sightId}
+    </if>
+  </select>
 </mapper>
