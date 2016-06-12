@@ -17,6 +17,10 @@ public class BossesRHotel  implements Serializable{
     private Date updatetime;
 
     private String updateuser;
+    
+    public BossesRHotel() {
+		super();
+	}
 
     public Long getId() {
         return id;
@@ -50,7 +54,7 @@ public class BossesRHotel  implements Serializable{
         this.createtime = createtime;
     }
 
-    public String getCreateuser() {
+	public String getCreateuser() {
         return createuser;
     }
 
