@@ -20,6 +20,26 @@
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.SightInputBean" >
+    <id column="sight_id" property="sightId" jdbcType="BIGINT" />
+    <result column="sight_name" property="sightName" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="open_time" property="openTime" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="traffic" property="traffic" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="provcode" property="provcode" jdbcType="INTEGER" />
+    <result column="citycode" property="citycode" jdbcType="INTEGER" />
+    <result column="discode" property="discode" jdbcType="INTEGER" />
+    <result column="sight_rank_id" property="sightRankId" jdbcType="BIGINT" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="follow" property="follow" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="travel" property="travel" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -404,7 +424,7 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where sight_id = #{sightId,jdbcType=BIGINT}
   </update>
-  <select id="queryEsInputSights" resultType="com.duantuke.basic.esbean.input.SightInputBean"  >
+  <select id="queryEsInputSights" resultMap="BaseResultMap1">
     SELECT 
     <include refid="Join_Column_List" />
     ,r.sight_rank_id,r.rank,r.follow,r.comment,r.travel

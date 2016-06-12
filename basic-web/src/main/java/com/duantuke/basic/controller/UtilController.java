@@ -27,7 +27,7 @@ public class UtilController extends BaseController {
 	String AUTH = "5416d7cd6ef195a0f7622a9c56b55e84";
 	
 	/**
-	 * @return 初始化es
+	 * @return 初始化景点es
 	 */
 	@RequestMapping(value = "/initsightes", method = RequestMethod.POST)
 	public ResponseEntity<String> initsightes(Long sightId, String auth) {
@@ -47,7 +47,7 @@ public class UtilController extends BaseController {
 	
 
 	/**
-	 * @return 清空es
+	 * @return 清空景点es
 	 */
 	@RequestMapping(value = "/delsightes", method = RequestMethod.POST)
 	public ResponseEntity<String> delsightes(Long sightId,String auth) {
@@ -69,9 +69,14 @@ public class UtilController extends BaseController {
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
 	}
 
+	/**
+	 * @param sightQueryBean
+	 * @param auth
+	 * 搜索景点es
+	 */
 	@RequestMapping(value = "/searchSightsFromEs", method = RequestMethod.POST)
 	public ResponseEntity<String> searchSightsFromEs(SightQueryBean sightQueryBean, String auth) {
-		if (StringUtils.isEmpty(auth) || !AUTH.equals(auth)) {
+		if (!validateAuth(auth)) {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
 		List<SightOutputBean> list = sightSearchService.searchSightsFromEs(sightQueryBean);

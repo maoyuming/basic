@@ -2,7 +2,7 @@ package com.duantuke.basic.esbean.input;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+
 import org.elasticsearch.common.geo.GeoPoint;
 
 public class SightInputBean implements Serializable{
@@ -34,13 +34,7 @@ public class SightInputBean implements Serializable{
 
     private Integer discode;
 
-    private Date createtime;
-
-    private String createuser;
-
-    private Date updatetime;
-
-    private String updateuser;
+    private String createtime;
     
     private Long sightRankId;//景点评级id
     private Integer rank;//评级
@@ -197,36 +191,12 @@ public class SightInputBean implements Serializable{
         this.discode = discode;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
-    }
-
-    public String getCreateuser() {
-        return createuser;
-    }
-
-    public void setCreateuser(String createuser) {
-        this.createuser = createuser == null ? null : createuser.trim();
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    public String getUpdateuser() {
-        return updateuser;
-    }
-
-    public void setUpdateuser(String updateuser) {
-        this.updateuser = updateuser == null ? null : updateuser.trim();
     }
 
 	public GeoPoint getPin() {

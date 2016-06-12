@@ -2,7 +2,6 @@ package com.duantuke.basic.face.esbean.output;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * @author he
@@ -37,13 +36,11 @@ public class SightOutputBean implements Serializable{
 
     private Integer discode;
 
-    private Date createtime;
-
-    private String createuser;
-
-    private Date updatetime;
-
-    private String updateuser;
+    private Long sightRankId;//景点评级id
+    private Integer rank;//评级
+    private Integer follow;//关注数
+    private Integer comment;//评论数
+    private Integer travel;//游记数
     
     public Long getSightId() {
         return sightId;
@@ -149,36 +146,45 @@ public class SightOutputBean implements Serializable{
         this.discode = discode;
     }
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public Long getSightRankId() {
+		return sightRankId;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setSightRankId(Long sightRankId) {
+		this.sightRankId = sightRankId;
+	}
 
-    public String getCreateuser() {
-        return createuser;
-    }
+	public Integer getRank() {
+		return rank;
+	}
 
-    public void setCreateuser(String createuser) {
-        this.createuser = createuser == null ? null : createuser.trim();
-    }
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
 
-    public Date getUpdatetime() {
-        return updatetime;
-    }
+	public Integer getFollow() {
+		return follow;
+	}
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
+	public void setFollow(Integer follow) {
+		this.follow = follow;
+	}
 
-    public String getUpdateuser() {
-        return updateuser;
-    }
+	public Integer getComment() {
+		return comment;
+	}
 
-    public void setUpdateuser(String updateuser) {
-        this.updateuser = updateuser == null ? null : updateuser.trim();
-    }
+	public void setComment(Integer comment) {
+		this.comment = comment;
+	}
+
+	public Integer getTravel() {
+		return travel;
+	}
+
+	public void setTravel(Integer travel) {
+		this.travel = travel;
+	}
+
 
 }

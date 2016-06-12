@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DateUtil {
+    
+    public final static  String  DateFormat = "yyyy-MM-dd";
 
 	public static String dateToStr(Date date ,String pattern) {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
@@ -30,7 +32,7 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 获取n天前的时间
+	 * 获取n天 的时间
 	 * @param n
 	 * @return
 	 * @throws ParseException
@@ -166,7 +168,7 @@ public class DateUtil {
 	/**
 	 * 字符串转换成时间 只包括时分秒
 	 * @param date
-	 * @return
+	 * @return 
 	 */
 	public static Date getTime(String date){
 		SimpleDateFormat sdf =  new SimpleDateFormat("HH:mm:ss");
@@ -177,5 +179,84 @@ public class DateUtil {
 		}
 		return c.getTime();
 	}
+	
+	 public static Date addDateOneDay(Date date,int inday) {  
+        if (null == date) {  
+            return date;  
+        }  
+        Calendar c = Calendar.getInstance();  
+        c.setTime(date);   //设置当前日期  
+        c.add(Calendar.DATE, inday); //日期加1天  
+        date = c.getTime();  
+        return date;  
+    }  
+	 
+	 
+	public static Date getTime(int hour, int minute, int second, int day) {
+		Calendar todayStart = Calendar.getInstance();
+		todayStart.add(Calendar.DATE, day);
+		todayStart.set(Calendar.HOUR_OF_DAY, hour);
+		todayStart.set(Calendar.MINUTE, minute);
+		todayStart.set(Calendar.SECOND, second);
+		todayStart.set(Calendar.MILLISECOND, 0);
+		return todayStart.getTime();
+	}
+	
+	
+
+    /**
+     * 计算两个日期之间相差的天数
+     * 
+     * @param smdate
+     *            较小的时间
+     * @param bdate
+     *            较大的时间
+     * @return 相差天数
+     * @throws ParseException
+     */
+    public static List<Date> listDays(Date begintime, Date endtime) throws Exception {
+        List<Date> list = new ArrayList<Date>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        begintime = sdf.parse(sdf.format(begintime));
+        endtime = sdf.parse(sdf.format(endtime));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(begintime);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(endtime);
+        long time2 = cal.getTimeInMillis();
+        long between_days = (time2 - time1) / (1000 * 3600 * 24);
+        int daysnum = Integer.parseInt(String.valueOf(between_days));
+        for (int i = 0; i < daysnum; i++) {
+            list.add(DateUtil.addDateOneDay(begintime, i));
+        }
+        return list;
+    }
+	
+	public static Date getNowDate(){
+		Calendar c = Calendar.getInstance();
+		return c.getTime();
+	}
+	
+	 /**
+     * 计算两个日期之间相差的天数
+     * @param smdate      较小的时间
+     * @param bdate     较大的时间
+     * @return 相差天数
+     * @throws ParseException
+     */
+    public static int daysBetween(Date begintime, Date endtime) throws Exception {
+    	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+          begintime = sdf.parse(sdf.format(begintime));
+          endtime = sdf.parse(sdf.format(endtime));
+          Calendar cal = Calendar.getInstance();
+          cal.setTime(begintime);
+          long time1 = cal.getTimeInMillis();
+          cal.setTime(endtime);
+          long time2 = cal.getTimeInMillis();
+          long between_days = (time2 - time1) / (1000 * 3600 * 24);
+
+          return Integer.parseInt(String.valueOf(between_days));
+    }
+		
 
 }

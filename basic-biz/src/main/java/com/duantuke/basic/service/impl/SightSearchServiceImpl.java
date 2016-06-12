@@ -3,6 +3,7 @@ package com.duantuke.basic.service.impl;
 import java.util.List;
 
 import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.duantuke.basic.face.esbean.output.SightOutputBean;
 import com.duantuke.basic.face.esbean.query.SightQueryBean;
 import com.duantuke.basic.face.service.SightSearchService;
 import com.duantuke.basic.service.ISightService;
+import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.elasticsearch.SightElasticsearchUtil;
 import com.google.gson.Gson;
 
@@ -58,6 +60,12 @@ public class SightSearchServiceImpl implements SightSearchService {
 	public void initEs(Long sightId) {
 		logger.info("SightSearchServiceImpl initEs begin:{}", sightId);
 		List<SightInputBean> esInputlist = isightService.queryEsInputSights(sightId);
+		for (SightInputBean sightInputBean:esInputlist) {
+			if ((sightInputBean.getLatitude() != null) && (sightInputBean.getLongitude() != null)) {
+				sightInputBean.setPin(new GeoPoint(sightInputBean.getLatitude().doubleValue(), sightInputBean.getLongitude().doubleValue()));
+			}
+			sightInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("SightSearchServiceImpl initEs end:{}", sightId);
 	}
