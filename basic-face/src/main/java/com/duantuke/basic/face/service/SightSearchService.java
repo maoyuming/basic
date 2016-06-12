@@ -16,7 +16,7 @@ public interface SightSearchService {
 	 * @param tags
 	 * 搜索es
 	 */
-	List<SightOutputBean> searchSightsFromEs(SightQueryBean sightQueryBean,Map<String, String> tags);
+	List<SightOutputBean> searchSightsFromEs(SightQueryBean sightQueryBean);
 	
 	/**
 	 * @param sightId 不传则刷全部
@@ -26,13 +26,12 @@ public interface SightSearchService {
 	
 	/**
 	 * @param sightId
-	 * 删除es
+	 * 通过sightid删除es
 	 */
 	boolean delEsBySightId(Long sightId);
 	
 	/**
-	 * @param sightId
-	 * 更新es
+	 * 删除es
 	 */
-	void updateEsBySightId(Long sightId);
+	void delEs();
 }

@@ -10,7 +10,7 @@ public interface MealMapper {
 
     int deleteByExample(MealExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long mealId);
 
     int insert(Meal record);
 
@@ -18,7 +18,7 @@ public interface MealMapper {
 
     List<Meal> selectByExample(MealExample example);
 
-    Meal selectByPrimaryKey(Long id);
+    Meal selectByPrimaryKey(Long mealId);
 
     int updateByExampleSelective(@Param("record") Meal record, @Param("example") MealExample example);
 

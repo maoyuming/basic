@@ -335,7 +335,7 @@ public class SightElasticsearchUtil {
         xBuilder.field("type", "geo_point");
         xBuilder.endObject();
 
-        xBuilder.startObject("taggroup_1");
+        /*xBuilder.startObject("taggroup_1");
         xBuilder.field("type", "nested");
         xBuilder.endObject();
 
@@ -349,7 +349,7 @@ public class SightElasticsearchUtil {
 
         xBuilder.startObject("taggroup_4");
         xBuilder.field("type", "nested");
-        xBuilder.endObject();
+        xBuilder.endObject();*/
         
         xBuilder.endObject();
         xBuilder.endObject();
@@ -446,7 +446,7 @@ public class SightElasticsearchUtil {
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<SightOutputBean> searchSights(SightQueryBean sightQueryBean,Map<String, String> tags) {
+    public List<SightOutputBean> searchSights(SightQueryBean sightQueryBean) {
         SearchHit[] hits = null;
         List<SightOutputBean> list = new ArrayList<SightOutputBean>();
         try {
@@ -490,7 +490,7 @@ public class SightElasticsearchUtil {
             if (discode != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", discode.toString()).operator(Operator.AND)));
             }
-            if (tags != null && tags.size() > 0) {
+/*            if (tags != null && tags.size() > 0) {
                 for (Map.Entry<String, String> tmp : tags.entrySet()) {
                     if (tmp.getValue() == null) {
                         continue;
@@ -500,7 +500,7 @@ public class SightElasticsearchUtil {
                     searchBuilder.setQuery(nestedBoolQuery(propertyValues, tmp.getKey()));
                 }
             }
-            //LBS
+*/            //LBS
             if(longitude!=null &&latitude!=null){
             	GeoDistanceFilterBuilder geoFilter = FilterBuilders.geoDistanceFilter("pin");
             	GeoPoint geoPoint = new GeoPoint(latitude.doubleValue(), longitude.doubleValue());

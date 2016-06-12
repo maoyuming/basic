@@ -2,7 +2,7 @@ package com.duantuke.basic.esbean.input;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+
 import org.elasticsearch.common.geo.GeoPoint;
 
 public class SightInputBean implements Serializable{
@@ -34,17 +34,60 @@ public class SightInputBean implements Serializable{
 
     private Integer discode;
 
-    private Date createtime;
-
-    private String createuser;
-
-    private Date updatetime;
-
-    private String updateuser;
+    private String createtime;
+    
+    private Long sightRankId;//景点评级id
+    private Integer rank;//评级
+    private Integer follow;//关注数
+    private Integer comment;//评论数
+    private Integer travel;//游记数
+    
     
     private GeoPoint pin;// 坐标
+    
+    
 
-    public Long getSightId() {
+    public Long getSightRankId() {
+		return sightRankId;
+	}
+
+	public void setSightRankId(Long sightRankId) {
+		this.sightRankId = sightRankId;
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	public Integer getFollow() {
+		return follow;
+	}
+
+	public void setFollow(Integer follow) {
+		this.follow = follow;
+	}
+
+	public Integer getComment() {
+		return comment;
+	}
+
+	public void setComment(Integer comment) {
+		this.comment = comment;
+	}
+
+	public Integer getTravel() {
+		return travel;
+	}
+
+	public void setTravel(Integer travel) {
+		this.travel = travel;
+	}
+
+	public Long getSightId() {
         return sightId;
     }
 
@@ -148,36 +191,12 @@ public class SightInputBean implements Serializable{
         this.discode = discode;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
-    }
-
-    public String getCreateuser() {
-        return createuser;
-    }
-
-    public void setCreateuser(String createuser) {
-        this.createuser = createuser == null ? null : createuser.trim();
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    public String getUpdateuser() {
-        return updateuser;
-    }
-
-    public void setUpdateuser(String updateuser) {
-        this.updateuser = updateuser == null ? null : updateuser.trim();
     }
 
 	public GeoPoint getPin() {
