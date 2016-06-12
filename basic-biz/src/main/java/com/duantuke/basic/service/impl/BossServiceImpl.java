@@ -160,4 +160,10 @@ public class BossServiceImpl implements BossService {
 	}
 
 
+	@Override
+	public Boss queryBossById(Long bossId) {
+		return bossMapper.selectByPrimaryKey(bossId);
+	}
+
+
 }

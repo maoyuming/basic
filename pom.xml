@@ -31,14 +31,14 @@
 			</snapshots>
 			<id>public</id>
 			<name>Public Repositories</name>
-			<url>http://repo.fangbaba.com/nexus/content/groups/public/</url>
+			<url>http://nexus.duantuke.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>public</id>
 			<name>Public Repositories</name>
-			<url>http://repo.fangbaba.com/nexus/content/groups/public/</url>
+			<url>http://nexus.duantuke.com/nexus/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
 	
@@ -47,13 +47,13 @@
         <snapshotRepository>
             <id>user-snapshot</id>
             <name>User Porject Snapshot</name>
-            <url>http://repo.fangbaba.com/nexus/content/repositories/snapshots/</url>
+            <url>http://nexus.duantuke.com/nexus/content/repositories/snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>
             <id>user-release</id>
             <name>User Porject Release</name>
-            <url>http://repo.fangbaba.com/nexus/content/repositories/releases/</url>
+            <url>http://nexus.duantuke.com/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 
@@ -504,6 +504,7 @@
 				<!-- config_center -->
 				<config.localMode>true</config.localMode>
 				<config.zk>211.157.155.198:2181</config.zk>
+				<config.domain.name>basic</config.domain.name>
 				<cat.app.name>${project.name}</cat.app.name>
 				<!-- elasticsearch -->
 				<elasticsearch.clusterhosts>211.157.155.198:9300</elasticsearch.clusterhosts>
@@ -540,6 +541,7 @@
 				<!-- config_center -->
 				<config.localMode>false</config.localMode>
 				<config.zk>211.157.155.198:2181</config.zk>
+				<config.domain.name>basic</config.domain.name>
 				<cat.app.name>${project.name}</cat.app.name>
 				<!-- elasticsearch -->
 				<elasticsearch.clusterhosts>211.157.155.198:9300</elasticsearch.clusterhosts>
