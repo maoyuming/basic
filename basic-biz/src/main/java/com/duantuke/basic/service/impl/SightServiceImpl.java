@@ -26,20 +26,17 @@ public class SightServiceImpl implements ISightService {
 
 	@Override
 	public int addSight(Sight sight) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sightMapper.insertSelective(sight);
 	}
 
 	@Override
 	public int updateSight(Sight sight) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sightMapper.updateByPrimaryKeySelective(sight);
 	}
 
 	@Override
 	public int delSightById(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sightMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override

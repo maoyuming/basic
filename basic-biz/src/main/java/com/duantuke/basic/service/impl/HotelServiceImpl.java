@@ -7,17 +7,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.duantuke.basic.face.service.HotelService;
+import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.mappers.HotelMapper;
 import com.duantuke.basic.po.Hotel;
 import com.duantuke.basic.po.HotelExample;
+import com.duantuke.basic.service.IHotelService;
 
 /**
  * @author he
  * 酒店相关接口
  */
 @Service
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl implements IHotelService {
 	
 	private static Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
 	
@@ -66,9 +67,12 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public Hotel queryHotelById(Long id) {
-		// TODO Auto-generated method stub
 		return hotelmapper.selectByPrimaryKey(id);
 	}
-	
+
+	@Override
+	public List<HotelInputBean> queryEsInputHotels(Long hotelId) {
+		return hotelmapper.queryEsInputHotels(hotelId);
+	}
 
 }

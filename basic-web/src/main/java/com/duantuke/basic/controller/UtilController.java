@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.duantuke.basic.face.base.RetInfo;
+import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.output.SightOutputBean;
+import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.face.esbean.query.SightQueryBean;
+import com.duantuke.basic.face.service.HotelSearchService;
 import com.duantuke.basic.face.service.SightSearchService;
 import com.google.gson.Gson;
 import com.mk.jdbc.utils.MD5Util;
@@ -23,8 +25,13 @@ public class UtilController extends BaseController {
 
 	@Autowired
 	private SightSearchService sightSearchService;
+	@Autowired
+	private HotelSearchService hotelSearchService;
 	
 	String AUTH = "5416d7cd6ef195a0f7622a9c56b55e84";
+	
+	
+	/**-------------------------------------------------------------景点相关begin---------------------------------------------------------------*/
 	
 	/**
 	 * @return 初始化景点es
@@ -83,6 +90,71 @@ public class UtilController extends BaseController {
 		String result = new Gson().toJson(list);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+	
+	/**-------------------------------------------------------------景点相关end---------------------------------------------------------------*/
+	
+	
+	/**-------------------------------------------------------------农家院相关begin---------------------------------------------------------------*/
+	
+	/**
+	 * @return 初始化农家院es
+	 */
+	@RequestMapping(value = "/inithoteles", method = RequestMethod.POST)
+	public ResponseEntity<String> inithoteles(Long hotelId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			hotelSearchService.initEs(hotelId);
+			result = "inithoteles完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("inithoteles error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+
+	/**
+	 * @return 清空农家院es
+	 */
+	@RequestMapping(value = "/delhoteles", method = RequestMethod.POST)
+	public ResponseEntity<String> delhoteles(Long hotelId,String auth) {
+		
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+
+		try {
+			if(hotelId!=null){
+				hotelSearchService.delEsByHotelId(hotelId);
+			}else{
+				hotelSearchService.delEs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("delhoteles error", e);
+		}
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+
+	/**
+	 * @param hotelQueryBean
+	 * @param auth
+	 * 搜索农家院es
+	 */
+	@RequestMapping(value = "/searchHotelsFromEs", method = RequestMethod.POST)
+	public ResponseEntity<String> searchHotelsFromEs(HotelQueryBean hotelQueryBean, String auth) {
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,null);
+		String result = new Gson().toJson(list);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+	/**-------------------------------------------------------------农家院相关end---------------------------------------------------------------*/
 
 	/**
 	 * @param auth

@@ -19,7 +19,7 @@ import com.duantuke.basic.util.elasticsearch.SightElasticsearchUtil;
 import com.google.gson.Gson;
 
 /**
- * @author he 搜索相关接口
+ * @author he 景点搜索相关接口
  */
 @Service
 public class SightSearchServiceImpl implements SightSearchService {

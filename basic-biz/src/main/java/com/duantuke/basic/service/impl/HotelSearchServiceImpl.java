@@ -1,0 +1,85 @@
+package com.duantuke.basic.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.common.geo.GeoPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.duantuke.basic.esbean.input.HotelInputBean;
+import com.duantuke.basic.face.esbean.output.HotelOutputBean;
+import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.face.service.HotelSearchService;
+import com.duantuke.basic.service.IHotelService;
+import com.duantuke.basic.util.DateUtil;
+import com.duantuke.basic.util.elasticsearch.HotelElasticsearchUtil;
+import com.google.gson.Gson;
+
+/**
+ * @author he 农家院 搜索相关接口
+ */
+@Service
+public class HotelSearchServiceImpl implements HotelSearchService {
+
+	private static Logger logger = LoggerFactory.getLogger(HotelSearchServiceImpl.class);
+
+	@Autowired
+	private HotelElasticsearchUtil esutil;
+	@Autowired
+	private IHotelService ihotelService;
+
+	private Gson gson = new Gson();
+
+	@Override
+	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,String> tags) {
+		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{}", gson.toJson(hotelQueryBean));
+		// page参数校验：如果page小于等于0，默认为1.
+		Integer page = hotelQueryBean.getPage();
+		if ((null == page) || (page <= 0)) {
+			page = HotelQueryBean.SEARCH_PAGE_DEFAULT;
+			hotelQueryBean.setPage(page);
+		}
+		// size参数校验：如果size小于等于0，默认为10.
+		Integer pagesize = hotelQueryBean.getPagesize();
+		if ((null == pagesize) || (pagesize <= 0)) {
+			pagesize = HotelQueryBean.SEARCH_LIMIT_DEFAULT;
+			hotelQueryBean.setPagesize(pagesize);
+		}
+		if (hotelQueryBean.getRange() == null) {
+			hotelQueryBean.setRange(Double.valueOf(HotelQueryBean.SEARCH_RANGE_DEFAULT));
+		}
+		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tags);
+		logger.info("HotelSearchServiceImpl searchHotelsFromEs result:{}", gson.toJson(result));
+		return result;
+	}
+
+	@Override
+	public void initEs(Long hotelId) {
+		logger.info("HotelSearchServiceImpl initEs begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		for (HotelInputBean hotelInputBean:esInputlist) {
+			if ((hotelInputBean.getLatitude() != null) && (hotelInputBean.getLongitude() != null)) {
+				hotelInputBean.setPin(new GeoPoint(hotelInputBean.getLatitude().doubleValue(), hotelInputBean.getLongitude().doubleValue()));
+			}
+			hotelInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+		}
+		esutil.batchAddDocument(esInputlist);
+		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
+	}
+
+	@Override
+	public boolean delEsByHotelId(Long hotelId) {
+		DeleteResponse resp = esutil.deleteDocument(hotelId+"");
+		return resp.isFound();
+	}
+
+	@Override
+	public void delEs() {
+		esutil.deleteAllDocument();
+	}
+
+}

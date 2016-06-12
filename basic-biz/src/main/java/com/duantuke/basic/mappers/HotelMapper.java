@@ -1,9 +1,12 @@
 package com.duantuke.basic.mappers;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.po.Hotel;
 import com.duantuke.basic.po.HotelExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface HotelMapper {
     int countByExample(HotelExample example);
@@ -33,4 +36,6 @@ public interface HotelMapper {
     int updateByPrimaryKeyWithBLOBs(Hotel record);
 
     int updateByPrimaryKey(Hotel record);
+    
+    List<HotelInputBean> queryEsInputHotels(@Param("hotelId") Long hotelId);
 }

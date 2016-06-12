@@ -57,18 +57,18 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.duantuke.basic.esbean.input.SightInputBean;
-import com.duantuke.basic.face.esbean.output.SightOutputBean;
-import com.duantuke.basic.face.esbean.query.SightQueryBean;
+import com.duantuke.basic.esbean.input.HotelInputBean;
+import com.duantuke.basic.face.esbean.output.HotelOutputBean;
+import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.util.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 /**
- * Elasticsearch  景点搜索工具类
+ * Elasticsearch  农家院搜索工具类
  */
 @Repository
-public class SightElasticsearchUtil {
+public class HotelElasticsearchUtil {
     /**
      * 默认index
      */
@@ -76,9 +76,9 @@ public class SightElasticsearchUtil {
     /**
      * 默认type
      */
-    public final static String ES_TYPE = "sight";
+    public final static String ES_TYPE = "hotel";
     
-    private Logger logger = org.slf4j.LoggerFactory.getLogger(SightElasticsearchUtil.class);
+    private Logger logger = org.slf4j.LoggerFactory.getLogger(HotelElasticsearchUtil.class);
     
     private Gson gson = new Gson();
     
@@ -92,11 +92,11 @@ public class SightElasticsearchUtil {
     /**
      *
      */
-    public SightElasticsearchUtil() {
+    public HotelElasticsearchUtil() {
         try {
             this.initClient();
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil error",e);
+            logger.error("HotelElasticsearchUtil error",e);
             e.printStackTrace();
         }
     }
@@ -112,7 +112,7 @@ public class SightElasticsearchUtil {
                 client.close();
             }
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil close",e);
+            logger.error("HotelElasticsearchUtil close",e);
             e.printStackTrace();
         }
     }
@@ -123,16 +123,16 @@ public class SightElasticsearchUtil {
      * @param objList
      * @return
      */
-    public BulkResponse batchAddDocument(List<SightInputBean> objList) {
+    public BulkResponse batchAddDocument(List<HotelInputBean> objList) {
         BulkResponse bulkResponse = null;
         try {
             BulkRequestBuilder requestBuilder = this.getClient().prepareBulk();
-            for (SightInputBean obj : objList) {
-                requestBuilder.add(this.prepareIndex(obj,obj.getSightId()+""));
+            for (HotelInputBean obj : objList) {
+                requestBuilder.add(this.prepareIndex(obj,obj.getHotelId()+""));
             }
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil batchAddDocument error", e);
+            logger.error("HotelElasticsearchUtil batchAddDocument error", e);
             e.printStackTrace();
         }
         return bulkResponse;
@@ -149,7 +149,7 @@ public class SightElasticsearchUtil {
         try {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil signleAddDocument error", e);
+            logger.error("HotelElasticsearchUtil signleAddDocument error", e);
             e.printStackTrace();
         }
         return indexResponse;
@@ -163,9 +163,9 @@ public class SightElasticsearchUtil {
             DeleteByQueryResponse deleteByQueryResponse = this.getClient().prepareDeleteByQuery(ES_INDEX).setTypes(ES_TYPE)
                     .setQuery(QueryBuilders.matchAllQuery()).execute().actionGet();
             int status = deleteByQueryResponse.status().getStatus();
-            logger.info("SightElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
+            logger.info("HotelElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil deleteAllDocument error", e);
+            logger.error("HotelElasticsearchUtil deleteAllDocument error", e);
             e.printStackTrace();
         }
     }
@@ -181,7 +181,7 @@ public class SightElasticsearchUtil {
         try {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil deleteDocument error", e);
+            logger.error("HotelElasticsearchUtil deleteDocument error", e);
             e.printStackTrace();
         }
         return deleteResponse;
@@ -201,7 +201,7 @@ public class SightElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(docs).execute().actionGet();
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
-            logger.error("SightElasticsearchUtil updateDocument error", e);
+            logger.error("HotelElasticsearchUtil updateDocument error", e);
             e.printStackTrace();
         }
         return updateResponse;
@@ -219,7 +219,7 @@ public class SightElasticsearchUtil {
         try {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
-            this.logger.error("SightElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
+            this.logger.error("HotelElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
             e.printStackTrace();
         }
         return updateResponse;
@@ -296,10 +296,10 @@ public class SightElasticsearchUtil {
                 final XContentBuilder mappingBuilder = this.createGeoMappingBuilder();
                 createIndexRequestBuilder.addMapping(ES_TYPE, mappingBuilder);
                 createIndexRequestBuilder.execute().actionGet();
-                this.logger.info("SightElasticsearchUtil auto create the index: {}, type: {}.", ES_INDEX, ES_TYPE);
+                this.logger.info("HotelElasticsearchUtil auto create the index: {}, type: {}.", ES_INDEX, ES_TYPE);
             }
         } catch (Exception e) {
-            this.logger.error("SightElasticsearchUtil init elasticsearch client is error", e);
+            this.logger.error("HotelElasticsearchUtil init elasticsearch client is error", e);
         }
     }
 
@@ -335,7 +335,7 @@ public class SightElasticsearchUtil {
         xBuilder.field("type", "geo_point");
         xBuilder.endObject();
 
-        /*xBuilder.startObject("taggroup_1");
+        xBuilder.startObject("taggroup_1");
         xBuilder.field("type", "nested");
         xBuilder.endObject();
 
@@ -349,7 +349,7 @@ public class SightElasticsearchUtil {
 
         xBuilder.startObject("taggroup_4");
         xBuilder.field("type", "nested");
-        xBuilder.endObject();*/
+        xBuilder.endObject();
         
         xBuilder.endObject();
         xBuilder.endObject();
@@ -365,20 +365,20 @@ public class SightElasticsearchUtil {
     }
 
     /**
-     * @param sightid
+     * @param hotelid
      * @return
      */
-    public SearchHit[] searchSightBySightId(String sightid) {
+    public SearchHit[] searchHotelByHotelId(String hotelId) {
         SearchHit[] hits = null;
         try {
             SearchRequestBuilder searchBuilder = this.prepareSearch();
-            FilterBuilder termFilter = FilterBuilders.termFilter("sightId", sightid);
+            FilterBuilder termFilter = FilterBuilders.termFilter("hotelId", hotelId);
             BoolFilterBuilder boolFilter = FilterBuilders.boolFilter().must(termFilter);
             searchBuilder.setPostFilter(boolFilter);
 
             hits = queryEsPageing(searchBuilder);
         } catch (Exception e) {
-            this.logger.error("SightElasticsearchUtil searchSightBySightId error",e);
+            this.logger.error("HotelElasticsearchUtil searchHotelByHotelId error",e);
         }
         return hits;
     }
@@ -446,51 +446,51 @@ public class SightElasticsearchUtil {
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<SightOutputBean> searchSights(SightQueryBean sightQueryBean) {
+    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String, String> tags) {
         SearchHit[] hits = null;
-        List<SightOutputBean> list = new ArrayList<SightOutputBean>();
+        List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         try {
             SearchRequestBuilder searchBuilder = this.prepareSearch();
             // 设置查询类型 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询 2.SearchType.SCAN = 扫描查询,无序
             searchBuilder.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
             List<FilterBuilder> filterBuilders = new ArrayList<FilterBuilder>();
             // 遍历查询条件，并进行过滤
-            String sightName = sightQueryBean.getSightName();
-            BigDecimal longitude = sightQueryBean.getLongitude();
-            BigDecimal latitude = sightQueryBean.getLatitude();
-            String phone = sightQueryBean.getPhone();
-            String traffic = sightQueryBean.getTraffic();
-            String memo = sightQueryBean.getMemo();
-            Integer provcode = sightQueryBean.getProvcode();
-            Integer citycode = sightQueryBean.getCitycode();
-            Integer discode = sightQueryBean.getDiscode();
-            Integer page = sightQueryBean.getPage();
-            Integer pagesize = sightQueryBean.getPagesize();
-            String sortby = sightQueryBean.getSortby();
-            String sortorder = sightQueryBean.getSortorder();
+            String hotelName = hotelQueryBean.getHotelName();
+            BigDecimal longitude = hotelQueryBean.getLongitude();
+            BigDecimal latitude = hotelQueryBean.getLatitude();
+            String isvisible = hotelQueryBean.getIsvisible();
+            String hotelPhone = hotelQueryBean.getHotelPhone();
+            String qtPhone = hotelQueryBean.getQtPhone();
+            Integer provinceCode = hotelQueryBean.getProvinceCode();
+            Integer cityCode = hotelQueryBean.getCityCode();
+            Integer districtCode = hotelQueryBean.getDistrictCode();
+            Integer page = hotelQueryBean.getPage();
+            Integer pagesize = hotelQueryBean.getPagesize();
+            String sortby = hotelQueryBean.getSortby();
+            String sortorder = hotelQueryBean.getSortorder();
             
-            if (sightName != null) {
-            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("sightName", sightName).operator(Operator.AND)));
+            if (hotelName != null) {
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
             }
-            if (phone != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("phone", phone).operator(Operator.AND)));
+            if (isvisible != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("isvisible", isvisible).operator(Operator.AND)));
             }
-            if (traffic != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("traffic", traffic).operator(Operator.AND)));
+            if (hotelPhone != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelPhone", hotelPhone).operator(Operator.AND)));
             }
-            if (memo != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("memo", memo).operator(Operator.AND)));
+            if (qtPhone != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("qtPhone", qtPhone).operator(Operator.AND)));
             }
-            if (provcode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("provcode", provcode.toString()).operator(Operator.AND)));
+            if (provinceCode != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("provinceCode", provinceCode.toString()).operator(Operator.AND)));
             }
-            if (citycode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("citycode", citycode.toString()).operator(Operator.AND)));
+            if (cityCode != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("cityCode", cityCode.toString()).operator(Operator.AND)));
             }
-            if (discode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", discode.toString()).operator(Operator.AND)));
+            if (districtCode != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", districtCode.toString()).operator(Operator.AND)));
             }
-/*            if (tags != null && tags.size() > 0) {
+            if (tags != null && tags.size() > 0) {
                 for (Map.Entry<String, String> tmp : tags.entrySet()) {
                     if (tmp.getValue() == null) {
                         continue;
@@ -500,11 +500,11 @@ public class SightElasticsearchUtil {
                     searchBuilder.setQuery(nestedBoolQuery(propertyValues, tmp.getKey()));
                 }
             }
-*/            //LBS
+            //LBS
             if(longitude!=null &&latitude!=null){
             	GeoDistanceFilterBuilder geoFilter = FilterBuilders.geoDistanceFilter("pin");
             	GeoPoint geoPoint = new GeoPoint(latitude.doubleValue(), longitude.doubleValue());
-            	geoFilter.point(geoPoint.getLat(), geoPoint.getLon()).distance(sightQueryBean.getRange(), DistanceUnit.METERS).optimizeBbox("memory")
+            	geoFilter.point(geoPoint.getLat(), geoPoint.getLon()).distance(hotelQueryBean.getRange(), DistanceUnit.METERS).optimizeBbox("memory")
 				.geoDistance(GeoDistance.ARC);
             	filterBuilders.add(geoFilter);
             	// 距离排序
@@ -526,7 +526,6 @@ public class SightElasticsearchUtil {
     			}
                 this.sortByFields(searchBuilder, sortby, sortOrder);
             }
-            
 
             // 分页应用
             if (page > 0) {
@@ -541,7 +540,7 @@ public class SightElasticsearchUtil {
                 list = this.dataTransfer(hits);
             }
         } catch (Exception e) {
-        	this.logger.error("SightElasticsearchUtil searchSights error",e);
+        	this.logger.error("HotelElasticsearchUtil searchHotels error",e);
             e.printStackTrace();
         }
         return list;
@@ -574,12 +573,12 @@ public class SightElasticsearchUtil {
      * @param hits
      * @return
      */
-    private List<SightOutputBean> dataTransfer(SearchHit[] hits) {
-        List<SightOutputBean> list = new ArrayList<SightOutputBean>();
+    private List<HotelOutputBean> dataTransfer(SearchHit[] hits) {
+        List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         for (SearchHit searchHit : hits) {
             Map<String, Object> map = searchHit.getSource();
-            SightOutputBean sightOutputBean = dozerMapper.map(map, SightOutputBean.class);
-            list.add(sightOutputBean);
+            HotelOutputBean hotelOutputBean = dozerMapper.map(map, HotelOutputBean.class);
+            list.add(hotelOutputBean);
         }
         return list;
     }

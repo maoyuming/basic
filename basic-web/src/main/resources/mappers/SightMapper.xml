@@ -428,9 +428,13 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.sight_rank_id,r.rank,r.follow,r.comment,r.travel
-    from sight s,sight_rank r where s.sight_id = r.sight_id
-    <if test="sightId != null" >
-      and s.sight_id = #{sightId}
-    </if>
+    from 
+    sight s
+    LEFT JOIN sight_rank r ON s.sight_id = r.sight_id
+    <where>
+	    <if test="sightId != null" >
+	      s.sight_id = #{sightId}
+	    </if>
+    </where>
   </select>
 </mapper>
