@@ -121,5 +121,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return false;
 	}
 
+	@Override
+	public Customer queryCustomerById(Long customerId) {
+		return customerMapper.selectByPrimaryKey(customerId);
+	}
+
 
 }

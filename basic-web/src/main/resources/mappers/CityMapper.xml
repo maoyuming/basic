@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, code, name, proid, sort, latitude, longitude, simplename, ishotcity, range, isselect, 
+    id, `code`, `name`, proid, sort, latitude, longitude, simplename, ishotcity, `range`, isselect, 
     querycityname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.CityExample" >

@@ -11,6 +11,7 @@ public interface BossService {
 	public Boss queryBossByPhone(String phone);
 	
 	public Boss queryBossByLoginName(String loginName);
+	public Boss queryBossById(Long bossId);
 	
 	public List<Boss> queryBosss(Boss boss);
 	

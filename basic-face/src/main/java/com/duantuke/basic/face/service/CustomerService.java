@@ -9,6 +9,8 @@ public interface CustomerService {
 	
 	public Customer queryCustomerByPhone(String phone);
 	
+	public Customer queryCustomerById(Long customerId);
+	
 	public Customer queryCustomerByLoginName(String loginName);
 	
 	public List<Customer> queryCustomers(Customer customer);

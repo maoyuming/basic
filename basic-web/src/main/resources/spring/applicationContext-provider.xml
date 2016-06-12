@@ -44,6 +44,9 @@
 	<!-- 点赞 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeLikeService" ref="duantukeLikeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="duantukeLikeService" class="com.duantuke.basic.service.impl.DuantukeLikeServiceImpl" />
+	<!-- 用户token -->
+	<dubbo:service interface="com.duantuke.basic.face.service.UserTokenService" ref="userTokenService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="userTokenService" class="com.duantuke.basic.service.impl.UserTokenServiceImpl" />
      
       
 </beans>  
