@@ -65,6 +65,11 @@
 			<artifactId>commons-configuration</artifactId>
 			<version>${commons-configuration.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-reflect</artifactId>
+			<version>3.4</version>
+		</dependency>
 	    
 		<dependency>
             <groupId>net.sf.dozer</groupId>
