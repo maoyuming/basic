@@ -35,6 +35,44 @@
   <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Hotel" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
   </resultMap>
+  
+  
+  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.HotelInputBean" >
+    <id column="hotel_id" property="hotelId" jdbcType="BIGINT" />
+    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="hotel_contact_name" property="hotelContactName" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="open_time" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="repair_time" property="repairTime" jdbcType="TIMESTAMP" />
+    <result column="business_license_front" property="businessLicenseFront" jdbcType="VARCHAR" />
+    <result column="business_license_back" property="businessLicenseBack" jdbcType="VARCHAR" />
+    <result column="isvisible" property="isvisible" jdbcType="CHAR" />
+    <result column="idcardfront" property="idcardfront" jdbcType="VARCHAR" />
+    <result column="idcardback" property="idcardback" jdbcType="VARCHAR" />
+    <result column="retention_time" property="retentionTime" jdbcType="CHAR" />
+    <result column="default_leave_time" property="defaultLeaveTime" jdbcType="CHAR" />
+    <result column="hotel_phone" property="hotelPhone" jdbcType="VARCHAR" />
+    <result column="qt_phone" property="qtPhone" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="INTEGER" />
+    <result column="city_code" property="cityCode" jdbcType="INTEGER" />
+    <result column="district_code" property="districtCode" jdbcType="INTEGER" />
+    <result column="hotel_fax" property="hotelFax" jdbcType="VARCHAR" />
+    <result column="readonly" property="readonly" jdbcType="CHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+    
+    <result column="hotel_rank_id" property="hotelRankId" jdbcType="BIGINT" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="follow" property="follow" jdbcType="INTEGER" />
+    <result column="roomnight" property="roomnight" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="travel" property="travel" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
