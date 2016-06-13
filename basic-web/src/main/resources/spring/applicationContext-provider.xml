@@ -56,4 +56,12 @@
     <!-- 吃-->
 	<dubbo:service interface="com.duantuke.basic.face.service.MealService" ref="mealServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="mealServiceImpl" class="com.duantuke.basic.service.impl.MealServiceImpl" />  
+
+    <!-- sku-->
+	<dubbo:service interface="com.duantuke.basic.face.service.SkuService" ref="skuServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="skuServiceImpl" class="com.duantuke.basic.service.impl.SkuServiceImpl" />  
+    
+    <!-- price-->
+	<dubbo:service interface="com.duantuke.basic.face.service.PriceService" ref="priceServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="priceServiceImpl" class="com.duantuke.basic.service.impl.PriceServiceImpl" />  
 </beans>  
