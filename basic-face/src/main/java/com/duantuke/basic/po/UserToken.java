@@ -1,8 +1,9 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserToken {
+public class UserToken implements Serializable{
     private Long tokenId;
 
     private Long mid;
