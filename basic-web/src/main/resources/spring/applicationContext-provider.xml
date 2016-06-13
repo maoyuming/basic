@@ -48,5 +48,7 @@
 	<dubbo:service interface="com.duantuke.basic.face.service.UserTokenService" ref="userTokenService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="userTokenService" class="com.duantuke.basic.service.impl.UserTokenServiceImpl" />
      
-      
+    <!-- 用户token -->
+	<dubbo:service interface="com.duantuke.basic.face.service.JourneyService" ref="journeyService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="journeyService" class="com.duantuke.basic.service.impl.JourneyServiceImpl" />  
 </beans>  

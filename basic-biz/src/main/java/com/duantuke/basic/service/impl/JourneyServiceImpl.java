@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.face.service.JourneyService;
+import com.duantuke.basic.mappers.JourneyMapper;
 import com.duantuke.basic.po.Journey;
 
 /**
@@ -17,7 +20,10 @@ import com.duantuke.basic.po.Journey;
 public class JourneyServiceImpl implements JourneyService {
 	
 	private static Logger logger = LoggerFactory.getLogger(JourneyServiceImpl.class);
-
+	@Autowired
+	@Qualifier("journeyMapper")
+	private  JourneyMapper  journeyMapper;
+	
 	@Override
 	public int addJourney(Journey journey) {
 		// TODO Auto-generated method stub
@@ -44,9 +50,6 @@ public class JourneyServiceImpl implements JourneyService {
 
 	@Override
 	public Journey queryJourneyById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return journeyMapper.selectByPrimaryKey(id);
 	}
-	
-
 }

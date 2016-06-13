@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.face.service.MealService;
+import com.duantuke.basic.mappers.MealMapper;
 import com.duantuke.basic.po.Meal;
+import com.duantuke.basic.po.MealExample;
+import com.duantuke.basic.po.MealExample.Criteria;
 
 /**
  * @author he
@@ -17,7 +21,9 @@ import com.duantuke.basic.po.Meal;
 public class MealServiceImpl implements MealService {
 	
 	private static Logger logger = LoggerFactory.getLogger(MealServiceImpl.class);
-
+	@Autowired
+	private MealMapper mealMapper;
+	
 	@Override
 	public int addMeal(Meal meal) {
 		// TODO Auto-generated method stub
@@ -38,8 +44,10 @@ public class MealServiceImpl implements MealService {
 
 	@Override
 	public List<Meal> queryMeals(Meal meal) {
-		// TODO Auto-generated method stub
-		return null;
+		MealExample mealExample = new MealExample();
+		Criteria criteria = mealExample.createCriteria();
+		criteria.andMealIdEqualTo(meal.getMealId());
+		return mealMapper.selectByExample(mealExample);
 	}
 	
 
