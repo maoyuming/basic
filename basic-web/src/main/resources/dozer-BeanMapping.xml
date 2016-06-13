@@ -9,5 +9,16 @@
     </configuration>
 
     <!-- 如果两个bean的field名称和类型都一样，则不需要指明映射 -->
+    
+    
+    
+    <mapping date-format="yyyy年MM月dd日">
+        <class-a>com.duantuke.basic.po.Meal</class-a>
+        <class-b>com.duantuke.basic.face.bean.MealInfo</class-b>
+    </mapping>
+    <mapping date-format="yyyy年MM月dd日">
+        <class-a>com.duantuke.basic.po.RoomType</class-a>
+        <class-b>com.duantuke.basic.face.bean.RoomTypeInfo</class-b>
+    </mapping>
 
 </mappings>

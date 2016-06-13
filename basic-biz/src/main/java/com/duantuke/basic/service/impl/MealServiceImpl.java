@@ -51,6 +51,24 @@ public class MealServiceImpl implements MealService {
 	public Meal queryMealById(Long id) {
 		return mealMapper.selectByPrimaryKey(id);
 	}
+
+	@Override
+	public List<Meal> queryMealByHotleId(Long hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Meal queryMealByMealId(Long roomtypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Meal> queryMealByMealIds(List<Long> mealIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
