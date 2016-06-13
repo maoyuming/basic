@@ -47,7 +47,7 @@
         <snapshotRepository>
             <id>user-snapshot</id>
             <name>User Porject Snapshot</name>
-            <url>http://nexus.duantuke.com/nexus/content/repositories/snapshots/</url>
+            <url>http://nexus.duantuke.com/vcontent/repositories/snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>

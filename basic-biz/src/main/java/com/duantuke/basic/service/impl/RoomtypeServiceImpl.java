@@ -48,11 +48,30 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 		try {
 			RoomTypeExample roomTypeExample = new RoomTypeExample();
 			Criteria criteria =  roomTypeExample.createCriteria();
-			criteria.andIdEqualTo(roomType.getId());
+			criteria.andRoomtypeIdEqualTo(roomType.getRoomtypeId());
 			return roomTypeMapper.selectByExample(roomTypeExample);
 		} catch (Exception e) {
 			RoomtypeServiceImpl.logger.error(RoomtypeServiceImpl.class.getName() + ":queryByHotelId error", e);
 			throw e;
 		}
 	}
+	@Override
+	public List<RoomType> queryRoomtypeByHotleId(Long hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RoomType queryRoomtypeByRoomtypeId(Long roomtypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RoomType> queryRoomtypeByRoomtypeIds(List<Long> roomtypeIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 }

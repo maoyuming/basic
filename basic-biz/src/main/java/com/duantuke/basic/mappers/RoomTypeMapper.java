@@ -10,7 +10,7 @@ public interface RoomTypeMapper {
 
     int deleteByExample(RoomTypeExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long roomtypeId);
 
     int insert(RoomType record);
 
@@ -18,7 +18,7 @@ public interface RoomTypeMapper {
 
     List<RoomType> selectByExample(RoomTypeExample example);
 
-    RoomType selectByPrimaryKey(Long id);
+    RoomType selectByPrimaryKey(Long roomtypeId);
 
     int updateByExampleSelective(@Param("record") RoomType record, @Param("example") RoomTypeExample example);
 

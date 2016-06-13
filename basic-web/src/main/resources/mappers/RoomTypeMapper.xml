@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.duantuke.basic.mappers.RoomTypeMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RoomType" >
-    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="roomtype_id" property="roomtypeId" jdbcType="BIGINT" />
     <result column="room_num" property="roomNum" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="bedtype" property="bedtype" jdbcType="INTEGER" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
+    roomtype_id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
     update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.RoomTypeExample" >
@@ -96,11 +96,11 @@
     select 
     <include refid="Base_Column_List" />
     from room_type
-    where id = #{id,jdbcType=BIGINT}
+    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from room_type
-    where id = #{id,jdbcType=BIGINT}
+    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.duantuke.basic.po.RoomTypeExample" >
     delete from room_type
@@ -109,11 +109,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.RoomType" >
-    insert into room_type (id, room_num, type, 
+    insert into room_type (roomtype_id, room_num, type, 
       bedtype, bedsize, area, 
       create_time, create_by, update_time, 
       update_by)
-    values (#{id,jdbcType=BIGINT}, #{roomNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+    values (#{roomtypeId,jdbcType=BIGINT}, #{roomNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
       #{bedtype,jdbcType=INTEGER}, #{bedsize,jdbcType=INTEGER}, #{area,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR})
@@ -121,8 +121,8 @@
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.RoomType" >
     insert into room_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="roomtypeId != null" >
+        roomtype_id,
       </if>
       <if test="roomNum != null" >
         room_num,
@@ -153,8 +153,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+      <if test="roomtypeId != null" >
+        #{roomtypeId,jdbcType=BIGINT},
       </if>
       <if test="roomNum != null" >
         #{roomNum,jdbcType=INTEGER},
@@ -194,8 +194,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update room_type
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+      <if test="record.roomtypeId != null" >
+        roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
       </if>
       <if test="record.roomNum != null" >
         room_num = #{record.roomNum,jdbcType=INTEGER},
@@ -231,7 +231,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update room_type
-    set id = #{record.id,jdbcType=BIGINT},
+    set roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
       room_num = #{record.roomNum,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       bedtype = #{record.bedtype,jdbcType=INTEGER},
@@ -276,7 +276,7 @@
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.RoomType" >
     update room_type
@@ -289,6 +289,6 @@
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
   </update>
 </mapper>

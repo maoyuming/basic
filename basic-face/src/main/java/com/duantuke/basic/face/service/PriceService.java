@@ -4,6 +4,7 @@
  */
 package com.duantuke.basic.face.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -23,8 +24,6 @@ public interface PriceService {
      * @param roomtypeid
      * @return
      */
-    public Map<Long,Map<String,String>> queryHotelPrices(Long hotelId, Date begintime, Date endtime,Long roomtypeId);
-    
-    
+    public Map<Long,Map<String,BigDecimal>> queryHotelPrices(Long hotelId, Date begintime, Date endtime,Long roomtypeId);
     
 }
