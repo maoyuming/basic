@@ -8,8 +8,10 @@ import java.util.Map;
 
 public class RoomTypeInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
-    private Long id;
+    private Long roomtypeId;
 
+    private String roomtypeName;
+    
     private Integer roomNum;
 
     private Integer type;
@@ -33,15 +35,25 @@ public class RoomTypeInfo implements Serializable{
     
     
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getRoomtypeId() {
+		return roomtypeId;
+	}
 
-    public Integer getRoomNum() {
+	public void setRoomtypeId(Long roomtypeId) {
+		this.roomtypeId = roomtypeId;
+	}
+
+
+	public String getRoomtypeName() {
+		return roomtypeName;
+	}
+
+	public void setRoomtypeName(String roomtypeName) {
+		this.roomtypeName = roomtypeName;
+	}
+
+	public Integer getRoomNum() {
         return roomNum;
     }
 

@@ -48,6 +48,8 @@ public class Hotel {
 
     private String hotelFax;
 
+    private String readonly;
+
     private Integer state;
 
     private String pics;
@@ -236,6 +238,14 @@ public class Hotel {
 
     public void setHotelFax(String hotelFax) {
         this.hotelFax = hotelFax == null ? null : hotelFax.trim();
+    }
+
+    public String getReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(String readonly) {
+        this.readonly = readonly == null ? null : readonly.trim();
     }
 
     public Integer getState() {

@@ -1,14 +1,14 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RoomType implements Serializable{
-	private static final long serialVersionUID = 1L;
-    private Long id;
+public class RoomType {
+    private Long roomtypeId;
 
     private Integer roomNum;
+    
+    private String roomtypeName;
 
     private Integer type;
 
@@ -26,12 +26,12 @@ public class RoomType implements Serializable{
 
     private String updateBy;
 
-    public Long getId() {
-        return id;
+    public Long getRoomtypeId() {
+        return roomtypeId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoomtypeId(Long roomtypeId) {
+        this.roomtypeId = roomtypeId;
     }
 
     public Integer getRoomNum() {
@@ -105,4 +105,17 @@ public class RoomType implements Serializable{
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
+
+	public String getRoomtypeName() {
+		return roomtypeName;
+	}
+
+	public void setRoomtypeName(String roomtypeName) {
+		this.roomtypeName = roomtypeName;
+	}
+    
+    
+    
+    
+    
 }

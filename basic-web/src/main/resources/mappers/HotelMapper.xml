@@ -24,46 +24,13 @@
     <result column="city_code" property="cityCode" jdbcType="INTEGER" />
     <result column="district_code" property="districtCode" jdbcType="INTEGER" />
     <result column="hotel_fax" property="hotelFax" jdbcType="VARCHAR" />
+    <result column="readonly" property="readonly" jdbcType="CHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="pics" property="pics" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.HotelInputBean" >
-    <id column="hotel_id" property="hotelId" jdbcType="BIGINT" />
-    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
-    <result column="hotel_contact_name" property="hotelContactName" jdbcType="VARCHAR" />
-    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
-    <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
-    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
-    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
-    <result column="open_time" property="openTime" jdbcType="TIMESTAMP" />
-    <result column="repair_time" property="repairTime" jdbcType="TIMESTAMP" />
-    <result column="business_license_front" property="businessLicenseFront" jdbcType="VARCHAR" />
-    <result column="business_license_back" property="businessLicenseBack" jdbcType="VARCHAR" />
-    <result column="isvisible" property="isvisible" jdbcType="CHAR" />
-    <result column="idcardfront" property="idcardfront" jdbcType="VARCHAR" />
-    <result column="idcardback" property="idcardback" jdbcType="VARCHAR" />
-    <result column="retention_time" property="retentionTime" jdbcType="CHAR" />
-    <result column="default_leave_time" property="defaultLeaveTime" jdbcType="CHAR" />
-    <result column="hotel_phone" property="hotelPhone" jdbcType="VARCHAR" />
-    <result column="qt_phone" property="qtPhone" jdbcType="VARCHAR" />
-    <result column="province_code" property="provinceCode" jdbcType="INTEGER" />
-    <result column="city_code" property="cityCode" jdbcType="INTEGER" />
-    <result column="district_code" property="districtCode" jdbcType="INTEGER" />
-    <result column="hotel_fax" property="hotelFax" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="INTEGER" />
-    <result column="pics" property="pics" jdbcType="VARCHAR" />
-    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
-    
-    <result column="hotel_rank_id" property="hotelRankId" jdbcType="BIGINT" />
-    <result column="rank" property="rank" jdbcType="INTEGER" />
-    <result column="follow" property="follow" jdbcType="INTEGER" />
-    <result column="roomnight" property="roomnight" jdbcType="INTEGER" />
-    <result column="comment" property="comment" jdbcType="INTEGER" />
-    <result column="travel" property="travel" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Hotel" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
@@ -130,17 +97,9 @@
     hotel_id, hotel_name, hotel_contact_name, reg_time, detail_addr, longitude, latitude, 
     open_time, repair_time, business_license_front, business_license_back, isvisible, 
     idcardfront, idcardback, retention_time, default_leave_time, hotel_phone, qt_phone, 
-    province_code, city_code, district_code, hotel_fax, state, pics, createtime, createuser, 
-    updatetime, updateuser
+    province_code, city_code, district_code, hotel_fax, readonly, state, pics, createtime, 
+    createuser, updatetime, updateuser
   </sql>
-  <sql id="Join_Column_List" >
-    h.hotel_id, h.hotel_name, h.hotel_contact_name, h.reg_time, h.detail_addr, h.longitude, h.latitude, 
-    h.open_time, h.repair_time, h.business_license_front, h.business_license_back, h.isvisible, 
-    h.idcardfront, h.idcardback, h.retention_time, h.default_leave_time, h.hotel_phone, h.qt_phone, 
-    h.province_code, h.city_code, h.district_code, h.hotel_fax, h.state, h.pics, h.createtime, h.createuser, 
-    h.updatetime, h.updateuser,h.introduction
-  </sql>
-  
   <sql id="Blob_Column_List" >
     introduction
   </sql>
@@ -203,10 +162,10 @@
       isvisible, idcardfront, idcardback, 
       retention_time, default_leave_time, hotel_phone, 
       qt_phone, province_code, city_code, 
-      district_code, hotel_fax, state, 
-      pics, createtime, createuser, 
-      updatetime, updateuser, introduction
-      )
+      district_code, hotel_fax, readonly, 
+      state, pics, createtime, 
+      createuser, updatetime, updateuser, 
+      introduction)
     values (#{hotelId,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{hotelContactName,jdbcType=VARCHAR}, 
       #{regTime,jdbcType=TIMESTAMP}, #{detailAddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
       #{latitude,jdbcType=DECIMAL}, #{openTime,jdbcType=TIMESTAMP}, #{repairTime,jdbcType=TIMESTAMP}, 
@@ -214,10 +173,10 @@
       #{isvisible,jdbcType=CHAR}, #{idcardfront,jdbcType=VARCHAR}, #{idcardback,jdbcType=VARCHAR}, 
       #{retentionTime,jdbcType=CHAR}, #{defaultLeaveTime,jdbcType=CHAR}, #{hotelPhone,jdbcType=VARCHAR}, 
       #{qtPhone,jdbcType=VARCHAR}, #{provinceCode,jdbcType=INTEGER}, #{cityCode,jdbcType=INTEGER}, 
-      #{districtCode,jdbcType=INTEGER}, #{hotelFax,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{pics,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+      #{districtCode,jdbcType=INTEGER}, #{hotelFax,jdbcType=VARCHAR}, #{readonly,jdbcType=CHAR}, 
+      #{state,jdbcType=INTEGER}, #{pics,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.Hotel" >
     insert into hotel
@@ -287,6 +246,9 @@
       </if>
       <if test="hotelFax != null" >
         hotel_fax,
+      </if>
+      <if test="readonly != null" >
+        readonly,
       </if>
       <if test="state != null" >
         state,
@@ -376,6 +338,9 @@
       </if>
       <if test="hotelFax != null" >
         #{hotelFax,jdbcType=VARCHAR},
+      </if>
+      <if test="readonly != null" >
+        #{readonly,jdbcType=CHAR},
       </if>
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
@@ -475,6 +440,9 @@
       <if test="record.hotelFax != null" >
         hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
       </if>
+      <if test="record.readonly != null" >
+        readonly = #{record.readonly,jdbcType=CHAR},
+      </if>
       <if test="record.state != null" >
         state = #{record.state,jdbcType=INTEGER},
       </if>
@@ -525,6 +493,7 @@
       city_code = #{record.cityCode,jdbcType=INTEGER},
       district_code = #{record.districtCode,jdbcType=INTEGER},
       hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
+      readonly = #{record.readonly,jdbcType=CHAR},
       state = #{record.state,jdbcType=INTEGER},
       pics = #{record.pics,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -560,6 +529,7 @@
       city_code = #{record.cityCode,jdbcType=INTEGER},
       district_code = #{record.districtCode,jdbcType=INTEGER},
       hotel_fax = #{record.hotelFax,jdbcType=VARCHAR},
+      readonly = #{record.readonly,jdbcType=CHAR},
       state = #{record.state,jdbcType=INTEGER},
       pics = #{record.pics,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -636,6 +606,9 @@
       <if test="hotelFax != null" >
         hotel_fax = #{hotelFax,jdbcType=VARCHAR},
       </if>
+      <if test="readonly != null" >
+        readonly = #{readonly,jdbcType=CHAR},
+      </if>
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
       </if>
@@ -683,6 +656,7 @@
       city_code = #{cityCode,jdbcType=INTEGER},
       district_code = #{districtCode,jdbcType=INTEGER},
       hotel_fax = #{hotelFax,jdbcType=VARCHAR},
+      readonly = #{readonly,jdbcType=CHAR},
       state = #{state,jdbcType=INTEGER},
       pics = #{pics,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -715,6 +689,7 @@
       city_code = #{cityCode,jdbcType=INTEGER},
       district_code = #{districtCode,jdbcType=INTEGER},
       hotel_fax = #{hotelFax,jdbcType=VARCHAR},
+      readonly = #{readonly,jdbcType=CHAR},
       state = #{state,jdbcType=INTEGER},
       pics = #{pics,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -723,7 +698,9 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where hotel_id = #{hotelId,jdbcType=BIGINT}
   </update>
-  <select id="queryEsInputHotels" resultMap="BaseResultMap1">
+  
+  
+   <select id="queryEsInputHotels" resultMap="BaseResultMap1">
     SELECT 
     <include refid="Join_Column_List" />
     ,r.hotel_rank_id,r.rank,r.follow,r.roomnight,r.comment,r.travel
@@ -736,4 +713,5 @@
 	    </if>
     </where>
   </select>
+  
 </mapper>

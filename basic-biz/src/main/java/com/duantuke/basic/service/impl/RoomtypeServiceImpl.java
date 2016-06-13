@@ -41,6 +41,24 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<RoomType> queryRoomtypeByHotleId(Long hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RoomType queryRoomtypeByRoomtypeId(Long roomtypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RoomType> queryRoomtypeByRoomtypeIds(List<Long> roomtypeIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
