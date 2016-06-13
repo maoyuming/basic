@@ -39,7 +39,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private Gson gson = new Gson();
 
 	@Override
-	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,String> tags) {
+	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags) {
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{}", gson.toJson(hotelQueryBean));
 		// page参数校验：如果page小于等于0，默认为1.
 		Integer page = hotelQueryBean.getPage();

@@ -16,7 +16,7 @@ public interface HotelSearchService {
 	 * @param tags
 	 * 搜索es
 	 */
-	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,String> tags);
+	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags);
 	
 	/**
 	 * @param hotelId 不传则刷全部

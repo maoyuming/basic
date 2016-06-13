@@ -2,8 +2,9 @@ package com.duantuke.basic.face.service;
 
 import java.util.List;
 
-import com.duantuke.basic.po.Hotel;
 import com.duantuke.basic.po.Journey;
+import com.duantuke.basic.po.JourneyRHotel;
+import com.duantuke.basic.po.JourneyRSight;
 
 /**
  * @author he
@@ -15,4 +16,6 @@ public interface JourneyService {
 	public int delJourneyById(Long id);
 	public List<Journey> queryJourneys(Journey journey);
 	public Journey queryJourneyById(Long id);
+	public List<JourneyRHotel> queryHotelIdsByJourneyId(Long journeyId);
+	public List<JourneyRSight> queryHotelIdsBySightId(Long journeyId);
 }

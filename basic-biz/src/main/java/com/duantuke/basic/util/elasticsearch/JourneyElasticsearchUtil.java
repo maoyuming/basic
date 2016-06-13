@@ -2,7 +2,6 @@ package com.duantuke.basic.util.elasticsearch;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,19 +34,16 @@ import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.geo.GeoDistance;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.BoolFilterBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.GeoDistanceFilterBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.NestedQueryBuilder;
@@ -60,18 +56,18 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.duantuke.basic.esbean.input.HotelInputBean;
-import com.duantuke.basic.face.esbean.output.HotelOutputBean;
-import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.esbean.input.JourneyInputBean;
+import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
+import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
 import com.duantuke.basic.util.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 /**
- * Elasticsearch  农家院搜索工具类
+ * Elasticsearch  游记搜索工具类
  */
 @Repository
-public class HotelElasticsearchUtil {
+public class JourneyElasticsearchUtil {
     /**
      * 默认index
      */
@@ -79,9 +75,9 @@ public class HotelElasticsearchUtil {
     /**
      * 默认type
      */
-    public final static String ES_TYPE = "hotel";
+    public final static String ES_TYPE = "journey";
     
-    private Logger logger = org.slf4j.LoggerFactory.getLogger(HotelElasticsearchUtil.class);
+    private Logger logger = org.slf4j.LoggerFactory.getLogger(JourneyElasticsearchUtil.class);
     
     private Gson gson = new Gson();
     
@@ -95,11 +91,11 @@ public class HotelElasticsearchUtil {
     /**
      *
      */
-    public HotelElasticsearchUtil() {
+    public JourneyElasticsearchUtil() {
         try {
             this.initClient();
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil error",e);
+            logger.error("JourneyElasticsearchUtil error",e);
             e.printStackTrace();
         }
     }
@@ -115,7 +111,7 @@ public class HotelElasticsearchUtil {
                 client.close();
             }
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil close",e);
+            logger.error("JourneyElasticsearchUtil close",e);
             e.printStackTrace();
         }
     }
@@ -126,16 +122,16 @@ public class HotelElasticsearchUtil {
      * @param objList
      * @return
      */
-    public BulkResponse batchAddDocument(List<HotelInputBean> objList) {
+    public BulkResponse batchAddDocument(List<JourneyInputBean> objList) {
         BulkResponse bulkResponse = null;
         try {
             BulkRequestBuilder requestBuilder = this.getClient().prepareBulk();
-            for (HotelInputBean obj : objList) {
-                requestBuilder.add(this.prepareIndex(obj,obj.getHotelId()+""));
+            for (JourneyInputBean obj : objList) {
+                requestBuilder.add(this.prepareIndex(obj,obj.getJourneyId()+""));
             }
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil batchAddDocument error", e);
+            logger.error("JourneyElasticsearchUtil batchAddDocument error", e);
             e.printStackTrace();
         }
         return bulkResponse;
@@ -152,7 +148,7 @@ public class HotelElasticsearchUtil {
         try {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil signleAddDocument error", e);
+            logger.error("JourneyElasticsearchUtil signleAddDocument error", e);
             e.printStackTrace();
         }
         return indexResponse;
@@ -166,9 +162,9 @@ public class HotelElasticsearchUtil {
             DeleteByQueryResponse deleteByQueryResponse = this.getClient().prepareDeleteByQuery(ES_INDEX).setTypes(ES_TYPE)
                     .setQuery(QueryBuilders.matchAllQuery()).execute().actionGet();
             int status = deleteByQueryResponse.status().getStatus();
-            logger.info("HotelElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
+            logger.info("JourneyElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil deleteAllDocument error", e);
+            logger.error("JourneyElasticsearchUtil deleteAllDocument error", e);
             e.printStackTrace();
         }
     }
@@ -184,7 +180,7 @@ public class HotelElasticsearchUtil {
         try {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil deleteDocument error", e);
+            logger.error("JourneyElasticsearchUtil deleteDocument error", e);
             e.printStackTrace();
         }
         return deleteResponse;
@@ -204,7 +200,7 @@ public class HotelElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(docs).execute().actionGet();
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil updateDocument error", e);
+            logger.error("JourneyElasticsearchUtil updateDocument error", e);
             e.printStackTrace();
         }
         return updateResponse;
@@ -222,7 +218,7 @@ public class HotelElasticsearchUtil {
         try {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
-            this.logger.error("HotelElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
+            this.logger.error("JourneyElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
             e.printStackTrace();
         }
         return updateResponse;
@@ -295,26 +291,26 @@ public class HotelElasticsearchUtil {
             // 默认index，没有index的话自动创建
             if (!this.indexExists(ES_INDEX)) {
                 final CreateIndexRequestBuilder createIndexRequestBuilder = this.client.admin().indices().prepareCreate(ES_INDEX);
-                //final XContentBuilder hotelMappingBuilder = this.createGeoMappingBuilder();
-                //createIndexRequestBuilder.addMapping(ES_TYPE, hotelMappingBuilder);
+                //final XContentBuilder journeyMappingBuilder = this.createGeoMappingBuilder();
+                //createIndexRequestBuilder.addMapping(ES_TYPE, journeyMappingBuilder);
                 
                 createIndexRequestBuilder.execute().actionGet();
                 
             }
             //创建type
             if(!this.typeExists(ES_INDEX, ES_TYPE)){
-            	final XContentBuilder hotelMappingBuilder = this.createGeoMappingBuilder();
+            	final XContentBuilder journeyMappingBuilder = this.createGeoMappingBuilder();
             	PutMappingResponse response =
             	        client.admin().indices().preparePutMapping(ES_INDEX).setType(ES_TYPE)
-            	            .setSource(hotelMappingBuilder).execute().actionGet();
+            	            .setSource(journeyMappingBuilder).execute().actionGet();
             	 if (response.isAcknowledged()) {
-            	      logger.info("HotelElasticsearchUtil Type and mapping created !{}", ES_TYPE);
+            	      logger.info("JourneyElasticsearchUtil Type and mapping created !{}", ES_TYPE);
         	     } else {
-        	    	 logger.info("HotelElasticsearchUtil Type and mapping failed !{}", ES_TYPE);
+        	    	 logger.info("JourneyElasticsearchUtil Type and mapping failed !{}", ES_TYPE);
         	     }
             }
         } catch (Exception e) {
-            this.logger.error("HotelElasticsearchUtil init elasticsearch client is error", e);
+            this.logger.error("JourneyElasticsearchUtil init elasticsearch client is error", e);
         }
     }
 
@@ -369,22 +365,14 @@ public class HotelElasticsearchUtil {
         xBuilder.field("type", "geo_point");
         xBuilder.endObject();
 
-        xBuilder.startObject("taggroup_1");
+        xBuilder.startObject("hotelIds");
         xBuilder.field("type", "nested");
         xBuilder.endObject();
 
-        xBuilder.startObject("taggroup_2");
+        xBuilder.startObject("sightIds");
         xBuilder.field("type", "nested");
         xBuilder.endObject();
 
-        xBuilder.startObject("taggroup_3");
-        xBuilder.field("type", "nested");
-        xBuilder.endObject();
-
-        xBuilder.startObject("taggroup_4");
-        xBuilder.field("type", "nested");
-        xBuilder.endObject();
-        
         xBuilder.endObject();
         xBuilder.endObject();
 
@@ -399,20 +387,20 @@ public class HotelElasticsearchUtil {
     }
 
     /**
-     * @param hotelid
+     * @param journeyid
      * @return
      */
-    public SearchHit[] searchHotelByHotelId(String hotelId) {
+    public SearchHit[] searchJourneyByJourneyId(String journeyId) {
         SearchHit[] hits = null;
         try {
             SearchRequestBuilder searchBuilder = this.prepareSearch();
-            FilterBuilder termFilter = FilterBuilders.termFilter("hotelId", hotelId);
+            FilterBuilder termFilter = FilterBuilders.termFilter("journeyId", journeyId);
             BoolFilterBuilder boolFilter = FilterBuilders.boolFilter().must(termFilter);
             searchBuilder.setPostFilter(boolFilter);
 
             hits = queryEsPageing(searchBuilder);
         } catch (Exception e) {
-            this.logger.error("HotelElasticsearchUtil searchHotelByHotelId error",e);
+            this.logger.error("JourneyElasticsearchUtil searchJourneyByJourneyId error",e);
         }
         return hits;
     }
@@ -480,80 +468,57 @@ public class HotelElasticsearchUtil {
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags) {
+    public List<JourneyOutputBean> searchJourneys(JourneyQueryBean journeyQueryBean,Map<String,List<String>> hotelIds,Map<String,List<String>> sightIds) {
         SearchHit[] hits = null;
-        List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
+        List<JourneyOutputBean> list = new ArrayList<JourneyOutputBean>();
         try {
             SearchRequestBuilder searchBuilder = this.prepareSearch();
             // 设置查询类型 1.SearchType.DFS_QUERY_THEN_FETCH = 精确查询 2.SearchType.SCAN = 扫描查询,无序
             searchBuilder.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
             List<FilterBuilder> filterBuilders = new ArrayList<FilterBuilder>();
             // 遍历查询条件，并进行过滤
-            String hotelName = hotelQueryBean.getHotelName();
-            BigDecimal longitude = hotelQueryBean.getLongitude();
-            BigDecimal latitude = hotelQueryBean.getLatitude();
-            String isvisible = hotelQueryBean.getIsvisible();
-            String hotelPhone = hotelQueryBean.getHotelPhone();
-            String qtPhone = hotelQueryBean.getQtPhone();
-            Integer provinceCode = hotelQueryBean.getProvinceCode();
-            Integer cityCode = hotelQueryBean.getCityCode();
-            Integer districtCode = hotelQueryBean.getDistrictCode();
-            Integer page = hotelQueryBean.getPage();
-            Integer pagesize = hotelQueryBean.getPagesize();
-            String sortby = hotelQueryBean.getSortby();
-            String sortorder = hotelQueryBean.getSortorder();
+            String title = journeyQueryBean.getTitle();
+            String author = journeyQueryBean.getAuthor();
+            String content = journeyQueryBean.getContent();
+            Integer page = journeyQueryBean.getPage();
+            Integer pagesize = journeyQueryBean.getPagesize();
+            String sortby = journeyQueryBean.getSortby();
+            String sortorder = journeyQueryBean.getSortorder();
             
-            if (hotelName != null) {
-            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
+            if (title != null) {
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("title", title).operator(Operator.AND)));
             }
-            if (isvisible != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("isvisible", isvisible).operator(Operator.AND)));
+            if (author != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("author", author).operator(Operator.AND)));
             }
-            if (hotelPhone != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelPhone", hotelPhone).operator(Operator.AND)));
+            if (content != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("content", content).operator(Operator.AND)));
             }
-            if (qtPhone != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("qtPhone", qtPhone).operator(Operator.AND)));
-            }
-            if (provinceCode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("provinceCode", provinceCode.toString()).operator(Operator.AND)));
-            }
-            if (cityCode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("cityCode", cityCode.toString()).operator(Operator.AND)));
-            }
-            if (districtCode != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", districtCode.toString()).operator(Operator.AND)));
-            }
-            if (tags != null && tags.size() > 0) {
-            	for (String key:tags.keySet()) {
-            		List<String> value = tags.get(key);
+            if (hotelIds != null && hotelIds.size() > 0) {
+                for (String key:hotelIds.keySet()) {
+            		List<String> value = hotelIds.get(key);
 					if(CollectionUtils.isEmpty(value)){
 						continue;
 					}
 					Map<String, String> propertyValues = new HashMap<String, String>();
 					for (String searchcontent:value) {
-						propertyValues.put(key + ".tagName", searchcontent);
+						propertyValues.put(key + ".hotelId", searchcontent);
 						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
 					}
 				}
-                /*for (Map.Entry<String, String> tmp : tags.entrySet()) {
-                    if (tmp.getValue() == null) {
-                        continue;
-                    }
-                    Map<String, String> propertyValues = new HashMap<String, String>();
-                    propertyValues.put(tmp.getKey() + ".tagName", tmp.getValue());
-                    searchBuilder.setQuery(nestedBoolQuery(propertyValues, tmp.getKey()));
-                }*/
             }
-            //LBS
-            if(longitude!=null &&latitude!=null){
-            	GeoDistanceFilterBuilder geoFilter = FilterBuilders.geoDistanceFilter("pin");
-            	GeoPoint geoPoint = new GeoPoint(latitude.doubleValue(), longitude.doubleValue());
-            	geoFilter.point(geoPoint.getLat(), geoPoint.getLon()).distance(hotelQueryBean.getRange(), DistanceUnit.METERS).optimizeBbox("memory")
-				.geoDistance(GeoDistance.ARC);
-            	filterBuilders.add(geoFilter);
-            	// 距离排序
-            	this.sortByDistance(searchBuilder, geoPoint);
+            if (sightIds != null && sightIds.size() > 0) {
+            	for (String key:sightIds.keySet()) {
+            		List<String> value = sightIds.get(key);
+					if(CollectionUtils.isEmpty(value)){
+						continue;
+					}
+					Map<String, String> propertyValues = new HashMap<String, String>();
+					for (String searchcontent:value) {
+						propertyValues.put(key + ".sightId", searchcontent);
+						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+					}
+				}
             }
             if(CollectionUtils.isNotEmpty(filterBuilders)){
             	FilterBuilder[] builders = new FilterBuilder[]{};
@@ -585,7 +550,7 @@ public class HotelElasticsearchUtil {
                 list = this.dataTransfer(hits);
             }
         } catch (Exception e) {
-        	this.logger.error("HotelElasticsearchUtil searchHotels error",e);
+        	this.logger.error("JourneyElasticsearchUtil searchJourneys error",e);
             e.printStackTrace();
         }
         return list;
@@ -618,12 +583,12 @@ public class HotelElasticsearchUtil {
      * @param hits
      * @return
      */
-    private List<HotelOutputBean> dataTransfer(SearchHit[] hits) {
-        List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
+    private List<JourneyOutputBean> dataTransfer(SearchHit[] hits) {
+        List<JourneyOutputBean> list = new ArrayList<JourneyOutputBean>();
         for (SearchHit searchHit : hits) {
             Map<String, Object> map = searchHit.getSource();
-            HotelOutputBean hotelOutputBean = dozerMapper.map(map, HotelOutputBean.class);
-            list.add(hotelOutputBean);
+            JourneyOutputBean journeyOutputBean = dozerMapper.map(map, JourneyOutputBean.class);
+            list.add(journeyOutputBean);
         }
         return list;
     }

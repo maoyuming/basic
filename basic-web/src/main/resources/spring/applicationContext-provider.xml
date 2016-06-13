@@ -21,38 +21,39 @@
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
     <!-- <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="192.168.0.106"/> -->
    
-    <dubbo:service interface="com.duantuke.basic.face.service.CityService" ref="cityService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" /> 
-	<bean id="cityService" class="com.duantuke.basic.service.impl.CityServiceImpl" /> 
+    <dubbo:service interface="com.duantuke.basic.face.service.CityService" ref="cityServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" /> 
+	<bean id="cityServiceImpl" class="com.duantuke.basic.service.impl.CityServiceImpl" /> 
      
-	<dubbo:service interface="com.duantuke.basic.face.service.ProvinceService" ref="provinceService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />  
-    <bean id="provinceService" class="com.duantuke.basic.service.impl.ProvinceServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.ProvinceService" ref="provinceServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />  
+    <bean id="provinceServiceImpl" class="com.duantuke.basic.service.impl.ProvinceServiceImpl" />
      
-	<dubbo:service interface="com.duantuke.basic.face.service.DistrictService" ref="districtService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="districtService" class="com.duantuke.basic.service.impl.DistrictServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.DistrictService" ref="districtServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="districtServiceImpl" class="com.duantuke.basic.service.impl.DistrictServiceImpl" />
 	
        
-	<dubbo:service interface="com.duantuke.basic.face.service.CustomerService" ref="customerService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="customerService" class="com.duantuke.basic.service.impl.CustomerServiceImpl" /> 
+	<dubbo:service interface="com.duantuke.basic.face.service.CustomerService" ref="customerServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="customerServiceImpl" class="com.duantuke.basic.service.impl.CustomerServiceImpl" /> 
     
-	<dubbo:service interface="com.duantuke.basic.face.service.BossService" ref="bossService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="bossService" class="com.duantuke.basic.service.impl.BossServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.BossService" ref="bossServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="bossServiceImpl" class="com.duantuke.basic.service.impl.BossServiceImpl" />
 	
 	<!-- 评论 -->
-	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeCommentService" ref="duantukeCommentService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="duantukeCommentService" class="com.duantuke.basic.service.impl.DuantukeCommentServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeCommentService" ref="duantukeCommentServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="duantukeCommentServiceImpl" class="com.duantuke.basic.service.impl.DuantukeCommentServiceImpl" />
 	
 	<!-- 点赞 -->
-	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeLikeService" ref="duantukeLikeService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="duantukeLikeService" class="com.duantuke.basic.service.impl.DuantukeLikeServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.DuantukeLikeService" ref="duantukeLikeServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="duantukeLikeServiceImpl" class="com.duantuke.basic.service.impl.DuantukeLikeServiceImpl" />
 	<!-- 用户token -->
-	<dubbo:service interface="com.duantuke.basic.face.service.UserTokenService" ref="userTokenService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="userTokenService" class="com.duantuke.basic.service.impl.UserTokenServiceImpl" />
+	<dubbo:service interface="com.duantuke.basic.face.service.UserTokenService" ref="userTokenServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="userTokenServiceImpl" class="com.duantuke.basic.service.impl.UserTokenServiceImpl" />
      
     <!-- 游记 -->
-	<dubbo:service interface="com.duantuke.basic.face.service.JourneyService" ref="journeyService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="journeyService" class="com.duantuke.basic.service.impl.JourneyServiceImpl" />  
+	<dubbo:service interface="com.duantuke.basic.face.service.JourneyService" ref="journeyServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="journeyServiceImpl" class="com.duantuke.basic.service.impl.JourneyServiceImpl" />  
+    
     
     <!-- 吃-->
-	<dubbo:service interface="com.duantuke.basic.face.service.MealService" ref="mealService"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="mealService" class="com.duantuke.basic.service.impl.MealServiceImpl" />  
+	<dubbo:service interface="com.duantuke.basic.face.service.MealService" ref="mealServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="mealServiceImpl" class="com.duantuke.basic.service.impl.MealServiceImpl" />  
 </beans>  

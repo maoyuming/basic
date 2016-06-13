@@ -12,6 +12,25 @@
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.JourneyInputBean" >
+    <id column="journey_id" property="journeyId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    
+    <result column="journey_rank_id" property="journeyRankId" jdbcType="BIGINT" />
+    <result column="journey_id" property="journeyId" jdbcType="BIGINT" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="follow" property="follow" jdbcType="INTEGER" />
+    <result column="roomnight" property="roomnight" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="travel" property="travel" jdbcType="INTEGER" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="journey_like" property="journeyLike" jdbcType="INTEGER" />
+    <result column="share" property="share" jdbcType="INTEGER" />
+  </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Journey" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -75,6 +94,9 @@
   </sql>
   <sql id="Base_Column_List" >
     journey_id, title, author, pics, tag, createtime, createuser, updatetime, updateuser
+  </sql>
+  <sql id="Join_Column_List" >
+    j.journey_id, j.title, j.author, j.pics, j.tag, j.createtime, j.createuser, j.updatetime, j.updateuser,j.content
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -340,4 +362,17 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where journey_id = #{journeyId,jdbcType=BIGINT}
   </update>
+  <select id="queryEsInputJourneys" resultMap="BaseResultMap1">
+    SELECT 
+    <include refid="Join_Column_List" />
+    ,r.journey_rank_id,r.rank,r.follow,r.roomnight,r.comment,r.travel,r.view,r.journey_like,r.share
+    from 
+    journey j
+    LEFT JOIN journey_rank r ON j.journey_id = r.journey_id
+    <where>
+	    <if test="journeyId != null" >
+	      j.journey_id = #{journeyId}
+	    </if>
+    </where>
+  </select>
 </mapper>
