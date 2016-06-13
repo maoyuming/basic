@@ -1,5 +1,6 @@
 package com.duantuke.basic.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
+import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
 import com.duantuke.basic.face.esbean.output.SightOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
 import com.duantuke.basic.face.esbean.query.SightQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
+import com.duantuke.basic.face.service.JourneySearchService;
 import com.duantuke.basic.face.service.SightSearchService;
 import com.google.gson.Gson;
 import com.mk.jdbc.utils.MD5Util;
@@ -29,6 +33,8 @@ public class UtilController extends BaseController {
 	private SightSearchService sightSearchService;
 	@Autowired
 	private HotelSearchService hotelSearchService;
+	@Autowired
+	private JourneySearchService journeySearchService;
 	
 	String AUTH = "5416d7cd6ef195a0f7622a9c56b55e84";
 	
@@ -151,15 +157,88 @@ public class UtilController extends BaseController {
 		if (!validateAuth(auth)) {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
-		Map<String,String> tagmap = new HashMap<String,String>();
-		tagmap.put("taggroup_2", "温泉度假");
-		tagmap.put("taggroup_1", "旅游景区");
+		Map<String,List<String>> tagmap = new HashMap<String,List<String>>();
+		List<String> list1 = new ArrayList<String>();
+		list1.add("旅游景区");
+		List<String> list2 = new ArrayList<String>();
+		list2.add("商务会议");
+		//list2.add("温泉度假");
+		tagmap.put("taggroup_2", list2);
+		//tagmap.put("taggroup_1", list1);
 		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,tagmap);
 		String result = new Gson().toJson(list);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	/**-------------------------------------------------------------农家院相关end---------------------------------------------------------------*/
+	
+	
+	/**-------------------------------------------------------------游记相关begin---------------------------------------------------------------*/
+	
+	/**
+	 * @return 初始化游记es
+	 */
+	@RequestMapping(value = "/initjourneyes", method = RequestMethod.POST)
+	public ResponseEntity<String> initjourneyes(Long journeyId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			journeySearchService.initEs(journeyId);
+			result = "initjourneyes完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("initjourneyes error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+
+	/**
+	 * @return 清空游记es
+	 */
+	@RequestMapping(value = "/deljourneyes", method = RequestMethod.POST)
+	public ResponseEntity<String> deljourneyes(Long journeyId,String auth) {
+		
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+
+		try {
+			if(journeyId!=null){
+				journeySearchService.delEsByJourneyId(journeyId);
+			}else{
+				journeySearchService.delEs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("deljourneyes error", e);
+		}
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+
+	/**
+	 * @param journeyQueryBean
+	 * @param auth
+	 * 搜索游记es
+	 */
+	@RequestMapping(value = "/searchJourneysFromEs", method = RequestMethod.POST)
+	public ResponseEntity<String> searchJourneysFromEs(JourneyQueryBean journeyQueryBean, String auth) {
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		Map<String,List<String>> tagmap = new HashMap<String,List<String>>();
+		List<String> paramlist = new ArrayList<String>();
+		paramlist.add("1");
+		paramlist.add("2");
+		tagmap.put("hotelIds", paramlist);
+		List<JourneyOutputBean> list = journeySearchService.searchJourneysFromEs(journeyQueryBean,tagmap,null);
+		String result = new Gson().toJson(list);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+	/**-------------------------------------------------------------游记相关end---------------------------------------------------------------*/
 
 	/**
 	 * @param auth

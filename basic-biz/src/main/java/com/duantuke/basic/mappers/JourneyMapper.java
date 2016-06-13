@@ -1,5 +1,6 @@
 package com.duantuke.basic.mappers;
 
+import com.duantuke.basic.esbean.input.JourneyInputBean;
 import com.duantuke.basic.po.Journey;
 import com.duantuke.basic.po.JourneyExample;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface JourneyMapper {
     int updateByPrimaryKeyWithBLOBs(Journey record);
 
     int updateByPrimaryKey(Journey record);
+    
+    List<JourneyInputBean> queryEsInputJourneys(@Param("journeyId") Long journeyId);
 }
