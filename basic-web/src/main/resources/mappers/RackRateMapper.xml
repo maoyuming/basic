@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.RackRateMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RackRate" >
+    <id column="rack_rate_id" property="rackRateId" jdbcType="BIGINT" />
+    <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
+    <result column="roomtype_id" property="roomtypeId" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rack_rate_id, hotel_id, roomtype_id, price, suggest_price, createtime, createuser, 
+    updatetime, updateuser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.RackRateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rack_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rack_rate
+    where rack_rate_id = #{rackRateId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rack_rate
+    where rack_rate_id = #{rackRateId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.RackRateExample" >
+    delete from rack_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duantuke.basic.po.RackRate" >
+    insert into rack_rate (rack_rate_id, hotel_id, roomtype_id, 
+      price, suggest_price, createtime, 
+      createuser, updatetime, updateuser
+      )
+    values (#{rackRateId,jdbcType=BIGINT}, #{hotelId,jdbcType=BIGINT}, #{roomtypeId,jdbcType=BIGINT}, 
+      #{price,jdbcType=DECIMAL}, #{suggestPrice,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.RackRate" >
+    insert into rack_rate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rackRateId != null" >
+        rack_rate_id,
+      </if>
+      <if test="hotelId != null" >
+        hotel_id,
+      </if>
+      <if test="roomtypeId != null" >
+        roomtype_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="suggestPrice != null" >
+        suggest_price,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="updateuser != null" >
+        updateuser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rackRateId != null" >
+        #{rackRateId,jdbcType=BIGINT},
+      </if>
+      <if test="hotelId != null" >
+        #{hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="roomtypeId != null" >
+        #{roomtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestPrice != null" >
+        #{suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duantuke.basic.po.RackRateExample" resultType="java.lang.Integer" >
+    select count(*) from rack_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rack_rate
+    <set >
+      <if test="record.rackRateId != null" >
+        rack_rate_id = #{record.rackRateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotelId != null" >
+        hotel_id = #{record.hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.roomtypeId != null" >
+        roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.suggestPrice != null" >
+        suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        createuser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuser != null" >
+        updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rack_rate
+    set rack_rate_id = #{record.rackRateId,jdbcType=BIGINT},
+      hotel_id = #{record.hotelId,jdbcType=BIGINT},
+      roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=DECIMAL},
+      suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      createuser = #{record.createuser,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.RackRate" >
+    update rack_rate
+    <set >
+      <if test="hotelId != null" >
+        hotel_id = #{hotelId,jdbcType=BIGINT},
+      </if>
+      <if test="roomtypeId != null" >
+        roomtype_id = #{roomtypeId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestPrice != null" >
+        suggest_price = #{suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        updateuser = #{updateuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rack_rate_id = #{rackRateId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.RackRate" >
+    update rack_rate
+    set hotel_id = #{hotelId,jdbcType=BIGINT},
+      roomtype_id = #{roomtypeId,jdbcType=BIGINT},
+      price = #{price,jdbcType=DECIMAL},
+      suggest_price = #{suggestPrice,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=VARCHAR}
+    where rack_rate_id = #{rackRateId,jdbcType=BIGINT}
+  </update>
+</mapper>
