@@ -27,4 +27,6 @@ public interface DailyRateMapper {
     int updateByPrimaryKeySelective(DailyRate record);
 
     int updateByPrimaryKey(DailyRate record);
+    
+    List<DailyRate> findDailyRates(@Param("hotelid") Long hotelid, @Param("roomtypeids") List<Long> roomtypeids, @Param("begintime") int begintime, @Param("endtime") int endtime);
 }

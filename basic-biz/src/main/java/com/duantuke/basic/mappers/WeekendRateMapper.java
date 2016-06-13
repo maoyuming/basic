@@ -2,7 +2,10 @@ package com.duantuke.basic.mappers;
 
 import com.duantuke.basic.po.WeekendRate;
 import com.duantuke.basic.po.WeekendRateExample;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface WeekendRateMapper {
@@ -27,4 +30,8 @@ public interface WeekendRateMapper {
     int updateByPrimaryKeySelective(WeekendRate record);
 
     int updateByPrimaryKey(WeekendRate record);
+    
+    
+
+    List<WeekendRate> findWeekendRates(@Param("hotelid") Long hotelid, @Param("roomtypeids") List<Long> roomtypeids, @Param("weeks") List<Integer> weeks);
 }

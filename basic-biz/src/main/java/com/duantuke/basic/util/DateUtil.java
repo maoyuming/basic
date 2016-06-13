@@ -258,5 +258,117 @@ public class DateUtil {
           return Integer.parseInt(String.valueOf(between_days));
     }
 		
+    
+    
+    /**
+	 *  星期日0 星期一 1 星期二 2 星期三 3 星期四 4 星期五 5 星期六 6
+	 * @throws ParseException 
+	 */
+	public static int getWeekTime(String date){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Calendar c = Calendar.getInstance();
+		try {
+			c.setTime(sdf.parse(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return c.get(Calendar.DAY_OF_WEEK)-1;
+	}
+	
+	
+	 /**
+     * 
+     * @return 取得当前时间的date对象
+     */
+    public static Date createDate() {
+        return Calendar.getInstance().getTime();
+    }
+
+    /**
+     * 为指定日期增加一段指定单位的时间
+     * @param date 日期对象
+     * @param calendarField 时间单位。
+     * @param amount 数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    private static Date add(Date date, int calendarField, int amount) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(calendarField, amount);
+        return c.getTime();
+    }
+
+    /**
+     * 为指定日期增加几分钟
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addMinutes(Date date, int amount) {
+        return add(date, Calendar.MINUTE, amount);
+    }
+
+    /**
+     * 为指定日期增加几小时
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addHours(Date date, int amount) {
+        return add(date, Calendar.HOUR_OF_DAY, amount);
+    }
+    
+    /**
+     * 为指定日期增加几秒钟
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addSeconds(Date date, int amount) {
+        return add(date, Calendar.SECOND, amount);
+    }
+
+    /**
+     * 为指定日期增加几天
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addDays(Date date, int amount) {
+        return add(date, Calendar.DAY_OF_MONTH, amount);
+    }
+
+    /**
+     * 为指定日期增加几星期
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addWeeks(Date date, int amount) {
+        return add(date, Calendar.WEEK_OF_YEAR, amount);
+    }
+
+    /**
+     * 为指定日期增加几个月
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addMonths(Date date, int amount) {
+        return add(date, Calendar.MONTH, amount);
+    }
+
+    /**
+     * 为指定日期增加几年
+     * @param date 指定日期
+     * @param amount 增加的数量
+     * @return 增加指定单位之间之后的Date对象
+     */
+    public static Date addYears(Date date, int amount) {
+        return add(date, Calendar.YEAR, amount);
+    }
 
 }

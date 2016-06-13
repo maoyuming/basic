@@ -291,4 +291,27 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where daily_rate_id = #{dailyRateId,jdbcType=BIGINT}
   </update>
+  
+  
+  <select id="findDailyRates" parameterType="map" resultMap="BaseResultMap">
+  	select * from daily_rate 
+  	where 
+  	(
+		<if test="hotelid != null " >
+        hotel_id = #{hotelid,jdbcType=BIGINT}
+    	</if>
+    	<if test="hotelid != null and roomtypeids != null and roomtypeids.size() > 0" >
+    	or
+    	</if>
+    	<if test="roomtypeids != null and roomtypeids.size() > 0" >
+    	roomtype_id in  
+		    <foreach item="roomtypeid" collection="roomtypeids" separator="," open="(" close=")" index="">  
+		      #{roomtypeid}  
+		    </foreach>
+	    </if>
+    )
+	and day &gt;= #{begintime} 
+    and day &lt;= #{endtime}
+  </select>
+  
 </mapper>
