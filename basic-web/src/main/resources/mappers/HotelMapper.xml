@@ -732,7 +732,7 @@
     LEFT JOIN hotel_rank r ON h.hotel_id = r.hotel_id
     <where>
 	    <if test="hotelId != null" >
-	      s.hotel_id = #{hotelId}
+	      h.hotel_id = #{hotelId}
 	    </if>
     </where>
   </select>

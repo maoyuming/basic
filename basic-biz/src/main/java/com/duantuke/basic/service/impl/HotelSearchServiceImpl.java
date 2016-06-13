@@ -14,6 +14,8 @@ import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
+import com.duantuke.basic.face.service.TagService;
+import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.elasticsearch.HotelElasticsearchUtil;
@@ -31,6 +33,8 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private HotelElasticsearchUtil esutil;
 	@Autowired
 	private IHotelService ihotelService;
+	@Autowired
+	private TagService tagService;
 
 	private Gson gson = new Gson();
 
@@ -61,11 +65,26 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	public void initEs(Long hotelId) {
 		logger.info("HotelSearchServiceImpl initEs begin:{}", hotelId);
 		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		
+		// TODO 应改为多线程
 		for (HotelInputBean hotelInputBean:esInputlist) {
 			if ((hotelInputBean.getLatitude() != null) && (hotelInputBean.getLongitude() != null)) {
 				hotelInputBean.setPin(new GeoPoint(hotelInputBean.getLatitude().doubleValue(), hotelInputBean.getLongitude().doubleValue()));
 			}
 			hotelInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+			//保存tag
+			List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
+			for (Tag tag:taglist) {
+				if(tag.getTagGroupId().equals(1l)){
+					hotelInputBean.getTaggroup_1().add(tag);
+				}else if(tag.getTagGroupId().equals(2l)){
+					hotelInputBean.getTaggroup_2().add(tag);
+				}else if(tag.getTagGroupId().equals(3l)){
+					hotelInputBean.getTaggroup_3().add(tag);
+				}else if(tag.getTagGroupId().equals(4l)){
+					hotelInputBean.getTaggroup_4().add(tag);
+				}
+			}
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);

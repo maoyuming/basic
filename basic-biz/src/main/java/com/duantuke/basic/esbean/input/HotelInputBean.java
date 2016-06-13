@@ -2,6 +2,7 @@ package com.duantuke.basic.esbean.input;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,10 +72,10 @@ public class HotelInputBean implements Serializable{
     private Integer comment;//评论数
     private Integer travel;//游记数
     private GeoPoint pin;// 坐标
-    private List<Tag> taggroup_1;
-    private List<Tag> taggroup_2;
-    private List<Tag> taggroup_3;
-    private List<Tag> taggroup_4;
+    private List<Tag> taggroup_1 = new ArrayList<Tag>();
+    private List<Tag> taggroup_2 = new ArrayList<Tag>();
+    private List<Tag> taggroup_3 = new ArrayList<Tag>();
+    private List<Tag> taggroup_4 = new ArrayList<Tag>();
     
 	public List<Tag> getTaggroup_1() {
 		return taggroup_1;

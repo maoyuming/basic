@@ -1,6 +1,8 @@
 package com.duantuke.basic.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +151,10 @@ public class UtilController extends BaseController {
 		if (!validateAuth(auth)) {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
-		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,null);
+		Map<String,String> tagmap = new HashMap<String,String>();
+		tagmap.put("taggroup_2", "温泉度假");
+		tagmap.put("taggroup_1", "旅游景区");
+		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,tagmap);
 		String result = new Gson().toJson(list);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}

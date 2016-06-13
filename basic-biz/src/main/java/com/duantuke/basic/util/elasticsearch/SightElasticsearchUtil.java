@@ -18,6 +18,9 @@ import org.dozer.Mapper;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsRequest;
+import org.elasticsearch.action.admin.indices.exists.types.TypesExistsResponse;
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequestBuilder;
@@ -291,12 +294,22 @@ public class SightElasticsearchUtil {
 
             // 默认index，没有index的话自动创建
             if (!this.indexExists(ES_INDEX)) {
-                // auto create the index if it not exists.
                 final CreateIndexRequestBuilder createIndexRequestBuilder = this.client.admin().indices().prepareCreate(ES_INDEX);
-                final XContentBuilder mappingBuilder = this.createGeoMappingBuilder();
-                createIndexRequestBuilder.addMapping(ES_TYPE, mappingBuilder);
+                //final XContentBuilder mappingBuilder = this.createGeoMappingBuilder();
+                //createIndexRequestBuilder.addMapping(ES_TYPE, mappingBuilder);
                 createIndexRequestBuilder.execute().actionGet();
-                this.logger.info("SightElasticsearchUtil auto create the index: {}, type: {}.", ES_INDEX, ES_TYPE);
+            }
+            //创建type
+            if(!this.typeExists(ES_INDEX, ES_TYPE)){
+            	final XContentBuilder hotelMappingBuilder = this.createGeoMappingBuilder();
+            	PutMappingResponse response =
+            	        client.admin().indices().preparePutMapping(ES_INDEX).setType(ES_TYPE)
+            	            .setSource(hotelMappingBuilder).execute().actionGet();
+            	 if (response.isAcknowledged()) {
+            	      logger.info("SightElasticsearchUtil Type and mapping created !{}", ES_TYPE);
+        	     } else {
+        	    	  logger.info("SightElasticsearchUtil Type and mapping failed !{}", ES_TYPE);
+        	     }
             }
         } catch (Exception e) {
             this.logger.error("SightElasticsearchUtil init elasticsearch client is error", e);
@@ -318,6 +331,24 @@ public class SightElasticsearchUtil {
             return true;
         }
         this.logger.info("No such index name: {}", indexName);
+        return false;
+    }
+    
+    /**
+     * @param indexName
+     * @param typeName
+     * 指定type是否存在
+     */
+    private boolean typeExists(String indexName,String typeName){
+    	String[] indexArray = new String[1];
+    	indexArray[0] = indexName;
+    	TypesExistsRequest request = new TypesExistsRequest(indexArray,typeName);
+    	TypesExistsResponse response = this.client.admin().indices().typesExists(request).actionGet();
+    	if (response.isExists()) {
+            this.logger.info("Type {} has exists.", typeName);
+            return true;
+        }
+        this.logger.info("No such type name: {}", typeName);
         return false;
     }
 
