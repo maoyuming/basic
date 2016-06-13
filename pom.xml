@@ -47,7 +47,7 @@
         <snapshotRepository>
             <id>user-snapshot</id>
             <name>User Porject Snapshot</name>
-            <url>http://nexus.duantuke.com/nexus/content/repositories/snapshots/</url>
+            <url>http://nexus.duantuke.com/vcontent/repositories/snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
         <repository>
@@ -499,7 +499,7 @@
 				<dubbo_admin_root_password>root</dubbo_admin_root_password>
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
 				
-				<dubbo_basic_group>basic_dev</dubbo_basic_group>
+				<dubbo_basic_group>basic_mym</dubbo_basic_group>
 				
 				<!-- config_center -->
 				<config.localMode>true</config.localMode>

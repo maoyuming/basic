@@ -44,10 +44,12 @@ public class MealServiceImpl implements MealService {
 
 	@Override
 	public List<Meal> queryMeals(Meal meal) {
-		MealExample mealExample = new MealExample();
-		Criteria criteria = mealExample.createCriteria();
-		criteria.andMealIdEqualTo(meal.getMealId());
-		return mealMapper.selectByExample(mealExample);
+		return null;
+	}
+
+	@Override
+	public Meal queryMealById(Long id) {
+		return mealMapper.selectByPrimaryKey(id);
 	}
 	
 

@@ -1,14 +1,18 @@
-package com.duantuke.basic.po;
+package com.duantuke.basic.face.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.Bidi;
 import java.util.Date;
+import java.util.Map;
 
-public class RoomType {
+public class RoomTypeInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long roomtypeId;
 
-    private Integer roomNum;
-    
     private String roomtypeName;
+    
+    private Integer roomNum;
 
     private Integer type;
 
@@ -25,16 +29,31 @@ public class RoomType {
     private Date updateTime;
 
     private String updateBy;
+    
+    
+    private Map<String, BigDecimal> prices;
+    
+    
+
 
     public Long getRoomtypeId() {
-        return roomtypeId;
-    }
+		return roomtypeId;
+	}
 
-    public void setRoomtypeId(Long roomtypeId) {
-        this.roomtypeId = roomtypeId;
-    }
+	public void setRoomtypeId(Long roomtypeId) {
+		this.roomtypeId = roomtypeId;
+	}
 
-    public Integer getRoomNum() {
+
+	public String getRoomtypeName() {
+		return roomtypeName;
+	}
+
+	public void setRoomtypeName(String roomtypeName) {
+		this.roomtypeName = roomtypeName;
+	}
+
+	public Integer getRoomNum() {
         return roomNum;
     }
 
@@ -106,16 +125,13 @@ public class RoomType {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
 
-	public String getRoomtypeName() {
-		return roomtypeName;
+	public Map<String, BigDecimal> getPrices() {
+		return prices;
 	}
 
-	public void setRoomtypeName(String roomtypeName) {
-		this.roomtypeName = roomtypeName;
+	public void setPrices(Map<String, BigDecimal> prices) {
+		this.prices = prices;
 	}
-    
-    
-    
     
     
 }

@@ -13,4 +13,8 @@ public interface RoomTypeService {
 	public int updateRoomType(RoomType roomType);
 	public int delRoomTypeById(Long id);
 	public List<RoomType> queryRoomTypes(RoomType roomType);
+	
+	public List<RoomType> queryRoomtypeByHotleId(Long hotelId);
+	public RoomType queryRoomtypeByRoomtypeId(Long roomtypeId);
+	public List<RoomType> queryRoomtypeByRoomtypeIds(List<Long> roomtypeIds);
 }

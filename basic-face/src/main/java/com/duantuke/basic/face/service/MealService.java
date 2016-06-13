@@ -13,4 +13,5 @@ public interface MealService {
 	public int updateMeal(Meal meal);
 	public int delMealById(Long id);
 	public List<Meal> queryMeals(Meal meal);
+	public Meal queryMealById(Long id);
 }

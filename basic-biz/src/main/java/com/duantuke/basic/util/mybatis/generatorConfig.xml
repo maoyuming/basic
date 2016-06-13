@@ -36,6 +36,13 @@
         
 <!--         <table tableName="meal" domainObjectName="Meal"></table> -->
 <!--         <table tableName="recommend_item" domainObjectName="RecommendItem"></table> -->
-        <table tableName="recommend_detail" domainObjectName="RecommendDetail"></table>
+<!--         <table tableName="recommend_detail" domainObjectName="RecommendDetail"></table> -->
+<!--         <table tableName="skus" domainObjectName="Sku"></table> -->
+<!--         <table tableName="daily_rate" domainObjectName="DailyRate"></table> -->
+<!--         <table tableName="rack_rate" domainObjectName="RackRate"></table> -->
+<!--         <table tableName="weekend_rate" domainObjectName="WeekendRate"></table> -->
+<!--         <table tableName="hotel" domainObjectName="Hotel"></table> -->
+        <table tableName="room_type" domainObjectName="RoomType"></table>
+<!--         <table tableName="meal" domainObjectName="Meal"></table> -->
 	</context>
 </generatorConfiguration>

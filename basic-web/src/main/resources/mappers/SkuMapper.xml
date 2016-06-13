@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.duantuke.basic.mappers.RoomTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RoomType" >
-    <id column="roomtype_id" property="roomtypeId" jdbcType="BIGINT" />
-    <result column="room_num" property="roomNum" jdbcType="INTEGER" />
+<mapper namespace="com.duantuke.basic.mappers.SkuMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Sku" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="bedtype" property="bedtype" jdbcType="INTEGER" />
-    <result column="bedsize" property="bedsize" jdbcType="INTEGER" />
-    <result column="area" property="area" jdbcType="DECIMAL" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -72,16 +76,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    roomtype_id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
-    update_by
+    id, name, type, cost, price, suggest_price, pics, descrition, supplier, memo, create_time, 
+    create_by, update_time, update_by
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.RoomTypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.SkuExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from room_type
+    from skus
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,49 +99,63 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from room_type
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
+    from skus
+    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from room_type
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
+    delete from skus
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.RoomTypeExample" >
-    delete from room_type
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.SkuExample" >
+    delete from skus
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.duantuke.basic.po.RoomType" >
-    insert into room_type (roomtype_id, room_num, type, 
-      bedtype, bedsize, area, 
-      create_time, create_by, update_time, 
-      update_by)
-    values (#{roomtypeId,jdbcType=BIGINT}, #{roomNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
-      #{bedtype,jdbcType=INTEGER}, #{bedsize,jdbcType=INTEGER}, #{area,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.duantuke.basic.po.Sku" >
+    insert into skus (id, name, type, 
+      cost, price, suggest_price, 
+      pics, descrition, supplier, 
+      memo, create_time, create_by, 
+      update_time, update_by)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{cost,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{suggestPrice,jdbcType=DECIMAL}, 
+      #{pics,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.duantuke.basic.po.RoomType" >
-    insert into room_type
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Sku" >
+    insert into skus
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roomtypeId != null" >
-        roomtype_id,
+      <if test="id != null" >
+        id,
       </if>
-      <if test="roomNum != null" >
-        room_num,
+      <if test="name != null" >
+        name,
       </if>
       <if test="type != null" >
         type,
       </if>
-      <if test="bedtype != null" >
-        bedtype,
+      <if test="cost != null" >
+        cost,
       </if>
-      <if test="bedsize != null" >
-        bedsize,
+      <if test="price != null" >
+        price,
       </if>
-      <if test="area != null" >
-        area,
+      <if test="suggestPrice != null" >
+        suggest_price,
+      </if>
+      <if test="pics != null" >
+        pics,
+      </if>
+      <if test="descrition != null" >
+        descrition,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="memo != null" >
+        memo,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -153,23 +171,35 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roomtypeId != null" >
-        #{roomtypeId,jdbcType=BIGINT},
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
       </if>
-      <if test="roomNum != null" >
-        #{roomNum,jdbcType=INTEGER},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="bedtype != null" >
-        #{bedtype,jdbcType=INTEGER},
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
       </if>
-      <if test="bedsize != null" >
-        #{bedsize,jdbcType=INTEGER},
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
       </if>
-      <if test="area != null" >
-        #{area,jdbcType=DECIMAL},
+      <if test="suggestPrice != null" >
+        #{suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pics != null" >
+        #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -185,32 +215,44 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.duantuke.basic.po.RoomTypeExample" resultType="java.lang.Integer" >
-    select count(*) from room_type
+  <select id="countByExample" parameterType="com.duantuke.basic.po.SkuExample" resultType="java.lang.Integer" >
+    select count(*) from skus
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update room_type
+    update skus
     <set >
-      <if test="record.roomtypeId != null" >
-        roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.roomNum != null" >
-        room_num = #{record.roomNum,jdbcType=INTEGER},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.bedtype != null" >
-        bedtype = #{record.bedtype,jdbcType=INTEGER},
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=DECIMAL},
       </if>
-      <if test="record.bedsize != null" >
-        bedsize = #{record.bedsize,jdbcType=INTEGER},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="record.area != null" >
-        area = #{record.area,jdbcType=DECIMAL},
+      <if test="record.suggestPrice != null" >
+        suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pics != null" >
+        pics = #{record.pics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descrition != null" >
+        descrition = #{record.descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null" >
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -230,13 +272,17 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update room_type
-    set roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
-      room_num = #{record.roomNum,jdbcType=INTEGER},
+    update skus
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
-      bedtype = #{record.bedtype,jdbcType=INTEGER},
-      bedsize = #{record.bedsize,jdbcType=INTEGER},
-      area = #{record.area,jdbcType=DECIMAL},
+      cost = #{record.cost,jdbcType=DECIMAL},
+      price = #{record.price,jdbcType=DECIMAL},
+      suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
+      pics = #{record.pics,jdbcType=VARCHAR},
+      descrition = #{record.descrition,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -245,23 +291,35 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.RoomType" >
-    update room_type
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.Sku" >
+    update skus
     <set >
-      <if test="roomNum != null" >
-        room_num = #{roomNum,jdbcType=INTEGER},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="bedtype != null" >
-        bedtype = #{bedtype,jdbcType=INTEGER},
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
       </if>
-      <if test="bedsize != null" >
-        bedsize = #{bedsize,jdbcType=INTEGER},
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="area != null" >
-        area = #{area,jdbcType=DECIMAL},
+      <if test="suggestPrice != null" >
+        suggest_price = #{suggestPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pics != null" >
+        pics = #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -276,19 +334,23 @@
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
     </set>
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.RoomType" >
-    update room_type
-    set room_num = #{roomNum,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.Sku" >
+    update skus
+    set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      bedtype = #{bedtype,jdbcType=INTEGER},
-      bedsize = #{bedsize,jdbcType=INTEGER},
-      area = #{area,jdbcType=DECIMAL},
+      cost = #{cost,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      suggest_price = #{suggestPrice,jdbcType=DECIMAL},
+      pics = #{pics,jdbcType=VARCHAR},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR}
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
