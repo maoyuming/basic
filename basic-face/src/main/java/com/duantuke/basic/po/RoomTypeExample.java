@@ -126,63 +126,63 @@ public class RoomTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andRoomtypeIdIsNull() {
-            addCriterion("roomtype_id is null");
+        public Criteria andSkuIdIsNull() {
+            addCriterion("sku_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdIsNotNull() {
-            addCriterion("roomtype_id is not null");
+        public Criteria andSkuIdIsNotNull() {
+            addCriterion("sku_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdEqualTo(Long value) {
-            addCriterion("roomtype_id =", value, "roomtypeId");
+        public Criteria andSkuIdEqualTo(Long value) {
+            addCriterion("sku_id =", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdNotEqualTo(Long value) {
-            addCriterion("roomtype_id <>", value, "roomtypeId");
+        public Criteria andSkuIdNotEqualTo(Long value) {
+            addCriterion("sku_id <>", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdGreaterThan(Long value) {
-            addCriterion("roomtype_id >", value, "roomtypeId");
+        public Criteria andSkuIdGreaterThan(Long value) {
+            addCriterion("sku_id >", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("roomtype_id >=", value, "roomtypeId");
+        public Criteria andSkuIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("sku_id >=", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdLessThan(Long value) {
-            addCriterion("roomtype_id <", value, "roomtypeId");
+        public Criteria andSkuIdLessThan(Long value) {
+            addCriterion("sku_id <", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdLessThanOrEqualTo(Long value) {
-            addCriterion("roomtype_id <=", value, "roomtypeId");
+        public Criteria andSkuIdLessThanOrEqualTo(Long value) {
+            addCriterion("sku_id <=", value, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdIn(List<Long> values) {
-            addCriterion("roomtype_id in", values, "roomtypeId");
+        public Criteria andSkuIdIn(List<Long> values) {
+            addCriterion("sku_id in", values, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdNotIn(List<Long> values) {
-            addCriterion("roomtype_id not in", values, "roomtypeId");
+        public Criteria andSkuIdNotIn(List<Long> values) {
+            addCriterion("sku_id not in", values, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdBetween(Long value1, Long value2) {
-            addCriterion("roomtype_id between", value1, value2, "roomtypeId");
+        public Criteria andSkuIdBetween(Long value1, Long value2) {
+            addCriterion("sku_id between", value1, value2, "skuId");
             return (Criteria) this;
         }
 
-        public Criteria andRoomtypeIdNotBetween(Long value1, Long value2) {
-            addCriterion("roomtype_id not between", value1, value2, "roomtypeId");
+        public Criteria andSkuIdNotBetween(Long value1, Long value2) {
+            addCriterion("sku_id not between", value1, value2, "skuId");
             return (Criteria) this;
         }
 
