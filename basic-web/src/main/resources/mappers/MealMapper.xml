@@ -277,10 +277,10 @@
     ,s.name,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
     from 
     (meal m
-    LEFT JOIN meal_rank r ON m.meal_id = r.meal_id) JOIN skus s ON m.sku_id = s.sku_id
+    LEFT JOIN meal_rank r ON m.sku_id = r.meal_id) JOIN skus s ON m.sku_id = s.sku_id
     where s.type=2
     <if test="mealId != null" >
-      and j.meal_id = #{mealId}
+      and m.sku_id = #{mealId}
     </if>
   </select>
 </mapper>
