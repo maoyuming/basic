@@ -385,6 +385,12 @@ public class HotelElasticsearchUtil {
         xBuilder.field("type", "nested");
         xBuilder.endObject();
         
+        xBuilder.startObject("hotelName");
+        xBuilder.field("type", "string")
+        .field("indexAnalyzer", "ik")  
+        .field("searchAnalyzer", "ik");
+        xBuilder.endObject();
+        
         xBuilder.endObject();
         xBuilder.endObject();
 

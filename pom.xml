@@ -539,7 +539,7 @@
 				
 				
 				<!-- config_center -->
-				<config.localMode>false</config.localMode>
+				<config.localMode>true</config.localMode>
 				<config.zk>211.157.155.198:2181</config.zk>
 				<config.domain.name>basic</config.domain.name>
 				<cat.app.name>${project.name}</cat.app.name>

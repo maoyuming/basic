@@ -163,14 +163,14 @@ public class UtilController extends BaseController {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
 		Map<String,List<String>> tagmap = new HashMap<String,List<String>>();
-		List<String> list1 = new ArrayList<String>();
-		list1.add("旅游景区");
-		List<String> list2 = new ArrayList<String>();
-		list2.add("商务会议");
+		//List<String> list1 = new ArrayList<String>();
+		//list1.add("旅游景区");
+		//List<String> list2 = new ArrayList<String>();
+		//list2.add("商务会议");
 		//list2.add("温泉度假");
-		tagmap.put("taggroup_2", list2);
+		//tagmap.put("taggroup_2", list2);
 		//tagmap.put("taggroup_1", list1);
-		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,tagmap);
+		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,null);
 		String result = new Gson().toJson(list);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
