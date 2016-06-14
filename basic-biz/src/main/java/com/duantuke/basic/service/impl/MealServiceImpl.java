@@ -1,5 +1,6 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -12,6 +13,10 @@ import com.duantuke.basic.esbean.input.MealInputBean;
 import com.duantuke.basic.mappers.MealMapper;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.MealExample;
+import com.duantuke.basic.po.Meal;
+import com.duantuke.basic.po.MealExample;
+import com.duantuke.basic.po.MealExample;
+import com.duantuke.basic.po.MealExample.Criteria;
 import com.duantuke.basic.service.IMealService;
 
 /**
@@ -62,20 +67,45 @@ public class MealServiceImpl implements IMealService {
 
 	@Override
 	public List<Meal> queryMealByHotleId(Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		MealExample example = new MealExample();
+		Criteria criteria =  example.createCriteria();
+		criteria.andSupplierIdEqualTo(hotelId);
+		return mealMapper.selectByExample(example);
+	
 	}
 
 	@Override
-	public Meal queryMealByMealId(Long roomtypeId) {
-		// TODO Auto-generated method stub
+	public Meal queryMealByMealId(Long mealId) {
+
+		MealExample example = new MealExample();
+		Criteria criteria =  example.createCriteria();
+		criteria.andSkuIdEqualTo(mealId);
+		
+		List<Meal> list = mealMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}
 		return null;
+	
 	}
 
 	@Override
 	public List<Meal> queryMealByMealIds(List<Long> mealIds) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Meal> allList =new ArrayList<Meal>();
+		for (Long mealId : mealIds) {
+			MealExample example = new MealExample();
+			MealExample.Criteria criteria =  example.createCriteria();
+			criteria.andSkuIdEqualTo(mealId);
+			
+			List<Meal> list = mealMapper.selectByExample(example);
+			if(CollectionUtils.isNotEmpty(list)){
+				allList.addAll(list);
+			}
+		}
+		return allList;
+	
 	}
 
 	@Override
