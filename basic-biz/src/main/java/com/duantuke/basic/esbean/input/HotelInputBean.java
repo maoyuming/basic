@@ -62,6 +62,7 @@ public class HotelInputBean implements Serializable{
     private String pics;
 
     private String introduction;
+    private String readonly;
 
     private String createtime;
     
@@ -77,6 +78,14 @@ public class HotelInputBean implements Serializable{
     private List<Tag> taggroup_3 = new ArrayList<Tag>();
     private List<Tag> taggroup_4 = new ArrayList<Tag>();
     
+    
+    
+	public String getReadonly() {
+		return readonly;
+	}
+	public void setReadonly(String readonly) {
+		this.readonly = readonly;
+	}
 	public List<Tag> getTaggroup_1() {
 		return taggroup_1;
 	}

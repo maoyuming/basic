@@ -53,6 +53,7 @@ public class HotelOutputBean implements Serializable{
     private Integer districtCode;
 
     private String hotelFax;
+    private String readonly;
 
     private Integer state;
 
@@ -68,6 +69,14 @@ public class HotelOutputBean implements Serializable{
     private Integer roomnight;//间夜数
     private Integer comment;//评论数
     private Integer travel;//游记数
+    
+    
+	public String getReadonly() {
+		return readonly;
+	}
+	public void setReadonly(String readonly) {
+		this.readonly = readonly;
+	}
 	public Long getHotelId() {
 		return hotelId;
 	}

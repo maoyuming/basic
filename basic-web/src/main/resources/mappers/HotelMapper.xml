@@ -145,7 +145,7 @@
     h.hotel_id, h.hotel_name, h.hotel_contact_name, h.reg_time, h.detail_addr, h.longitude, h.latitude, 
     h.open_time, h.repair_time, h.business_license_front, h.business_license_back, h.isvisible, 
     h.idcardfront, h.idcardback, h.retention_time, h.default_leave_time, h.hotel_phone, h.qt_phone, 
-    h.province_code, h.city_code, h.district_code, h.hotel_fax, h.state, h.pics, h.createtime, h.createuser, 
+    h.province_code, h.city_code, h.district_code, h.hotel_fax, h.readonly,h.state, h.pics, h.createtime, h.createuser, 
     h.updatetime, h.updateuser,h.introduction
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.duantuke.basic.po.HotelExample" >

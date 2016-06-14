@@ -499,6 +499,7 @@ public class HotelElasticsearchUtil {
             BigDecimal longitude = hotelQueryBean.getLongitude();
             BigDecimal latitude = hotelQueryBean.getLatitude();
             String isvisible = hotelQueryBean.getIsvisible();
+            String readonly = hotelQueryBean.getReadonly();
             String hotelPhone = hotelQueryBean.getHotelPhone();
             String qtPhone = hotelQueryBean.getQtPhone();
             Integer provinceCode = hotelQueryBean.getProvinceCode();
@@ -511,6 +512,9 @@ public class HotelElasticsearchUtil {
             
             if (hotelName != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
+            }
+            if (readonly != null) {
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("readonly", readonly).operator(Operator.AND)));
             }
             if (isvisible != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("isvisible", isvisible).operator(Operator.AND)));
