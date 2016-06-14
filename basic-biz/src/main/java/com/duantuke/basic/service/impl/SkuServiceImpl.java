@@ -52,7 +52,7 @@ public class SkuServiceImpl implements SkuService {
 		
 		SkuInfo skuInfo = new SkuInfo();
 		skuInfo.setTotalPrice(totalPrice);
-		skuInfo.setSupplier(skuQueryIn.getHotelId()+"");
+		skuInfo.setSupplierId(skuQueryIn.getHotelId());
 		
 		if(skuQueryIn!=null){
 			if(MapUtils.isNotEmpty(skuQueryIn.getSkuMap())){
