@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.enums.HotelStateEnum;
 import com.duantuke.basic.enums.IsvisibleEnum;
+import com.duantuke.basic.enums.ReadonlyEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.base.RetInfo;
 import com.duantuke.basic.face.bean.BossParam;
@@ -135,9 +137,10 @@ public class BossServiceImpl implements BossService {
 				//已经存在酒店，绑定老板关系，和处理hotel的readonly字段
 				Hotel hotel = new Hotel();
 				hotel.setHotelId(boss.getHotelId());
-				hotel.setReadonly(IsvisibleEnum.yes.getCode());
+				hotel.setReadonly(ReadonlyEnum.yes.getCode());
 				hotel.setUpdatetime(new Date());
 				hotel.setUpdateuser(boss.getSalePhone());
+				hotel.setState(HotelStateEnum.init.getId());
 				int num = hotelService.updateHotel(hotel);
 				if(num>0){
 					//绑定老板关系
@@ -148,11 +151,12 @@ public class BossServiceImpl implements BossService {
 				//已经存在酒店，绑定老板关系，和处理hotel的readonly字段
 				Hotel hotel = new Hotel();
 				hotel.setHotelName(boss.getHotelName());
-				hotel.setReadonly(IsvisibleEnum.yes.getCode());
+				hotel.setReadonly(ReadonlyEnum.yes.getCode());
 				hotel.setCreatetime(new Date());
 				hotel.setUpdatetime(new Date());
 				hotel.setCreateuser(boss.getSalePhone());
 				hotel.setUpdateuser(boss.getSalePhone());
+				hotel.setState(HotelStateEnum.init.getId());
 				int num = hotelService.addHotel(hotel);
 				if(num>0){
 					//绑定老板关系
