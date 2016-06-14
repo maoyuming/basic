@@ -1,11 +1,9 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Sku implements Serializable{
-	private static final long serialVersionUID = 1L;
-    private Long id;
+public class Sku {
+    private Long skuId;
 
     private String name;
 
@@ -29,12 +27,12 @@ public class Sku implements Serializable{
 
     private String updateBy;
 
-    public Long getId() {
-        return id;
+    public Long getSkuId() {
+        return skuId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSkuId(Long skuId) {
+        this.skuId = skuId;
     }
 
     public String getName() {
