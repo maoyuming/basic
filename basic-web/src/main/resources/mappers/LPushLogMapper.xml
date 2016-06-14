@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.LPushLogMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.LPushLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="readstatus" property="readstatus" jdbcType="CHAR" />
+    <result column="mid" property="mid" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="deviceno" property="deviceno" jdbcType="VARCHAR" />
+    <result column="devicetype" property="devicetype" jdbcType="VARCHAR" />
+    <result column="fromsource" property="fromsource" jdbcType="VARCHAR" />
+    <result column="fromip" property="fromip" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="activeid" property="activeid" jdbcType="BIGINT" />
+    <result column="success" property="success" jdbcType="CHAR" />
+    <result column="pushid" property="pushid" jdbcType="VARCHAR" />
+    <result column="groupid" property="groupid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, content, type, time, readstatus, mid, phone, deviceno, devicetype, fromsource, 
+    fromip, url, activeid, success, pushid, groupid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.LPushLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from l_push_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from l_push_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from l_push_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.duantuke.basic.po.LPushLogExample" >
+    delete from l_push_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.duantuke.basic.po.LPushLog" >
+    insert into l_push_log (id, title, content, 
+      type, time, readstatus, 
+      mid, phone, deviceno, 
+      devicetype, fromsource, fromip, 
+      url, activeid, success, 
+      pushid, groupid)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{readstatus,jdbcType=CHAR}, 
+      #{mid,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{deviceno,jdbcType=VARCHAR}, 
+      #{devicetype,jdbcType=VARCHAR}, #{fromsource,jdbcType=VARCHAR}, #{fromip,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{activeid,jdbcType=BIGINT}, #{success,jdbcType=CHAR}, 
+      #{pushid,jdbcType=VARCHAR}, #{groupid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.LPushLog" >
+    insert into l_push_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="readstatus != null" >
+        readstatus,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="deviceno != null" >
+        deviceno,
+      </if>
+      <if test="devicetype != null" >
+        devicetype,
+      </if>
+      <if test="fromsource != null" >
+        fromsource,
+      </if>
+      <if test="fromip != null" >
+        fromip,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="activeid != null" >
+        activeid,
+      </if>
+      <if test="success != null" >
+        success,
+      </if>
+      <if test="pushid != null" >
+        pushid,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readstatus != null" >
+        #{readstatus,jdbcType=CHAR},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null" >
+        #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetype != null" >
+        #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromsource != null" >
+        #{fromsource,jdbcType=VARCHAR},
+      </if>
+      <if test="fromip != null" >
+        #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="activeid != null" >
+        #{activeid,jdbcType=BIGINT},
+      </if>
+      <if test="success != null" >
+        #{success,jdbcType=CHAR},
+      </if>
+      <if test="pushid != null" >
+        #{pushid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.duantuke.basic.po.LPushLogExample" resultType="java.lang.Integer" >
+    select count(*) from l_push_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update l_push_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readstatus != null" >
+        readstatus = #{record.readstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.mid != null" >
+        mid = #{record.mid,jdbcType=BIGINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceno != null" >
+        deviceno = #{record.deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicetype != null" >
+        devicetype = #{record.devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromsource != null" >
+        fromsource = #{record.fromsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromip != null" >
+        fromip = #{record.fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activeid != null" >
+        activeid = #{record.activeid,jdbcType=BIGINT},
+      </if>
+      <if test="record.success != null" >
+        success = #{record.success,jdbcType=CHAR},
+      </if>
+      <if test="record.pushid != null" >
+        pushid = #{record.pushid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update l_push_log
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      readstatus = #{record.readstatus,jdbcType=CHAR},
+      mid = #{record.mid,jdbcType=BIGINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      deviceno = #{record.deviceno,jdbcType=VARCHAR},
+      devicetype = #{record.devicetype,jdbcType=VARCHAR},
+      fromsource = #{record.fromsource,jdbcType=VARCHAR},
+      fromip = #{record.fromip,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      activeid = #{record.activeid,jdbcType=BIGINT},
+      success = #{record.success,jdbcType=CHAR},
+      pushid = #{record.pushid,jdbcType=VARCHAR},
+      groupid = #{record.groupid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.LPushLog" >
+    update l_push_log
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readstatus != null" >
+        readstatus = #{readstatus,jdbcType=CHAR},
+      </if>
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null" >
+        deviceno = #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetype != null" >
+        devicetype = #{devicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fromsource != null" >
+        fromsource = #{fromsource,jdbcType=VARCHAR},
+      </if>
+      <if test="fromip != null" >
+        fromip = #{fromip,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="activeid != null" >
+        activeid = #{activeid,jdbcType=BIGINT},
+      </if>
+      <if test="success != null" >
+        success = #{success,jdbcType=CHAR},
+      </if>
+      <if test="pushid != null" >
+        pushid = #{pushid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.LPushLog" >
+    update l_push_log
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      readstatus = #{readstatus,jdbcType=CHAR},
+      mid = #{mid,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      deviceno = #{deviceno,jdbcType=VARCHAR},
+      devicetype = #{devicetype,jdbcType=VARCHAR},
+      fromsource = #{fromsource,jdbcType=VARCHAR},
+      fromip = #{fromip,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      activeid = #{activeid,jdbcType=BIGINT},
+      success = #{success,jdbcType=CHAR},
+      pushid = #{pushid,jdbcType=VARCHAR},
+      groupid = #{groupid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
