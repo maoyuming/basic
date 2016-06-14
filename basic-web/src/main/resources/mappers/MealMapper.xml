@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.duantuke.basic.mappers.MealMapper" >
+  
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Meal" >
     <result column="sku_id" property="skuId" jdbcType="BIGINT" />
     <result column="meat_vegetable" property="meatVegetable" jdbcType="VARCHAR" />
@@ -12,7 +13,16 @@
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -72,8 +82,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    sku_id, meat_vegetable, cost, price, suggest_price, people_number, create_time, create_by, 
-    update_time, update_by
+    m.sku_id, m.meat_vegetable, m.cost, m.price, m.suggest_price, m.people_number, m.create_time, m.create_by, 
+    m.update_time, m.update_by,s.`name`,s.`type`,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.MealExample" >
     select
@@ -81,7 +91,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from meal
+    from meal m left join sku s on m.sku_id = s.sku_id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
