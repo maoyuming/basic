@@ -26,6 +26,7 @@ public class HotelQueryBean implements Serializable{
     private Integer provinceCode;
 
     private Integer cityCode;
+    
 
     private Integer districtCode;
     
@@ -36,6 +37,7 @@ public class HotelQueryBean implements Serializable{
     private String sortorder; //默认升序
     private Double range;// 搜索范围，默认5000m
     
+    private String readonly;
     
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
@@ -157,4 +159,14 @@ public class HotelQueryBean implements Serializable{
 	public void setRange(Double range) {
 		this.range = range;
 	}
+
+	public String getReadonly() {
+		return readonly;
+	}
+
+	public void setReadonly(String readonly) {
+		this.readonly = readonly;
+	}
+	
+	
 }

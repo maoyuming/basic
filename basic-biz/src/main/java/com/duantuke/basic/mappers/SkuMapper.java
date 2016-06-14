@@ -10,7 +10,7 @@ public interface SkuMapper {
 
     int deleteByExample(SkuExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long skuId);
 
     int insert(Sku record);
 
@@ -18,7 +18,7 @@ public interface SkuMapper {
 
     List<Sku> selectByExample(SkuExample example);
 
-    Sku selectByPrimaryKey(Long id);
+    Sku selectByPrimaryKey(Long skuId);
 
     int updateByExampleSelective(@Param("record") Sku record, @Param("example") SkuExample example);
 

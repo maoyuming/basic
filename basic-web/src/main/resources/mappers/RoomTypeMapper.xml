@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.duantuke.basic.mappers.RoomTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RoomType" >
+<!--   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RoomType" > -->
+<!--     <result column="sku_id" property="skuId" jdbcType="BIGINT" /> -->
+<!--     <result column="room_num" property="roomNum" jdbcType="INTEGER" /> -->
+<!--     <result column="type" property="type" jdbcType="INTEGER" /> -->
+<!--     <result column="bedtype" property="bedtype" jdbcType="INTEGER" /> -->
+<!--     <result column="bedsize" property="bedsize" jdbcType="INTEGER" /> -->
+<!--     <result column="area" property="area" jdbcType="DECIMAL" /> -->
+<!--     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="create_by" property="createBy" jdbcType="VARCHAR" /> -->
+<!--     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" /> -->
+<!--     <result column="update_by" property="updateBy" jdbcType="VARCHAR" /> -->
+<!--   </resultMap> -->
+  
+  <resultMap id="BaseResultSkuMap" type="com.duantuke.basic.po.RoomType" >
     <result column="sku_id" property="skuId" jdbcType="BIGINT" />
     <result column="room_num" property="roomNum" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
@@ -12,7 +25,16 @@
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -72,16 +94,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    sku_id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
-    update_by
+    r.sku_id, r.room_num, r.type, r.bedtype, r.bedsize, r.area, r.create_time, r.create_by, r.update_time, 
+    r.update_by,s.`name`,s.`type`,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.RoomTypeExample" >
+  <select id="selectByExample" resultMap="BaseResultSkuMap" parameterType="com.duantuke.basic.po.RoomTypeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from room_type
+    from room_type r left join skus s on r.sku_id = s.sku_id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -176,7 +198,7 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.duantuke.basic.po.RoomTypeExample" resultType="java.lang.Integer" >
-    select count(*) from room_type
+    select count(*) from room_type 
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

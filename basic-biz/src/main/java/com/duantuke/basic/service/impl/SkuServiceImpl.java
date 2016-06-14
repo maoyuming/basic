@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +26,12 @@ import com.duantuke.basic.face.service.RoomTypeService;
 import com.duantuke.basic.face.service.SkuService;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.RoomType;
+import com.duantuke.basic.util.DateUtil;
+import com.google.gson.Gson;
 
 @Service
 public class SkuServiceImpl implements SkuService {
-
+	private static Logger logger = LoggerFactory.getLogger(SkuServiceImpl.class);
 	@Autowired
 	private RoomTypeService roomTypeService;
 	@Autowired
@@ -48,7 +52,7 @@ public class SkuServiceImpl implements SkuService {
 		
 		SkuInfo skuInfo = new SkuInfo();
 		skuInfo.setTotalPrice(totalPrice);
-		skuInfo.setSupplier(skuQueryIn.getHotelId()+"");
+		skuInfo.setSupplierId(skuQueryIn.getHotelId());
 		
 		if(skuQueryIn!=null){
 			if(MapUtils.isNotEmpty(skuQueryIn.getSkuMap())){
@@ -124,6 +128,16 @@ public class SkuServiceImpl implements SkuService {
 			}
 		
 		}
+		
+		//间页数
+		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime());
+		diff = diff-1;
+		if(diff<=0){
+			throw new OpenException("时间区间错误");
+		}
+		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
+		logger.info("总价："+totalPrice);
+		logger.info("查询返回值：{}",new Gson().toJson(roomTypeInfos));
 		return roomTypeInfos;
 	}
 	

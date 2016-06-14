@@ -1,7 +1,9 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,20 +59,39 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 	}
 	@Override
 	public List<RoomType> queryRoomtypeByHotleId(Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		RoomTypeExample roomTypeExample = new RoomTypeExample();
+		Criteria criteria =  roomTypeExample.createCriteria();
+		criteria.andSupplierIdEqualTo(hotelId);
+		return roomTypeMapper.selectByExample(roomTypeExample);
 	}
 
 	@Override
 	public RoomType queryRoomtypeByRoomtypeId(Long roomtypeId) {
-		// TODO Auto-generated method stub
+		RoomTypeExample roomTypeExample = new RoomTypeExample();
+		Criteria criteria =  roomTypeExample.createCriteria();
+		criteria.andSkuIdEqualTo(roomtypeId);
+		
+		List<RoomType> list = roomTypeMapper.selectByExample(roomTypeExample);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}
 		return null;
 	}
 
 	@Override
 	public List<RoomType> queryRoomtypeByRoomtypeIds(List<Long> roomtypeIds) {
-		// TODO Auto-generated method stub
-		return null;
+		List<RoomType> allList =new ArrayList<RoomType>();
+		for (Long roomtypeId : roomtypeIds) {
+			RoomTypeExample roomTypeExample = new RoomTypeExample();
+			Criteria criteria =  roomTypeExample.createCriteria();
+			criteria.andSkuIdEqualTo(roomtypeId);
+			
+			List<RoomType> list = roomTypeMapper.selectByExample(roomTypeExample);
+			if(CollectionUtils.isNotEmpty(list)){
+				allList.addAll(list);
+			}
+		}
+		return allList;
 	}
 	
 
