@@ -2,6 +2,7 @@ package com.duantuke.basic.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import com.duantuke.basic.face.service.MealService;
 import com.duantuke.basic.mappers.MealMapper;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.MealExample;
-import com.duantuke.basic.po.MealExample.Criteria;
 
 /**
  * @author he
@@ -48,8 +48,15 @@ public class MealServiceImpl implements MealService {
 	}
 
 	@Override
-	public Meal queryMealById(Long id) {
-		return mealMapper.selectByPrimaryKey(id);
+	public Meal queryMealById(Long skuid) {
+		MealExample example = new MealExample();
+		MealExample.Criteria criteria = example.createCriteria();
+		criteria.andSkuIdEqualTo(skuid);
+		List<Meal> list = mealMapper.selectByExample(example);
+		if(CollectionUtils.isNotEmpty(list)){
+			return list.get(0);
+		}
+		return null;
 	}
 
 	@Override

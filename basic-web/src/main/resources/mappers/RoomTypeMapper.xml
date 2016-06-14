@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.duantuke.basic.mappers.RoomTypeMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.RoomType" >
-    <id column="roomtype_id" property="roomtypeId" jdbcType="BIGINT" />
+    <result column="sku_id" property="skuId" jdbcType="BIGINT" />
     <result column="room_num" property="roomNum" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="bedtype" property="bedtype" jdbcType="INTEGER" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    roomtype_id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
+    sku_id, room_num, type, bedtype, bedsize, area, create_time, create_by, update_time, 
     update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.RoomTypeExample" >
@@ -92,16 +92,6 @@
       limit ${limitStart} , ${limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from room_type
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from room_type
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
-  </delete>
   <delete id="deleteByExample" parameterType="com.duantuke.basic.po.RoomTypeExample" >
     delete from room_type
     <if test="_parameter != null" >
@@ -109,11 +99,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.RoomType" >
-    insert into room_type (roomtype_id, room_num, type, 
+    insert into room_type (sku_id, room_num, type, 
       bedtype, bedsize, area, 
       create_time, create_by, update_time, 
       update_by)
-    values (#{roomtypeId,jdbcType=BIGINT}, #{roomNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+    values (#{skuId,jdbcType=BIGINT}, #{roomNum,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
       #{bedtype,jdbcType=INTEGER}, #{bedsize,jdbcType=INTEGER}, #{area,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR})
@@ -121,8 +111,8 @@
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.RoomType" >
     insert into room_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roomtypeId != null" >
-        roomtype_id,
+      <if test="skuId != null" >
+        sku_id,
       </if>
       <if test="roomNum != null" >
         room_num,
@@ -153,8 +143,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roomtypeId != null" >
-        #{roomtypeId,jdbcType=BIGINT},
+      <if test="skuId != null" >
+        #{skuId,jdbcType=BIGINT},
       </if>
       <if test="roomNum != null" >
         #{roomNum,jdbcType=INTEGER},
@@ -194,8 +184,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update room_type
     <set >
-      <if test="record.roomtypeId != null" >
-        roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
+      <if test="record.skuId != null" >
+        sku_id = #{record.skuId,jdbcType=BIGINT},
       </if>
       <if test="record.roomNum != null" >
         room_num = #{record.roomNum,jdbcType=INTEGER},
@@ -231,7 +221,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update room_type
-    set roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
+    set sku_id = #{record.skuId,jdbcType=BIGINT},
       room_num = #{record.roomNum,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       bedtype = #{record.bedtype,jdbcType=INTEGER},
@@ -244,51 +234,5 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.RoomType" >
-    update room_type
-    <set >
-      <if test="roomNum != null" >
-        room_num = #{roomNum,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="bedtype != null" >
-        bedtype = #{bedtype,jdbcType=INTEGER},
-      </if>
-      <if test="bedsize != null" >
-        bedsize = #{bedsize,jdbcType=INTEGER},
-      </if>
-      <if test="area != null" >
-        area = #{area,jdbcType=DECIMAL},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.RoomType" >
-    update room_type
-    set room_num = #{roomNum,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      bedtype = #{bedtype,jdbcType=INTEGER},
-      bedsize = #{bedsize,jdbcType=INTEGER},
-      area = #{area,jdbcType=DECIMAL},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR}
-    where roomtype_id = #{roomtypeId,jdbcType=BIGINT}
   </update>
 </mapper>

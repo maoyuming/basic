@@ -1,26 +1,23 @@
 package com.duantuke.basic.po;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Sku {
+public class Sku implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long id;
 
     private String name;
 
     private Integer type;
 
-    private BigDecimal cost;
-
-    private BigDecimal price;
-
-    private BigDecimal suggestPrice;
-
     private String pics;
 
     private String descrition;
 
-    private String supplier;
+    private Long supplierId;
+
+    private String supplierName;
 
     private String memo;
 
@@ -56,30 +53,6 @@ public class Sku {
         this.type = type;
     }
 
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getSuggestPrice() {
-        return suggestPrice;
-    }
-
-    public void setSuggestPrice(BigDecimal suggestPrice) {
-        this.suggestPrice = suggestPrice;
-    }
-
     public String getPics() {
         return pics;
     }
@@ -96,12 +69,20 @@ public class Sku {
         this.descrition = descrition == null ? null : descrition.trim();
     }
 
-    public String getSupplier() {
-        return supplier;
+    public Long getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier == null ? null : supplier.trim();
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName == null ? null : supplierName.trim();
     }
 
     public String getMemo() {

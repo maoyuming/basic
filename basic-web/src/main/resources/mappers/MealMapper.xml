@@ -2,21 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.duantuke.basic.mappers.MealMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Meal" >
-    <id column="meal_id" property="mealId" jdbcType="BIGINT" />
-    <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
-    <result column="meal_name" property="mealName" jdbcType="VARCHAR" />
+    <result column="sku_id" property="skuId" jdbcType="BIGINT" />
     <result column="meat_vegetable" property="meatVegetable" jdbcType="VARCHAR" />
-    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
     <result column="cost" property="cost" jdbcType="DECIMAL" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
     <result column="people_number" property="peopleNumber" jdbcType="INTEGER" />
-    <result column="pics" property="pics" jdbcType="VARCHAR" />
-    <result column="memo" property="memo" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
-    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
-    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    meal_id, hotel_id, meal_name, meat_vegetable, descrition, cost, price, suggest_price, 
-    people_number, pics, memo, createtime, createuser, updatetime, updateuser
+    sku_id, meat_vegetable, cost, price, suggest_price, people_number, create_time, create_by, 
+    update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.MealExample" >
     select
@@ -97,16 +92,6 @@
       limit ${limitStart} , ${limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from meal
-    where meal_id = #{mealId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from meal
-    where meal_id = #{mealId,jdbcType=BIGINT}
-  </delete>
   <delete id="deleteByExample" parameterType="com.duantuke.basic.po.MealExample" >
     delete from meal
     <if test="_parameter != null" >
@@ -114,36 +99,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.Meal" >
-    insert into meal (meal_id, hotel_id, meal_name, 
-      meat_vegetable, descrition, cost, 
+    insert into meal (sku_id, meat_vegetable, cost, 
       price, suggest_price, people_number, 
-      pics, memo, createtime, 
-      createuser, updatetime, updateuser
-      )
-    values (#{mealId,jdbcType=BIGINT}, #{hotelId,jdbcType=BIGINT}, #{mealName,jdbcType=VARCHAR}, 
-      #{meatVegetable,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      create_time, create_by, update_time, 
+      update_by)
+    values (#{skuId,jdbcType=BIGINT}, #{meatVegetable,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
       #{price,jdbcType=DECIMAL}, #{suggestPrice,jdbcType=DECIMAL}, #{peopleNumber,jdbcType=INTEGER}, 
-      #{pics,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.Meal" >
     insert into meal
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="mealId != null" >
-        meal_id,
-      </if>
-      <if test="hotelId != null" >
-        hotel_id,
-      </if>
-      <if test="mealName != null" >
-        meal_name,
+      <if test="skuId != null" >
+        sku_id,
       </if>
       <if test="meatVegetable != null" >
         meat_vegetable,
-      </if>
-      <if test="descrition != null" >
-        descrition,
       </if>
       <if test="cost != null" >
         cost,
@@ -157,40 +129,25 @@
       <if test="peopleNumber != null" >
         people_number,
       </if>
-      <if test="pics != null" >
-        pics,
+      <if test="createTime != null" >
+        create_time,
       </if>
-      <if test="memo != null" >
-        memo,
+      <if test="createBy != null" >
+        create_by,
       </if>
-      <if test="createtime != null" >
-        createtime,
+      <if test="updateTime != null" >
+        update_time,
       </if>
-      <if test="createuser != null" >
-        createuser,
-      </if>
-      <if test="updatetime != null" >
-        updatetime,
-      </if>
-      <if test="updateuser != null" >
-        updateuser,
+      <if test="updateBy != null" >
+        update_by,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="mealId != null" >
-        #{mealId,jdbcType=BIGINT},
-      </if>
-      <if test="hotelId != null" >
-        #{hotelId,jdbcType=BIGINT},
-      </if>
-      <if test="mealName != null" >
-        #{mealName,jdbcType=VARCHAR},
+      <if test="skuId != null" >
+        #{skuId,jdbcType=BIGINT},
       </if>
       <if test="meatVegetable != null" >
         #{meatVegetable,jdbcType=VARCHAR},
-      </if>
-      <if test="descrition != null" >
-        #{descrition,jdbcType=VARCHAR},
       </if>
       <if test="cost != null" >
         #{cost,jdbcType=DECIMAL},
@@ -204,23 +161,17 @@
       <if test="peopleNumber != null" >
         #{peopleNumber,jdbcType=INTEGER},
       </if>
-      <if test="pics != null" >
-        #{pics,jdbcType=VARCHAR},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="memo != null" >
-        #{memo,jdbcType=VARCHAR},
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createuser != null" >
-        #{createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateuser != null" >
-        #{updateuser,jdbcType=VARCHAR},
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -233,20 +184,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update meal
     <set >
-      <if test="record.mealId != null" >
-        meal_id = #{record.mealId,jdbcType=BIGINT},
-      </if>
-      <if test="record.hotelId != null" >
-        hotel_id = #{record.hotelId,jdbcType=BIGINT},
-      </if>
-      <if test="record.mealName != null" >
-        meal_name = #{record.mealName,jdbcType=VARCHAR},
+      <if test="record.skuId != null" >
+        sku_id = #{record.skuId,jdbcType=BIGINT},
       </if>
       <if test="record.meatVegetable != null" >
         meat_vegetable = #{record.meatVegetable,jdbcType=VARCHAR},
-      </if>
-      <if test="record.descrition != null" >
-        descrition = #{record.descrition,jdbcType=VARCHAR},
       </if>
       <if test="record.cost != null" >
         cost = #{record.cost,jdbcType=DECIMAL},
@@ -260,23 +202,17 @@
       <if test="record.peopleNumber != null" >
         people_number = #{record.peopleNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.pics != null" >
-        pics = #{record.pics,jdbcType=VARCHAR},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.memo != null" >
-        memo = #{record.memo,jdbcType=VARCHAR},
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
       </if>
-      <if test="record.createtime != null" >
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.createuser != null" >
-        createuser = #{record.createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updatetime != null" >
-        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateuser != null" >
-        updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      <if test="record.updateBy != null" >
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -285,89 +221,18 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update meal
-    set meal_id = #{record.mealId,jdbcType=BIGINT},
-      hotel_id = #{record.hotelId,jdbcType=BIGINT},
-      meal_name = #{record.mealName,jdbcType=VARCHAR},
+    set sku_id = #{record.skuId,jdbcType=BIGINT},
       meat_vegetable = #{record.meatVegetable,jdbcType=VARCHAR},
-      descrition = #{record.descrition,jdbcType=VARCHAR},
       cost = #{record.cost,jdbcType=DECIMAL},
       price = #{record.price,jdbcType=DECIMAL},
       suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
       people_number = #{record.peopleNumber,jdbcType=INTEGER},
-      pics = #{record.pics,jdbcType=VARCHAR},
-      memo = #{record.memo,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      createuser = #{record.createuser,jdbcType=VARCHAR},
-      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.Meal" >
-    update meal
-    <set >
-      <if test="hotelId != null" >
-        hotel_id = #{hotelId,jdbcType=BIGINT},
-      </if>
-      <if test="mealName != null" >
-        meal_name = #{mealName,jdbcType=VARCHAR},
-      </if>
-      <if test="meatVegetable != null" >
-        meat_vegetable = #{meatVegetable,jdbcType=VARCHAR},
-      </if>
-      <if test="descrition != null" >
-        descrition = #{descrition,jdbcType=VARCHAR},
-      </if>
-      <if test="cost != null" >
-        cost = #{cost,jdbcType=DECIMAL},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="suggestPrice != null" >
-        suggest_price = #{suggestPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="peopleNumber != null" >
-        people_number = #{peopleNumber,jdbcType=INTEGER},
-      </if>
-      <if test="pics != null" >
-        pics = #{pics,jdbcType=VARCHAR},
-      </if>
-      <if test="memo != null" >
-        memo = #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createuser != null" >
-        createuser = #{createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="updatetime != null" >
-        updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateuser != null" >
-        updateuser = #{updateuser,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where meal_id = #{mealId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.Meal" >
-    update meal
-    set hotel_id = #{hotelId,jdbcType=BIGINT},
-      meal_name = #{mealName,jdbcType=VARCHAR},
-      meat_vegetable = #{meatVegetable,jdbcType=VARCHAR},
-      descrition = #{descrition,jdbcType=VARCHAR},
-      cost = #{cost,jdbcType=DECIMAL},
-      price = #{price,jdbcType=DECIMAL},
-      suggest_price = #{suggestPrice,jdbcType=DECIMAL},
-      people_number = #{peopleNumber,jdbcType=INTEGER},
-      pics = #{pics,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      createuser = #{createuser,jdbcType=VARCHAR},
-      updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{updateuser,jdbcType=VARCHAR}
-    where meal_id = #{mealId,jdbcType=BIGINT}
   </update>
 </mapper>

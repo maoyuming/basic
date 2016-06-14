@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Customer  implements Serializable{
-    private Long customerId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long customerId;
 
     private String loginName;
 

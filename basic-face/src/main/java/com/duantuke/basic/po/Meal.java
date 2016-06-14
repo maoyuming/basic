@@ -5,18 +5,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Meal implements Serializable{
-	
 	private static final long serialVersionUID = 1L;
-
-	private Long mealId;
-
-    private Long hotelId;
-
-    private String mealName;
+	
+    private Long skuId;
 
     private String meatVegetable;
-
-    private String descrition;
 
     private BigDecimal cost;
 
@@ -26,40 +19,20 @@ public class Meal implements Serializable{
 
     private Integer peopleNumber;
 
-    private String pics;
+    private Date createTime;
 
-    private String memo;
+    private String createBy;
 
-    private Date createtime;
+    private Date updateTime;
 
-    private String createuser;
+    private String updateBy;
 
-    private Date updatetime;
-
-    private String updateuser;
-
-    public Long getMealId() {
-        return mealId;
+    public Long getSkuId() {
+        return skuId;
     }
 
-    public void setMealId(Long mealId) {
-        this.mealId = mealId;
-    }
-
-    public Long getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(Long hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    public String getMealName() {
-        return mealName;
-    }
-
-    public void setMealName(String mealName) {
-        this.mealName = mealName == null ? null : mealName.trim();
+    public void setSkuId(Long skuId) {
+        this.skuId = skuId;
     }
 
     public String getMeatVegetable() {
@@ -68,14 +41,6 @@ public class Meal implements Serializable{
 
     public void setMeatVegetable(String meatVegetable) {
         this.meatVegetable = meatVegetable == null ? null : meatVegetable.trim();
-    }
-
-    public String getDescrition() {
-        return descrition;
-    }
-
-    public void setDescrition(String descrition) {
-        this.descrition = descrition == null ? null : descrition.trim();
     }
 
     public BigDecimal getCost() {
@@ -110,51 +75,35 @@ public class Meal implements Serializable{
         this.peopleNumber = peopleNumber;
     }
 
-    public String getPics() {
-        return pics;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setPics(String pics) {
-        this.pics = pics == null ? null : pics.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public String getMemo() {
-        return memo;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy == null ? null : createBy.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public String getCreateuser() {
-        return createuser;
+    public String getUpdateBy() {
+        return updateBy;
     }
 
-    public void setCreateuser(String createuser) {
-        this.createuser = createuser == null ? null : createuser.trim();
-    }
-
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    public String getUpdateuser() {
-        return updateuser;
-    }
-
-    public void setUpdateuser(String updateuser) {
-        this.updateuser = updateuser == null ? null : updateuser.trim();
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy == null ? null : updateBy.trim();
     }
 }

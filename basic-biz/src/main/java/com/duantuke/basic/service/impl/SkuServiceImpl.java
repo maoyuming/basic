@@ -113,7 +113,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
-					roomTypeInfo.setPrices(priceMap.get(roomType.getRoomtypeId()));
+					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 						for (Entry<String, BigDecimal> entry : roomTypeInfo.getPrices().entrySet()) {
 							if(entry.getValue()!=null){

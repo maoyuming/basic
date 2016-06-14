@@ -48,7 +48,7 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 		try {
 			RoomTypeExample roomTypeExample = new RoomTypeExample();
 			Criteria criteria =  roomTypeExample.createCriteria();
-			criteria.andRoomtypeIdEqualTo(roomType.getRoomtypeId());
+			criteria.andSkuIdEqualTo(roomType.getSkuId());
 			return roomTypeMapper.selectByExample(roomTypeExample);
 		} catch (Exception e) {
 			RoomtypeServiceImpl.logger.error(RoomtypeServiceImpl.class.getName() + ":queryByHotelId error", e);

@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserToken implements Serializable{
-    private Long tokenId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long tokenId;
 
     private Long mid;
 
