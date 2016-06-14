@@ -10,7 +10,7 @@ import java.util.Map;
  * @author tankai
  *
  */
-public class SkuQueryIn implements Serializable{
+public class SkuRequest implements Serializable{
 	/**
 	 * 
 	 */

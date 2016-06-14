@@ -4,8 +4,8 @@
  */
 package com.duantuke.basic.face.service;
 
-import com.duantuke.basic.face.bean.SkuInfo;
-import com.duantuke.basic.face.bean.SkuQueryIn;
+import com.duantuke.basic.face.bean.SkuRequest;
+import com.duantuke.basic.face.bean.SkuResponse;
 
 
 /**
@@ -19,6 +19,6 @@ public interface SkuService {
      * 查询商品sku
      * @return
      */
-    public SkuInfo querySku(SkuQueryIn skuQueryIn);
+    public SkuResponse querySku(SkuRequest skuQueryIn);
     
 }
