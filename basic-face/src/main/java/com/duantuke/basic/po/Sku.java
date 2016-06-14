@@ -1,8 +1,9 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Sku {
+public class Sku implements Serializable{
     private Long skuId;
 
     private String name;

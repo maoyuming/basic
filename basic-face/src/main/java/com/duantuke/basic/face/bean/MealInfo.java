@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MealInfo implements Serializable{
+import com.duantuke.basic.po.Sku;
+
+public class MealInfo extends Sku implements Serializable{
 	private static final long serialVersionUID = 1L;
     private Long mealId;
 
