@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
+import com.duantuke.basic.face.esbean.output.MealOutputBean;
 import com.duantuke.basic.face.esbean.output.SightOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
+import com.duantuke.basic.face.esbean.query.MealQueryBean;
 import com.duantuke.basic.face.esbean.query.SightQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
 import com.duantuke.basic.face.service.JourneySearchService;
+import com.duantuke.basic.face.service.MealSearchService;
 import com.duantuke.basic.face.service.SightSearchService;
 import com.google.gson.Gson;
 import com.mk.jdbc.utils.MD5Util;
@@ -35,6 +38,8 @@ public class UtilController extends BaseController {
 	private HotelSearchService hotelSearchService;
 	@Autowired
 	private JourneySearchService journeySearchService;
+	@Autowired
+	private MealSearchService mealSearchService;
 	
 	String AUTH = "5416d7cd6ef195a0f7622a9c56b55e84";
 	
@@ -240,6 +245,69 @@ public class UtilController extends BaseController {
 	
 	/**-------------------------------------------------------------游记相关end---------------------------------------------------------------*/
 
+	/**-------------------------------------------------------------餐饮相关begin---------------------------------------------------------------*/
+	
+	/**
+	 * @return 初始化餐饮es
+	 */
+	@RequestMapping(value = "/initmeales", method = RequestMethod.POST)
+	public ResponseEntity<String> initmeales(Long mealId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			mealSearchService.initEs(mealId);
+			result = "initmeales完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("initmeales error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+
+	/**
+	 * @return 清空游记es
+	 */
+	@RequestMapping(value = "/delmeales", method = RequestMethod.POST)
+	public ResponseEntity<String> delmeales(Long mealId,String auth) {
+		
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+
+		try {
+			if(mealId!=null){
+				mealSearchService.delEsByMealId(mealId);
+			}else{
+				mealSearchService.delEs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("delmeales error", e);
+		}
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+
+	/**
+	 * @param mealQueryBean
+	 * @param auth
+	 * 搜索餐饮es
+	 */
+	@RequestMapping(value = "/searchMealsFromEs", method = RequestMethod.POST)
+	public ResponseEntity<String> searchMealsFromEs(MealQueryBean mealQueryBean, String auth) {
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		List<MealOutputBean> list = mealSearchService.searchMealsFromEs(mealQueryBean);
+		String result = new Gson().toJson(list);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+	/**-------------------------------------------------------------餐饮相关end---------------------------------------------------------------*/
+	
+	
 	/**
 	 * @param auth
 	 * 校验auth

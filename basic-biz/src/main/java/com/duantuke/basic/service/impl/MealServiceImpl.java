@@ -8,17 +8,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.duantuke.basic.face.service.MealService;
+import com.duantuke.basic.esbean.input.MealInputBean;
 import com.duantuke.basic.mappers.MealMapper;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.MealExample;
+import com.duantuke.basic.service.IMealService;
 
 /**
  * @author he
  * 饮食相关接口
  */
 @Service
-public class MealServiceImpl implements MealService {
+public class MealServiceImpl implements IMealService {
 	
 	private static Logger logger = LoggerFactory.getLogger(MealServiceImpl.class);
 	@Autowired
@@ -75,6 +76,11 @@ public class MealServiceImpl implements MealService {
 	public List<Meal> queryMealByMealIds(List<Long> mealIds) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<MealInputBean> queryEsInputMeals(Long mealId) {
+		return mealMapper.queryEsInputMeals(mealId);
 	}
 	
 

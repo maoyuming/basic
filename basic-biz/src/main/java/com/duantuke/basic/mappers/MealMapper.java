@@ -1,5 +1,6 @@
 package com.duantuke.basic.mappers;
 
+import com.duantuke.basic.esbean.input.MealInputBean;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.MealExample;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface MealMapper {
     int updateByExampleSelective(@Param("record") Meal record, @Param("example") MealExample example);
 
     int updateByExample(@Param("record") Meal record, @Param("example") MealExample example);
+    
+    List<MealInputBean> queryEsInputMeals(@Param("mealId") Long mealId);
 }
