@@ -21,7 +21,6 @@
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
-<<<<<<< HEAD
   <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.MealInputBean" >
     <result column="sku_id" property="skuId" jdbcType="BIGINT" />
     <result column="meat_vegetable" property="meatVegetable" jdbcType="VARCHAR" />
@@ -45,10 +44,6 @@
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
-=======
-  
-  
->>>>>>> 126dc436f1c67ae9ec12c18bee9bce26825fe73e
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
