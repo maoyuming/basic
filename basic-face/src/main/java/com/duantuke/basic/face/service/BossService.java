@@ -3,6 +3,7 @@ package com.duantuke.basic.face.service;
 import java.util.List;
 
 import com.duantuke.basic.face.base.RetInfo;
+import com.duantuke.basic.face.bean.BossParam;
 import com.duantuke.basic.po.Boss;
 import com.duantuke.basic.po.Hotel;
 
@@ -23,7 +24,7 @@ public interface BossService {
 	 * @param Boss
 	 * @return
 	 */
-	public RetInfo<Boolean> register(Boss boss);
+	public RetInfo<Boolean> register(BossParam boss);
 	
 
 	/**
