@@ -1,9 +1,11 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class DailyRate {
+public class DailyRate implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long dailyRateId;
 
     private Long hotelId;

@@ -10,7 +10,11 @@ import java.util.List;
  *
  */
 public class SkuInfo implements Serializable{
-//	private Long skuId;//skuid  包括房型id，餐饮id等,如果不传，返回hotelid下所有房型、套餐
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//	private Long skuId;//skuid  包括房型id，餐饮id等,如果不传，返回hotelid下所有房型、套餐
 	private String supplier;//暂时只有酒店id,
 //	private Integer type;//sku类型，1房型，2餐饮
 //	private String skuName;//商品名称

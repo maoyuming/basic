@@ -1,8 +1,10 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RecommendItem {
+public class RecommendItem implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long recommendItemId;
 
     private Long recommendDetailId;

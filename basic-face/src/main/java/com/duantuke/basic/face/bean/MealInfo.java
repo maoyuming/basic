@@ -1,9 +1,11 @@
 package com.duantuke.basic.face.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MealInfo {
+public class MealInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long mealId;
 
     private Long hotelId;

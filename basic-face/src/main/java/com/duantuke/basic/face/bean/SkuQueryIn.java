@@ -11,6 +11,10 @@ import java.util.Map;
  *
  */
 public class SkuQueryIn implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<Integer, List<Long>> skuMap;//key :sku类型，1房型，2餐饮 ;value:skuid集合  包括房型id，餐饮id等
 	private Long hotelId;//酒店id
 	private Date beginTime;//入住预抵时间

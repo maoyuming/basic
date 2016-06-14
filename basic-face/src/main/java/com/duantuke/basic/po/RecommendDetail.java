@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class RecommendDetail implements Serializable {
-    private Long recommendDetailId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long recommendDetailId;
 
     private String title;
 

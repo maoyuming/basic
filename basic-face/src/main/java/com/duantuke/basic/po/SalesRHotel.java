@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SalesRHotel  implements Serializable{
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Long saleId;
 

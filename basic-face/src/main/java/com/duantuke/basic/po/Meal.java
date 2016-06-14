@@ -1,9 +1,12 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Meal {
+public class Meal implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
     private Long skuId;
 
     private String meatVegetable;

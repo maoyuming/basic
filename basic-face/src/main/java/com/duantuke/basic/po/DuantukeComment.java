@@ -1,8 +1,10 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DuantukeComment {
+public class DuantukeComment implements Serializable{
+	private static final long serialVersionUID = 1L;
     private Long duantukeCommentId;
 
     private Long fid;
