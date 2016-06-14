@@ -291,4 +291,31 @@
       updateuser = #{updateuser,jdbcType=VARCHAR}
     where weekend_rate_id = #{weekendRateId,jdbcType=BIGINT}
   </update>
+  
+  
+   <select id="findWeekendRates" parameterType="map" resultMap="BaseResultMap">
+  	select * from weekend_rate 
+  	where 
+  	(
+		<if test="hotelid != null " >
+        hotel_id = #{hotelId,jdbcType=BIGINT}
+    	</if>
+    	<if test="hotelid != null and roomtypeids != null and roomtypeids.size() > 0" >
+    	or
+    	</if>
+    	<if test="roomtypeIds != null and roomtypeIds.size() > 0" >
+    	roomtype_id in  
+		    <foreach item="roomtypeid" collection="roomtypeids" separator="," open="(" close=")" index="">  
+		      #{roomtypeid}  
+		    </foreach>
+	    </if>
+    )
+	<if test="weeks != null and weeks.size() > 0" >
+	and week in
+	    <foreach item="week" collection="weeks" separator="," open="(" close=")" index="">  
+	      #{week}  
+	    </foreach>
+	</if>
+  </select>
+  
 </mapper>
