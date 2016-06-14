@@ -116,7 +116,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from meal m left join sku s on m.sku_id = s.sku_id
+    from meal m left join skus s on m.sku_id = s.sku_id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

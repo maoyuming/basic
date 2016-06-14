@@ -50,6 +50,7 @@ public class SkuServiceImpl implements SkuService {
      */
 	@Override
 	public SkuResponse querySku(SkuRequest skuQueryIn) {
+		logger.info("查询sku开始，{}",new Gson().toJson(skuQueryIn));
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		
 		SkuResponse skuResponse = new SkuResponse();
@@ -118,10 +119,14 @@ public class SkuServiceImpl implements SkuService {
 						break;
 					}
 				}
+			}else{
+				throw new OpenException("sku列表为空");
 			}
+		}else{
+			throw new OpenException("sku列表为空");
 		}
-		
-		return null;
+		logger.info("查询sku结束，{}",new Gson().toJson(skuResponse));
+		return skuResponse;
 	}
 	
 	/**

@@ -1,9 +1,10 @@
 package com.duantuke.basic.face.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class SkuResponse {
+public class SkuResponse implements Serializable{
 	private Long supplierId;//暂时只有酒店id,
 	private String supplierName;//暂时只有酒店id,
 	private BigDecimal totalPrice;//订单总价

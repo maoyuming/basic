@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.IsvisibleEnum;
+import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.mappers.DailyRateMapper;
 import com.duantuke.basic.mappers.RackRateMapper;
@@ -47,6 +48,14 @@ public class PriceServiceImpl implements PriceService{
 	@Override
 	public Map<Long, Map<String, BigDecimal>> queryHotelPrices(Long hotelId,
 			Date begintime, Date endtime, List<Long> roomtypeIds) {
+		if(begintime==null){
+			throw new OpenException("开始时间为空");
+		}
+		if(endtime==null){
+			throw new OpenException("结束时间为空");
+		}
+		
+		
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();
 		// 特殊价
