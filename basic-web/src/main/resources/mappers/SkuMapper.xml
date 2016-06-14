@@ -5,12 +5,10 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="cost" property="cost" jdbcType="DECIMAL" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
     <result column="pics" property="pics" jdbcType="VARCHAR" />
     <result column="descrition" property="descrition" jdbcType="VARCHAR" />
-    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
@@ -76,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, type, cost, price, suggest_price, pics, descrition, supplier, memo, create_time, 
+    id, name, type, pics, descrition, supplier_id, supplier_name, memo, create_time, 
     create_by, update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.SkuExample" >
@@ -114,15 +112,15 @@
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.Sku" >
     insert into skus (id, name, type, 
-      cost, price, suggest_price, 
-      pics, descrition, supplier, 
-      memo, create_time, create_by, 
-      update_time, update_by)
+      pics, descrition, supplier_id, 
+      supplier_name, memo, create_time, 
+      create_by, update_time, update_by
+      )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{cost,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{suggestPrice,jdbcType=DECIMAL}, 
-      #{pics,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
-      #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+      #{pics,jdbcType=VARCHAR}, #{descrition,jdbcType=VARCHAR}, #{supplierId,jdbcType=BIGINT}, 
+      #{supplierName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.Sku" >
     insert into skus
@@ -136,23 +134,17 @@
       <if test="type != null" >
         type,
       </if>
-      <if test="cost != null" >
-        cost,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="suggestPrice != null" >
-        suggest_price,
-      </if>
       <if test="pics != null" >
         pics,
       </if>
       <if test="descrition != null" >
         descrition,
       </if>
-      <if test="supplier != null" >
-        supplier,
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="supplierName != null" >
+        supplier_name,
       </if>
       <if test="memo != null" >
         memo,
@@ -180,23 +172,17 @@
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="cost != null" >
-        #{cost,jdbcType=DECIMAL},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="suggestPrice != null" >
-        #{suggestPrice,jdbcType=DECIMAL},
-      </if>
       <if test="pics != null" >
         #{pics,jdbcType=VARCHAR},
       </if>
       <if test="descrition != null" >
         #{descrition,jdbcType=VARCHAR},
       </if>
-      <if test="supplier != null" >
-        #{supplier,jdbcType=VARCHAR},
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
       </if>
       <if test="memo != null" >
         #{memo,jdbcType=VARCHAR},
@@ -233,23 +219,17 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.cost != null" >
-        cost = #{record.cost,jdbcType=DECIMAL},
-      </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=DECIMAL},
-      </if>
-      <if test="record.suggestPrice != null" >
-        suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
-      </if>
       <if test="record.pics != null" >
         pics = #{record.pics,jdbcType=VARCHAR},
       </if>
       <if test="record.descrition != null" >
         descrition = #{record.descrition,jdbcType=VARCHAR},
       </if>
-      <if test="record.supplier != null" >
-        supplier = #{record.supplier,jdbcType=VARCHAR},
+      <if test="record.supplierId != null" >
+        supplier_id = #{record.supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.supplierName != null" >
+        supplier_name = #{record.supplierName,jdbcType=VARCHAR},
       </if>
       <if test="record.memo != null" >
         memo = #{record.memo,jdbcType=VARCHAR},
@@ -276,12 +256,10 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
-      cost = #{record.cost,jdbcType=DECIMAL},
-      price = #{record.price,jdbcType=DECIMAL},
-      suggest_price = #{record.suggestPrice,jdbcType=DECIMAL},
       pics = #{record.pics,jdbcType=VARCHAR},
       descrition = #{record.descrition,jdbcType=VARCHAR},
-      supplier = #{record.supplier,jdbcType=VARCHAR},
+      supplier_id = #{record.supplierId,jdbcType=BIGINT},
+      supplier_name = #{record.supplierName,jdbcType=VARCHAR},
       memo = #{record.memo,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_by = #{record.createBy,jdbcType=VARCHAR},
@@ -300,23 +278,17 @@
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="cost != null" >
-        cost = #{cost,jdbcType=DECIMAL},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="suggestPrice != null" >
-        suggest_price = #{suggestPrice,jdbcType=DECIMAL},
-      </if>
       <if test="pics != null" >
         pics = #{pics,jdbcType=VARCHAR},
       </if>
       <if test="descrition != null" >
         descrition = #{descrition,jdbcType=VARCHAR},
       </if>
-      <if test="supplier != null" >
-        supplier = #{supplier,jdbcType=VARCHAR},
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="supplierName != null" >
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
       </if>
       <if test="memo != null" >
         memo = #{memo,jdbcType=VARCHAR},
@@ -340,12 +312,10 @@
     update skus
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      cost = #{cost,jdbcType=DECIMAL},
-      price = #{price,jdbcType=DECIMAL},
-      suggest_price = #{suggestPrice,jdbcType=DECIMAL},
       pics = #{pics,jdbcType=VARCHAR},
       descrition = #{descrition,jdbcType=VARCHAR},
-      supplier = #{supplier,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=BIGINT},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
