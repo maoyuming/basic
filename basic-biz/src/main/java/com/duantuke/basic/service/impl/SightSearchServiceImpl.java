@@ -1,6 +1,7 @@
 package com.duantuke.basic.service.impl;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
@@ -16,6 +17,7 @@ import com.duantuke.basic.face.service.SightSearchService;
 import com.duantuke.basic.service.ISightService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.elasticsearch.SightElasticsearchUtil;
+import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**
@@ -60,11 +62,25 @@ public class SightSearchServiceImpl implements SightSearchService {
 	public void initEs(Long sightId) {
 		logger.info("SightSearchServiceImpl initEs begin:{}", sightId);
 		List<SightInputBean> esInputlist = isightService.queryEsInputSights(sightId);
-		for (SightInputBean sightInputBean:esInputlist) {
-			if ((sightInputBean.getLatitude() != null) && (sightInputBean.getLongitude() != null)) {
-				sightInputBean.setPin(new GeoPoint(sightInputBean.getLatitude().doubleValue(), sightInputBean.getLongitude().doubleValue()));
-			}
-			sightInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		for (final SightInputBean sightInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if ((sightInputBean.getLatitude() != null) && (sightInputBean.getLongitude() != null)) {
+							sightInputBean.setPin(new GeoPoint(sightInputBean.getLatitude().doubleValue(), sightInputBean.getLongitude().doubleValue()));
+						}
+						sightInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+					}catch (Exception e) {
+						logger.error("SightSearchServiceImpl initEs error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+			
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("SightSearchServiceImpl initEs end:{}", sightId);

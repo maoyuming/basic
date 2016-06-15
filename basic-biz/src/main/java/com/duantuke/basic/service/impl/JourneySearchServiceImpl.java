@@ -3,8 +3,10 @@ package com.duantuke.basic.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.common.geo.GeoPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,11 @@ import com.duantuke.basic.face.service.JourneySearchService;
 import com.duantuke.basic.face.service.TagService;
 import com.duantuke.basic.po.JourneyRHotel;
 import com.duantuke.basic.po.JourneyRSight;
+import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IJourneyService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.elasticsearch.JourneyElasticsearchUtil;
+import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**
@@ -64,23 +68,35 @@ public class JourneySearchServiceImpl implements JourneySearchService {
 	public void initEs(Long journeyId) {
 		logger.info("JourneySearchServiceImpl initEs begin:{}", journeyId);
 		List<JourneyInputBean> esInputlist = ijourneyService.queryEsInputJourneys(journeyId);
-		
-		// TODO 应改为多线程
-		for (JourneyInputBean journeyInputBean:esInputlist) {
-			journeyInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
-			//保存关联关系
-			List<JourneyRHotel> hotellist = ijourneyService.queryHotelIdsByJourneyId(journeyInputBean.getJourneyId());
-			List<JourneyRSight> sightlist = ijourneyService.queryHotelIdsBySightId(journeyInputBean.getJourneyId());
-			for (JourneyRHotel hotel:hotellist) {
-				Map<String,String> map = new HashMap<String,String>();
-				map.put("hotelId", hotel.getHotelId()+"");
-				journeyInputBean.getHotelIds().add(map);
-			}
-			for (JourneyRSight sight:sightlist) {
-				Map<String,String> map = new HashMap<String,String>();
-				map.put("sightId", sight.getSightId()+"");
-				journeyInputBean.getSightIds().add(map);
-			}
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		// 为多线程
+		for (final JourneyInputBean journeyInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						journeyInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+						//保存关联关系
+						List<JourneyRHotel> hotellist = ijourneyService.queryHotelIdsByJourneyId(journeyInputBean.getJourneyId());
+						List<JourneyRSight> sightlist = ijourneyService.queryHotelIdsBySightId(journeyInputBean.getJourneyId());
+						for (JourneyRHotel hotel:hotellist) {
+							Map<String,String> map = new HashMap<String,String>();
+							map.put("hotelId", hotel.getHotelId()+"");
+							journeyInputBean.getHotelIds().add(map);
+						}
+						for (JourneyRSight sight:sightlist) {
+							Map<String,String> map = new HashMap<String,String>();
+							map.put("sightId", sight.getSightId()+"");
+							journeyInputBean.getSightIds().add(map);
+						}
+					}catch (Exception e) {
+						logger.error("JourneySearchServiceImpl initEs error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("JourneySearchServiceImpl initEs end:{}", journeyId);

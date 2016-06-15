@@ -2,6 +2,7 @@ package com.duantuke.basic.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
@@ -19,6 +20,7 @@ import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.elasticsearch.HotelElasticsearchUtil;
+import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**
@@ -66,25 +68,38 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		logger.info("HotelSearchServiceImpl initEs begin:{}", hotelId);
 		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
 		
-		// TODO 应改为多线程
-		for (HotelInputBean hotelInputBean:esInputlist) {
-			if ((hotelInputBean.getLatitude() != null) && (hotelInputBean.getLongitude() != null)) {
-				hotelInputBean.setPin(new GeoPoint(hotelInputBean.getLatitude().doubleValue(), hotelInputBean.getLongitude().doubleValue()));
-			}
-			hotelInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
-			//保存tag
-			List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
-			for (Tag tag:taglist) {
-				if(tag.getTagGroupId().equals(1l)){
-					hotelInputBean.getTaggroup_1().add(tag);
-				}else if(tag.getTagGroupId().equals(2l)){
-					hotelInputBean.getTaggroup_2().add(tag);
-				}else if(tag.getTagGroupId().equals(3l)){
-					hotelInputBean.getTaggroup_3().add(tag);
-				}else if(tag.getTagGroupId().equals(4l)){
-					hotelInputBean.getTaggroup_4().add(tag);
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		//多线程
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if ((hotelInputBean.getLatitude() != null) && (hotelInputBean.getLongitude() != null)) {
+							hotelInputBean.setPin(new GeoPoint(hotelInputBean.getLatitude().doubleValue(), hotelInputBean.getLongitude().doubleValue()));
+						}
+						hotelInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
+						//保存tag
+						List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
+						for (Tag tag:taglist) {
+							if(tag.getTagGroupId().equals(1l)){
+								hotelInputBean.getTaggroup_1().add(tag);
+							}else if(tag.getTagGroupId().equals(2l)){
+								hotelInputBean.getTaggroup_2().add(tag);
+							}else if(tag.getTagGroupId().equals(3l)){
+								hotelInputBean.getTaggroup_3().add(tag);
+							}else if(tag.getTagGroupId().equals(4l)){
+								hotelInputBean.getTaggroup_4().add(tag);
+							}
+						}
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl initEs error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
 				}
-			}
+			});
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
