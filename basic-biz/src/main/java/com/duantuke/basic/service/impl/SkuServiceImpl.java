@@ -175,7 +175,7 @@ public class SkuServiceImpl implements SkuService {
 		}
 		
 		//间页数
-		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime());
+		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), DateUtil.DateFormat);
 		diff = diff-1;
 		if(diff<=0){
 			throw new OpenException("时间区间错误");

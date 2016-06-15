@@ -117,6 +117,23 @@ public class DateUtil {
 	    Long days = diff / (1000 * 60 * 60 * 24);
 	    return days.intValue();
 	}
+	
+	/**
+	 * 计算两个时间的时间差
+	 * @param day1
+	 * @param day2
+	 * @return
+	 */
+	public static int diffDay(String days1, String days2,String pattern) {
+		
+
+		Date day1 = DateUtil.strToDate(days1, pattern);
+		Date day2 = DateUtil.strToDate(days2, pattern);
+		
+		long diff = day2.getTime() - day1.getTime();
+		Long days = diff / (1000 * 60 * 60 * 24);
+		return days.intValue();
+	}
 
 	/**
 	 * 获取零点日期
