@@ -3,7 +3,7 @@
 <mapper namespace="com.duantuke.basic.mappers.DistrictMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.District" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="cityid" property="cityid" jdbcType="INTEGER" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
@@ -108,7 +108,7 @@
     insert into district (id, code, name, 
       cityid, sort, latitude, 
       longitude)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{cityid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DECIMAL}, 
       #{longitude,jdbcType=DECIMAL})
   </insert>
@@ -142,7 +142,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
+        #{code,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -174,7 +174,7 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.code != null" >
-        code = #{record.code,jdbcType=VARCHAR},
+        code = #{record.code,jdbcType=BIGINT},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
   <update id="updateByExample" parameterType="map" >
     update district
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       cityid = #{record.cityid,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
@@ -213,7 +213,7 @@
     update district
     <set >
       <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
+        code = #{code,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -235,7 +235,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.District" >
     update district
-    set code = #{code,jdbcType=VARCHAR},
+    set code = #{code,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       cityid = #{cityid,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},

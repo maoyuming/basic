@@ -27,4 +27,14 @@ public interface PriceService {
      */
     public Map<Long,Map<String,BigDecimal>> queryHotelPrices(Long hotelId, Date begintime, Date endtime,List<Long> roomtypeIds);
     
+    /**
+     * 酒店住宿价格查询
+     * @param hotelid
+     * @param begintime
+     * @param endtime
+     * @param roomtypeid
+     * @return
+     */
+    public Map<Long,Map<String,BigDecimal>> queryHotelPrices(Long hotelId, String begintime, String endtime,List<Long> roomtypeIds);
+    
 }

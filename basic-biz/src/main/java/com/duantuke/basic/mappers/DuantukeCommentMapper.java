@@ -16,15 +16,21 @@ public interface DuantukeCommentMapper {
 
     int insertSelective(DuantukeComment record);
 
+    List<DuantukeComment> selectByExampleWithBLOBs(DuantukeCommentExample example);
+
     List<DuantukeComment> selectByExample(DuantukeCommentExample example);
 
     DuantukeComment selectByPrimaryKey(Long duantukeCommentId);
 
     int updateByExampleSelective(@Param("record") DuantukeComment record, @Param("example") DuantukeCommentExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") DuantukeComment record, @Param("example") DuantukeCommentExample example);
+
     int updateByExample(@Param("record") DuantukeComment record, @Param("example") DuantukeCommentExample example);
 
     int updateByPrimaryKeySelective(DuantukeComment record);
+
+    int updateByPrimaryKeyWithBLOBs(DuantukeComment record);
 
     int updateByPrimaryKey(DuantukeComment record);
 }

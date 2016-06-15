@@ -48,7 +48,7 @@ public class DistrictServiceImpl implements DistrictService {
 		}
 		DistrictExample example = new DistrictExample();
 		DistrictExample.Criteria hoCriteria = example.createCriteria();
-		hoCriteria.andCodeEqualTo(districtcode);
+		hoCriteria.andCodeEqualTo(Long.valueOf(districtcode));
 		List<District> models =  districtMapper.selectByExample( example);
 		if( models != null && models.size() > 0){
 			retInfo.setObj(models.get(0));

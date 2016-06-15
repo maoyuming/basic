@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class District implements Serializable{
-	private static final long serialVersionUID = 1L;
     private Long id;
 
-    private String code;
+    private Long code;
 
     private String name;
 
@@ -27,12 +26,12 @@ public class District implements Serializable{
         this.id = id;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setCode(Long code) {
+        this.code = code;
     }
 
     public String getName() {

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DuantukeComment implements Serializable{
-	private static final long serialVersionUID = 1L;
     private Long duantukeCommentId;
 
     private Long fid;
@@ -12,8 +11,6 @@ public class DuantukeComment implements Serializable{
     private Long hotelId;
 
     private Long customerId;
-
-    private Integer duantukeComment;
 
     private Short businessType;
 
@@ -24,6 +21,8 @@ public class DuantukeComment implements Serializable{
     private Date updatetime;
 
     private String updateuser;
+
+    private String duantukeComment;
 
     public Long getDuantukeCommentId() {
         return duantukeCommentId;
@@ -55,14 +54,6 @@ public class DuantukeComment implements Serializable{
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
-    }
-
-    public Integer getDuantukeComment() {
-        return duantukeComment;
-    }
-
-    public void setDuantukeComment(Integer duantukeComment) {
-        this.duantukeComment = duantukeComment;
     }
 
     public Short getBusinessType() {
@@ -103,5 +94,13 @@ public class DuantukeComment implements Serializable{
 
     public void setUpdateuser(String updateuser) {
         this.updateuser = updateuser == null ? null : updateuser.trim();
+    }
+
+    public String getDuantukeComment() {
+        return duantukeComment;
+    }
+
+    public void setDuantukeComment(String duantukeComment) {
+        this.duantukeComment = duantukeComment == null ? null : duantukeComment.trim();
     }
 }

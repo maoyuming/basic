@@ -6,12 +6,14 @@
     <result column="fid" property="fid" jdbcType="BIGINT" />
     <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
     <result column="customer_id" property="customerId" jdbcType="BIGINT" />
-    <result column="duantuke_comment" property="duantukeComment" jdbcType="INTEGER" />
     <result column="business_type" property="businessType" jdbcType="SMALLINT" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.DuantukeComment" extends="BaseResultMap" >
+    <result column="duantuke_comment" property="duantukeComment" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,9 +74,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    duantuke_comment_id, fid, hotel_id, customer_id, duantuke_comment, business_type, 
-    createtime, createuser, updatetime, updateuser
+    duantuke_comment_id, fid, hotel_id, customer_id, business_type, createtime, createuser, 
+    updatetime, updateuser
   </sql>
+  <sql id="Blob_Column_List" >
+    duantuke_comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.duantuke.basic.po.DuantukeCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from duantuke_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.DuantukeCommentExample" >
     select
     <if test="distinct" >
@@ -92,9 +113,11 @@
       limit ${limitStart} , ${limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from duantuke_comment
     where duantuke_comment_id = #{duantukeCommentId,jdbcType=BIGINT}
   </select>
@@ -110,13 +133,13 @@
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.DuantukeComment" >
     insert into duantuke_comment (duantuke_comment_id, fid, hotel_id, 
-      customer_id, duantuke_comment, business_type, 
-      createtime, createuser, updatetime, 
-      updateuser)
+      customer_id, business_type, createtime, 
+      createuser, updatetime, updateuser, 
+      duantuke_comment)
     values (#{duantukeCommentId,jdbcType=BIGINT}, #{fid,jdbcType=BIGINT}, #{hotelId,jdbcType=BIGINT}, 
-      #{customerId,jdbcType=BIGINT}, #{duantukeComment,jdbcType=INTEGER}, #{businessType,jdbcType=SMALLINT}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{updateuser,jdbcType=VARCHAR})
+      #{customerId,jdbcType=BIGINT}, #{businessType,jdbcType=SMALLINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, 
+      #{duantukeComment,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.DuantukeComment" >
     insert into duantuke_comment
@@ -133,9 +156,6 @@
       <if test="customerId != null" >
         customer_id,
       </if>
-      <if test="duantukeComment != null" >
-        duantuke_comment,
-      </if>
       <if test="businessType != null" >
         business_type,
       </if>
@@ -151,6 +171,9 @@
       <if test="updateuser != null" >
         updateuser,
       </if>
+      <if test="duantukeComment != null" >
+        duantuke_comment,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="duantukeCommentId != null" >
@@ -164,9 +187,6 @@
       </if>
       <if test="customerId != null" >
         #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="duantukeComment != null" >
-        #{duantukeComment,jdbcType=INTEGER},
       </if>
       <if test="businessType != null" >
         #{businessType,jdbcType=SMALLINT},
@@ -182,6 +202,9 @@
       </if>
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
+      </if>
+      <if test="duantukeComment != null" >
+        #{duantukeComment,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -206,9 +229,6 @@
       <if test="record.customerId != null" >
         customer_id = #{record.customerId,jdbcType=BIGINT},
       </if>
-      <if test="record.duantukeComment != null" >
-        duantuke_comment = #{record.duantukeComment,jdbcType=INTEGER},
-      </if>
       <if test="record.businessType != null" >
         business_type = #{record.businessType,jdbcType=SMALLINT},
       </if>
@@ -224,7 +244,26 @@
       <if test="record.updateuser != null" >
         updateuser = #{record.updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="record.duantukeComment != null" >
+        duantuke_comment = #{record.duantukeComment,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update duantuke_comment
+    set duantuke_comment_id = #{record.duantukeCommentId,jdbcType=BIGINT},
+      fid = #{record.fid,jdbcType=BIGINT},
+      hotel_id = #{record.hotelId,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      business_type = #{record.businessType,jdbcType=SMALLINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      createuser = #{record.createuser,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      duantuke_comment = #{record.duantukeComment,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -235,7 +274,6 @@
       fid = #{record.fid,jdbcType=BIGINT},
       hotel_id = #{record.hotelId,jdbcType=BIGINT},
       customer_id = #{record.customerId,jdbcType=BIGINT},
-      duantuke_comment = #{record.duantukeComment,jdbcType=INTEGER},
       business_type = #{record.businessType,jdbcType=SMALLINT},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
@@ -257,9 +295,6 @@
       <if test="customerId != null" >
         customer_id = #{customerId,jdbcType=BIGINT},
       </if>
-      <if test="duantukeComment != null" >
-        duantuke_comment = #{duantukeComment,jdbcType=INTEGER},
-      </if>
       <if test="businessType != null" >
         business_type = #{businessType,jdbcType=SMALLINT},
       </if>
@@ -275,7 +310,23 @@
       <if test="updateuser != null" >
         updateuser = #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="duantukeComment != null" >
+        duantuke_comment = #{duantukeComment,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where duantuke_comment_id = #{duantukeCommentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.duantuke.basic.po.DuantukeComment" >
+    update duantuke_comment
+    set fid = #{fid,jdbcType=BIGINT},
+      hotel_id = #{hotelId,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      business_type = #{businessType,jdbcType=SMALLINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateuser = #{updateuser,jdbcType=VARCHAR},
+      duantuke_comment = #{duantukeComment,jdbcType=LONGVARCHAR}
     where duantuke_comment_id = #{duantukeCommentId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.DuantukeComment" >
@@ -283,7 +334,6 @@
     set fid = #{fid,jdbcType=BIGINT},
       hotel_id = #{hotelId,jdbcType=BIGINT},
       customer_id = #{customerId,jdbcType=BIGINT},
-      duantuke_comment = #{duantukeComment,jdbcType=INTEGER},
       business_type = #{businessType,jdbcType=SMALLINT},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},

@@ -43,7 +43,20 @@ public class PriceServiceImpl implements PriceService{
 	public static final Logger logger = LoggerFactory.getLogger(PriceServiceImpl.class);
 	public static final int DEFAULTDAYS = 30;
 	
-	
+
+	@Override
+	public Map<Long, Map<String, BigDecimal>> queryHotelPrices(Long hotelId,
+			String begintime, String endtime, List<Long> roomtypeIds) {
+		if(begintime==null){
+			throw new OpenException("开始时间为空");
+		}
+		if(endtime==null){
+			throw new OpenException("结束时间为空");
+		}
+		Date begin = DateUtil.strToDate(begintime, DateUtil.DateFormat);
+		Date end = DateUtil.strToDate(endtime,  DateUtil.DateFormat);
+		return this.queryHotelPrices(hotelId, begin, end, roomtypeIds);
+	}
 	
 	@Override
 	public Map<Long, Map<String, BigDecimal>> queryHotelPrices(Long hotelId,
