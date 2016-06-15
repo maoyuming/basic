@@ -71,4 +71,7 @@
     <!-- hotel search -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotelSearchService" ref="hotelSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotelSearchServiceImpl" class="com.duantuke.basic.service.impl.HotelSearchServiceImpl" />  
+    <!-- hotel  -->
+	<dubbo:service interface="com.duantuke.basic.face.service.HotelService" ref="hotelServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="hotelServiceImpl" class="com.duantuke.basic.service.impl.HotelServiceImpl" />  
 </beans>  
