@@ -39,6 +39,8 @@ public class HotelQueryBean implements Serializable{
     
     private String readonly;
     
+    private String businessType;//业务类型 meal:饮食 journey:游记 sight:景点 hotel:农家院
+    
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
     
@@ -47,6 +49,14 @@ public class HotelQueryBean implements Serializable{
     
     /** 搜索默认搜索半径（单位: 米） */
     public final static Integer SEARCH_RANGE_DEFAULT = 5000;
+    
+    
+    public String getBusinessType() {
+		return businessType;
+	}
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
 
 	public String getHotelName() {
 		return hotelName;

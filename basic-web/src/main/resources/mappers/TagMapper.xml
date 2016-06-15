@@ -10,6 +10,7 @@
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="business_type" property="businessType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,10 +71,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    tag_id, tag_name, tag_group_id, tag_value, createtime, createuser, updatetime, updateuser
+    tag_id, tag_name, tag_group_id, tag_value, createtime, createuser, updatetime, updateuser, 
+    business_type
   </sql>
-  <sql id="Join_Column_List" >
-    t.tag_id, t.tag_name, t.tag_group_id, t.tag_value, t.createtime, t.createuser, t.updatetime, t.updateuser
+  <sql id="Base_Column_List" >
+    t.tag_id, t.tag_name, t.tag_group_id, t.tag_value, t.createtime, t.createuser, t.updatetime, t.updateuser, 
+    t.business_type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.TagExample" >
     select
@@ -111,10 +114,12 @@
   <insert id="insert" parameterType="com.duantuke.basic.po.Tag" >
     insert into tag (tag_id, tag_name, tag_group_id, 
       tag_value, createtime, createuser, 
-      updatetime, updateuser)
+      updatetime, updateuser, business_type
+      )
     values (#{tagId,jdbcType=BIGINT}, #{tagName,jdbcType=VARCHAR}, #{tagGroupId,jdbcType=BIGINT}, 
       #{tagValue,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR})
+      #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{businessType,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.Tag" >
     insert into tag
@@ -143,6 +148,9 @@
       <if test="updateuser != null" >
         updateuser,
       </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tagId != null" >
@@ -168,6 +176,9 @@
       </if>
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -204,6 +215,9 @@
       <if test="record.updateuser != null" >
         updateuser = #{record.updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="record.businessType != null" >
+        business_type = #{record.businessType,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -218,7 +232,8 @@
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+      updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      business_type = #{record.businessType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -247,6 +262,9 @@
       <if test="updateuser != null" >
         updateuser = #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="businessType != null" >
+        business_type = #{businessType,jdbcType=VARCHAR},
+      </if>
     </set>
     where tag_id = #{tagId,jdbcType=BIGINT}
   </update>
@@ -258,10 +276,11 @@
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{updateuser,jdbcType=VARCHAR}
+      updateuser = #{updateuser,jdbcType=VARCHAR},
+      business_type = #{businessType,jdbcType=VARCHAR}
     where tag_id = #{tagId,jdbcType=BIGINT}
   </update>
-  <select id="queryTagsByHotelId" resultMap="BaseResultMap">
+    <select id="queryTagsByHotelId" resultMap="BaseResultMap">
     SELECT 
     <include refid="Join_Column_List" />
     from 
@@ -273,4 +292,5 @@
 	    </if>
     </where>
   </select>
+  
 </mapper>

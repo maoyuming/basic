@@ -502,6 +502,7 @@ public class HotelElasticsearchUtil {
             String readonly = hotelQueryBean.getReadonly();
             String hotelPhone = hotelQueryBean.getHotelPhone();
             String qtPhone = hotelQueryBean.getQtPhone();
+            String businessType = hotelQueryBean.getBusinessType();
             Integer provinceCode = hotelQueryBean.getProvinceCode();
             Integer cityCode = hotelQueryBean.getCityCode();
             Integer districtCode = hotelQueryBean.getDistrictCode();
@@ -543,6 +544,9 @@ public class HotelElasticsearchUtil {
 					Map<String, String> propertyValues = new HashMap<String, String>();
 					for (String searchcontent:value) {
 						propertyValues.put(key + ".tagName", searchcontent);
+						if(businessType!=null){
+							propertyValues.put(key + ".businessType", businessType);
+						}
 						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
 					}
 				}

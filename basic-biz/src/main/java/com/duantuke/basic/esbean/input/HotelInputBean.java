@@ -78,8 +78,6 @@ public class HotelInputBean implements Serializable{
     private List<Tag> taggroup_3 = new ArrayList<Tag>();
     private List<Tag> taggroup_4 = new ArrayList<Tag>();
     
-    
-    
 	public String getReadonly() {
 		return readonly;
 	}

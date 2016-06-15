@@ -34,9 +34,6 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-         <table tableName="city" domainObjectName="City"></table> 
-         <table tableName="district" domainObjectName="District"></table> 
-         <table tableName="province" domainObjectName="Province"></table> 
-         <table tableName="duantuke_comment" domainObjectName="DuantukeComment"></table> 
+         <table tableName="tag" domainObjectName="Tag"></table> 
 	</context>
 </generatorConfiguration>

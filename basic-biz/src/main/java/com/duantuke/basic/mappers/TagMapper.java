@@ -29,4 +29,5 @@ public interface TagMapper {
     int updateByPrimaryKey(Tag record);
     
     List<Tag> queryTagsByHotelId(@Param("hotelId") Long hotelId);
+
 }

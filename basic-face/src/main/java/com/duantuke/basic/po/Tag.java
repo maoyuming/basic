@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Tag implements Serializable{
 	private static final long serialVersionUID = 1L;
+
     private Long tagId;
 
     private String tagName;
@@ -20,6 +21,8 @@ public class Tag implements Serializable{
     private Date updatetime;
 
     private String updateuser;
+
+    private String businessType;
 
     public Long getTagId() {
         return tagId;
@@ -83,5 +86,13 @@ public class Tag implements Serializable{
 
     public void setUpdateuser(String updateuser) {
         this.updateuser = updateuser == null ? null : updateuser.trim();
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType == null ? null : businessType.trim();
     }
 }
