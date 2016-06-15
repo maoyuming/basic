@@ -3,7 +3,7 @@
 <mapper namespace="com.duantuke.basic.mappers.CityMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.City" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="proid" property="proid" jdbcType="INTEGER" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, `code`, `name`, proid, sort, latitude, longitude, simplename, ishotcity, `range`, isselect, 
+    id, code, name, proid, sort, latitude, longitude, simplename, ishotcity, range, isselect, 
     querycityname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.CityExample" >
@@ -116,7 +116,7 @@
       longitude, simplename, ishotcity, 
       range, isselect, querycityname
       )
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
       #{proid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DECIMAL}, 
       #{longitude,jdbcType=DECIMAL}, #{simplename,jdbcType=VARCHAR}, #{ishotcity,jdbcType=VARCHAR}, 
       #{range,jdbcType=DOUBLE}, #{isselect,jdbcType=VARCHAR}, #{querycityname,jdbcType=VARCHAR}
@@ -167,7 +167,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
+        #{code,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -214,7 +214,7 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.code != null" >
-        code = #{record.code,jdbcType=VARCHAR},
+        code = #{record.code,jdbcType=BIGINT},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -254,7 +254,7 @@
   <update id="updateByExample" parameterType="map" >
     update city
     set id = #{record.id,jdbcType=BIGINT},
-      code = #{record.code,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       proid = #{record.proid,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
@@ -273,7 +273,7 @@
     update city
     <set >
       <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
+        code = #{code,jdbcType=BIGINT},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -310,7 +310,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.City" >
     update city
-    set code = #{code,jdbcType=VARCHAR},
+    set code = #{code,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       proid = #{proid,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},

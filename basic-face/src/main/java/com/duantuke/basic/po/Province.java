@@ -1,13 +1,11 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Province implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Province {
     private Long id;
 
-    private String code;
+    private Long code;
 
     private String name;
 
@@ -27,12 +25,12 @@ public class Province implements Serializable{
         this.id = id;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setCode(Long code) {
+        this.code = code;
     }
 
     public String getName() {

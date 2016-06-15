@@ -365,66 +365,6 @@ public class DuantukeCommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andDuantukeCommentIsNull() {
-            addCriterion("duantuke_comment is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentIsNotNull() {
-            addCriterion("duantuke_comment is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentEqualTo(Integer value) {
-            addCriterion("duantuke_comment =", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentNotEqualTo(Integer value) {
-            addCriterion("duantuke_comment <>", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentGreaterThan(Integer value) {
-            addCriterion("duantuke_comment >", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentGreaterThanOrEqualTo(Integer value) {
-            addCriterion("duantuke_comment >=", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentLessThan(Integer value) {
-            addCriterion("duantuke_comment <", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentLessThanOrEqualTo(Integer value) {
-            addCriterion("duantuke_comment <=", value, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentIn(List<Integer> values) {
-            addCriterion("duantuke_comment in", values, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentNotIn(List<Integer> values) {
-            addCriterion("duantuke_comment not in", values, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentBetween(Integer value1, Integer value2) {
-            addCriterion("duantuke_comment between", value1, value2, "duantukeComment");
-            return (Criteria) this;
-        }
-
-        public Criteria andDuantukeCommentNotBetween(Integer value1, Integer value2) {
-            addCriterion("duantuke_comment not between", value1, value2, "duantukeComment");
-            return (Criteria) this;
-        }
-
         public Criteria andBusinessTypeIsNull() {
             addCriterion("business_type is null");
             return (Criteria) this;

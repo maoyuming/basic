@@ -195,62 +195,52 @@ public class ProvinceExample {
             return (Criteria) this;
         }
 
-        public Criteria andCodeEqualTo(String value) {
+        public Criteria andCodeEqualTo(Long value) {
             addCriterion("code =", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotEqualTo(String value) {
+        public Criteria andCodeNotEqualTo(Long value) {
             addCriterion("code <>", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThan(String value) {
+        public Criteria andCodeGreaterThan(Long value) {
             addCriterion("code >", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThanOrEqualTo(String value) {
+        public Criteria andCodeGreaterThanOrEqualTo(Long value) {
             addCriterion("code >=", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThan(String value) {
+        public Criteria andCodeLessThan(Long value) {
             addCriterion("code <", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThanOrEqualTo(String value) {
+        public Criteria andCodeLessThanOrEqualTo(Long value) {
             addCriterion("code <=", value, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeNotLike(String value) {
-            addCriterion("code not like", value, "code");
-            return (Criteria) this;
-        }
-
-        public Criteria andCodeIn(List<String> values) {
+        public Criteria andCodeIn(List<Long> values) {
             addCriterion("code in", values, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotIn(List<String> values) {
+        public Criteria andCodeNotIn(List<Long> values) {
             addCriterion("code not in", values, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeBetween(String value1, String value2) {
+        public Criteria andCodeBetween(Long value1, Long value2) {
             addCriterion("code between", value1, value2, "code");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotBetween(String value1, String value2) {
+        public Criteria andCodeNotBetween(Long value1, Long value2) {
             addCriterion("code not between", value1, value2, "code");
             return (Criteria) this;
         }

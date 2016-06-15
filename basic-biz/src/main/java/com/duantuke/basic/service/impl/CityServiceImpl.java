@@ -56,7 +56,7 @@ public class CityServiceImpl implements CityService {
 		}
 		CityExample example = new CityExample();
 		CityExample.Criteria hoCriteria = example.createCriteria();
-		hoCriteria.andCodeEqualTo(citycode);
+		hoCriteria.andCodeEqualTo(Long.valueOf(citycode));
 		List<City> models =  cityMapper.selectByExample( example);
 		if( models != null && models.size() > 0){
 			retInfo.setObj(models.get(0));
