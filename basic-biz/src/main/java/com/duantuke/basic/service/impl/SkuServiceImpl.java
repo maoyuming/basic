@@ -145,15 +145,22 @@ public class SkuServiceImpl implements SkuService {
 		List<RoomTypeInfo> roomTypeInfos =  new ArrayList<RoomTypeInfo>();
 		
 
-		//query price
-		Map<Long,Map<String,BigDecimal>> priceMap = priceService.queryHotelPrices(skuQueryIn.getHotelId(), skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), null);
-		
 		//如果sku集合为空，则查询所有房型
 		if(CollectionUtils.isEmpty(roomtypeIds)){
 			roomtypes = roomTypeService.queryRoomtypeByHotleId(skuQueryIn.getHotelId());
+			roomtypeIds = new ArrayList<Long>();
+			for (RoomType roomType : roomtypes) {
+				roomtypeIds.add(roomType.getSkuId());
+			}
 		}else{
 			roomtypes = roomTypeService.queryRoomtypeByRoomtypeIds(roomtypeIds);
 		}
+		
+		
+		
+		//query price
+		Map<Long,Map<String,BigDecimal>> priceMap = priceService.queryHotelPrices(skuQueryIn.getHotelId(), skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), roomtypeIds);
+		
 		if(CollectionUtils.isNotEmpty(roomtypes)){
 
 			for (RoomType roomType : roomtypes) {
@@ -181,7 +188,6 @@ public class SkuServiceImpl implements SkuService {
 		
 		//间页数
 		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), DateUtil.DateFormat);
-		diff = diff-1;
 		if(diff<=0){
 			throw new OpenException("时间区间错误");
 		}

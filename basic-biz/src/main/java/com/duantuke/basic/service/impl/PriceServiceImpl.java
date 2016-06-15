@@ -71,17 +71,7 @@ public class PriceServiceImpl implements PriceService{
 		if(endtime==null){
 			throw new OpenException("结束时间为空");
 		}
-		if(CollectionUtils.isEmpty(roomtypeIds)){
-			List<RoomType> roomTypes = roomTypeService.queryRoomtypeByHotleId(hotelId);
-			if(CollectionUtils.isNotEmpty(roomTypes)){
-				roomtypeIds = new ArrayList<Long>();
-				for (RoomType roomType : roomTypes) {
-					roomtypeIds.add(roomType.getSkuId());
-				}
-			}else{
-				throw new OpenException("房型列表为空");
-			}
-		}
+		
 		
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();

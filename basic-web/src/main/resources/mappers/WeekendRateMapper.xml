@@ -298,12 +298,12 @@
   	where 
   	(
 		<if test="hotelid != null " >
-        hotel_id = #{hotelId,jdbcType=BIGINT}
+        hotel_id = #{hotelid,jdbcType=BIGINT}
     	</if>
     	<if test="hotelid != null and roomtypeids != null and roomtypeids.size() > 0" >
     	or
     	</if>
-    	<if test="roomtypeIds != null and roomtypeIds.size() > 0" >
+    	<if test="roomtypeids != null and roomtypeids.size() > 0" >
     	roomtype_id in  
 		    <foreach item="roomtypeid" collection="roomtypeids" separator="," open="(" close=")" index="">  
 		      #{roomtypeid}  
