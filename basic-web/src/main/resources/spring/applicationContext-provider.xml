@@ -67,4 +67,8 @@
     <!-- price-->
 	<dubbo:service interface="com.duantuke.basic.face.service.PushLogService" ref="pushLogServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="pushLogServiceImpl" class="com.duantuke.basic.service.impl.PushLogServiceImpl" />  
+    
+    <!-- hotel search -->
+	<dubbo:service interface="com.duantuke.basic.face.service.HotelSearchService" ref="hotelSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="hotelSearchServiceImpl" class="com.duantuke.basic.service.impl.HotelSearchServiceImpl" />  
 </beans>  
