@@ -29,7 +29,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
-		hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		if(duantukeComment.getFid()!=null){
+			hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		}
 		return duantukeCommentMapper.countByExample(example);
 	}
 
@@ -41,7 +43,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
-		hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		if(duantukeComment.getFid()!=null){
+			hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		}
 		return duantukeCommentMapper.deleteByExample(example);
 	}
 
@@ -64,7 +68,9 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 		DuantukeCommentExample example = new DuantukeCommentExample();
 		DuantukeCommentExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeComment.getBusinessType());
-		hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		if(duantukeComment.getFid()!=null){
+			hoCriteria.andFidEqualTo(duantukeComment.getFid());
+		}
 	
 		return duantukeCommentMapper.selectByExample(example);
 	}
