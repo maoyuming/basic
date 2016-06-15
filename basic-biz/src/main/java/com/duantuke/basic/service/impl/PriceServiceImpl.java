@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.PriceService;
+import com.duantuke.basic.face.service.RoomTypeService;
 import com.duantuke.basic.mappers.DailyRateMapper;
 import com.duantuke.basic.mappers.RackRateMapper;
 import com.duantuke.basic.mappers.WeekendRateMapper;
@@ -26,6 +27,7 @@ import com.duantuke.basic.po.DailyRate;
 import com.duantuke.basic.po.DailyRateExample;
 import com.duantuke.basic.po.RackRate;
 import com.duantuke.basic.po.RackRateExample;
+import com.duantuke.basic.po.RoomType;
 import com.duantuke.basic.po.WeekendRate;
 import com.duantuke.basic.po.WeekendRateExample;
 import com.duantuke.basic.util.DateUtil;
@@ -35,6 +37,8 @@ public class PriceServiceImpl implements PriceService{
 	
 	@Autowired
 	private DailyRateMapper dailyRateMapper;
+	@Autowired
+	private RoomTypeService roomTypeService;
 	@Autowired
 	private WeekendRateMapper weekendRateMapper;
 	@Autowired
@@ -67,7 +71,17 @@ public class PriceServiceImpl implements PriceService{
 		if(endtime==null){
 			throw new OpenException("结束时间为空");
 		}
-		
+		if(CollectionUtils.isEmpty(roomtypeIds)){
+			List<RoomType> roomTypes = roomTypeService.queryRoomtypeByHotleId(hotelId);
+			if(CollectionUtils.isNotEmpty(roomTypes)){
+				roomtypeIds = new ArrayList<Long>();
+				for (RoomType roomType : roomTypes) {
+					roomtypeIds.add(roomType.getSkuId());
+				}
+			}else{
+				throw new OpenException("房型列表为空");
+			}
+		}
 		
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();

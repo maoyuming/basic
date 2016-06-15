@@ -54,76 +54,81 @@ public class SkuServiceImpl implements SkuService {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		
 		SkuResponse skuResponse = new SkuResponse();
-		skuResponse.setTotalPrice(totalPrice);
-		skuResponse.setSupplierId(skuQueryIn.getHotelId());
-		
-		
+		try {
+			skuResponse.setTotalPrice(totalPrice);
+			skuResponse.setSupplierId(skuQueryIn.getHotelId());
+			
+			
 
-		List<SkuInfo> listAll = new ArrayList<SkuInfo>();
-		if(skuQueryIn!=null){
-			if(MapUtils.isNotEmpty(skuQueryIn.getSkuMap())){
-				for (Entry<Integer, List<Long>> entry : skuQueryIn.getSkuMap().entrySet()) {
-					SkuTypeEnum skuTypeEnum = SkuTypeEnum.getSkuTypeEnumByCode(entry.getKey());
-					
-					switch (skuTypeEnum) {
-					case roomtype:
-						BigDecimal roomtypePrice = BigDecimal.ZERO;
-						List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, entry.getValue(),roomtypePrice);
-						totalPrice = totalPrice.add(roomtypePrice);
+			List<SkuInfo> listAll = new ArrayList<SkuInfo>();
+			if(skuQueryIn!=null){
+				if(MapUtils.isNotEmpty(skuQueryIn.getSkuMap())){
+					for (Entry<Integer, List<Long>> entry : skuQueryIn.getSkuMap().entrySet()) {
+						SkuTypeEnum skuTypeEnum = SkuTypeEnum.getSkuTypeEnumByCode(entry.getKey());
 						
-						List<SkuInfo<RoomTypeInfo>> list = new ArrayList<SkuInfo<RoomTypeInfo>>();
-						if(CollectionUtils.isNotEmpty(roomTypeInfos)){
-							for (RoomTypeInfo roomTypeInfo : roomTypeInfos) {
-								if(StringUtils.isBlank(skuResponse.getSupplierName())){
-									skuResponse.setSupplierName(roomTypeInfo.getSupplierName());
+						switch (skuTypeEnum) {
+						case roomtype:
+							List<Long> roomtypeIds = entry.getValue();
+							BigDecimal roomtypePrice = BigDecimal.ZERO;
+							List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, roomtypeIds,roomtypePrice);
+							totalPrice = totalPrice.add(roomtypePrice);
+							
+							List<SkuInfo<RoomTypeInfo>> list = new ArrayList<SkuInfo<RoomTypeInfo>>();
+							if(CollectionUtils.isNotEmpty(roomTypeInfos)){
+								for (RoomTypeInfo roomTypeInfo : roomTypeInfos) {
+									if(StringUtils.isBlank(skuResponse.getSupplierName())){
+										skuResponse.setSupplierName(roomTypeInfo.getSupplierName());
+									}
+									SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
+									skuInfo.setInfo(roomTypeInfo);
+									skuInfo.setType(SkuTypeEnum.roomtype.getCode());
+									skuInfo.setSkuName(roomTypeInfo.getName());
+									skuInfo.setSkuId(roomTypeInfo.getSkuId());
+									list.add(skuInfo);
 								}
-								SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
-								skuInfo.setInfo(roomTypeInfo);
-								skuInfo.setType(SkuTypeEnum.roomtype.getCode());
-								skuInfo.setSkuName(roomTypeInfo.getName());
-								skuInfo.setSkuId(roomTypeInfo.getSkuId());
-								list.add(skuInfo);
+								listAll.addAll(list);
 							}
-							listAll.addAll(list);
-						}
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
-						break;
-					case meal:
-						BigDecimal mealPrice = BigDecimal.ZERO;
-						List<MealInfo> mealInfos = queryMeal(skuQueryIn, entry.getValue(), totalPrice);
-						totalPrice = totalPrice.add(mealPrice);
-						
-						List<SkuInfo<MealInfo>> list2 = new ArrayList<SkuInfo<MealInfo>>();
-						if(CollectionUtils.isNotEmpty(mealInfos)){
-							for (MealInfo mealInfo : mealInfos) {
+							break;
+						case meal:
+							BigDecimal mealPrice = BigDecimal.ZERO;
+							List<MealInfo> mealInfos = queryMeal(skuQueryIn, entry.getValue(), totalPrice);
+							totalPrice = totalPrice.add(mealPrice);
+							
+							List<SkuInfo<MealInfo>> list2 = new ArrayList<SkuInfo<MealInfo>>();
+							if(CollectionUtils.isNotEmpty(mealInfos)){
+								for (MealInfo mealInfo : mealInfos) {
 
-								if(StringUtils.isBlank(skuResponse.getSupplierName())){
-									skuResponse.setSupplierName(mealInfo.getSupplierName());
+									if(StringUtils.isBlank(skuResponse.getSupplierName())){
+										skuResponse.setSupplierName(mealInfo.getSupplierName());
+									}
+									
+									SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
+									skuInfo.setInfo(mealInfo);
+
+									skuInfo.setType(SkuTypeEnum.meal.getCode());
+									skuInfo.setSkuName(mealInfo.getName());
+									skuInfo.setSkuId(mealInfo.getSkuId());
+									list2.add(skuInfo);
 								}
-								
-								SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
-								skuInfo.setInfo(mealInfo);
-
-								skuInfo.setType(SkuTypeEnum.meal.getCode());
-								skuInfo.setSkuName(mealInfo.getName());
-								skuInfo.setSkuId(mealInfo.getSkuId());
-								list2.add(skuInfo);
+								listAll.addAll(list2);
 							}
-							listAll.addAll(list2);
-						}
-						
+							
 //						skuInfo.setMealInfos(mealInfos);
-						break;
-						
-					default:
-						break;
+							break;
+							
+						default:
+							break;
+						}
 					}
+				}else{
+					throw new OpenException("sku列表为空");
 				}
 			}else{
 				throw new OpenException("sku列表为空");
 			}
-		}else{
-			throw new OpenException("sku列表为空");
+		} catch (Exception e) {
+			logger.error("查询sku异常",e);
 		}
 		logger.info("查询sku结束，{}",new Gson().toJson(skuResponse));
 		return skuResponse;
