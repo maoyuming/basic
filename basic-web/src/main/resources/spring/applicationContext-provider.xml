@@ -68,10 +68,26 @@
 	<dubbo:service interface="com.duantuke.basic.face.service.PushLogService" ref="pushLogServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="pushLogServiceImpl" class="com.duantuke.basic.service.impl.PushLogServiceImpl" />  
     
+    <!-- elasticsearch begin -->
     <!-- hotel search -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotelSearchService" ref="hotelSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotelSearchServiceImpl" class="com.duantuke.basic.service.impl.HotelSearchServiceImpl" />  
+    <!-- meal search -->
+	<dubbo:service interface="com.duantuke.basic.face.service.MealSearchService" ref="mealSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="mealSearchServiceImpl" class="com.duantuke.basic.service.impl.MealSearchServiceImpl" />  
+    <!-- journey search -->
+	<dubbo:service interface="com.duantuke.basic.face.service.JourneySearchService" ref="journeySearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="journeySearchServiceImpl" class="com.duantuke.basic.service.impl.JourneySearchServiceImpl" />  
+    <!-- sight search -->
+	<dubbo:service interface="com.duantuke.basic.face.service.SightSearchService" ref="sightSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="sightSearchServiceImpl" class="com.duantuke.basic.service.impl.SightSearchServiceImpl" />  
+    <!-- elasticsearch end -->
+    
+    
     <!-- hotel  -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotelService" ref="hotelServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotelServiceImpl" class="com.duantuke.basic.service.impl.HotelServiceImpl" />  
+    <!-- 热词 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.HotWordService" ref="hotWordServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="hotWordServiceImpl" class="com.duantuke.basic.service.impl.HotWordServiceImpl" />  
 </beans>  
