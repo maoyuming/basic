@@ -34,9 +34,6 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-<!--          <table tableName="meal" domainObjectName="Meal"></table>  -->
-         <table tableName="l_push_log" domainObjectName="LPushLog"></table> 
-<!--          <table tableName="skus" domainObjectName="Sku"></table>  -->
-<!--         <table tableName="room_type" domainObjectName="RoomType"></table> -->
+         <table tableName="hot_word" domainObjectName="HotWord"></table> 
 	</context>
 </generatorConfiguration>
