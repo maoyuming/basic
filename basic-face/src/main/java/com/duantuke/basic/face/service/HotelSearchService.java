@@ -1,7 +1,6 @@
 package com.duantuke.basic.face.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
@@ -16,7 +15,7 @@ public interface HotelSearchService {
 	 * @param tags
 	 * 搜索es
 	 */
-	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags);
+	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean);
 	
 	/**
 	 * @param hotelId 不传则刷全部

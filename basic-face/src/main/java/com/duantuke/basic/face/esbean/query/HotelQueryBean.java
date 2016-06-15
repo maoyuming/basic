@@ -41,6 +41,8 @@ public class HotelQueryBean implements Serializable{
     
     private String businessType;//业务类型 meal:饮食 journey:游记 sight:景点 hotel:农家院
     
+    private String tagJson;//tag搜索条件   {"taggroup_2":["商务会议","温泉度假"],"taggroup_1":["旅游景区"]}
+    
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
     
@@ -51,7 +53,13 @@ public class HotelQueryBean implements Serializable{
     public final static Integer SEARCH_RANGE_DEFAULT = 5000;
     
     
-    public String getBusinessType() {
+    public String getTagJson() {
+		return tagJson;
+	}
+	public void setTagJson(String tagJson) {
+		this.tagJson = tagJson;
+	}
+	public String getBusinessType() {
 		return businessType;
 	}
 	public void setBusinessType(String businessType) {

@@ -1,11 +1,13 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
+import org.elasticsearch.common.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private Gson gson = new Gson();
 
 	@Override
-	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags) {
+	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean) {
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{}", gson.toJson(hotelQueryBean));
 		// page参数校验：如果page小于等于0，默认为1.
 		Integer page = hotelQueryBean.getPage();
@@ -58,7 +60,11 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		if (hotelQueryBean.getRange() == null) {
 			hotelQueryBean.setRange(Double.valueOf(HotelQueryBean.SEARCH_RANGE_DEFAULT));
 		}
-		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tags);
+		Map<String,List<String>> tagmap = new HashMap<String,List<String>>();
+		if(StringUtils.isNotEmpty(hotelQueryBean.getTagJson())){
+			tagmap = gson.fromJson(hotelQueryBean.getTagJson(), Map.class);
+		}
+		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tagmap);
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs result:{}", gson.toJson(result));
 		return result;
 	}
