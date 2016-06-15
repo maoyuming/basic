@@ -1,4 +1,4 @@
-package com.duantuke.basic.util.elasticsearch;
+package com.duantuke.basic.util;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

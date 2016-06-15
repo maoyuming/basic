@@ -16,8 +16,8 @@ import com.duantuke.basic.face.esbean.query.SightQueryBean;
 import com.duantuke.basic.face.service.SightSearchService;
 import com.duantuke.basic.service.ISightService;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.basic.util.ThreadPoolUtil;
 import com.duantuke.basic.util.elasticsearch.SightElasticsearchUtil;
-import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**

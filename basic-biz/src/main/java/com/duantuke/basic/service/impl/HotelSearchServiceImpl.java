@@ -19,8 +19,8 @@ import com.duantuke.basic.face.service.TagService;
 import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.basic.util.ThreadPoolUtil;
 import com.duantuke.basic.util.elasticsearch.HotelElasticsearchUtil;
-import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**

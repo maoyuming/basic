@@ -22,8 +22,8 @@ import com.duantuke.basic.po.JourneyRSight;
 import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IJourneyService;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.basic.util.ThreadPoolUtil;
 import com.duantuke.basic.util.elasticsearch.JourneyElasticsearchUtil;
-import com.duantuke.basic.util.elasticsearch.ThreadPoolUtil;
 import com.google.gson.Gson;
 
 /**
