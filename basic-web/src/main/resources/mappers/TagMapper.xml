@@ -74,7 +74,7 @@
     tag_id, tag_name, tag_group_id, tag_value, createtime, createuser, updatetime, updateuser, 
     business_type
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Join_Column_List" >
     t.tag_id, t.tag_name, t.tag_group_id, t.tag_value, t.createtime, t.createuser, t.updatetime, t.updateuser, 
     t.business_type
   </sql>
