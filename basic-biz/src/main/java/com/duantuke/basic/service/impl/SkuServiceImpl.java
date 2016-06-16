@@ -159,10 +159,10 @@ public class SkuServiceImpl implements SkuService {
 			List<SkuInfo<MealInfo>> list2 = new ArrayList<SkuInfo<MealInfo>>();
 			if(CollectionUtils.isNotEmpty(mealInfos)){
 				for (MealInfo mealInfo : mealInfos) {
+					SkuInfo<MealInfo> skuInfo = dozerMapper.map(mealInfo, SkuInfo.class);
 					
-					SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
+//					SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
 					skuInfo.setInfo(mealInfo);
-					
 					skuInfo.setType(SkuTypeEnum.meal.getCode());
 					skuInfo.setSkuName(mealInfo.getName());
 					skuInfo.setSkuId(mealInfo.getSkuId());
@@ -226,7 +226,8 @@ public class SkuServiceImpl implements SkuService {
 			List<SkuInfo<RoomTypeInfo>> list = new ArrayList<SkuInfo<RoomTypeInfo>>();
 			if(CollectionUtils.isNotEmpty(roomTypeInfos)){
 				for (RoomTypeInfo roomTypeInfo : roomTypeInfos) {
-					SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
+//					SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
+					SkuInfo<RoomTypeInfo> skuInfo = dozerMapper.map(roomTypeInfo, SkuInfo.class);
 					skuInfo.setInfo(roomTypeInfo);
 					skuInfo.setType(SkuTypeEnum.roomtype.getCode());
 					skuInfo.setSkuName(roomTypeInfo.getName());
