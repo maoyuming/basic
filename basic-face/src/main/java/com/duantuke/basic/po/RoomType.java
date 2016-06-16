@@ -10,8 +10,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class RoomType extends Sku implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@JSONField(name = "roomtypeId")
-    private Long skuId;
 
     private Integer roomNum;
 
@@ -36,13 +34,6 @@ public class RoomType extends Sku implements Serializable{
     @JSONField(name = "roomtypeUpdateBy")
     private String updateBy;
 
-    public Long getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(Long skuId) {
-        this.skuId = skuId;
-    }
 
     public Integer getRoomNum() {
         return roomNum;
