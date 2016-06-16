@@ -4,13 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class RoomType extends Sku implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@JSONField(name = "roomtypeId")
     private Long skuId;
 
     private Integer roomNum;
 
-    private Integer type;
+    @JSONField(name = "roomtypeType")
+    private  Integer type;
 
     private Integer bedtype;
 
@@ -18,12 +24,16 @@ public class RoomType extends Sku implements Serializable{
 
     private BigDecimal area;
 
+    @JSONField(name = "roomtypeCreateTime")
     private Date createTime;
 
+    @JSONField(name = "roomtypeCreateBy")
     private String createBy;
 
+    @JSONField(name = "roomtypeUpdateTime")
     private Date updateTime;
 
+    @JSONField(name = "roomtypeUpdateBy")
     private String updateBy;
 
     public Long getSkuId() {

@@ -3,7 +3,10 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class Sku implements Serializable{
+	
+	
     private Long skuId;
 
     private String name;
@@ -20,13 +23,13 @@ public class Sku implements Serializable{
 
     private String memo;
 
-    private Date createTime;
+    private transient Date createTime;
 
-    private String createBy;
+    private transient String createBy;
 
-    private Date updateTime;
+    private transient Date updateTime;
 
-    private String updateBy;
+    private transient String updateBy;
 
     public Long getSkuId() {
         return skuId;

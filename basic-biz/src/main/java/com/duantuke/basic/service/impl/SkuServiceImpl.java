@@ -1,5 +1,6 @@
 package com.duantuke.basic.service.impl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +10,13 @@ import java.util.Map.Entry;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.duantuke.basic.enums.SkuTypeEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.bean.MealInfo;
@@ -204,7 +205,11 @@ public class SkuServiceImpl implements SkuService {
 		}
 		
 		
-		logger.info("查询sku结束，{}",new Gson().toJson(skuResponse));
+		try {
+			logger.info("查询sku结束，{}",JSON.json(skuResponse));
+		} catch (IOException e) {
+			
+		}
 		return skuResponse;
 	}
 	
@@ -267,7 +272,11 @@ public class SkuServiceImpl implements SkuService {
 		}
 		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
 		logger.info("总价："+totalPrice);
-		logger.info("查询返回值：{}",new Gson().toJson(roomTypeInfos));
+		try {
+			logger.info("查询返回值：{}",JSON.json(roomTypeInfos));
+		} catch (IOException e) {
+			
+		}
 		return roomTypeInfos;
 	}
 	
