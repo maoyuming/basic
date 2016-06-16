@@ -16,12 +16,12 @@ public class SkuRequest implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Map<Integer, List<Long>> skuMap;//key :sku类型，1房型，2餐饮 ;value:skuid集合  包括房型id，餐饮id等
-	private Long hotelId;//酒店id
-	private Date beginTime;//入住预抵时间 
-	private Date endTime;//入住预离时间 
-	private String beginDate;//入住预抵时间 格式 yyyy-MM-dd
-	private String endDate;//入住预离时间 格式 yyyy-MM-dd
+	private Map<Integer, List<Long>> skuMap;//key :sku类型，1房型，2餐饮 ;value:skuid集合  包括房型id，餐饮id等  必填
+	private Long hotelId;//酒店id 不作为入参使用
+	private Date beginTime;//入住预抵时间  dubbo使用
+	private Date endTime;//入住预离时间  dubbo使用
+	private String beginDate;//入住预抵时间 格式 yyyy-MM-dd http接口使用
+	private String endDate;//入住预离时间 格式 yyyy-MM-dd http接口使用
 	private List<Long> promotionIds;//促销集合
 	public Map<Integer, List<Long>> getSkuMap() {
 		return skuMap;

@@ -12,5 +12,6 @@ public interface SightService {
 	public int addSight(Sight sight);
 	public int updateSight(Sight sight);
 	public int delSightById(Long id);
+	public Sight querySightById(Long sightId);
 	public List<Sight> querySights(Sight sight);
 }

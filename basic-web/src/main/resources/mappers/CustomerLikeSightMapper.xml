@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.CustomerLikeSightMapper" >
+	
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Sight" >
+    <id column="sight_id" property="sightId" jdbcType="BIGINT" />
+    <result column="sight_name" property="sightName" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="open_time" property="openTime" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="traffic" property="traffic" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="provcode" property="provcode" jdbcType="INTEGER" />
+    <result column="citycode" property="citycode" jdbcType="INTEGER" />
+    <result column="discode" property="discode" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Join_Column_List" >
+    s.sight_id, s.sight_name, s.longitude, s.latitude, s.open_time, s.phone, s.traffic, s.price, s.pics, 
+    s.memo, s.provcode, s.citycode, s.discode, s.createtime, s.createuser, s.updatetime, s.updateuser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.CustomerLikeSightExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Join_Column_List" />
+    from duantuke_like d left join sight s on d.fid = s.sight_id 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  
+  
+  <select id="countByExample" parameterType="com.duantuke.basic.po.CustomerLikeSightExample" resultType="java.lang.Integer" >
+    select count(*) from duantuke_like d left join sight s on d.fid = s.sight_id 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+</mapper>
