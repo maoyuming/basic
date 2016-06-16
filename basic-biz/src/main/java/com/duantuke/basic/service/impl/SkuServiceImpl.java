@@ -69,6 +69,13 @@ public class SkuServiceImpl implements SkuService {
 						switch (skuTypeEnum) {
 						case roomtype:
 							
+							if(skuQueryIn.getBeginDate()!=null){
+								skuQueryIn.setBeginTime(DateUtil.strToDate(skuQueryIn.getBeginDate(), "yyyy-MM-dd"));
+							}
+							if(skuQueryIn.getEndDate()!=null){
+								skuQueryIn.setEndTime(DateUtil.strToDate(skuQueryIn.getEndDate(), "yyyy-MM-dd"));
+							}
+							
 							List<Long> roomtypeIds = entry.getValue();
 							BigDecimal roomtypePrice = BigDecimal.ZERO;
 							List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, roomtypeIds,roomtypePrice);
