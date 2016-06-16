@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duantuke.basic.mappers.CustomerLikeHotelMapper" >
+  <resultMap id="BaseResultMap" type="com.duantuke.basic.po.Hotel" >
+    <id column="hotel_id" property="hotelId" jdbcType="BIGINT" />
+    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="hotel_contact_name" property="hotelContactName" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="open_time" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="repair_time" property="repairTime" jdbcType="TIMESTAMP" />
+    <result column="business_license_front" property="businessLicenseFront" jdbcType="VARCHAR" />
+    <result column="business_license_back" property="businessLicenseBack" jdbcType="VARCHAR" />
+    <result column="isvisible" property="isvisible" jdbcType="CHAR" />
+    <result column="idcardfront" property="idcardfront" jdbcType="VARCHAR" />
+    <result column="idcardback" property="idcardback" jdbcType="VARCHAR" />
+    <result column="retention_time" property="retentionTime" jdbcType="CHAR" />
+    <result column="default_leave_time" property="defaultLeaveTime" jdbcType="CHAR" />
+    <result column="hotel_phone" property="hotelPhone" jdbcType="VARCHAR" />
+    <result column="qt_phone" property="qtPhone" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="INTEGER" />
+    <result column="city_code" property="cityCode" jdbcType="INTEGER" />
+    <result column="district_code" property="districtCode" jdbcType="INTEGER" />
+    <result column="hotel_fax" property="hotelFax" jdbcType="VARCHAR" />
+    <result column="readonly" property="readonly" jdbcType="CHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Hotel" extends="BaseResultMap" >
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Join_Column_List" >
+    h.hotel_id, h.hotel_name, h.hotel_contact_name, h.reg_time, h.detail_addr, h.longitude, h.latitude, 
+    h.open_time, h.repair_time, h.business_license_front, h.business_license_back, h.isvisible, 
+    h.idcardfront, h.idcardback, h.retention_time, h.default_leave_time, h.hotel_phone, h.qt_phone, 
+    h.province_code, h.city_code, h.district_code, h.hotel_fax, h.readonly,h.state, h.pics, h.createtime, h.createuser, 
+    h.updatetime, h.updateuser,h.introduction
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.CustomerLikeHotelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Join_Column_List" />
+    from duantuke_like d left join hotel h on d.fid = h.hotelid and d.business_type=1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >=0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  
+  
+  
+  <select id="countByExample" parameterType="com.duantuke.basic.po.CustomerLikeHotelExample" resultType="java.lang.Integer" >
+    select count(*) from  duantuke_like d left join hotel h on d.fid = h.hotelid and d.business_type=1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>

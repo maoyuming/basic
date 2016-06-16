@@ -80,8 +80,8 @@ public class SkuController {
 		
 		skuRequest.setHotelId(123L);
 		skuRequest.setSkuMap(skuMap);
-		skuRequest.setBeginTime("2016-06-05");
-		skuRequest.setEndTime("2016-06-06");
+		skuRequest.setBeginDate("2016-06-05");
+		skuRequest.setEndDate("2016-06-06");
 	
 		System.out.println(new Gson().toJson(skuRequest));
 		
