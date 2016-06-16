@@ -694,6 +694,76 @@ public class HotWordExample {
             addCriterion("business_type not between", value1, value2, "businessType");
             return (Criteria) this;
         }
+
+        public Criteria andWordIsNull() {
+            addCriterion("word is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordIsNotNull() {
+            addCriterion("word is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordEqualTo(String value) {
+            addCriterion("word =", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotEqualTo(String value) {
+            addCriterion("word <>", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordGreaterThan(String value) {
+            addCriterion("word >", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordGreaterThanOrEqualTo(String value) {
+            addCriterion("word >=", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLessThan(String value) {
+            addCriterion("word <", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLessThanOrEqualTo(String value) {
+            addCriterion("word <=", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLike(String value) {
+            addCriterion("word like", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotLike(String value) {
+            addCriterion("word not like", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordIn(List<String> values) {
+            addCriterion("word in", values, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotIn(List<String> values) {
+            addCriterion("word not in", values, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordBetween(String value1, String value2) {
+            addCriterion("word between", value1, value2, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotBetween(String value1, String value2) {
+            addCriterion("word not between", value1, value2, "word");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

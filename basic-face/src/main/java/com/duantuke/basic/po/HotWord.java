@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class HotWord implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
     private Long id;
 
     private Integer provcode;
@@ -23,6 +22,8 @@ public class HotWord implements Serializable{
     private String updateuser;
 
     private String businessType;
+
+    private String word;
 
     public Long getId() {
         return id;
@@ -94,5 +95,13 @@ public class HotWord implements Serializable{
 
     public void setBusinessType(String businessType) {
         this.businessType = businessType == null ? null : businessType.trim();
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word == null ? null : word.trim();
     }
 }

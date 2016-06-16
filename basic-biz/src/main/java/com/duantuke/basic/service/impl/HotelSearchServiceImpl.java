@@ -107,6 +107,11 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 				}
 			});
 		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl initEs InterruptedException",e);
+		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
 	}

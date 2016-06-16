@@ -476,10 +476,10 @@ public class MealElasticsearchUtil {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("meatVegetable", meatVegetable).operator(Operator.AND)));
             }
             if (name != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("author", name).operator(Operator.AND)));
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("name", name).operator(Operator.AND)));
             }
             if (descrition != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("content", descrition).operator(Operator.AND)));
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("descrition", descrition).operator(Operator.AND)));
             }
             if(CollectionUtils.isNotEmpty(filterBuilders)){
             	FilterBuilder[] builders = new FilterBuilder[]{};

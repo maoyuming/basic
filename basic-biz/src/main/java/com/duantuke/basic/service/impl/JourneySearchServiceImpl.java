@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.common.geo.GeoPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,8 @@ import com.duantuke.basic.esbean.input.JourneyInputBean;
 import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
 import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
 import com.duantuke.basic.face.service.JourneySearchService;
-import com.duantuke.basic.face.service.TagService;
 import com.duantuke.basic.po.JourneyRHotel;
 import com.duantuke.basic.po.JourneyRSight;
-import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IJourneyService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.ThreadPoolUtil;
@@ -97,6 +94,11 @@ public class JourneySearchServiceImpl implements JourneySearchService {
 				    }
 				}
 			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("JourneySearchServiceImpl initEs InterruptedException",e);
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("JourneySearchServiceImpl initEs end:{}", journeyId);

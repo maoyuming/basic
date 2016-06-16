@@ -80,7 +80,11 @@ public class SightSearchServiceImpl implements SightSearchService {
 				    }
 				}
 			});
-			
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("SightSearchServiceImpl initEs InterruptedException",e);
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("SightSearchServiceImpl initEs end:{}", sightId);
