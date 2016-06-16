@@ -68,6 +68,7 @@ public class SkuServiceImpl implements SkuService {
 						
 						switch (skuTypeEnum) {
 						case roomtype:
+							
 							List<Long> roomtypeIds = entry.getValue();
 							BigDecimal roomtypePrice = BigDecimal.ZERO;
 							List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, roomtypeIds,roomtypePrice);
@@ -187,7 +188,7 @@ public class SkuServiceImpl implements SkuService {
 		}
 		
 		//间页数
-		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), DateUtil.DateFormat);
+		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime());
 		if(diff<=0){
 			throw new OpenException("时间区间错误");
 		}
