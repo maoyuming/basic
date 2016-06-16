@@ -70,116 +70,11 @@ public class SkuServiceImpl implements SkuService {
 						
 						switch (skuTypeEnum) {
 						case roomtype:
-							
-							if(skuQueryIn.getBeginDate()!=null){
-								skuQueryIn.setBeginTime(DateUtil.strToDate(skuQueryIn.getBeginDate(), "yyyy-MM-dd"));
-							}
-							if(skuQueryIn.getEndDate()!=null){
-								skuQueryIn.setEndTime(DateUtil.strToDate(skuQueryIn.getEndDate(), "yyyy-MM-dd"));
-							}
-							
-							List<Long> roomtypeIds = entry.getValue();
-							BigDecimal roomtypePrice = BigDecimal.ZERO;
-							
-							
-							List<RoomType> roomTypes = new ArrayList<RoomType>();
-							for (Long skuId : roomtypeIds) {
-								//根据房型id查询酒店id
-								RoomType roomType = roomTypeService.queryRoomtypeByRoomtypeId(skuId);
-								if(roomType!=null){
-									roomTypes.add(roomType);
-								}
-							}
-							if(CollectionUtils.isEmpty(roomTypes)){
-								logger.info("房型id没有对应酒店，{}",new Gson().toJson(roomtypeIds));
-								continue;
-							}
-							Map<Long, List<Long>> roomMap = new HashMap<Long, List<Long>>();
-							for (RoomType roomType : roomTypes) {
-								if(roomMap.containsKey(roomType.getSupplierId())){
-									roomMap.get(roomType.getSupplierId()).add(roomType.getSkuId());
-								}else{
-									List<Long> skuIds = new ArrayList<Long>();
-									skuIds.add(roomType.getSkuId());
-									roomMap.put(roomType.getSupplierId(),skuIds);
-								}
-							}
-							
-							
-							for (Entry<Long, List<Long>> roomEntry : roomMap.entrySet()) {
-								skuQueryIn.setHotelId(roomEntry.getKey());
-								List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, roomEntry.getValue(),roomtypePrice);
-								totalPrice = totalPrice.add(roomtypePrice);
-								
-								List<SkuInfo<RoomTypeInfo>> list = new ArrayList<SkuInfo<RoomTypeInfo>>();
-								if(CollectionUtils.isNotEmpty(roomTypeInfos)){
-									for (RoomTypeInfo roomTypeInfo : roomTypeInfos) {
-										SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
-										skuInfo.setInfo(roomTypeInfo);
-										skuInfo.setType(SkuTypeEnum.roomtype.getCode());
-										skuInfo.setSkuName(roomTypeInfo.getName());
-										skuInfo.setSkuId(roomTypeInfo.getSkuId());
-										list.add(skuInfo);
-									}
-									listAll.addAll(list);
-								}
-							}
-							
+							doQueryRoomtype(skuQueryIn, totalPrice, listAll, entry.getValue());
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
 							break;
 						case meal:
-							BigDecimal mealPrice = BigDecimal.ZERO;
-
-							List<Long> mealIds = entry.getValue();
-							
-							List<Meal> meals = new ArrayList<Meal>();
-							for (Long skuId : mealIds) {
-								//根据房型id查询酒店id
-								Meal meal = mealService.queryMealById(skuId);
-								if(meal!=null){
-									meals.add(meal);
-								}
-							}
-							
-							if(CollectionUtils.isEmpty(meals)){
-								logger.info("餐饮id没有对应酒店，{}",new Gson().toJson(mealIds));
-								continue;
-							}
-							
-							Map<Long, List<Long>> mealMap = new HashMap<Long, List<Long>>();
-							for (Meal meal : meals) {
-								if(mealMap.containsKey(meal.getSupplierId())){
-									mealMap.get(meal.getSupplierId()).add(meal.getSkuId());
-								}else{
-									List<Long> skuIds = new ArrayList<Long>();
-									skuIds.add(meal.getSkuId());
-									mealMap.put(meal.getSupplierId(),skuIds);
-								}
-							}
-							
-							
-							for (Entry<Long, List<Long>> mealEntry : mealMap.entrySet()) {
-								skuQueryIn.setHotelId(mealEntry.getKey());
-								List<MealInfo> mealInfos = queryMeal(skuQueryIn, mealEntry.getValue(), totalPrice);
-								totalPrice = totalPrice.add(mealPrice);
-								
-								List<SkuInfo<MealInfo>> list2 = new ArrayList<SkuInfo<MealInfo>>();
-								if(CollectionUtils.isNotEmpty(mealInfos)){
-									for (MealInfo mealInfo : mealInfos) {
-										
-										SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
-										skuInfo.setInfo(mealInfo);
-										
-										skuInfo.setType(SkuTypeEnum.meal.getCode());
-										skuInfo.setSkuName(mealInfo.getName());
-										skuInfo.setSkuId(mealInfo.getSkuId());
-										list2.add(skuInfo);
-									}
-									listAll.addAll(list2);
-								}
-							}
-							
-							
+							doQueryMeal(skuQueryIn, totalPrice, listAll, entry.getValue());
 //						skuInfo.setMealInfos(mealInfos);
 							break;
 							
@@ -194,23 +89,153 @@ public class SkuServiceImpl implements SkuService {
 				throw new OpenException("sku列表为空");
 			}
 			
-			
-			
 			if(CollectionUtils.isEmpty(listAll)){
 				throw new OpenException("没有查询到sku信息");
+			}else{
+				logger.info("sku返回集合大小：{}",listAll.size());
 			}
 			skuResponse.setList(listAll);
 		} catch (Exception e) {
 			logger.error("查询sku异常",e);
-		}
-		
-		
-		try {
-			logger.info("查询sku结束，{}",JSON.json(skuResponse));
-		} catch (IOException e) {
+			throw new OpenException(e);
+		}finally{
 			
+			try {
+				
+				
+				logger.info("查询sku结束，{}",JSON.json(skuResponse));
+			} catch (IOException e) {
+				
+			}
 		}
+		
+		
 		return skuResponse;
+	}
+	
+
+	/**
+	 * 执行查询餐饮信息，包括价格
+	 * @param skuQueryIn
+	 * @param totalPrice
+	 * @param listAll
+	 * @param roomtypeIds
+	 * @throws IOException 
+	 */
+	public void  doQueryMeal(SkuRequest skuQueryIn,BigDecimal totalPrice,List<SkuInfo> listAll,List<Long> mealIds) throws IOException{
+		BigDecimal mealPrice = BigDecimal.ZERO;
+
+		List<Meal> meals = new ArrayList<Meal>();
+		for (Long skuId : mealIds) {
+			//根据房型id查询酒店id
+			Meal meal = mealService.queryMealById(skuId);
+			if(meal!=null){
+				meals.add(meal);
+			}
+		}
+		
+		if(CollectionUtils.isEmpty(meals)){
+			logger.info("餐饮id没有对应酒店，{}",new Gson().toJson(mealIds));
+			return;
+		}
+		
+		Map<Long, List<Long>> mealMap = new HashMap<Long, List<Long>>();
+		for (Meal meal : meals) {
+			if(mealMap.containsKey(meal.getSupplierId())){
+				mealMap.get(meal.getSupplierId()).add(meal.getSkuId());
+			}else{
+				List<Long> skuIds = new ArrayList<Long>();
+				skuIds.add(meal.getSkuId());
+				mealMap.put(meal.getSupplierId(),skuIds);
+			}
+		}
+		
+		
+		for (Entry<Long, List<Long>> mealEntry : mealMap.entrySet()) {
+			skuQueryIn.setHotelId(mealEntry.getKey());
+			List<MealInfo> mealInfos = queryMeal(skuQueryIn, mealEntry.getValue(), totalPrice);
+			totalPrice = totalPrice.add(mealPrice);
+			
+			List<SkuInfo<MealInfo>> list2 = new ArrayList<SkuInfo<MealInfo>>();
+			if(CollectionUtils.isNotEmpty(mealInfos)){
+				for (MealInfo mealInfo : mealInfos) {
+					
+					SkuInfo<MealInfo> skuInfo = new SkuInfo<MealInfo>();
+					skuInfo.setInfo(mealInfo);
+					
+					skuInfo.setType(SkuTypeEnum.meal.getCode());
+					skuInfo.setSkuName(mealInfo.getName());
+					skuInfo.setSkuId(mealInfo.getSkuId());
+					list2.add(skuInfo);
+				}
+				listAll.addAll(list2);
+			}
+		}
+		
+	}
+	
+	/**
+	 * 执行查询房型信息，包括价格
+	 * @param skuQueryIn
+	 * @param totalPrice
+	 * @param listAll
+	 * @param roomtypeIds
+	 * @throws IOException 
+	 */
+	public void  doQueryRoomtype(SkuRequest skuQueryIn,BigDecimal totalPrice,List<SkuInfo> listAll,List<Long> roomtypeIds) throws IOException{
+		if(skuQueryIn.getBeginDate()!=null){
+			skuQueryIn.setBeginTime(DateUtil.strToDate(skuQueryIn.getBeginDate(), "yyyy-MM-dd"));
+		}
+		if(skuQueryIn.getEndDate()!=null){
+			skuQueryIn.setEndTime(DateUtil.strToDate(skuQueryIn.getEndDate(), "yyyy-MM-dd"));
+		}
+		
+//		List<Long> roomtypeIds = entry.getValue();
+		BigDecimal roomtypePrice = BigDecimal.ZERO;
+		
+		
+		List<RoomType> roomTypes = new ArrayList<RoomType>();
+		for (Long skuId : roomtypeIds) {
+			//根据房型id查询酒店id
+			RoomType roomType = roomTypeService.queryRoomtypeByRoomtypeId(skuId);
+			if(roomType!=null){
+				roomTypes.add(roomType);
+			}
+		}
+		if(CollectionUtils.isEmpty(roomTypes)){
+			logger.info("房型id没有对应酒店，{}",new Gson().toJson(roomtypeIds));
+			return;
+		}
+		Map<Long, List<Long>> roomMap = new HashMap<Long, List<Long>>();
+		for (RoomType roomType : roomTypes) {
+			if(roomMap.containsKey(roomType.getSupplierId())){
+				roomMap.get(roomType.getSupplierId()).add(roomType.getSkuId());
+			}else{
+				List<Long> skuIds = new ArrayList<Long>();
+				skuIds.add(roomType.getSkuId());
+				roomMap.put(roomType.getSupplierId(),skuIds);
+			}
+		}
+		logger.info("存在的房型，{}",JSON.json(roomMap));
+		
+		for (Entry<Long, List<Long>> roomEntry : roomMap.entrySet()) {
+			skuQueryIn.setHotelId(roomEntry.getKey());
+			List<RoomTypeInfo> roomTypeInfos = queryRoomtype(skuQueryIn, roomEntry.getValue(),roomtypePrice);
+			totalPrice = totalPrice.add(roomtypePrice);
+			
+			List<SkuInfo<RoomTypeInfo>> list = new ArrayList<SkuInfo<RoomTypeInfo>>();
+			if(CollectionUtils.isNotEmpty(roomTypeInfos)){
+				for (RoomTypeInfo roomTypeInfo : roomTypeInfos) {
+					SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
+					skuInfo.setInfo(roomTypeInfo);
+					skuInfo.setType(SkuTypeEnum.roomtype.getCode());
+					skuInfo.setSkuName(roomTypeInfo.getName());
+					skuInfo.setSkuId(roomTypeInfo.getSkuId());
+					list.add(skuInfo);
+				}
+				listAll.addAll(list);
+			}
+		}
 	}
 	
 	/**
