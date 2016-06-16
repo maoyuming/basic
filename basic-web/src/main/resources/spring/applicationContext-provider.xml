@@ -93,7 +93,7 @@
     <!-- 热词 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotWordService" ref="hotWordServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotWordServiceImpl" class="com.duantuke.basic.service.impl.HotWordServiceImpl" />  
-    <!-- 用户收藏酒店 -->
-	<dubbo:service interface="com.duantuke.basic.face.service.CustomerLikeHotelService" ref="customerLikeHotelServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
-    <bean id="customerLikeHotelServiceImpl" class="com.duantuke.basic.service.impl.CustomerLikeHotelServiceImpl" />  
+    <!-- 用户收藏 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.CustomerLikeService" ref="customerLikeServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="customerLikeServiceImpl" class="com.duantuke.basic.service.impl.CustomerLikeServiceImpl" />  
 </beans>  
