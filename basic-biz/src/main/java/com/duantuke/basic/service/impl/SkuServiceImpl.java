@@ -85,7 +85,13 @@ public class SkuServiceImpl implements SkuService {
 							for (Long skuId : roomtypeIds) {
 								//根据房型id查询酒店id
 								RoomType roomType = roomTypeService.queryRoomtypeByRoomtypeId(skuId);
-								roomTypes.add(roomType);
+								if(roomType!=null){
+									roomTypes.add(roomType);
+								}
+							}
+							if(CollectionUtils.isEmpty(roomTypes)){
+								logger.info("房型id没有对应酒店，{}",new Gson().toJson(roomtypeIds));
+								continue;
 							}
 							Map<Long, List<Long>> roomMap = new HashMap<Long, List<Long>>();
 							for (RoomType roomType : roomTypes) {
@@ -129,8 +135,16 @@ public class SkuServiceImpl implements SkuService {
 							for (Long skuId : mealIds) {
 								//根据房型id查询酒店id
 								Meal meal = mealService.queryMealById(skuId);
-								meals.add(meal);
+								if(meal!=null){
+									meals.add(meal);
+								}
 							}
+							
+							if(CollectionUtils.isEmpty(meals)){
+								logger.info("餐饮id没有对应酒店，{}",new Gson().toJson(mealIds));
+								continue;
+							}
+							
 							Map<Long, List<Long>> mealMap = new HashMap<Long, List<Long>>();
 							for (Meal meal : meals) {
 								if(mealMap.containsKey(meal.getSupplierId())){
@@ -178,9 +192,18 @@ public class SkuServiceImpl implements SkuService {
 			}else{
 				throw new OpenException("sku列表为空");
 			}
+			
+			
+			
+			if(CollectionUtils.isEmpty(listAll)){
+				throw new OpenException("没有查询到sku信息");
+			}
+			skuResponse.setList(listAll);
 		} catch (Exception e) {
 			logger.error("查询sku异常",e);
 		}
+		
+		
 		logger.info("查询sku结束，{}",new Gson().toJson(skuResponse));
 		return skuResponse;
 	}
