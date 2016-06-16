@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.enums.MessageReadStatusEnum;
 import com.duantuke.basic.face.service.PushLogService;
 import com.duantuke.basic.mappers.LPushLogMapper;
 import com.duantuke.basic.po.LPushLog;
@@ -34,6 +35,19 @@ public class PushLogServiceImpl implements PushLogService {
 		List<LPushLog> models =  lPushLogMapper.selectByExample(example);
 		return models;
 	
+	}
+
+	@Override
+	public int updateReadStatus(Long customerId,Long id) {
+
+		LPushLogExample example = new LPushLogExample();
+		LPushLogExample.Criteria hoCriteria = example.createCriteria();
+		hoCriteria.andMidEqualTo(customerId);
+		hoCriteria.andIdEqualTo(id);
+		
+		LPushLog record = new LPushLog();
+		record.setReadstatus(MessageReadStatusEnum.read.getCode()+"");
+		return lPushLogMapper.updateByExampleSelective(record,example);
 	}
 
 

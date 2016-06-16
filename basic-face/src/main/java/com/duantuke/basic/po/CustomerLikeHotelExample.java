@@ -1965,6 +1965,68 @@ public class CustomerLikeHotelExample {
             addCriterion("h.updateuser not between", value1, value2, "updateuser");
             return (Criteria) this;
         }
+        
+        
+        public Criteria andCustomerIdIsNull() {
+            addCriterion("d.customer_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdIsNotNull() {
+            addCriterion("d.customer_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdEqualTo(Long value) {
+            addCriterion("d.customer_id =", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdNotEqualTo(Long value) {
+            addCriterion("d.customer_id <>", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdGreaterThan(Long value) {
+            addCriterion("d.customer_id >", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("d.customer_id >=", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdLessThan(Long value) {
+            addCriterion("d.customer_id <", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdLessThanOrEqualTo(Long value) {
+            addCriterion("d.customer_id <=", value, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdIn(List<Long> values) {
+            addCriterion("d.customer_id in", values, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdNotIn(List<Long> values) {
+            addCriterion("d.customer_id not in", values, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdBetween(Long value1, Long value2) {
+            addCriterion("d.customer_id between", value1, value2, "customerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCustomerIdNotBetween(Long value1, Long value2) {
+            addCriterion("d.customer_id not between", value1, value2, "customerId");
+            return (Criteria) this;
+        }
+        
     }
 
     public static class Criteria extends GeneratedCriteria {

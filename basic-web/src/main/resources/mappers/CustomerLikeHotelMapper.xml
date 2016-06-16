@@ -80,7 +80,7 @@
       distinct
     </if>
     <include refid="Join_Column_List" />
-    from duantuke_like d left join hotel h on d.fid = h.hotelid and d.business_type=1
+    from duantuke_like d left join hotel h on d.fid = h.hotel_id and d.business_type=1
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

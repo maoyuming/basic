@@ -8,13 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.IsvisibleEnum;
-import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.face.service.CustomerLikeHotelService;
 import com.duantuke.basic.mappers.CustomerLikeHotelMapper;
-import com.duantuke.basic.mappers.HotelMapper;
 import com.duantuke.basic.po.CustomerLikeHotelExample;
 import com.duantuke.basic.po.Hotel;
-import com.duantuke.basic.po.HotelExample;
 
 /**
  * @author he
@@ -28,15 +25,20 @@ public class CustomerLikeHotelServiceImpl implements CustomerLikeHotelService {
 	@Autowired
 	private CustomerLikeHotelMapper customerLikeHotelMapper;
 
+	
+	/**
+	 * 根据用户id查询收藏的酒店列表
+	 */
 	@Override
 	public List<Hotel> queryHotels(Long customerId) {
-
+		logger.info("查询用户customer：{}的收藏酒店",customerId);
 		CustomerLikeHotelExample example = new CustomerLikeHotelExample();
 		CustomerLikeHotelExample.Criteria criteria = example.createCriteria();
 		
 		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
-//		criteria.andcu
-		return null;
+		criteria.andCustomerIdEqualTo(customerId);
+		
+		return customerLikeHotelMapper.selectByExample(example);
 	}
 
 }

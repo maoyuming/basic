@@ -12,4 +12,6 @@ public interface PushLogService {
 	 * @return
 	 */
 	public List<LPushLog> queryPushLogByMid(Long mid);
+	
+	public int updateReadStatus(Long customerId,Long id);
 }
