@@ -49,4 +49,9 @@ public class SightServiceImpl implements ISightService {
 	public List<SightInputBean> queryEsInputSights(Long sightId) {
 		return sightMapper.queryEsInputSights(sightId);
 	}
+
+	@Override
+	public Sight querySightById(Long sightId) {
+		return sightMapper.selectByPrimaryKey(sightId);
+	}
 }
