@@ -3,6 +3,7 @@ package com.duantuke.basic.face.service;
 import java.util.List;
 
 import com.duantuke.basic.po.Hotel;
+import com.duantuke.basic.po.Journey;
 import com.duantuke.basic.po.Sight;
 
 /**
@@ -13,5 +14,8 @@ public interface CustomerLikeService {
 	public List<Sight> querySights(Long customerId);
 
 	public List<Hotel> queryHotels(Long customerId);
+	
+	
+	public List<Journey> queryJourneys(Long customerId);
 
 }
