@@ -290,16 +290,16 @@ public class SkuServiceImpl implements SkuService {
 				if(MapUtils.isNotEmpty(priceMap)){
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
-						int index=0;
+//						int index=0;
 						for (Entry<String, BigDecimal> entry : roomTypeInfo.getPrices().entrySet()) {
 							if(entry.getValue()!=null){
-								if(index!=roomTypeInfo.getPrices().entrySet().size()-1){//忽略最后一天的价格
+//								if(index!=roomTypeInfo.getPrices().entrySet().size()-1){//忽略最后一天的价格
 									totalPrice = totalPrice.add(entry.getValue());
-								}
+//								}
 							}else{
 								throw new OpenException("有房型价格为空");
 							}
-							index++;
+//							index++;
 						}
 					}else{
 						throw new OpenException("没有查询到房型价格");

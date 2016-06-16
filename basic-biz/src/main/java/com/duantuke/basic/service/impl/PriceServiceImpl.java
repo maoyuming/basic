@@ -77,7 +77,8 @@ public class PriceServiceImpl implements PriceService{
 		if(endtime==null){
 			throw new OpenException("结束时间为空");
 		}
-		
+		//排除掉结束的这一天
+		endtime = DateUtil.addDays(endtime,-1);
 		
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();
