@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.enums.RecommendItemStateEnum;
+import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.RecommendService;
 import com.duantuke.basic.mappers.RecommendDetailMapper;
 import com.duantuke.basic.mappers.RecommendItemMapper;
@@ -43,14 +44,27 @@ public class RecommendServiceImpl implements RecommendService {
 		RecommendItemExample example = new RecommendItemExample();
 		RecommendItemExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andPositionIdEqualTo(item.getPositionId());
-		hoCriteria.andCityCodeEqualTo(item.getCityCode());
-		hoCriteria.andProvinceCodeEqualTo(item.getProvinceCode());
-		hoCriteria.andDistrictCodeEqualTo(item.getDistrictCode());
+		if(item.getCityCode()!=null){
+			hoCriteria.andCityCodeEqualTo(item.getCityCode());
+		}
+		if(item.getProvinceCode()!=null){
+			hoCriteria.andProvinceCodeEqualTo(item.getProvinceCode());
+		}
+		if(item.getDistrictCode()!=null){
+			hoCriteria.andDistrictCodeEqualTo(item.getDistrictCode());
+		}
 		hoCriteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		hoCriteria.andStateEqualTo(RecommendItemStateEnum.pass.getCode());
-		hoCriteria.andStartTimeGreaterThanOrEqualTo(new Date());
-		hoCriteria.andEndTimeLessThanOrEqualTo(new Date());
+		hoCriteria.andStartTimeLessThanOrEqualTo(new Date());
+		hoCriteria.andEndTimeGreaterThanOrEqualTo(new Date());
+		if(item.getIndex()==-1){
+			throw new OpenException("查询页数错误");
+		}
+		example.setLimitStart(item.getIndex()-1);
+		example.setLimitEnd(item.getPageSize());
+		
 		example.setOrderByClause("recommend_sort desc");
+		
 		List<RecommendItem> models =  recommendItemMapper.selectByExample( example);
 		return models;
 	}

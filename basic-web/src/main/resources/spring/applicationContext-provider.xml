@@ -96,7 +96,10 @@
     <!-- 用户收藏 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.CustomerLikeService" ref="customerLikeServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="customerLikeServiceImpl" class="com.duantuke.basic.service.impl.CustomerLikeServiceImpl" />  
-    <!-- 用户收藏 -->
+    <!-- 房型服务 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.RoomTypeService" ref="roomTypeServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="roomTypeServiceImpl" class="com.duantuke.basic.service.impl.RoomTypeServiceImpl" />  
+    <!-- 推荐服务 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.RecommendService" ref="recommendServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="recommendServiceImpl" class="com.duantuke.basic.service.impl.RecommendServiceImpl" />  
 </beans>  

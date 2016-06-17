@@ -57,9 +57,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.duantuke.basic.esbean.input.JourneyInputBean;
+import com.duantuke.basic.face.bean.PageItem;
 import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
 import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
-import com.duantuke.basic.util.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 

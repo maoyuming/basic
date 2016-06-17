@@ -61,9 +61,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.duantuke.basic.esbean.input.HotelInputBean;
+import com.duantuke.basic.face.bean.PageItem;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
-import com.duantuke.basic.util.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
