@@ -365,6 +365,206 @@ public class HotWordExample {
             return (Criteria) this;
         }
 
+        public Criteria andWordIsNull() {
+            addCriterion("word is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordIsNotNull() {
+            addCriterion("word is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordEqualTo(String value) {
+            addCriterion("word =", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotEqualTo(String value) {
+            addCriterion("word <>", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordGreaterThan(String value) {
+            addCriterion("word >", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordGreaterThanOrEqualTo(String value) {
+            addCriterion("word >=", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLessThan(String value) {
+            addCriterion("word <", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLessThanOrEqualTo(String value) {
+            addCriterion("word <=", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordLike(String value) {
+            addCriterion("word like", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotLike(String value) {
+            addCriterion("word not like", value, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordIn(List<String> values) {
+            addCriterion("word in", values, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotIn(List<String> values) {
+            addCriterion("word not in", values, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordBetween(String value1, String value2) {
+            addCriterion("word between", value1, value2, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andWordNotBetween(String value1, String value2) {
+            addCriterion("word not between", value1, value2, "word");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeIsNull() {
+            addCriterion("business_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeIsNotNull() {
+            addCriterion("business_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeEqualTo(String value) {
+            addCriterion("business_type =", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotEqualTo(String value) {
+            addCriterion("business_type <>", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeGreaterThan(String value) {
+            addCriterion("business_type >", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("business_type >=", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeLessThan(String value) {
+            addCriterion("business_type <", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeLessThanOrEqualTo(String value) {
+            addCriterion("business_type <=", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeLike(String value) {
+            addCriterion("business_type like", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotLike(String value) {
+            addCriterion("business_type not like", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeIn(List<String> values) {
+            addCriterion("business_type in", values, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotIn(List<String> values) {
+            addCriterion("business_type not in", values, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeBetween(String value1, String value2) {
+            addCriterion("business_type between", value1, value2, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotBetween(String value1, String value2) {
+            addCriterion("business_type not between", value1, value2, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIsNull() {
+            addCriterion("priority is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIsNotNull() {
+            addCriterion("priority is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityEqualTo(Integer value) {
+            addCriterion("priority =", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotEqualTo(Integer value) {
+            addCriterion("priority <>", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThan(Integer value) {
+            addCriterion("priority >", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThanOrEqualTo(Integer value) {
+            addCriterion("priority >=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThan(Integer value) {
+            addCriterion("priority <", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThanOrEqualTo(Integer value) {
+            addCriterion("priority <=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIn(List<Integer> values) {
+            addCriterion("priority in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotIn(List<Integer> values) {
+            addCriterion("priority not in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityBetween(Integer value1, Integer value2) {
+            addCriterion("priority between", value1, value2, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotBetween(Integer value1, Integer value2) {
+            addCriterion("priority not between", value1, value2, "priority");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatetimeIsNull() {
             addCriterion("createtime is null");
             return (Criteria) this;
@@ -622,146 +822,6 @@ public class HotWordExample {
 
         public Criteria andUpdateuserNotBetween(String value1, String value2) {
             addCriterion("updateuser not between", value1, value2, "updateuser");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeIsNull() {
-            addCriterion("business_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeIsNotNull() {
-            addCriterion("business_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeEqualTo(String value) {
-            addCriterion("business_type =", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeNotEqualTo(String value) {
-            addCriterion("business_type <>", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeGreaterThan(String value) {
-            addCriterion("business_type >", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("business_type >=", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeLessThan(String value) {
-            addCriterion("business_type <", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeLessThanOrEqualTo(String value) {
-            addCriterion("business_type <=", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeLike(String value) {
-            addCriterion("business_type like", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeNotLike(String value) {
-            addCriterion("business_type not like", value, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeIn(List<String> values) {
-            addCriterion("business_type in", values, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeNotIn(List<String> values) {
-            addCriterion("business_type not in", values, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeBetween(String value1, String value2) {
-            addCriterion("business_type between", value1, value2, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessTypeNotBetween(String value1, String value2) {
-            addCriterion("business_type not between", value1, value2, "businessType");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordIsNull() {
-            addCriterion("word is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordIsNotNull() {
-            addCriterion("word is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordEqualTo(String value) {
-            addCriterion("word =", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordNotEqualTo(String value) {
-            addCriterion("word <>", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordGreaterThan(String value) {
-            addCriterion("word >", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordGreaterThanOrEqualTo(String value) {
-            addCriterion("word >=", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordLessThan(String value) {
-            addCriterion("word <", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordLessThanOrEqualTo(String value) {
-            addCriterion("word <=", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordLike(String value) {
-            addCriterion("word like", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordNotLike(String value) {
-            addCriterion("word not like", value, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordIn(List<String> values) {
-            addCriterion("word in", values, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordNotIn(List<String> values) {
-            addCriterion("word not in", values, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordBetween(String value1, String value2) {
-            addCriterion("word between", value1, value2, "word");
-            return (Criteria) this;
-        }
-
-        public Criteria andWordNotBetween(String value1, String value2) {
-            addCriterion("word not between", value1, value2, "word");
             return (Criteria) this;
         }
     }
