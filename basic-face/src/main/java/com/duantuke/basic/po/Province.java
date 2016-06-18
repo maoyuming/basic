@@ -1,8 +1,9 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Province {
+public class Province implements Serializable{
     private Long id;
 
     private Long code;

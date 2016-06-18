@@ -1,8 +1,9 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class City {
+public class City implements Serializable{
     private Long id;
 
     private Long code;
