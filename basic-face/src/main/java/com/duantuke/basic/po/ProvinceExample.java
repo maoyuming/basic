@@ -245,6 +245,76 @@ public class ProvinceExample {
             return (Criteria) this;
         }
 
+        public Criteria andQueryNameIsNull() {
+            addCriterion("query_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameIsNotNull() {
+            addCriterion("query_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameEqualTo(String value) {
+            addCriterion("query_name =", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameNotEqualTo(String value) {
+            addCriterion("query_name <>", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameGreaterThan(String value) {
+            addCriterion("query_name >", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("query_name >=", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameLessThan(String value) {
+            addCriterion("query_name <", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameLessThanOrEqualTo(String value) {
+            addCriterion("query_name <=", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameLike(String value) {
+            addCriterion("query_name like", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameNotLike(String value) {
+            addCriterion("query_name not like", value, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameIn(List<String> values) {
+            addCriterion("query_name in", values, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameNotIn(List<String> values) {
+            addCriterion("query_name not in", values, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameBetween(String value1, String value2) {
+            addCriterion("query_name between", value1, value2, "queryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andQueryNameNotBetween(String value1, String value2) {
+            addCriterion("query_name not between", value1, value2, "queryName");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;

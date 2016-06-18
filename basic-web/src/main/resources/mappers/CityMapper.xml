@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.City" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="query_name" property="queryName" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="proid" property="proid" jdbcType="INTEGER" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
@@ -111,16 +112,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.City" >
-    insert into city (id, code, name, 
-      proid, sort, latitude, 
-      longitude, simplename, ishotcity, 
-      range, isselect, querycityname
-      )
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{proid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DECIMAL}, 
-      #{longitude,jdbcType=DECIMAL}, #{simplename,jdbcType=VARCHAR}, #{ishotcity,jdbcType=VARCHAR}, 
-      #{range,jdbcType=DOUBLE}, #{isselect,jdbcType=VARCHAR}, #{querycityname,jdbcType=VARCHAR}
-      )
+    insert into city (id, code, query_name, 
+      name, proid, sort, 
+      latitude, longitude, simplename, 
+      ishotcity, range, isselect, 
+      querycityname)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{queryName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{proid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{simplename,jdbcType=VARCHAR}, 
+      #{ishotcity,jdbcType=VARCHAR}, #{range,jdbcType=DOUBLE}, #{isselect,jdbcType=VARCHAR}, 
+      #{querycityname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.City" >
     insert into city
@@ -130,6 +131,9 @@
       </if>
       <if test="code != null" >
         code,
+      </if>
+      <if test="queryName != null" >
+        query_name,
       </if>
       <if test="name != null" >
         name,
@@ -168,6 +172,9 @@
       </if>
       <if test="code != null" >
         #{code,jdbcType=BIGINT},
+      </if>
+      <if test="queryName != null" >
+        #{queryName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -216,6 +223,9 @@
       <if test="record.code != null" >
         code = #{record.code,jdbcType=BIGINT},
       </if>
+      <if test="record.queryName != null" >
+        query_name = #{record.queryName,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -255,6 +265,7 @@
     update city
     set id = #{record.id,jdbcType=BIGINT},
       code = #{record.code,jdbcType=BIGINT},
+      query_name = #{record.queryName,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       proid = #{record.proid,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
@@ -274,6 +285,9 @@
     <set >
       <if test="code != null" >
         code = #{code,jdbcType=BIGINT},
+      </if>
+      <if test="queryName != null" >
+        query_name = #{queryName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -311,6 +325,7 @@
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.City" >
     update city
     set code = #{code,jdbcType=BIGINT},
+      query_name = #{queryName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       proid = #{proid,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},

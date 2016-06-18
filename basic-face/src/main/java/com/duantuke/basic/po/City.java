@@ -1,12 +1,13 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class City implements Serializable{
+public class City {
     private Long id;
 
     private Long code;
+
+    private String queryName;
 
     private String name;
 
@@ -42,6 +43,14 @@ public class City implements Serializable{
 
     public void setCode(Long code) {
         this.code = code;
+    }
+
+    public String getQueryName() {
+        return queryName;
+    }
+
+    public void setQueryName(String queryName) {
+        this.queryName = queryName == null ? null : queryName.trim();
     }
 
     public String getName() {
