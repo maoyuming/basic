@@ -9,8 +9,6 @@ import java.util.Map;
 
 import org.elasticsearch.common.geo.GeoPoint;
 
-import com.duantuke.basic.po.Tag;
-
 public class HotelInputBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -74,10 +72,10 @@ public class HotelInputBean implements Serializable{
     private Integer comment;//评论数
     private Integer travel;//游记数
     private GeoPoint pin;// 坐标
-    private List<Tag> taggroup_1 = new ArrayList<Tag>();
-    private List<Tag> taggroup_2 = new ArrayList<Tag>();
-    private List<Tag> taggroup_3 = new ArrayList<Tag>();
-    private List<Tag> taggroup_4 = new ArrayList<Tag>();
+    private List<Map<String,String>> taggroup_1 = new ArrayList<Map<String,String>>();
+    private List<Map<String,String>> taggroup_2 = new ArrayList<Map<String,String>>();
+    private List<Map<String,String>> taggroup_3 = new ArrayList<Map<String,String>>();
+    private List<Map<String,String>> taggroup_4 = new ArrayList<Map<String,String>>();
     //价格信息列表  存31天
     private List<Map<String,Double>> prices = new ArrayList<Map<String,Double>>();
     
@@ -93,28 +91,28 @@ public class HotelInputBean implements Serializable{
 	public void setReadonly(String readonly) {
 		this.readonly = readonly;
 	}
-	public List<Tag> getTaggroup_1() {
+	public List<Map<String,String>> getTaggroup_1() {
 		return taggroup_1;
 	}
-	public void setTaggroup_1(List<Tag> taggroup_1) {
+	public void setTaggroup_1(List<Map<String,String>> taggroup_1) {
 		this.taggroup_1 = taggroup_1;
 	}
-	public List<Tag> getTaggroup_2() {
+	public List<Map<String,String>> getTaggroup_2() {
 		return taggroup_2;
 	}
-	public void setTaggroup_2(List<Tag> taggroup_2) {
+	public void setTaggroup_2(List<Map<String,String>> taggroup_2) {
 		this.taggroup_2 = taggroup_2;
 	}
-	public List<Tag> getTaggroup_3() {
+	public List<Map<String,String>> getTaggroup_3() {
 		return taggroup_3;
 	}
-	public void setTaggroup_3(List<Tag> taggroup_3) {
+	public void setTaggroup_3(List<Map<String,String>> taggroup_3) {
 		this.taggroup_3 = taggroup_3;
 	}
-	public List<Tag> getTaggroup_4() {
+	public List<Map<String,String>> getTaggroup_4() {
 		return taggroup_4;
 	}
-	public void setTaggroup_4(List<Tag> taggroup_4) {
+	public void setTaggroup_4(List<Map<String,String>> taggroup_4) {
 		this.taggroup_4 = taggroup_4;
 	}
 	public Long getHotelId() {

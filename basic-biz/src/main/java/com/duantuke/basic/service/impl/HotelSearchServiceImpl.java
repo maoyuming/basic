@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import org.dozer.Mapper;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.elasticsearch.common.lang3.StringUtils;
@@ -46,6 +47,8 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private PriceService priceService;
 	@Autowired
 	private TagService tagService;
+	@Autowired
+    private Mapper dozerMapper;
 
 	private Gson gson = new Gson();
 
@@ -95,14 +98,15 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 						//保存tag
 						List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
 						for (Tag tag:taglist) {
+							Map<String,String> map = dozerMapper.map(tag, Map.class);
 							if(tag.getTagGroupId().equals(1l)){
-								hotelInputBean.getTaggroup_1().add(tag);
+								hotelInputBean.getTaggroup_1().add(map);
 							}else if(tag.getTagGroupId().equals(2l)){
-								hotelInputBean.getTaggroup_2().add(tag);
+								hotelInputBean.getTaggroup_2().add(map);
 							}else if(tag.getTagGroupId().equals(3l)){
-								hotelInputBean.getTaggroup_3().add(tag);
+								hotelInputBean.getTaggroup_3().add(map);
 							}else if(tag.getTagGroupId().equals(4l)){
-								hotelInputBean.getTaggroup_4().add(tag);
+								hotelInputBean.getTaggroup_4().add(map);
 							}
 						}
 						hotelInputBean.setPrices(getPrices(hotelInputBean.getHotelId()));
@@ -187,6 +191,51 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 			doneSingal.await();
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl refreshesprice InterruptedException",e);
+		}
+	}
+	
+	@Override
+	public void refreshestag(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshestag begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
+						for (Tag tag:taglist) {
+							Map<String,String> map = dozerMapper.map(tag, Map.class);
+							if(tag.getTagGroupId().equals(1l)){
+								hotelInputBean.getTaggroup_1().add(map);
+							}else if(tag.getTagGroupId().equals(2l)){
+								hotelInputBean.getTaggroup_2().add(map);
+							}else if(tag.getTagGroupId().equals(3l)){
+								hotelInputBean.getTaggroup_3().add(map);
+							}else if(tag.getTagGroupId().equals(4l)){
+								hotelInputBean.getTaggroup_4().add(map);
+							}
+						}
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "taggroup_1", hotelInputBean.getTaggroup_1());
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "taggroup_2", hotelInputBean.getTaggroup_2());
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "taggroup_3", hotelInputBean.getTaggroup_3());
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "taggroup_4", hotelInputBean.getTaggroup_4());
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshestag error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshestag InterruptedException",e);
 		}
 	}
 

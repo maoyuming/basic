@@ -145,6 +145,24 @@ public class UtilController extends BaseController {
 		}
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+	/**
+	 * @return 刷新tag到es
+	 */
+	@RequestMapping(value = "/refreshestag", method = RequestMethod.POST)
+	public ResponseEntity<String> refreshestag(Long hotelId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			hotelSearchService.refreshestag(hotelId);
+			result = "refreshestag完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("refreshestag error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
 	
 
 	/**

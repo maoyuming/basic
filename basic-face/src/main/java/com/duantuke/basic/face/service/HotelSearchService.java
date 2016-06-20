@@ -27,6 +27,11 @@ public interface HotelSearchService {
 	 * 刷价格 
 	 */
 	void refreshesprice(Long hotelId) throws Exception;
+	/**
+	 * @param hotelId 不传则刷全部
+	 * 刷tag 
+	 */
+	void refreshestag(Long hotelId) throws Exception;
 	
 	/**
 	 * @param hotelId
