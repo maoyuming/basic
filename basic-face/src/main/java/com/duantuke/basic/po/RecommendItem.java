@@ -3,7 +3,9 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class RecommendItem implements Serializable{
+import com.duantuke.basic.face.bean.PageItem;
+
+public class RecommendItem extends PageItem implements Serializable{
 	private static final long serialVersionUID = 1L;
     private Long recommendItemId;
 

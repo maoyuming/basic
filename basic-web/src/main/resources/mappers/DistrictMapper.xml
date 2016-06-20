@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.District" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="query_name" property="queryName" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="cityid" property="cityid" jdbcType="INTEGER" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, code, name, cityid, sort, latitude, longitude
+    id, code, query_name, name, cityid, sort, latitude, longitude
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.DistrictExample" >
     select
@@ -105,12 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.District" >
-    insert into district (id, code, name, 
-      cityid, sort, latitude, 
-      longitude)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{cityid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{latitude,jdbcType=DECIMAL}, 
-      #{longitude,jdbcType=DECIMAL})
+    insert into district (id, code, query_name, 
+      name, cityid, sort, 
+      latitude, longitude)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{queryName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{cityid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.District" >
     insert into district
@@ -120,6 +121,9 @@
       </if>
       <if test="code != null" >
         code,
+      </if>
+      <if test="queryName != null" >
+        query_name,
       </if>
       <if test="name != null" >
         name,
@@ -143,6 +147,9 @@
       </if>
       <if test="code != null" >
         #{code,jdbcType=BIGINT},
+      </if>
+      <if test="queryName != null" >
+        #{queryName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -176,6 +183,9 @@
       <if test="record.code != null" >
         code = #{record.code,jdbcType=BIGINT},
       </if>
+      <if test="record.queryName != null" >
+        query_name = #{record.queryName,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -200,6 +210,7 @@
     update district
     set id = #{record.id,jdbcType=BIGINT},
       code = #{record.code,jdbcType=BIGINT},
+      query_name = #{record.queryName,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       cityid = #{record.cityid,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
@@ -214,6 +225,9 @@
     <set >
       <if test="code != null" >
         code = #{code,jdbcType=BIGINT},
+      </if>
+      <if test="queryName != null" >
+        query_name = #{queryName,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -236,6 +250,7 @@
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.District" >
     update district
     set code = #{code,jdbcType=BIGINT},
+      query_name = #{queryName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       cityid = #{cityid,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},

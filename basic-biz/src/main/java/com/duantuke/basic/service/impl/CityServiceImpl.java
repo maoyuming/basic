@@ -30,7 +30,11 @@ public class CityServiceImpl implements CityService {
 	public List<City> queryAllCitys() {
 		logger.info(CityServiceImpl.class.getName()+":queryAllCitys begin");
 		try {
-			return cityMapper.selectByExample(null);
+
+			CityExample example = new CityExample();
+
+			example.setOrderByClause("sort asc");
+			return cityMapper.selectByExample(example);
 		} catch (Exception e) {
 			logger.error(CityServiceImpl.class.getName()+":queryAllCitys error",e);
 			throw e;
@@ -57,6 +61,7 @@ public class CityServiceImpl implements CityService {
 		CityExample example = new CityExample();
 		CityExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andCodeEqualTo(Long.valueOf(citycode));
+		example.setOrderByClause("sort asc");
 		List<City> models =  cityMapper.selectByExample( example);
 		if( models != null && models.size() > 0){
 			retInfo.setObj(models.get(0));

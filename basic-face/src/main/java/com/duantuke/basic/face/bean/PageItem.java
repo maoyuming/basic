@@ -1,4 +1,4 @@
-package com.duantuke.basic.util;
+package com.duantuke.basic.face.bean;
 
 import java.io.Serializable;
 

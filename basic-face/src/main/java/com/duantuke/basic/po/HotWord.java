@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class HotWord implements Serializable{
-	private static final long serialVersionUID = 1L;
     private Long id;
 
     private Integer provcode;
@@ -13,6 +12,12 @@ public class HotWord implements Serializable{
 
     private Integer discode;
 
+    private String word;
+
+    private String businessType;
+
+    private Integer priority;
+
     private Date createtime;
 
     private String createuser;
@@ -20,10 +25,6 @@ public class HotWord implements Serializable{
     private Date updatetime;
 
     private String updateuser;
-
-    private String businessType;
-
-    private String word;
 
     public Long getId() {
         return id;
@@ -57,6 +58,30 @@ public class HotWord implements Serializable{
         this.discode = discode;
     }
 
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word == null ? null : word.trim();
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType == null ? null : businessType.trim();
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
     public Date getCreatetime() {
         return createtime;
     }
@@ -87,21 +112,5 @@ public class HotWord implements Serializable{
 
     public void setUpdateuser(String updateuser) {
         this.updateuser = updateuser == null ? null : updateuser.trim();
-    }
-
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType == null ? null : businessType.trim();
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word == null ? null : word.trim();
     }
 }

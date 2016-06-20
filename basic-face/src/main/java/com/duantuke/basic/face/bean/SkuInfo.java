@@ -2,12 +2,14 @@ package com.duantuke.basic.face.bean;
 
 import java.io.Serializable;
 
+import com.duantuke.basic.po.Sku;
+
 /**
  * sku查询入参
  * @author tankai
  *
  */
-public class SkuInfo<T> implements Serializable{
+public class SkuInfo<T>  implements Serializable{
 /**
 	 * 
 	 */
@@ -17,6 +19,9 @@ public class SkuInfo<T> implements Serializable{
 	private String skuName;//商品名称
 	private Long supplierId;//暂时只有酒店id,
 	private String supplierName;//暂时只有酒店id,
+    private String pics;//图片
+    private String descrition;//描述
+    private String memo;//
 	private T info;
 	public Long getSkuId() {
 		return skuId;
@@ -53,6 +58,24 @@ public class SkuInfo<T> implements Serializable{
 	}
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
+	}
+	public String getPics() {
+		return pics;
+	}
+	public void setPics(String pics) {
+		this.pics = pics;
+	}
+	public String getDescrition() {
+		return descrition;
+	}
+	public void setDescrition(String descrition) {
+		this.descrition = descrition;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	
 	

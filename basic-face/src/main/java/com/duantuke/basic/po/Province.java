@@ -8,6 +8,8 @@ public class Province implements Serializable{
 
     private Long code;
 
+    private String queryName;
+
     private String name;
 
     private Integer sort;
@@ -32,6 +34,14 @@ public class Province implements Serializable{
 
     public void setCode(Long code) {
         this.code = code;
+    }
+
+    public String getQueryName() {
+        return queryName;
+    }
+
+    public void setQueryName(String queryName) {
+        this.queryName = queryName == null ? null : queryName.trim();
     }
 
     public String getName() {

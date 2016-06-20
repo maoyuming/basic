@@ -20,9 +20,9 @@ import com.duantuke.basic.po.RoomTypeExample.Criteria;
  * 房型相关接口
  */
 @Service
-public class RoomtypeServiceImpl implements RoomTypeService {
+public class RoomTypeServiceImpl implements RoomTypeService {
 	
-	private static Logger logger = LoggerFactory.getLogger(RoomtypeServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(RoomTypeServiceImpl.class);
 	@Autowired
 	private RoomTypeMapper roomTypeMapper;
 	
@@ -46,14 +46,14 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 
 	@Override
 	public List<RoomType> queryRoomTypes(RoomType roomType) {		
-		RoomtypeServiceImpl.logger.info(RoomtypeServiceImpl.class.getName() + ":queryByHotelId begin");
+		RoomTypeServiceImpl.logger.info(RoomTypeServiceImpl.class.getName() + ":queryByHotelId begin");
 		try {
 			RoomTypeExample roomTypeExample = new RoomTypeExample();
 			Criteria criteria =  roomTypeExample.createCriteria();
 			criteria.andSkuIdEqualTo(roomType.getSkuId());
 			return roomTypeMapper.selectByExample(roomTypeExample);
 		} catch (Exception e) {
-			RoomtypeServiceImpl.logger.error(RoomtypeServiceImpl.class.getName() + ":queryByHotelId error", e);
+			RoomTypeServiceImpl.logger.error(RoomTypeServiceImpl.class.getName() + ":queryByHotelId error", e);
 			throw e;
 		}
 	}
@@ -62,7 +62,8 @@ public class RoomtypeServiceImpl implements RoomTypeService {
 		RoomTypeExample roomTypeExample = new RoomTypeExample();
 		Criteria criteria =  roomTypeExample.createCriteria();
 		criteria.andSupplierIdEqualTo(hotelId);
-		return roomTypeMapper.selectByExample(roomTypeExample);
+		List<RoomType> list = roomTypeMapper.selectByExample(roomTypeExample);
+		return list;
 	}
 
 	@Override

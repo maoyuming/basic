@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.face.service.CustomerLikeService;
 import com.duantuke.basic.mappers.CustomerLikeHotelMapper;
+import com.duantuke.basic.mappers.CustomerLikeJourneyMapper;
 import com.duantuke.basic.mappers.CustomerLikeSightMapper;
 import com.duantuke.basic.po.CustomerLikeHotelExample;
+import com.duantuke.basic.po.CustomerLikeJourneyExample;
 import com.duantuke.basic.po.CustomerLikeSightExample;
 import com.duantuke.basic.po.Hotel;
+import com.duantuke.basic.po.Journey;
 import com.duantuke.basic.po.Sight;
 
 /**
@@ -30,6 +33,8 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 
 	@Autowired
 	private CustomerLikeHotelMapper customerLikeHotelMapper;
+	@Autowired
+	private CustomerLikeJourneyMapper customerLikeJourneyMapper;
 	
 	/**
 	 * 根据用户id查询收藏的景点列表
@@ -61,6 +66,22 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		criteria.andCustomerIdEqualTo(customerId);
 		
 		return customerLikeHotelMapper.selectByExample(example);
+	}
+
+
+
+	@Override
+	public List<Journey> queryJourneys(Long customerId) {
+
+		logger.info("查询用户customer：{}的收藏酒店",customerId);
+		CustomerLikeJourneyExample example = new CustomerLikeJourneyExample();
+		CustomerLikeJourneyExample.Criteria criteria = example.createCriteria();
+		
+//		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
+		criteria.andCustomerIdEqualTo(customerId);
+		
+		return customerLikeJourneyMapper.selectByExample(example);
+	
 	}
 
 

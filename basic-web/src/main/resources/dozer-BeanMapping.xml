@@ -20,5 +20,13 @@
         <class-a>com.duantuke.basic.po.RoomType</class-a>
         <class-b>com.duantuke.basic.face.bean.RoomTypeInfo</class-b>
     </mapping>
+    <mapping date-format="yyyy年MM月dd日">
+        <class-a>com.duantuke.basic.face.bean.SkuInfo</class-a>
+        <class-b>com.duantuke.basic.face.bean.RoomTypeInfo</class-b>
+    </mapping>
+    <mapping date-format="yyyy年MM月dd日">
+        <class-a>com.duantuke.basic.face.bean.SkuInfo</class-a>
+        <class-b>com.duantuke.basic.face.bean.MealInfo</class-b>
+    </mapping>
 
 </mappings>

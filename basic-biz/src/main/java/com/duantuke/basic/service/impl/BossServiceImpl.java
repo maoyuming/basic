@@ -141,6 +141,11 @@ public class BossServiceImpl implements BossService {
 				hotel.setUpdatetime(new Date());
 				hotel.setUpdateuser(boss.getSalePhone());
 				hotel.setState(HotelStateEnum.init.getId());
+				
+
+				hotel.setLatitude(boss.getLatitude());
+				hotel.setLongitude(boss.getLongitude());
+				
 				int num = hotelService.updateHotel(hotel);
 				if(num>0){
 					//绑定老板关系
@@ -156,6 +161,11 @@ public class BossServiceImpl implements BossService {
 				hotel.setUpdatetime(new Date());
 				hotel.setCreateuser(boss.getSalePhone());
 				hotel.setUpdateuser(boss.getSalePhone());
+				
+
+				hotel.setLatitude(boss.getLatitude());
+				hotel.setLongitude(boss.getLongitude());
+				
 				hotel.setState(HotelStateEnum.init.getId());
 				int num = hotelService.addHotel(hotel);
 				if(num>0){

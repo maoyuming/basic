@@ -48,6 +48,12 @@ public class PriceServiceImpl implements PriceService{
 	public static final int DEFAULTDAYS = 30;
 	
 
+	/**
+	 * 查询价格服务
+	 * Map<Long, Map<String, BigDecimal>> key:房型id  value:Map<String, BigDecimal> 时间价格集合
+	 *    
+	 * Map<String, BigDecimal> key:时间 格式yyyyMMdd，value:价格
+	 */
 	@Override
 	public Map<Long, Map<String, BigDecimal>> queryHotelPrices(Long hotelId,
 			String begintime, String endtime, List<Long> roomtypeIds) {
@@ -71,7 +77,8 @@ public class PriceServiceImpl implements PriceService{
 		if(endtime==null){
 			throw new OpenException("结束时间为空");
 		}
-		
+		//排除掉结束的这一天
+		endtime = DateUtil.addDays(endtime,-1);
 		
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();

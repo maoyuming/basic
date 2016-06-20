@@ -51,6 +51,8 @@ public class ProvinceServiceImpl implements ProvinceService {
 		ProvinceExample example = new ProvinceExample();
 		ProvinceExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andCodeEqualTo(Long.valueOf(provCode));
+		example.setOrderByClause("sort asc");
+		
 		List<Province> models =  provinceMapper.selectByExample( example);
 		if( models != null && models.size() > 0){
 			retInfo.setObj(models.get(0));

@@ -30,7 +30,10 @@ public class DistrictServiceImpl implements DistrictService {
 	public List<District> queryAllDistricts() {
 		logger.info(DistrictServiceImpl.class.getName()+":queryAllDistricts begin");
 		try {
-			return districtMapper.selectByExample(null);
+
+			DistrictExample example = new DistrictExample();
+			example.setOrderByClause("sort asc");
+			return districtMapper.selectByExample(example);
 		} catch (Exception e) {
 			logger.error(DistrictServiceImpl.class.getName()+":queryAllDistricts error",e);
 			throw e;
@@ -49,6 +52,7 @@ public class DistrictServiceImpl implements DistrictService {
 		DistrictExample example = new DistrictExample();
 		DistrictExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andCodeEqualTo(Long.valueOf(districtcode));
+		example.setOrderByClause("sort asc");
 		List<District> models =  districtMapper.selectByExample( example);
 		if( models != null && models.size() > 0){
 			retInfo.setObj(models.get(0));

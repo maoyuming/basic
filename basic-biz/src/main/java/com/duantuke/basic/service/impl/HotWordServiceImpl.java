@@ -40,6 +40,7 @@ public class HotWordServiceImpl implements HotWordService {
 		if(hotWord.getBusinessType()!=null){
 			criteria.andBusinessTypeEqualTo(hotWord.getBusinessType());
 		}
+		example.setOrderByClause("priority desc");
 		return hotWordMapper.selectByExample(example);
 	}
 	
