@@ -43,6 +43,13 @@ public class HotelQueryBean implements Serializable{
     
     private String tagJson;//tag搜索条件   {"taggroup_2":["商务会议","温泉度假"],"taggroup_1":["旅游景区"]}
     
+    //价格区间
+    private Double queryminprice;
+    private Double querymaxprice;
+    //预订开始时间和结束时间
+    private String querystarttime;
+    private String queryendtime;
+    
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
     
@@ -53,7 +60,33 @@ public class HotelQueryBean implements Serializable{
     public final static Integer SEARCH_RANGE_DEFAULT = 5000;
     
     
-    public String getTagJson() {
+    
+    
+	public Double getQueryminprice() {
+		return queryminprice;
+	}
+	public void setQueryminprice(Double queryminprice) {
+		this.queryminprice = queryminprice;
+	}
+	public Double getQuerymaxprice() {
+		return querymaxprice;
+	}
+	public void setQuerymaxprice(Double querymaxprice) {
+		this.querymaxprice = querymaxprice;
+	}
+	public String getQuerystarttime() {
+		return querystarttime;
+	}
+	public void setQuerystarttime(String querystarttime) {
+		this.querystarttime = querystarttime;
+	}
+	public String getQueryendtime() {
+		return queryendtime;
+	}
+	public void setQueryendtime(String queryendtime) {
+		this.queryendtime = queryendtime;
+	}
+	public String getTagJson() {
 		return tagJson;
 	}
 	public void setTagJson(String tagJson) {

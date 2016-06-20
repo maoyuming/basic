@@ -462,7 +462,7 @@ public class JourneyElasticsearchUtil {
             String propertyName = iterator.next();
             String propertValue = propertyValues.get(propertyName);
             MatchQueryBuilder matchQuery = QueryBuilders.matchQuery(propertyName, propertValue);
-            boolQueryBuilder.must(matchQuery);
+            boolQueryBuilder.should(matchQuery);
         }
 
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);

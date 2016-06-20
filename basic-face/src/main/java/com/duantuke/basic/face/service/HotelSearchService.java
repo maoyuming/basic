@@ -22,6 +22,11 @@ public interface HotelSearchService {
 	 * 初始化es 
 	 */
 	void initEs(Long hotelId);
+	/**
+	 * @param hotelId 不传则刷全部
+	 * 刷价格 
+	 */
+	void refreshesprice(Long hotelId) throws Exception;
 	
 	/**
 	 * @param hotelId

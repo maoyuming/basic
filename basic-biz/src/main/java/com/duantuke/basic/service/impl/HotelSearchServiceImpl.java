@@ -1,5 +1,9 @@
 package com.duantuke.basic.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,7 @@ import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
+import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.face.service.TagService;
 import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
@@ -37,6 +42,8 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private HotelElasticsearchUtil esutil;
 	@Autowired
 	private IHotelService ihotelService;
+	@Autowired
+	private PriceService priceService;
 	@Autowired
 	private TagService tagService;
 
@@ -98,6 +105,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 								hotelInputBean.getTaggroup_4().add(tag);
 							}
 						}
+						hotelInputBean.setPrices(getPrices(hotelInputBean.getHotelId()));
 					}catch (Exception e) {
 						logger.error("HotelSearchServiceImpl initEs error", e);
 				    } finally {
@@ -114,6 +122,72 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		}
 		esutil.batchAddDocument(esInputlist);
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
+	}
+	
+	private List<Map<String,Double>> getPrices(Long hotelid) throws Exception{
+		List<Map<String,Double>> prices = new ArrayList<Map<String,Double>>();
+		//按hotelid和otatype分组30天内价格最高值和最低值
+		Calendar startc = Calendar.getInstance();
+		Calendar endc = Calendar.getInstance();
+		endc.add(Calendar.DAY_OF_MONTH, 31);
+		
+		Map<Long,Map<String,BigDecimal>> pricemap = priceService.queryHotelPrices(hotelid, startc.getTime(), endc.getTime(), null);
+		//按天按房型分组
+		List<Date> dateList = new ArrayList<Date>();
+        dateList = DateUtil.listDays(startc.getTime(), endc.getTime());
+		for (Date date : dateList) {
+			BigDecimal minprice =  BigDecimal.valueOf(999999);
+			String datestr = DateUtil.dateToStr(date, "yyyyMMdd");
+			Map<String,Double> map = new HashMap<String,Double>();
+			//按房型
+			for (Long roomtypeid:pricemap.keySet()) {
+				Map<String,BigDecimal> infomap= pricemap.get(roomtypeid);
+				BigDecimal temprice = infomap.get(datestr);
+				if(temprice.compareTo(minprice)==-1){
+					minprice = temprice;
+				}
+			}
+			if(minprice.compareTo(BigDecimal.valueOf(999999))==0){
+				continue;
+			}
+			map.put(datestr, minprice.doubleValue());
+			prices.add(map);
+		}
+		return prices;
+		
+	}
+	
+	
+
+	@Override
+	public void refreshesprice(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshesprice begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<Map<String,Double>> priceslist = new ArrayList<Map<String,Double>>();
+						priceslist = getPrices(hotelInputBean.getHotelId());
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "prices", priceslist);
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshesprice error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshesprice InterruptedException",e);
+		}
 	}
 
 	@Override

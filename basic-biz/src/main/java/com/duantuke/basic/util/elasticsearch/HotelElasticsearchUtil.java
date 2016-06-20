@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -52,6 +54,7 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -63,6 +66,7 @@ import org.springframework.stereotype.Repository;
 import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.PageItem;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -385,6 +389,10 @@ public class HotelElasticsearchUtil {
         xBuilder.field("type", "nested");
         xBuilder.endObject();
         
+        xBuilder.startObject("prices");
+        xBuilder.field("type", "nested");
+        xBuilder.endObject();
+        
         xBuilder.startObject("hotelName");
         xBuilder.field("type", "string")
         .field("indexAnalyzer", "ik")  
@@ -480,10 +488,24 @@ public class HotelElasticsearchUtil {
             String propertyName = iterator.next();
             String propertValue = propertyValues.get(propertyName);
             MatchQueryBuilder matchQuery = QueryBuilders.matchQuery(propertyName, propertValue);
-            boolQueryBuilder.must(matchQuery);
+            boolQueryBuilder.should(matchQuery);
         }
 
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
+    }
+    public NestedQueryBuilder nestedCompareQuery(final List<String> fields, final String nestedPath,Double queryminprice,Double querymaxprice) {
+    	
+    	BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+    	for (String field:fields) {
+    		RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery(field);
+    		if(queryminprice!=null)
+    			rangeQuery.gte(queryminprice);
+    		if(queryminprice!=null)
+    			rangeQuery.lte(querymaxprice);
+    		//boolQueryBuilder.must(rangeQuery);
+    		boolQueryBuilder.should(rangeQuery);
+		}
+    	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
     public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags) {
@@ -510,6 +532,10 @@ public class HotelElasticsearchUtil {
             Integer pagesize = hotelQueryBean.getPagesize();
             String sortby = hotelQueryBean.getSortby();
             String sortorder = hotelQueryBean.getSortorder();
+            Double querymaxprice = hotelQueryBean.getQuerymaxprice();
+            Double queryminprice = hotelQueryBean.getQueryminprice();
+            String querystarttime = hotelQueryBean.getQuerystarttime();
+            String queryendtime = hotelQueryBean.getQueryendtime();
             
             if (hotelName != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
@@ -550,14 +576,23 @@ public class HotelElasticsearchUtil {
 						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
 					}
 				}
-                /*for (Map.Entry<String, String> tmp : tags.entrySet()) {
-                    if (tmp.getValue() == null) {
-                        continue;
-                    }
-                    Map<String, String> propertyValues = new HashMap<String, String>();
-                    propertyValues.put(tmp.getKey() + ".tagName", tmp.getValue());
-                    searchBuilder.setQuery(nestedBoolQuery(propertyValues, tmp.getKey()));
-                }*/
+            }
+            if(!(querymaxprice==null && queryminprice==null)){
+            	List<String> days = new ArrayList<String>();
+            	Calendar startc = Calendar.getInstance();
+        		Calendar endc = Calendar.getInstance();
+        		endc.add(Calendar.DAY_OF_MONTH, 1);
+            	if(querystarttime==null){
+            		querystarttime = DateUtil.dateToStr(startc.getTime(), "yyyyMMdd");
+            	}
+            	if(queryendtime==null){
+            		queryendtime = DateUtil.dateToStr(endc.getTime(), "yyyyMMdd");
+            	}
+            	List<Date> datedays = DateUtil.listDays(DateUtil.strToDate(querystarttime, "yyyyMMdd"),DateUtil.strToDate(queryendtime, "yyyyMMdd"));
+            	for (int i = 0; i < datedays.size(); i++) {
+					days.add(DateUtil.dateToStr(datedays.get(i), "yyyyMMdd"));
+				}
+            	searchBuilder.setQuery(nestedCompareQuery(days,"prices", queryminprice,querymaxprice));
             }
             //LBS
             if(longitude!=null &&latitude!=null){

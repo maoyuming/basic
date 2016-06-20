@@ -127,6 +127,24 @@ public class UtilController extends BaseController {
 		}
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
+	/**
+	 * @return 刷新价格到es
+	 */
+	@RequestMapping(value = "/refreshesprice", method = RequestMethod.POST)
+	public ResponseEntity<String> refreshesprice(Long hotelId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			hotelSearchService.refreshesprice(hotelId);
+			result = "refreshesprice完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("refreshesprice error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
 	
 
 	/**

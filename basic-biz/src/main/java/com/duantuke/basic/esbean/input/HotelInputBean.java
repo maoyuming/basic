@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.elasticsearch.common.geo.GeoPoint;
 
@@ -77,7 +78,15 @@ public class HotelInputBean implements Serializable{
     private List<Tag> taggroup_2 = new ArrayList<Tag>();
     private List<Tag> taggroup_3 = new ArrayList<Tag>();
     private List<Tag> taggroup_4 = new ArrayList<Tag>();
+    //价格信息列表  存31天
+    private List<Map<String,Double>> prices = new ArrayList<Map<String,Double>>();
     
+	public List<Map<String, Double>> getPrices() {
+		return prices;
+	}
+	public void setPrices(List<Map<String, Double>> prices) {
+		this.prices = prices;
+	}
 	public String getReadonly() {
 		return readonly;
 	}
