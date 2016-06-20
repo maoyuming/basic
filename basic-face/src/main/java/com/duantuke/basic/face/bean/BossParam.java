@@ -1,5 +1,7 @@
 package com.duantuke.basic.face.bean;
 
+import java.math.BigDecimal;
+
 import com.duantuke.basic.po.Boss;
 
 public class BossParam extends Boss{
@@ -12,6 +14,11 @@ public class BossParam extends Boss{
     private String hotelName;
     
     private Long hotelId;
+    
+
+    private BigDecimal longitude;
+
+    private BigDecimal latitude;
     
     
 
@@ -37,6 +44,22 @@ public class BossParam extends Boss{
 
 	public void setSalePhone(String salePhone) {
 		this.salePhone = salePhone;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
+	}
+
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
 	}
     
     
