@@ -102,4 +102,7 @@
     <!-- 推荐服务 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.RecommendService" ref="recommendServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="recommendServiceImpl" class="com.duantuke.basic.service.impl.RecommendServiceImpl" />  
+    <!-- 销售服务 -->
+	<dubbo:service interface="com.duantuke.basic.face.service.SaleService" ref="saleServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="saleServiceImpl" class="com.duantuke.basic.service.impl.SaleServiceImpl" />  
 </beans>  
