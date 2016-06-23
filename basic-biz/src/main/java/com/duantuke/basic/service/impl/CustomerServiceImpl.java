@@ -71,6 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//check c端用户是否存在
 		if(isExistCustomerByPhone(customer.getPhone())){
 			info.setMsg("c端手机号码已经存在");
+			info.setResult(true);
 			return info;
 		}
 		//保存老板信息
