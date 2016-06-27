@@ -3,6 +3,7 @@ package com.duantuke.basic.service.impl;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
 import org.slf4j.Logger;
@@ -86,7 +87,11 @@ public class SightSearchServiceImpl implements SightSearchService {
 		} catch (InterruptedException e) {
 			logger.error("SightSearchServiceImpl initEs InterruptedException",e);
 		}
-		esutil.batchAddDocument(esInputlist);
+		if(CollectionUtils.isNotEmpty(esInputlist)){
+			esutil.batchAddDocument(esInputlist);
+		}else{
+			logger.warn("SightSearchServiceImpl initEs warn list is empty:{}", sightId);
+		}
 		logger.info("SightSearchServiceImpl initEs end:{}", sightId);
 	}
 

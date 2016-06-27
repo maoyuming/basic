@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.dozer.Mapper;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.common.geo.GeoPoint;
@@ -124,7 +125,11 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl initEs InterruptedException",e);
 		}
-		esutil.batchAddDocument(esInputlist);
+		if(CollectionUtils.isNotEmpty(esInputlist)){
+			esutil.batchAddDocument(esInputlist);
+		}else{
+			logger.warn("HotelSearchServiceImpl initEs warn list is empty:{}", hotelId);
+		}
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
 	}
 	

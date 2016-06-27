@@ -33,7 +33,16 @@ public class JourneyInputBean implements Serializable{
     private Integer share;//分享数 
     private List<Map<String,String>> hotelIds = new ArrayList<Map<String,String>>();//游记关联的农家院id,数组格式
     private List<Map<String,String>> sightIds = new ArrayList<Map<String,String>>();//游记关联的景点id,数组格式
-	public Long getJourneyId() {
+    //打分
+    private Integer paidScore=0;
+    
+	public Integer getPaidScore() {
+		return paidScore;
+	}
+	public void setPaidScore(Integer paidScore) {
+		this.paidScore = paidScore;
+	}
+    public Long getJourneyId() {
 		return journeyId;
 	}
 	public void setJourneyId(Long journeyId) {

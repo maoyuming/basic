@@ -557,7 +557,8 @@ public class SightElasticsearchUtil {
     			}
                 this.sortByFields(searchBuilder, sortby, sortOrder);
             }
-            
+            //按打分排序
+            this.sortByFields(searchBuilder, "paidScore", SortOrder.DESC);
 
             // 分页应用
             if (page > 0) {

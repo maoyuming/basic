@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +101,11 @@ public class JourneySearchServiceImpl implements JourneySearchService {
 		} catch (InterruptedException e) {
 			logger.error("JourneySearchServiceImpl initEs InterruptedException",e);
 		}
-		esutil.batchAddDocument(esInputlist);
+		if(CollectionUtils.isNotEmpty(esInputlist)){
+			esutil.batchAddDocument(esInputlist);
+		}else{
+			logger.warn("JourneySearchServiceImpl initEs warn list is empty:{}", journeyId);
+		}
 		logger.info("JourneySearchServiceImpl initEs end:{}", journeyId);
 	}
 

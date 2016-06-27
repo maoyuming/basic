@@ -39,6 +39,7 @@
     <result column="follow" property="follow" jdbcType="INTEGER" />
     <result column="comment" property="comment" jdbcType="INTEGER" />
     <result column="travel" property="travel" jdbcType="INTEGER" />
+    <result column="paid_score" property="paidScore" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -428,12 +429,14 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.sight_rank_id,r.rank,r.follow,r.comment,r.travel
+    ,p.paid_score
     from 
-    sight s
-    LEFT JOIN sight_rank r ON s.sight_id = r.sight_id
+    (sight s
+    LEFT JOIN sight_rank r ON s.sight_id = r.sight_id)
+    LEFT JOIN paid_listing p ON (s.sight_id = p.out_id and p.type='1')
     <where>
 	    <if test="sightId != null" >
-	      s.sight_id = #{sightId}
+	       s.sight_id = #{sightId}
 	    </if>
     </where>
   </select>

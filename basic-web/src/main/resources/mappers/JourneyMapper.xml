@@ -30,6 +30,7 @@
     <result column="view" property="view" jdbcType="INTEGER" />
     <result column="journey_like" property="journeyLike" jdbcType="INTEGER" />
     <result column="share" property="share" jdbcType="INTEGER" />
+    <result column="paid_score" property="paidScore" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Journey" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -366,12 +367,14 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.journey_rank_id,r.rank,r.follow,r.roomnight,r.comment,r.travel,r.view,r.journey_like,r.share
+    ,p.paid_score
     from 
-    journey j
-    LEFT JOIN journey_rank r ON j.journey_id = r.journey_id
+    (journey j
+    LEFT JOIN journey_rank r ON j.journey_id = r.journey_id)
+    LEFT JOIN paid_listing p ON (j.journey_id = p.out_id and p.type='2')
     <where>
 	    <if test="journeyId != null" >
-	      j.journey_id = #{journeyId}
+	       j.journey_id = #{journeyId}
 	    </if>
     </where>
   </select>

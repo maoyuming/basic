@@ -45,7 +45,15 @@ public class SightInputBean implements Serializable{
     
     private GeoPoint pin;// 坐标
     
+    //打分
+    private Integer paidScore=0;
     
+	public Integer getPaidScore() {
+		return paidScore;
+	}
+	public void setPaidScore(Integer paidScore) {
+		this.paidScore = paidScore;
+	}
 
     public Long getSightRankId() {
 		return sightRankId;

@@ -71,6 +71,7 @@
     <result column="roomnight" property="roomnight" jdbcType="INTEGER" />
     <result column="comment" property="comment" jdbcType="INTEGER" />
     <result column="travel" property="travel" jdbcType="INTEGER" />
+    <result column="paid_score" property="paidScore" jdbcType="INTEGER" />
   </resultMap>
   
   <sql id="Example_Where_Clause" >
@@ -749,12 +750,14 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.hotel_rank_id,r.rank,r.follow,r.roomnight,r.comment,r.travel
+    ,p.paid_score
     from 
-    hotel h
-    LEFT JOIN hotel_rank r ON h.hotel_id = r.hotel_id
+    (hotel h
+    LEFT JOIN hotel_rank r ON h.hotel_id = r.hotel_id)
+    LEFT JOIN paid_listing p ON (h.hotel_id = p.out_id and p.type='0')
     <where>
 	    <if test="hotelId != null" >
-	      h.hotel_id = #{hotelId}
+	       h.hotel_id = #{hotelId}
 	    </if>
     </where>
   </select>

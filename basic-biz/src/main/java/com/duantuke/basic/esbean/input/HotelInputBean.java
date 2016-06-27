@@ -78,7 +78,17 @@ public class HotelInputBean implements Serializable{
     private List<Map<String,String>> taggroup_4 = new ArrayList<Map<String,String>>();
     //价格信息列表  存31天
     private List<Map<String,Double>> prices = new ArrayList<Map<String,Double>>();
+    //打分
+    private Integer paidScore=0;
     
+    
+    
+	public Integer getPaidScore() {
+		return paidScore;
+	}
+	public void setPaidScore(Integer paidScore) {
+		this.paidScore = paidScore;
+	}
 	public List<Map<String, Double>> getPrices() {
 		return prices;
 	}
