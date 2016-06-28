@@ -57,7 +57,7 @@ public class HotelOpenSettingServiceImpl implements HotelOpenSettingService {
 //        businessLogUtil.saveLog(String.valueOf(hotelOpenSetting.getHotelId()), hotelOpenSetting.getCreateuser(), busilog, BussinssTypeEnum.hotelOpenSetting);
 
         logger.info("保存关房配置");
-        int rs = hotelOpenSettingMapper.insert(hotelOpenSetting);
+        int rs = hotelOpenSettingMapper.insertSelective(hotelOpenSetting);
 
         if (rs > 0) {
             logger.info("根据关房配置同步生成明细");
