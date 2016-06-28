@@ -248,6 +248,26 @@ public class BossServiceImpl implements BossService {
 		
 		return hotels;
 	}
+	/**
+	 * 根据老板id查询酒店信息
+	 */
+	@Override
+	public Boss queryBossByHotelId(Long hotelId) {
+		List<Hotel>  hotels = new ArrayList<Hotel>();
+		//根据老板id查询出酒店id，
+		BossesRHotelExample example = new BossesRHotelExample();
+		BossesRHotelExample.Criteria hoCriteria = example.createCriteria();
+		hoCriteria.andHotelIdEqualTo(hotelId);
+		List<BossesRHotel> models =  bossesRHotelMapper.selectByExample(example);
+		//根据酒店id查询出酒店信息
+		if(CollectionUtils.isNotEmpty(models)){
+			for (BossesRHotel bossesRHotel : models) {
+				return bossMapper.selectByPrimaryKey(bossesRHotel.getBossId());
+			}
+		}
+		
+		return null;
+	}
 
 
 	/**

@@ -39,4 +39,6 @@ public interface BossService {
 	 * @return
 	 */
 	public List<Hotel> queryHotelByBossLoginName(String loginName);
+	
+	public Boss queryBossByHotelId(Long hotelId);
 }
