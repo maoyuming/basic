@@ -110,4 +110,7 @@
     <bean id="hotelOpenSettingServiceImpl" class="com.duantuke.basic.service.impl.HotelOpenSettingServiceImpl" />  
 	<dubbo:service interface="com.duantuke.basic.face.service.HotelOpenSettingDetailService" ref="hotelOpenSettingDetailServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotelOpenSettingDetailServiceImpl" class="com.duantuke.basic.service.impl.HotelOpenSettingDetailServiceImpl" />  
+    <!-- 团体sku -->
+	<dubbo:service interface="com.duantuke.basic.face.service.TeamSkuService" ref="teamSkuServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="teamSkuServiceImpl" class="com.duantuke.basic.service.impl.TeamSkuServiceImpl" />  
 </beans>  

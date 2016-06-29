@@ -4,6 +4,7 @@ public enum SkuTypeEnum {
 
     roomtype(1,"房型"),
     meal(2,"餐饮"),
+    teamsku(3,"团体"),
     
     ;
     private Integer code;

@@ -25,12 +25,15 @@ import com.duantuke.basic.face.bean.SkuInfo;
 import com.duantuke.basic.face.bean.SkuRequest;
 import com.duantuke.basic.face.bean.SkuResponse;
 import com.duantuke.basic.face.bean.SkuResultInfo;
+import com.duantuke.basic.face.bean.TeamSkuInfo;
 import com.duantuke.basic.face.service.MealService;
 import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.face.service.RoomTypeService;
 import com.duantuke.basic.face.service.SkuService;
+import com.duantuke.basic.face.service.TeamSkuService;
 import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.RoomType;
+import com.duantuke.basic.po.TeamSku;
 import com.duantuke.basic.util.DateUtil;
 import com.google.gson.Gson;
 
@@ -39,6 +42,8 @@ public class SkuServiceImpl implements SkuService {
 	private static Logger logger = LoggerFactory.getLogger(SkuServiceImpl.class);
 	@Autowired
 	private RoomTypeService roomTypeService;
+	@Autowired
+	private TeamSkuService teamSkuService;
 	@Autowired
 	private PriceService priceService;
 	@Autowired
@@ -73,6 +78,11 @@ public class SkuServiceImpl implements SkuService {
 						case roomtype:
 							BigDecimal roomPrice  = doQueryRoomtype(skuQueryIn, listAll, entry.getValue());
 							totalPrice = totalPrice.add(roomPrice);
+//						skuInfo.setRoomTypeInfos(roomTypeInfos);
+							break;
+						case teamsku:
+							BigDecimal teamPrice  = doQueryTeamSku(skuQueryIn, listAll, entry.getValue());
+							totalPrice = totalPrice.add(teamPrice);
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
 							break;
 						case meal:
@@ -246,6 +256,71 @@ public class SkuServiceImpl implements SkuService {
 		}
 		return totalPrice;
 	}
+	/**
+	 * 执行查询房型信息，包括价格
+	 * @param skuQueryIn
+	 * @param totalPrice
+	 * @param listAll
+	 * @param roomtypeIds
+	 * @throws IOException 
+	 */
+	public BigDecimal  doQueryTeamSku(SkuRequest skuQueryIn,List<SkuInfo> listAll,List<Long> roomtypeIds) throws IOException{
+		if(skuQueryIn.getBeginDate()!=null){
+			skuQueryIn.setBeginTime(DateUtil.strToDate(skuQueryIn.getBeginDate(), "yyyy-MM-dd"));
+		}
+		if(skuQueryIn.getEndDate()!=null){
+			skuQueryIn.setEndTime(DateUtil.strToDate(skuQueryIn.getEndDate(), "yyyy-MM-dd"));
+		}
+		
+//		List<Long> roomtypeIds = entry.getValue();
+		
+		BigDecimal totalPrice = BigDecimal.ZERO;
+		List<TeamSku> roomTypes = new ArrayList<TeamSku>();
+		for (Long skuId : roomtypeIds) {
+			//根据房型id查询酒店id
+			TeamSku roomType = teamSkuService.queryTeamSkuBySkuId(skuId);
+			if(roomType!=null){
+				roomTypes.add(roomType);
+			}
+		}
+		if(CollectionUtils.isEmpty(roomTypes)){
+			logger.info("房型id没有对应酒店，{}",new Gson().toJson(roomtypeIds));
+			return totalPrice;
+		}
+		Map<Long, List<Long>> roomMap = new HashMap<Long, List<Long>>();
+		for (TeamSku roomType : roomTypes) {
+			if(roomMap.containsKey(roomType.getSupplierId())){
+				roomMap.get(roomType.getSupplierId()).add(roomType.getSkuId());
+			}else{
+				List<Long> skuIds = new ArrayList<Long>();
+				skuIds.add(roomType.getSkuId());
+				roomMap.put(roomType.getSupplierId(),skuIds);
+			}
+		}
+		logger.info("存在的房型，{}",JSON.json(roomMap));
+		
+		for (Entry<Long, List<Long>> roomEntry : roomMap.entrySet()) {
+			skuQueryIn.setHotelId(roomEntry.getKey());
+			SkuResultInfo<List<TeamSkuInfo>>  info   = queryTeamSku(skuQueryIn, roomEntry.getValue());
+			List<TeamSkuInfo> roomTypeInfos = info.getInfo();
+			totalPrice = totalPrice.add(info.getTotalPrice());
+			
+			List<SkuInfo<TeamSkuInfo>> list = new ArrayList<SkuInfo<TeamSkuInfo>>();
+			if(CollectionUtils.isNotEmpty(roomTypeInfos)){
+				for (TeamSkuInfo roomTypeInfo : roomTypeInfos) {
+//					SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
+					SkuInfo<TeamSkuInfo> skuInfo = dozerMapper.map(roomTypeInfo, SkuInfo.class);
+					skuInfo.setInfo(roomTypeInfo);
+					skuInfo.setType(SkuTypeEnum.roomtype.getCode());
+					skuInfo.setSkuName(roomTypeInfo.getName());
+					skuInfo.setSkuId(roomTypeInfo.getSkuId());
+					list.add(skuInfo);
+				}
+				listAll.addAll(list);
+			}
+		}
+		return totalPrice;
+	}
 	
 	/**
 	 * 查询房型信息
@@ -310,6 +385,87 @@ public class SkuServiceImpl implements SkuService {
 				roomTypeInfos.add(roomTypeInfo);
 			}
 		
+		}
+		
+		//间页数
+		int diff = DateUtil.diffDay(skuQueryIn.getBeginTime(), skuQueryIn.getEndTime());
+		if(diff<=0){
+			throw new OpenException("时间区间错误");
+		}
+		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
+		logger.info("总价："+totalPrice);
+		try {
+			logger.info("查询返回值：{}",JSON.json(roomTypeInfos));
+		} catch (IOException e) {
+			
+		}
+		info.setTotalPrice(totalPrice);
+		info.setInfo(roomTypeInfos);
+		return info;
+	}
+	/**
+	 * 查询团体信息
+	 * @param skuQueryIn
+	 * @param roomtypeIds
+	 * @return
+	 */
+	public SkuResultInfo<List<TeamSkuInfo>> queryTeamSku(SkuRequest skuQueryIn,List<Long> roomtypeIds){
+		
+		
+		BigDecimal totalPrice = BigDecimal.ZERO;
+		SkuResultInfo<List<TeamSkuInfo>> info  =new SkuResultInfo<List<TeamSkuInfo>>();
+		
+		List<TeamSku> roomtypes =  null;
+		List<TeamSkuInfo> roomTypeInfos =  new ArrayList<TeamSkuInfo>();
+		
+		
+		//如果sku集合为空，则查询所有房型
+		if(CollectionUtils.isEmpty(roomtypeIds)){
+			roomtypes = teamSkuService.queryTeamSkuByHotleId(skuQueryIn.getHotelId());
+			roomtypeIds = new ArrayList<Long>();
+			for (TeamSku roomType : roomtypes) {
+				roomtypeIds.add(roomType.getSkuId());
+			}
+		}else{
+			roomtypes = teamSkuService.queryTeamSkuBySkuIds(roomtypeIds);
+		}
+		
+		
+		
+		//query price
+		Map<Long,Map<String,BigDecimal>> priceMap = priceService.queryHotelPrices(skuQueryIn.getHotelId(), skuQueryIn.getBeginTime(), skuQueryIn.getEndTime(), roomtypeIds);
+		
+		if(CollectionUtils.isNotEmpty(roomtypes)){
+			
+			for (TeamSku roomType : roomtypes) {
+				
+				//类型转换，同时查询价格
+				TeamSkuInfo roomTypeInfo = dozerMapper.map(roomType, TeamSkuInfo.class);
+				
+				
+				if(MapUtils.isNotEmpty(priceMap)){
+					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
+					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
+//						int index=0;
+						for (Entry<String, BigDecimal> entry : roomTypeInfo.getPrices().entrySet()) {
+							if(entry.getValue()!=null){
+//								if(index!=roomTypeInfo.getPrices().entrySet().size()-1){//忽略最后一天的价格
+								totalPrice = totalPrice.add(entry.getValue());
+//								}
+							}else{
+								throw new OpenException("有房型价格为空");
+							}
+//							index++;
+						}
+					}else{
+						throw new OpenException("没有查询到房型价格");
+					}
+				}else{
+					throw new OpenException("没有查询到房型价格");
+				}
+				roomTypeInfos.add(roomTypeInfo);
+			}
+			
 		}
 		
 		//间页数
