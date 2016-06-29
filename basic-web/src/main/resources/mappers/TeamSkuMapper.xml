@@ -90,7 +90,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from team_sku
+    from team_sku m left join skus s on m.sku_id = s.sku_id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
