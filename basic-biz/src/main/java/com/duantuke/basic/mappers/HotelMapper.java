@@ -38,4 +38,5 @@ public interface HotelMapper {
     int updateByPrimaryKey(Hotel record);
     
     List<HotelInputBean> queryEsInputHotels(@Param("hotelId") Long hotelId);
+
 }

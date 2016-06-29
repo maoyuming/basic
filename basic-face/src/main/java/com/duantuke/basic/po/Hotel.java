@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Hotel implements Serializable{
 	private static final long serialVersionUID = 1L;
+
     private Long hotelId;
 
     private String hotelName;
@@ -55,6 +56,8 @@ public class Hotel implements Serializable{
     private Integer state;
 
     private String pics;
+
+    private Integer peopleNumber;
 
     private Date createtime;
 
@@ -264,6 +267,14 @@ public class Hotel implements Serializable{
 
     public void setPics(String pics) {
         this.pics = pics == null ? null : pics.trim();
+    }
+
+    public Integer getPeopleNumber() {
+        return peopleNumber;
+    }
+
+    public void setPeopleNumber(Integer peopleNumber) {
+        this.peopleNumber = peopleNumber;
     }
 
     public Date getCreatetime() {

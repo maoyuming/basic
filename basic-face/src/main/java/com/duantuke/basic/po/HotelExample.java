@@ -1576,6 +1576,76 @@ public class HotelExample {
             return (Criteria) this;
         }
 
+        public Criteria andReadonlyIsNull() {
+            addCriterion("readonly is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyIsNotNull() {
+            addCriterion("readonly is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyEqualTo(String value) {
+            addCriterion("readonly =", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyNotEqualTo(String value) {
+            addCriterion("readonly <>", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyGreaterThan(String value) {
+            addCriterion("readonly >", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyGreaterThanOrEqualTo(String value) {
+            addCriterion("readonly >=", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyLessThan(String value) {
+            addCriterion("readonly <", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyLessThanOrEqualTo(String value) {
+            addCriterion("readonly <=", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyLike(String value) {
+            addCriterion("readonly like", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyNotLike(String value) {
+            addCriterion("readonly not like", value, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyIn(List<String> values) {
+            addCriterion("readonly in", values, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyNotIn(List<String> values) {
+            addCriterion("readonly not in", values, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyBetween(String value1, String value2) {
+            addCriterion("readonly between", value1, value2, "readonly");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadonlyNotBetween(String value1, String value2) {
+            addCriterion("readonly not between", value1, value2, "readonly");
+            return (Criteria) this;
+        }
+
         public Criteria andStateIsNull() {
             addCriterion("state is null");
             return (Criteria) this;
@@ -1703,6 +1773,66 @@ public class HotelExample {
 
         public Criteria andPicsNotBetween(String value1, String value2) {
             addCriterion("pics not between", value1, value2, "pics");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberIsNull() {
+            addCriterion("people_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberIsNotNull() {
+            addCriterion("people_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberEqualTo(Integer value) {
+            addCriterion("people_number =", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberNotEqualTo(Integer value) {
+            addCriterion("people_number <>", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberGreaterThan(Integer value) {
+            addCriterion("people_number >", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("people_number >=", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberLessThan(Integer value) {
+            addCriterion("people_number <", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("people_number <=", value, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberIn(List<Integer> values) {
+            addCriterion("people_number in", values, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberNotIn(List<Integer> values) {
+            addCriterion("people_number not in", values, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberBetween(Integer value1, Integer value2) {
+            addCriterion("people_number between", value1, value2, "peopleNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeopleNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("people_number not between", value1, value2, "peopleNumber");
             return (Criteria) this;
         }
 
