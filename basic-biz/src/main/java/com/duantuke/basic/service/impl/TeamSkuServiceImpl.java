@@ -70,7 +70,8 @@ public class TeamSkuServiceImpl implements TeamSkuService {
 		TeamSkuExample example = new TeamSkuExample();
 		Criteria criteria =  example.createCriteria();
 		criteria.andSupplierIdEqualTo(hotelId);
-		return teamSkuMapper.selectByExample(example);
+		List<TeamSku> list =  teamSkuMapper.selectByExample(example);
+		return list;
 	
 	}
 

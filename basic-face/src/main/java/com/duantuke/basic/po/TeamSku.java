@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class TeamSku extends Sku implements Serializable{
-    private Long skuId;
 
     private String description;
 
@@ -25,13 +24,6 @@ public class TeamSku extends Sku implements Serializable{
 
     private String updateBy;
 
-    public Long getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(Long skuId) {
-        this.skuId = skuId;
-    }
 
     public String getDescription() {
         return description;
