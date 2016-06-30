@@ -127,8 +127,10 @@ public class PriceServiceImpl implements PriceService{
 			}
 			// 3、特殊价往里放(优先级1)
 			for (DailyRate dailyRate : dailyRates) {
+				dailyRate.setDayStr(DateUtil.dateToStr(dailyRate.getDay(), "yyyyMMdd"));
+				
 				// 判断day是否和当天一致
-				if (String.valueOf(dailyRate.getDay()).equals(yyyymmdd)) {
+				if (String.valueOf(dailyRate.getDayStr()).equals(yyyymmdd)) {
 					rackMap.put(dailyRate.getRoomtypeId() + "@" + yyyymmdd, dailyRate.getPrice());
 				}
 			}

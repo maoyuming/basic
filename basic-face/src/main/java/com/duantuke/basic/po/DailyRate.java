@@ -13,6 +13,7 @@ public class DailyRate implements Serializable{
     private Long roomtypeId;
 
     private Date day;
+    private String dayStr;
 
     private BigDecimal price;
 
@@ -105,4 +106,14 @@ public class DailyRate implements Serializable{
     public void setUpdateuser(String updateuser) {
         this.updateuser = updateuser == null ? null : updateuser.trim();
     }
+
+	public String getDayStr() {
+		return dayStr;
+	}
+
+	public void setDayStr(String dayStr) {
+		this.dayStr = dayStr;
+	}
+
+    
 }
