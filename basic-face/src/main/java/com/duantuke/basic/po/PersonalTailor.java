@@ -1,5 +1,6 @@
 package com.duantuke.basic.po;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class PersonalTailor {
@@ -17,17 +18,19 @@ public class PersonalTailor {
 
     private String schedule;
 
-    private String memo;
-
     private Integer number;
 
     private Long budget;
+
+    private BigDecimal totalPrice;
 
     private String contact;
 
     private String contactPhone;
 
     private String email;
+
+    private String memo;
 
     private Date createTime;
 
@@ -93,14 +96,6 @@ public class PersonalTailor {
         this.schedule = schedule == null ? null : schedule.trim();
     }
 
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
-    }
-
     public Integer getNumber() {
         return number;
     }
@@ -115,6 +110,14 @@ public class PersonalTailor {
 
     public void setBudget(Long budget) {
         this.budget = budget;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getContact() {
@@ -139,6 +142,14 @@ public class PersonalTailor {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo == null ? null : memo.trim();
     }
 
     public Date getCreateTime() {

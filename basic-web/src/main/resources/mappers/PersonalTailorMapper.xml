@@ -9,12 +9,13 @@
     <result column="howlong" property="howlong" jdbcType="INTEGER" />
     <result column="fromdate" property="fromdate" jdbcType="TIMESTAMP" />
     <result column="schedule" property="schedule" jdbcType="VARCHAR" />
-    <result column="memo" property="memo" jdbcType="VARCHAR" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="budget" property="budget" jdbcType="DECIMAL" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
     <result column="contact" property="contact" jdbcType="VARCHAR" />
     <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -79,9 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    personal_tailor_id, type, starting, destination, howlong, fromdate, schedule, memo, 
-    number, budget, contact, contact_phone, email, create_time, create_by, update_time, 
-    update_by
+    personal_tailor_id, type, starting, destination, howlong, fromdate, schedule, number, 
+    budget, total_price, contact, contact_phone, email, memo, create_time, create_by, 
+    update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.PersonalTailorExample" >
     select
@@ -119,16 +120,18 @@
   <insert id="insert" parameterType="com.duantuke.basic.po.PersonalTailor" >
     insert into personal_tailor (personal_tailor_id, type, starting, 
       destination, howlong, fromdate, 
-      schedule, memo, number, 
-      budget, contact, contact_phone, 
-      email, create_time, create_by, 
-      update_time, update_by)
+      schedule, number, budget, 
+      total_price, contact, contact_phone, 
+      email, memo, create_time, 
+      create_by, update_time, update_by
+      )
     values (#{personalTailorId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{starting,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{howlong,jdbcType=INTEGER}, #{fromdate,jdbcType=TIMESTAMP}, 
-      #{schedule,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{budget,jdbcType=DECIMAL}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+      #{schedule,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{budget,jdbcType=DECIMAL}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.PersonalTailor" >
     insert into personal_tailor
@@ -154,14 +157,14 @@
       <if test="schedule != null" >
         schedule,
       </if>
-      <if test="memo != null" >
-        memo,
-      </if>
       <if test="number != null" >
         number,
       </if>
       <if test="budget != null" >
         budget,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
       </if>
       <if test="contact != null" >
         contact,
@@ -171,6 +174,9 @@
       </if>
       <if test="email != null" >
         email,
+      </if>
+      <if test="memo != null" >
+        memo,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -207,14 +213,14 @@
       <if test="schedule != null" >
         #{schedule,jdbcType=VARCHAR},
       </if>
-      <if test="memo != null" >
-        #{memo,jdbcType=VARCHAR},
-      </if>
       <if test="number != null" >
         #{number,jdbcType=INTEGER},
       </if>
       <if test="budget != null" >
         #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
       </if>
       <if test="contact != null" >
         #{contact,jdbcType=VARCHAR},
@@ -224,6 +230,9 @@
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -269,14 +278,14 @@
       <if test="record.schedule != null" >
         schedule = #{record.schedule,jdbcType=VARCHAR},
       </if>
-      <if test="record.memo != null" >
-        memo = #{record.memo,jdbcType=VARCHAR},
-      </if>
       <if test="record.number != null" >
         number = #{record.number,jdbcType=INTEGER},
       </if>
       <if test="record.budget != null" >
         budget = #{record.budget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=DECIMAL},
       </if>
       <if test="record.contact != null" >
         contact = #{record.contact,jdbcType=VARCHAR},
@@ -286,6 +295,9 @@
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -313,12 +325,13 @@
       howlong = #{record.howlong,jdbcType=INTEGER},
       fromdate = #{record.fromdate,jdbcType=TIMESTAMP},
       schedule = #{record.schedule,jdbcType=VARCHAR},
-      memo = #{record.memo,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
       budget = #{record.budget,jdbcType=DECIMAL},
+      total_price = #{record.totalPrice,jdbcType=DECIMAL},
       contact = #{record.contact,jdbcType=VARCHAR},
       contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -348,14 +361,14 @@
       <if test="schedule != null" >
         schedule = #{schedule,jdbcType=VARCHAR},
       </if>
-      <if test="memo != null" >
-        memo = #{memo,jdbcType=VARCHAR},
-      </if>
       <if test="number != null" >
         number = #{number,jdbcType=INTEGER},
       </if>
       <if test="budget != null" >
         budget = #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
       </if>
       <if test="contact != null" >
         contact = #{contact,jdbcType=VARCHAR},
@@ -365,6 +378,9 @@
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -389,12 +405,13 @@
       howlong = #{howlong,jdbcType=INTEGER},
       fromdate = #{fromdate,jdbcType=TIMESTAMP},
       schedule = #{schedule,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       budget = #{budget,jdbcType=DECIMAL},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
       contact = #{contact,jdbcType=VARCHAR},
       contact_phone = #{contactPhone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},

@@ -1,5 +1,6 @@
 package com.duantuke.basic.po;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -575,76 +576,6 @@ public class PersonalTailorExample {
             return (Criteria) this;
         }
 
-        public Criteria andMemoIsNull() {
-            addCriterion("memo is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoIsNotNull() {
-            addCriterion("memo is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoEqualTo(String value) {
-            addCriterion("memo =", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoNotEqualTo(String value) {
-            addCriterion("memo <>", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoGreaterThan(String value) {
-            addCriterion("memo >", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoGreaterThanOrEqualTo(String value) {
-            addCriterion("memo >=", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoLessThan(String value) {
-            addCriterion("memo <", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoLessThanOrEqualTo(String value) {
-            addCriterion("memo <=", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoLike(String value) {
-            addCriterion("memo like", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoNotLike(String value) {
-            addCriterion("memo not like", value, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoIn(List<String> values) {
-            addCriterion("memo in", values, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoNotIn(List<String> values) {
-            addCriterion("memo not in", values, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoBetween(String value1, String value2) {
-            addCriterion("memo between", value1, value2, "memo");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemoNotBetween(String value1, String value2) {
-            addCriterion("memo not between", value1, value2, "memo");
-            return (Criteria) this;
-        }
-
         public Criteria andNumberIsNull() {
             addCriterion("number is null");
             return (Criteria) this;
@@ -762,6 +693,66 @@ public class PersonalTailorExample {
 
         public Criteria andBudgetNotBetween(Long value1, Long value2) {
             addCriterion("budget not between", value1, value2, "budget");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIsNull() {
+            addCriterion("total_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIsNotNull() {
+            addCriterion("total_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceEqualTo(BigDecimal value) {
+            addCriterion("total_price =", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotEqualTo(BigDecimal value) {
+            addCriterion("total_price <>", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceGreaterThan(BigDecimal value) {
+            addCriterion("total_price >", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_price >=", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceLessThan(BigDecimal value) {
+            addCriterion("total_price <", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_price <=", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIn(List<BigDecimal> values) {
+            addCriterion("total_price in", values, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotIn(List<BigDecimal> values) {
+            addCriterion("total_price not in", values, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_price between", value1, value2, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_price not between", value1, value2, "totalPrice");
             return (Criteria) this;
         }
 
@@ -972,6 +963,76 @@ public class PersonalTailorExample {
 
         public Criteria andEmailNotBetween(String value1, String value2) {
             addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoIsNull() {
+            addCriterion("memo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoIsNotNull() {
+            addCriterion("memo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoEqualTo(String value) {
+            addCriterion("memo =", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoNotEqualTo(String value) {
+            addCriterion("memo <>", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoGreaterThan(String value) {
+            addCriterion("memo >", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoGreaterThanOrEqualTo(String value) {
+            addCriterion("memo >=", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoLessThan(String value) {
+            addCriterion("memo <", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoLessThanOrEqualTo(String value) {
+            addCriterion("memo <=", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoLike(String value) {
+            addCriterion("memo like", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoNotLike(String value) {
+            addCriterion("memo not like", value, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoIn(List<String> values) {
+            addCriterion("memo in", values, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoNotIn(List<String> values) {
+            addCriterion("memo not in", values, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoBetween(String value1, String value2) {
+            addCriterion("memo between", value1, value2, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemoNotBetween(String value1, String value2) {
+            addCriterion("memo not between", value1, value2, "memo");
             return (Criteria) this;
         }
 
