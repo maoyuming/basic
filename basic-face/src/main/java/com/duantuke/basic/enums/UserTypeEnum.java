@@ -27,7 +27,7 @@ public enum UserTypeEnum {
 	}
 	
 	
-	public static UserTypeEnum getSkuTypeEnumByCode(Integer code){
+	public static UserTypeEnum getUserTypeEnumByCode(Integer code){
 		if(code==null){
 			return null;
 		}
