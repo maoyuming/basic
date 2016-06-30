@@ -3,7 +3,9 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class DuantukeComment implements Serializable{
+import com.duantuke.basic.face.bean.PageItem;
+
+public class DuantukeComment extends PageItem implements Serializable{
     private Long duantukeCommentId;
 
     private Long fid;

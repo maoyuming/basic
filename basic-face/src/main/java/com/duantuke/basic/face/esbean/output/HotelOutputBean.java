@@ -75,6 +75,8 @@ public class HotelOutputBean implements Serializable{
     
     //最低价
     private Double minPrice;
+    private Integer like;//收藏数量
+    
     
     
 	public Double getMinPrice() {
@@ -280,6 +282,12 @@ public class HotelOutputBean implements Serializable{
 	}
 	public void setTravel(Integer travel) {
 		this.travel = travel;
+	}
+	public Integer getLike() {
+		return like;
+	}
+	public void setLike(Integer like) {
+		this.like = like;
 	}
 
 }

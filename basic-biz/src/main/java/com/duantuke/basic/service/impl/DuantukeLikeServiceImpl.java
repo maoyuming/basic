@@ -33,7 +33,9 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 		DuantukeLikeExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
 		hoCriteria.andFidEqualTo(duantukeLike.getFid());
-		hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
+		if(duantukeLike.getCustomerId()!=null){
+			hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
+		}
 		return duantukeLikeMapper.countByExample(example);
 	}
 
@@ -81,7 +83,12 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 		DuantukeLikeExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andBusinessTypeEqualTo(duantukeLike.getBusinessType());
 		hoCriteria.andFidEqualTo(duantukeLike.getFid());
-		hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
+		if(duantukeLike.getCustomerId()!=null){
+			hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
+		}
+		
+		example.setLimitStart(duantukeLike.getBegin());
+		example.setLimitEnd(duantukeLike.getPageSize());
 		return duantukeLikeMapper.selectByExample(example);
 	}
 	

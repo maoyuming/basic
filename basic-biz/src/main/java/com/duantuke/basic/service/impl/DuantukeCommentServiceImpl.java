@@ -71,7 +71,8 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 		if(duantukeComment.getFid()!=null){
 			hoCriteria.andFidEqualTo(duantukeComment.getFid());
 		}
-	
+		example.setLimitStart(duantukeComment.getBegin());
+		example.setLimitEnd(duantukeComment.getPageSize());
 		return duantukeCommentMapper.selectByExample(example);
 	}
 	
