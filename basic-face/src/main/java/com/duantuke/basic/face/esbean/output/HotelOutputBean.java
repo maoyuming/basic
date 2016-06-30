@@ -2,6 +2,9 @@ package com.duantuke.basic.face.esbean.output;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author he
@@ -70,7 +73,16 @@ public class HotelOutputBean implements Serializable{
     private Integer comment;//评论数
     private Integer travel;//游记数
     
+    //最低价
+    private Double minPrice;
     
+    
+	public Double getMinPrice() {
+		return minPrice;
+	}
+	public void setMinPrice(Double minPrice) {
+		this.minPrice = minPrice;
+	}
 	public String getReadonly() {
 		return readonly;
 	}

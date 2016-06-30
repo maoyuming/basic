@@ -577,8 +577,8 @@ public class HotelElasticsearchUtil {
 					}
 				}
             }
+            List<String> days = new ArrayList<String>();
             if(!(querymaxprice==null && queryminprice==null)){
-            	List<String> days = new ArrayList<String>();
             	Calendar startc = Calendar.getInstance();
         		Calendar endc = Calendar.getInstance();
         		endc.add(Calendar.DAY_OF_MONTH, 1);
@@ -634,7 +634,7 @@ public class HotelElasticsearchUtil {
             hits = searchHits.getHits();
             // 对返回结果进行封装
             if ((null != hits) && (hits.length > 0)) {
-                list = this.dataTransfer(hits);
+                list = this.dataTransfer(hits,days);
             }
         } catch (Exception e) {
         	this.logger.error("HotelElasticsearchUtil searchHotels error",e);
@@ -670,14 +670,46 @@ public class HotelElasticsearchUtil {
      * @param hits
      * @return
      */
-    private List<HotelOutputBean> dataTransfer(SearchHit[] hits) {
+    private List<HotelOutputBean> dataTransfer(SearchHit[] hits,List<String> days) {
         List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         for (SearchHit searchHit : hits) {
             Map<String, Object> map = searchHit.getSource();
+            List<Map<String,Double>> prices = (List<Map<String,Double>>)map.get("prices");
+            Double minPrice=null;
+            try {
+            	minPrice = getMinPrice(days,prices);
+			} catch (Exception e) {
+				logger.error("dataTransfer error",e);
+			}
             HotelOutputBean hotelOutputBean = dozerMapper.map(map, HotelOutputBean.class);
+            hotelOutputBean.setMinPrice(minPrice);
             list.add(hotelOutputBean);
         }
         return list;
+    }
+    private Double getMinPrice(List<String> days,List<Map<String,Double>> prices){
+    	Double minPrice=Double.MAX_VALUE;
+        Map<String,Double> priceMap = new HashMap<String,Double>();
+        if(CollectionUtils.isNotEmpty(prices)){
+        	for (Map<String,Double> daypricemap:prices) {
+        		for (String key:daypricemap.keySet()) {
+        			priceMap.put(key, daypricemap.get(key));
+				}
+        	}
+        }
+        if(!priceMap.isEmpty()){
+        	//找出最低价
+        	for (String day:days) {
+				Double tempprice = priceMap.get(day);
+				if(tempprice.compareTo(minPrice)==-1){
+					minPrice = tempprice;
+				}
+			}
+        }
+        if(minPrice.compareTo(Double.MAX_VALUE)==0){
+        	minPrice = null;
+        }
+        return minPrice;
     }
 
 }
