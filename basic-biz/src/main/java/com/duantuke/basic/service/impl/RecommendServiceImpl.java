@@ -60,7 +60,7 @@ public class RecommendServiceImpl implements RecommendService {
 		if(item.getIndex()==-1){
 			throw new OpenException("查询页数错误");
 		}
-		example.setLimitStart(item.getIndex()-1);
+		example.setLimitStart(item.getBegin());
 		example.setLimitEnd(item.getPageSize());
 		
 		example.setOrderByClause("recommend_sort desc");

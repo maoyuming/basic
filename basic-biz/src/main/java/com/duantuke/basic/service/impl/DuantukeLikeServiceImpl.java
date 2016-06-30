@@ -86,6 +86,9 @@ public class DuantukeLikeServiceImpl implements DuantukeLikeService{
 		if(duantukeLike.getCustomerId()!=null){
 			hoCriteria.andCustomerIdEqualTo(duantukeLike.getCustomerId());
 		}
+		
+		example.setLimitStart(duantukeLike.getBegin());
+		example.setLimitEnd(duantukeLike.getPageSize());
 		return duantukeLikeMapper.selectByExample(example);
 	}
 	

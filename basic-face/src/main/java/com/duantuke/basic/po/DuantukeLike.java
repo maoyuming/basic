@@ -3,7 +3,9 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class DuantukeLike implements Serializable{
+import com.duantuke.basic.face.bean.PageItem;
+
+public class DuantukeLike extends PageItem implements Serializable{
 	private static final long serialVersionUID = 1L;
     private Long duantukeLikeId;
 
