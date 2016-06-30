@@ -144,23 +144,27 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		//按天按房型分组
 		List<Date> dateList = new ArrayList<Date>();
         dateList = DateUtil.listDays(startc.getTime(), endc.getTime());
-		for (Date date : dateList) {
-			BigDecimal minprice =  BigDecimal.valueOf(999999);
-			String datestr = DateUtil.dateToStr(date, "yyyyMMdd");
-			Map<String,Double> map = new HashMap<String,Double>();
-			//按房型
-			for (Long roomtypeid:pricemap.keySet()) {
-				Map<String,BigDecimal> infomap= pricemap.get(roomtypeid);
-				BigDecimal temprice = infomap.get(datestr);
-				if(temprice.compareTo(minprice)==-1){
-					minprice = temprice;
-				}
-			}
-			if(minprice.compareTo(BigDecimal.valueOf(999999))==0){
-				continue;
-			}
-			map.put(datestr, minprice.doubleValue());
-			prices.add(map);
+        try {
+        	for (Date date : dateList) {
+        		BigDecimal minprice =  BigDecimal.valueOf(999999);
+        		String datestr = DateUtil.dateToStr(date, "yyyyMMdd");
+        		Map<String,Double> map = new HashMap<String,Double>();
+        		//按房型
+        		for (Long roomtypeid:pricemap.keySet()) {
+        			Map<String,BigDecimal> infomap= pricemap.get(roomtypeid);
+        			BigDecimal temprice = infomap.get(datestr);
+        			if(temprice.compareTo(minprice)==-1){
+        				minprice = temprice;
+        			}
+        		}
+        		if(minprice.compareTo(BigDecimal.valueOf(999999))==0){
+        			continue;
+        		}
+        		map.put(datestr, minprice.doubleValue());
+        		prices.add(map);
+        	}
+		} catch (Exception e) {
+			logger.error("价格报错~hotelid:"+hotelid,e);
 		}
 		return prices;
 		

@@ -21,14 +21,17 @@ import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
 import com.duantuke.basic.face.esbean.output.MealOutputBean;
 import com.duantuke.basic.face.esbean.output.SightOutputBean;
+import com.duantuke.basic.face.esbean.output.TeamSkuOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
 import com.duantuke.basic.face.esbean.query.JourneyQueryBean;
 import com.duantuke.basic.face.esbean.query.MealQueryBean;
 import com.duantuke.basic.face.esbean.query.SightQueryBean;
+import com.duantuke.basic.face.esbean.query.TeamSkuQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
 import com.duantuke.basic.face.service.JourneySearchService;
 import com.duantuke.basic.face.service.MealSearchService;
 import com.duantuke.basic.face.service.SightSearchService;
+import com.duantuke.basic.face.service.TeamSkuSearchService;
 import com.google.gson.Gson;
 import com.mk.jdbc.utils.MD5Util;
 
@@ -44,6 +47,8 @@ public class UtilController extends BaseController {
 	private JourneySearchService journeySearchService;
 	@Autowired
 	private MealSearchService mealSearchService;
+	@Autowired
+	private TeamSkuSearchService teamSkuSearchService;
 	
 	String AUTH = "5416d7cd6ef195a0f7622a9c56b55e84";
 	
@@ -300,7 +305,7 @@ public class UtilController extends BaseController {
 	
 
 	/**
-	 * @return 清空游记es
+	 * @return 清空餐饮es
 	 */
 	@RequestMapping(value = "/delmeales", method = RequestMethod.POST)
 	public ResponseEntity<String> delmeales(Long mealId,String auth) {
@@ -338,6 +343,70 @@ public class UtilController extends BaseController {
 	}
 	
 	/**-------------------------------------------------------------餐饮相关end---------------------------------------------------------------*/
+	
+	
+
+	/**-------------------------------------------------------------团体sku相关begin---------------------------------------------------------------*/
+	
+	/**
+	 * @return 初始化团体skues
+	 */
+	@RequestMapping(value = "/initteamskues", method = RequestMethod.POST)
+	public ResponseEntity<String> initteamskues(Long teamSkuId, String auth) {
+		String result = "";
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		try {
+			teamSkuSearchService.initEs(teamSkuId);
+			result = "initteamskues完成";
+		} catch (Exception e) {
+			result = e.getMessage();
+			logger.error("initteamskues error", e);
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+
+	/**
+	 * @return 清空团体skues
+	 */
+	@RequestMapping(value = "/delteamskues", method = RequestMethod.POST)
+	public ResponseEntity<String> delteamskues(Long teamSkuId,String auth) {
+		
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+
+		try {
+			if(teamSkuId!=null){
+				teamSkuSearchService.delEsByTeamSkuId(teamSkuId);
+			}else{
+				teamSkuSearchService.delEs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("delteamskues error", e);
+		}
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+
+	/**
+	 * @param teamSkuQueryBean
+	 * @param auth
+	 * 搜索团体skues
+	 */
+	@RequestMapping(value = "/searchTeamSkusFromEs", method = RequestMethod.POST)
+	public ResponseEntity<String> searchTeamSkusFromEs(TeamSkuQueryBean teamSkuQueryBean, String auth) {
+		if (!validateAuth(auth)) {
+			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
+		}
+		List<TeamSkuOutputBean> list = teamSkuSearchService.searchTeamSkusFromEs(teamSkuQueryBean);
+		String result = new Gson().toJson(list);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
+	
+	/**-------------------------------------------------------------团体sku相关end---------------------------------------------------------------*/
 	
 	
 	/**

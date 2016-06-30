@@ -1,9 +1,12 @@
 package com.duantuke.basic.mappers;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.duantuke.basic.esbean.input.TeamSkuInputBean;
 import com.duantuke.basic.po.TeamSku;
 import com.duantuke.basic.po.TeamSkuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TeamSkuMapper {
     int countByExample(TeamSkuExample example);
@@ -27,4 +30,6 @@ public interface TeamSkuMapper {
     int updateByPrimaryKeySelective(TeamSku record);
 
     int updateByPrimaryKey(TeamSku record);
+    
+    List<TeamSkuInputBean> queryEsInputTeamSkus(@Param("skuId") Long skuId);
 }

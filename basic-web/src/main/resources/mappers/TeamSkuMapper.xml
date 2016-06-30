@@ -22,6 +22,24 @@
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.TeamSkuInputBean" >
+    <result column="sku_id" property="skuId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
+    <result column="people_number" property="peopleNumber" jdbcType="INTEGER" />
+    
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pics" property="pics" jdbcType="VARCHAR" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -83,6 +101,10 @@
   <sql id="Base_Column_List" >
     m.sku_id, m.description, m.cost, m.price, m.suggest_price, m.people_number, m.create_date, m.create_by, 
     m.update_date, m.update_by,s.`name`,s.`type`,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
+  </sql>
+  <sql id="Join_Column_List" >
+    m.sku_id, m.description, m.cost, m.price, m.suggest_price, m.people_number, m.create_date, m.create_by, 
+    m.update_date, m.update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.TeamSkuExample" >
     select
@@ -300,4 +322,15 @@
       update_by = #{updateBy,jdbcType=VARCHAR}
     where sku_id = #{skuId,jdbcType=BIGINT}
   </update>
+  <select id="queryEsInputTeamSkus" resultMap="BaseResultMap1">
+    SELECT 
+    <include refid="Join_Column_List" />
+    ,s.name,s.pics,s.supplier_id,s.supplier_name,s.memo
+    from 
+    team_sku m JOIN skus s ON m.sku_id = s.sku_id
+    where s.type=3
+    <if test="skuId != null" >
+      and m.sku_id = #{skuId}
+    </if>
+  </select>
 </mapper>

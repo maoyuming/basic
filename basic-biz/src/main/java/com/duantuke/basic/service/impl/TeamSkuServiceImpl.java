@@ -9,18 +9,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.duantuke.basic.face.service.TeamSkuService;
+import com.duantuke.basic.esbean.input.TeamSkuInputBean;
 import com.duantuke.basic.mappers.TeamSkuMapper;
 import com.duantuke.basic.po.TeamSku;
 import com.duantuke.basic.po.TeamSkuExample;
 import com.duantuke.basic.po.TeamSkuExample.Criteria;
+import com.duantuke.basic.service.ITeamSkuService;
 
 /**
  * @author he
  * 饮食相关接口
  */
 @Service
-public class TeamSkuServiceImpl implements TeamSkuService {
+public class TeamSkuServiceImpl implements ITeamSkuService {
 	
 	private static Logger logger = LoggerFactory.getLogger(TeamSkuServiceImpl.class);
 	@Autowired
@@ -110,6 +111,11 @@ public class TeamSkuServiceImpl implements TeamSkuService {
 		return allList;
 	
 	
+	}
+
+	@Override
+	public List<TeamSkuInputBean> queryEsInputTeamSkus(Long teamSkuId) {
+		return teamSkuMapper.queryEsInputTeamSkus(teamSkuId);
 	}
 	
 
