@@ -311,7 +311,7 @@ public class SkuServiceImpl implements SkuService {
 //					SkuInfo<RoomTypeInfo> skuInfo = new SkuInfo<RoomTypeInfo>();
 					SkuInfo<TeamSkuInfo> skuInfo = dozerMapper.map(roomTypeInfo, SkuInfo.class);
 					skuInfo.setInfo(roomTypeInfo);
-					skuInfo.setType(SkuTypeEnum.roomtype.getCode());
+					skuInfo.setType(SkuTypeEnum.teamsku.getCode());
 					skuInfo.setSkuName(roomTypeInfo.getName());
 					skuInfo.setSkuId(roomTypeInfo.getSkuId());
 					list.add(skuInfo);
