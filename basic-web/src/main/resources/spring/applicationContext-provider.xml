@@ -113,4 +113,9 @@
     <!-- 团体sku -->
 	<dubbo:service interface="com.duantuke.basic.face.service.TeamSkuService" ref="teamSkuServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="teamSkuServiceImpl" class="com.duantuke.basic.service.impl.TeamSkuServiceImpl" />  
+    
+     <!--私人订制-->
+	<dubbo:service interface="com.duantuke.basic.face.service.PersonalTailorService" ref="personalTailorServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="personalTailorServiceImpl" class="com.duantuke.basic.service.impl.PersonalTailorServiceImpl" />  
+    
 </beans>  

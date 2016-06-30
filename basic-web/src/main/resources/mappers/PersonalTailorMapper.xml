@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.PersonalTailor" >
     <id column="personal_tailor_id" property="personalTailorId" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="starting" property="starting" jdbcType="VARCHAR" />
+    <result column="departure_city" property="departureCity" jdbcType="VARCHAR" />
     <result column="destination" property="destination" jdbcType="VARCHAR" />
     <result column="howlong" property="howlong" jdbcType="INTEGER" />
     <result column="fromdate" property="fromdate" jdbcType="TIMESTAMP" />
-    <result column="schedule" property="schedule" jdbcType="VARCHAR" />
+    <result column="trip" property="trip" jdbcType="VARCHAR" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="budget" property="budget" jdbcType="DECIMAL" />
     <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
@@ -80,7 +80,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    personal_tailor_id, type, starting, destination, howlong, fromdate, schedule, number, 
+    personal_tailor_id, type, departure_city, destination, howlong, fromdate, trip, number, 
     budget, total_price, contact, contact_phone, email, memo, create_time, create_by, 
     update_time, update_by
   </sql>
@@ -118,16 +118,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.PersonalTailor" >
-    insert into personal_tailor (personal_tailor_id, type, starting, 
+    insert into personal_tailor (personal_tailor_id, type, departure_city, 
       destination, howlong, fromdate, 
-      schedule, number, budget, 
+      trip, number, budget, 
       total_price, contact, contact_phone, 
       email, memo, create_time, 
       create_by, update_time, update_by
       )
-    values (#{personalTailorId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{starting,jdbcType=VARCHAR}, 
+    values (#{personalTailorId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{departureCity,jdbcType=VARCHAR}, 
       #{destination,jdbcType=VARCHAR}, #{howlong,jdbcType=INTEGER}, #{fromdate,jdbcType=TIMESTAMP}, 
-      #{schedule,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{budget,jdbcType=DECIMAL}, 
+      #{trip,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{budget,jdbcType=DECIMAL}, 
       #{totalPrice,jdbcType=DECIMAL}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
@@ -142,8 +142,8 @@
       <if test="type != null" >
         type,
       </if>
-      <if test="starting != null" >
-        starting,
+      <if test="departureCity != null" >
+        departure_city,
       </if>
       <if test="destination != null" >
         destination,
@@ -154,8 +154,8 @@
       <if test="fromdate != null" >
         fromdate,
       </if>
-      <if test="schedule != null" >
-        schedule,
+      <if test="trip != null" >
+        trip,
       </if>
       <if test="number != null" >
         number,
@@ -198,8 +198,8 @@
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="starting != null" >
-        #{starting,jdbcType=VARCHAR},
+      <if test="departureCity != null" >
+        #{departureCity,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         #{destination,jdbcType=VARCHAR},
@@ -210,8 +210,8 @@
       <if test="fromdate != null" >
         #{fromdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedule != null" >
-        #{schedule,jdbcType=VARCHAR},
+      <if test="trip != null" >
+        #{trip,jdbcType=VARCHAR},
       </if>
       <if test="number != null" >
         #{number,jdbcType=INTEGER},
@@ -263,8 +263,8 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.starting != null" >
-        starting = #{record.starting,jdbcType=VARCHAR},
+      <if test="record.departureCity != null" >
+        departure_city = #{record.departureCity,jdbcType=VARCHAR},
       </if>
       <if test="record.destination != null" >
         destination = #{record.destination,jdbcType=VARCHAR},
@@ -275,8 +275,8 @@
       <if test="record.fromdate != null" >
         fromdate = #{record.fromdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.schedule != null" >
-        schedule = #{record.schedule,jdbcType=VARCHAR},
+      <if test="record.trip != null" >
+        trip = #{record.trip,jdbcType=VARCHAR},
       </if>
       <if test="record.number != null" >
         number = #{record.number,jdbcType=INTEGER},
@@ -320,11 +320,11 @@
     update personal_tailor
     set personal_tailor_id = #{record.personalTailorId,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
-      starting = #{record.starting,jdbcType=VARCHAR},
+      departure_city = #{record.departureCity,jdbcType=VARCHAR},
       destination = #{record.destination,jdbcType=VARCHAR},
       howlong = #{record.howlong,jdbcType=INTEGER},
       fromdate = #{record.fromdate,jdbcType=TIMESTAMP},
-      schedule = #{record.schedule,jdbcType=VARCHAR},
+      trip = #{record.trip,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
       budget = #{record.budget,jdbcType=DECIMAL},
       total_price = #{record.totalPrice,jdbcType=DECIMAL},
@@ -346,8 +346,8 @@
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="starting != null" >
-        starting = #{starting,jdbcType=VARCHAR},
+      <if test="departureCity != null" >
+        departure_city = #{departureCity,jdbcType=VARCHAR},
       </if>
       <if test="destination != null" >
         destination = #{destination,jdbcType=VARCHAR},
@@ -358,8 +358,8 @@
       <if test="fromdate != null" >
         fromdate = #{fromdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="schedule != null" >
-        schedule = #{schedule,jdbcType=VARCHAR},
+      <if test="trip != null" >
+        trip = #{trip,jdbcType=VARCHAR},
       </if>
       <if test="number != null" >
         number = #{number,jdbcType=INTEGER},
@@ -400,11 +400,11 @@
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.PersonalTailor" >
     update personal_tailor
     set type = #{type,jdbcType=INTEGER},
-      starting = #{starting,jdbcType=VARCHAR},
+      departure_city = #{departureCity,jdbcType=VARCHAR},
       destination = #{destination,jdbcType=VARCHAR},
       howlong = #{howlong,jdbcType=INTEGER},
       fromdate = #{fromdate,jdbcType=TIMESTAMP},
-      schedule = #{schedule,jdbcType=VARCHAR},
+      trip = #{trip,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       budget = #{budget,jdbcType=DECIMAL},
       total_price = #{totalPrice,jdbcType=DECIMAL},

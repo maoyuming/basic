@@ -8,7 +8,7 @@ public class PersonalTailor {
 
     private Integer type;
 
-    private String starting;
+    private String departureCity;
 
     private String destination;
 
@@ -16,7 +16,7 @@ public class PersonalTailor {
 
     private Date fromdate;
 
-    private String schedule;
+    private String trip;
 
     private Integer number;
 
@@ -56,12 +56,12 @@ public class PersonalTailor {
         this.type = type;
     }
 
-    public String getStarting() {
-        return starting;
+    public String getDepartureCity() {
+        return departureCity;
     }
 
-    public void setStarting(String starting) {
-        this.starting = starting == null ? null : starting.trim();
+    public void setDepartureCity(String departureCity) {
+        this.departureCity = departureCity == null ? null : departureCity.trim();
     }
 
     public String getDestination() {
@@ -88,12 +88,12 @@ public class PersonalTailor {
         this.fromdate = fromdate;
     }
 
-    public String getSchedule() {
-        return schedule;
+    public String getTrip() {
+        return trip;
     }
 
-    public void setSchedule(String schedule) {
-        this.schedule = schedule == null ? null : schedule.trim();
+    public void setTrip(String trip) {
+        this.trip = trip == null ? null : trip.trim();
     }
 
     public Integer getNumber() {
