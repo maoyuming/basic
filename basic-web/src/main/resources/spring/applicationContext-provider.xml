@@ -84,6 +84,9 @@
     <!-- sight search -->
 	<dubbo:service interface="com.duantuke.basic.face.service.SightSearchService" ref="sightSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="sightSearchServiceImpl" class="com.duantuke.basic.service.impl.SightSearchServiceImpl" />  
+    <!-- teamsku search -->
+	<dubbo:service interface="com.duantuke.basic.face.service.TeamSkuSearchService" ref="teamSkuSearchServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="teamSkuSearchServiceImpl" class="com.duantuke.basic.service.impl.TeamSkuSearchServiceImpl" />  
     <!-- elasticsearch end -->
     
     
