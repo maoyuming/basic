@@ -70,6 +70,8 @@ public class HotelOutputBean implements Serializable{
     private Integer comment;//评论数
     private Integer travel;//游记数
     
+    private Integer like;//收藏数量
+    
     
 	public String getReadonly() {
 		return readonly;
@@ -268,6 +270,12 @@ public class HotelOutputBean implements Serializable{
 	}
 	public void setTravel(Integer travel) {
 		this.travel = travel;
+	}
+	public Integer getLike() {
+		return like;
+	}
+	public void setLike(Integer like) {
+		this.like = like;
 	}
 
 }
