@@ -83,6 +83,8 @@ public class SkuServiceImpl implements SkuService {
 						case teamsku:
 							BigDecimal teamPrice  = doQueryTeamSku(skuQueryIn, listAll, entry.getValue());
 							totalPrice = totalPrice.add(teamPrice);
+							//需要和总人数相乘
+							totalPrice = totalPrice.subtract(BigDecimal.valueOf(skuQueryIn.getPeopleNum()));
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
 							break;
 						case meal:
@@ -270,6 +272,9 @@ public class SkuServiceImpl implements SkuService {
 		}
 		if(skuQueryIn.getEndDate()!=null){
 			skuQueryIn.setEndTime(DateUtil.strToDate(skuQueryIn.getEndDate(), "yyyy-MM-dd"));
+		}
+		if(skuQueryIn.getPeopleNum()==null){
+			skuQueryIn.setPeopleNum(0);
 		}
 		
 //		List<Long> roomtypeIds = entry.getValue();

@@ -18,6 +18,7 @@ public class SkuRequest implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Map<Integer, List<Long>> skuMap;//key :sku类型，1房型，2餐饮 ;value:skuid集合  包括房型id，餐饮id等  必填
 	private Long hotelId;//酒店id 不作为入参使用
+	private Integer peopleNum;//人数，团体sku时使用
 	private Date beginTime;//入住预抵时间  dubbo使用
 	private Date endTime;//入住预离时间  dubbo使用
 	private String beginDate;//入住预抵时间 格式 yyyy-MM-dd http接口使用
@@ -80,6 +81,12 @@ public class SkuRequest implements Serializable{
 		} catch (Exception e) {
 		}
 		return d;
+	}
+	public Integer getPeopleNum() {
+		return peopleNum;
+	}
+	public void setPeopleNum(Integer peopleNum) {
+		this.peopleNum = peopleNum;
 	}
 	
 	
