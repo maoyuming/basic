@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.duantuke.basic.face.service.PersonalTailorService;
 import com.duantuke.basic.mappers.PersonalTailorMapper;
 import com.duantuke.basic.po.PersonalTailor;
+import com.duantuke.basic.po.PersonalTailorExample;
 
 /**
  * @author yuming.mao
@@ -42,8 +43,14 @@ public class PersonalTailorServiceImpl implements PersonalTailorService {
 	
 	@Override
 	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public List<PersonalTailor> queryPersonalTailorsBycustomerId(Long customerId) {
+		PersonalTailorExample example = new PersonalTailorExample();
+		PersonalTailorExample.Criteria criteria =  example.createCriteria();
+		criteria.andCustomerIdEqualTo(customerId);
+		return personalTailorMapper.selectByExample(example);
 	}
 	
 

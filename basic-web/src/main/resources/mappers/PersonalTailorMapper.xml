@@ -3,6 +3,7 @@
 <mapper namespace="com.duantuke.basic.mappers.PersonalTailorMapper" >
   <resultMap id="BaseResultMap" type="com.duantuke.basic.po.PersonalTailor" >
     <id column="personal_tailor_id" property="personalTailorId" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="departure_city" property="departureCity" jdbcType="VARCHAR" />
     <result column="destination" property="destination" jdbcType="VARCHAR" />
@@ -80,9 +81,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    personal_tailor_id, type, departure_city, destination, howlong, fromdate, trip, number, 
-    budget, total_price, contact, contact_phone, email, memo, create_time, create_by, 
-    update_time, update_by
+    personal_tailor_id, customer_id, type, departure_city, destination, howlong, fromdate, 
+    trip, number, budget, total_price, contact, contact_phone, email, memo, create_time, 
+    create_by, update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.PersonalTailorExample" >
     select
@@ -118,26 +119,29 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.duantuke.basic.po.PersonalTailor" >
-    insert into personal_tailor (personal_tailor_id, type, departure_city, 
-      destination, howlong, fromdate, 
-      trip, number, budget, 
-      total_price, contact, contact_phone, 
-      email, memo, create_time, 
-      create_by, update_time, update_by
-      )
-    values (#{personalTailorId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{departureCity,jdbcType=VARCHAR}, 
-      #{destination,jdbcType=VARCHAR}, #{howlong,jdbcType=INTEGER}, #{fromdate,jdbcType=TIMESTAMP}, 
-      #{trip,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{budget,jdbcType=DECIMAL}, 
-      #{totalPrice,jdbcType=DECIMAL}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
+    insert into personal_tailor (personal_tailor_id, customer_id, type, 
+      departure_city, destination, howlong, 
+      fromdate, trip, number, 
+      budget, total_price, contact, 
+      contact_phone, email, memo, 
+      create_time, create_by, update_time, 
+      update_by)
+    values (#{personalTailorId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{departureCity,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, #{howlong,jdbcType=INTEGER}, 
+      #{fromdate,jdbcType=TIMESTAMP}, #{trip,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{budget,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL}, #{contact,jdbcType=VARCHAR}, 
+      #{contactPhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.PersonalTailor" >
     insert into personal_tailor
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="personalTailorId != null" >
         personal_tailor_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
       </if>
       <if test="type != null" >
         type,
@@ -194,6 +198,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="personalTailorId != null" >
         #{personalTailorId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
@@ -260,6 +267,9 @@
       <if test="record.personalTailorId != null" >
         personal_tailor_id = #{record.personalTailorId,jdbcType=BIGINT},
       </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
@@ -319,6 +329,7 @@
   <update id="updateByExample" parameterType="map" >
     update personal_tailor
     set personal_tailor_id = #{record.personalTailorId,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
       departure_city = #{record.departureCity,jdbcType=VARCHAR},
       destination = #{record.destination,jdbcType=VARCHAR},
@@ -343,6 +354,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.duantuke.basic.po.PersonalTailor" >
     update personal_tailor
     <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
@@ -399,7 +413,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.duantuke.basic.po.PersonalTailor" >
     update personal_tailor
-    set type = #{type,jdbcType=INTEGER},
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
       departure_city = #{departureCity,jdbcType=VARCHAR},
       destination = #{destination,jdbcType=VARCHAR},
       howlong = #{howlong,jdbcType=INTEGER},

@@ -13,5 +13,6 @@ public interface PersonalTailorService {
 	public int updatePersonalTailor(PersonalTailor personalTailor);
 	public int delPersonalTailorById(Long id);
 	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor);
+	public List<PersonalTailor> queryPersonalTailorsBycustomerId(Long customerId);
 	public PersonalTailor queryPersonalTailorById(Long id);
 }

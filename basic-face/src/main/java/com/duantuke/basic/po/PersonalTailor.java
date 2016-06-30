@@ -1,10 +1,16 @@
 package com.duantuke.basic.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PersonalTailor {
-    private Long personalTailorId;
+public class PersonalTailor implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	private Long personalTailorId;
+
+    private Long customerId;
 
     private Integer type;
 
@@ -46,6 +52,14 @@ public class PersonalTailor {
 
     public void setPersonalTailorId(Long personalTailorId) {
         this.personalTailorId = personalTailorId;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public Integer getType() {
