@@ -12,7 +12,7 @@ public class DailyRate implements Serializable{
 
     private Long roomtypeId;
 
-    private Long day;
+    private Date day;
 
     private BigDecimal price;
 
@@ -50,11 +50,11 @@ public class DailyRate implements Serializable{
         this.roomtypeId = roomtypeId;
     }
 
-    public Long getDay() {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(Long day) {
+    public void setDay(Date day) {
         this.day = day;
     }
 

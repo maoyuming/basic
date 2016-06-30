@@ -5,7 +5,7 @@
     <id column="daily_rate_id" property="dailyRateId" jdbcType="BIGINT" />
     <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
     <result column="roomtype_id" property="roomtypeId" jdbcType="BIGINT" />
-    <result column="day" property="day" jdbcType="BIGINT" />
+    <result column="day" property="day" jdbcType="DATE" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="suggest_price" property="suggestPrice" jdbcType="DECIMAL" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
@@ -163,7 +163,7 @@
         #{roomtypeId,jdbcType=BIGINT},
       </if>
       <if test="day != null" >
-        #{day,jdbcType=BIGINT},
+        #{day,jdbcType=DATE},
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
@@ -204,7 +204,7 @@
         roomtype_id = #{record.roomtypeId,jdbcType=BIGINT},
       </if>
       <if test="record.day != null" >
-        day = #{record.day,jdbcType=BIGINT},
+        day = #{record.day,jdbcType=DATE},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=DECIMAL},
@@ -255,7 +255,7 @@
         roomtype_id = #{roomtypeId,jdbcType=BIGINT},
       </if>
       <if test="day != null" >
-        day = #{day,jdbcType=BIGINT},
+        day = #{day,jdbcType=DATE},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},

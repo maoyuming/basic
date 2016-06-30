@@ -316,52 +316,52 @@ public class DailyRateExample {
             return (Criteria) this;
         }
 
-        public Criteria andDayEqualTo(Long value) {
+        public Criteria andDayEqualTo(Date value) {
             addCriterion("day =", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayNotEqualTo(Long value) {
+        public Criteria andDayNotEqualTo(Date value) {
             addCriterion("day <>", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayGreaterThan(Long value) {
+        public Criteria andDayGreaterThan(Date value) {
             addCriterion("day >", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayGreaterThanOrEqualTo(Long value) {
+        public Criteria andDayGreaterThanOrEqualTo(Date value) {
             addCriterion("day >=", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayLessThan(Long value) {
+        public Criteria andDayLessThan(Date value) {
             addCriterion("day <", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayLessThanOrEqualTo(Long value) {
+        public Criteria andDayLessThanOrEqualTo(Date value) {
             addCriterion("day <=", value, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayIn(List<Long> values) {
+        public Criteria andDayIn(List<Date> values) {
             addCriterion("day in", values, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayNotIn(List<Long> values) {
+        public Criteria andDayNotIn(List<Date> values) {
             addCriterion("day not in", values, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayBetween(Long value1, Long value2) {
+        public Criteria andDayBetween(Date value1, Date value2) {
             addCriterion("day between", value1, value2, "day");
             return (Criteria) this;
         }
 
-        public Criteria andDayNotBetween(Long value1, Long value2) {
+        public Criteria andDayNotBetween(Date value1, Date value2) {
             addCriterion("day not between", value1, value2, "day");
             return (Criteria) this;
         }

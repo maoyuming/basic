@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.duantuke.basic.face.bean.SkuRequest;
 import com.duantuke.basic.face.bean.SkuResponse;
+import com.duantuke.basic.face.bean.SkuSubRequest;
 import com.duantuke.basic.face.service.SkuService;
 import com.google.gson.Gson;
 
@@ -68,13 +69,12 @@ public class SkuController {
 	
 	public static void main(String[] args) {
 		SkuRequest skuRequest= new SkuRequest();
-		Map<Integer, List<Long>> skuMap = new HashMap<Integer, List<Long>>();
-		List<Long> list = new ArrayList<Long>();
-		list.add(123123L);
-		list.add(123123L);
-		list.add(123523L);
-		list.add(123823L);
-		list.add(123023L);
+		Map<Integer, List<SkuSubRequest>> skuMap = new HashMap<Integer, List<SkuSubRequest>>();
+		List<SkuSubRequest> list = new ArrayList<SkuSubRequest>();
+		SkuSubRequest request = new SkuSubRequest();
+		request.setSkuId(12321L);
+		request.setNum(11);
+		list.add(request);
 		
 		skuMap.put(1, list);
 		
@@ -85,8 +85,8 @@ public class SkuController {
 	
 		System.out.println(new Gson().toJson(skuRequest));
 		
-		String json = "{\"skuMap\":{\"1\":[123123,123123,123523,123823,123023]},\"hotelId\":123}";
-		SkuRequest skuRequest2= new Gson().fromJson(json, SkuRequest.class);
-		System.out.println(new Gson().toJson(skuRequest2));
+//		String json = "{\"skuMap\":{\"1\":[123123,123123,123523,123823,123023]},\"hotelId\":123}";
+//		SkuRequest skuRequest2= new Gson().fromJson(json, SkuRequest.class);
+//		System.out.println(new Gson().toJson(skuRequest2));
 	}
 }

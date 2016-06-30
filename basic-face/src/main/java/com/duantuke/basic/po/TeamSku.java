@@ -15,6 +15,7 @@ public class TeamSku extends Sku implements Serializable{
     private BigDecimal suggestPrice;
 
     private Integer peopleNumber;
+    private Integer orderNum;
 
     private Date createDate;
 
@@ -96,4 +97,14 @@ public class TeamSku extends Sku implements Serializable{
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
+
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+    
+    
 }

@@ -16,6 +16,10 @@ public class Meal extends Sku implements Serializable{
     private BigDecimal suggestPrice;
 
     private Integer peopleNumber;
+    /**
+     * 预定数量
+     */
+    private Integer orderNum;
 
     private Date createTime;
 
@@ -104,4 +108,14 @@ public class Meal extends Sku implements Serializable{
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
+
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+    
+    
 }

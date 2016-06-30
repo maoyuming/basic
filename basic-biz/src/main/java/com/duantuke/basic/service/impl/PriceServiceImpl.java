@@ -83,9 +83,9 @@ public class PriceServiceImpl implements PriceService{
 		logger.info("findRackRateByConditions:hotelid:{},roomtypeids:{},begintime:{},endtime:{}", hotelId, roomtypeIds, begintime, endtime);
 		Date begintime_ = (Date) begintime.clone();
 		// 特殊价
-		int begin = Integer.parseInt(DateUtil.dateToStr(begintime, "yyyyMMdd"));
-		int end = Integer.parseInt(DateUtil.dateToStr(endtime, "yyyyMMdd"));
-		List<DailyRate> dailyRates = dailyRateMapper.findDailyRates(hotelId, roomtypeIds,begin, end);
+//		int begin = Integer.parseInt(DateUtil.dateToStr(begintime, "yyyyMMdd"));
+//		int end = Integer.parseInt(DateUtil.dateToStr(endtime, "yyyyMMdd"));
+		List<DailyRate> dailyRates = dailyRateMapper.findDailyRates(hotelId, roomtypeIds,begintime, endtime);
 
 		// 周末价
 		List<Integer> weeks = new ArrayList<>();

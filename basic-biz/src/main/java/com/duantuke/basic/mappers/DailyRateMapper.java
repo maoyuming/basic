@@ -1,9 +1,12 @@
 package com.duantuke.basic.mappers;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.duantuke.basic.po.DailyRate;
 import com.duantuke.basic.po.DailyRateExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface DailyRateMapper {
     int countByExample(DailyRateExample example);
@@ -28,5 +31,5 @@ public interface DailyRateMapper {
 
     int updateByPrimaryKey(DailyRate record);
     
-    List<DailyRate> findDailyRates(@Param("hotelid") Long hotelid, @Param("roomtypeids") List<Long> roomtypeids, @Param("begintime") int begintime, @Param("endtime") int endtime);
+    List<DailyRate> findDailyRates(@Param("hotelid") Long hotelid, @Param("roomtypeids") List<Long> roomtypeids, @Param("begintime") Date begintime, @Param("endtime") Date endtime);
 }

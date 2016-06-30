@@ -12,6 +12,7 @@ public class RoomType extends Sku implements Serializable{
 	
 
     private Integer roomNum;
+    private Integer ordreNum;
 
     @JSONField(name = "roomtypeType")
     private  Integer type;
@@ -106,4 +107,13 @@ public class RoomType extends Sku implements Serializable{
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
+
+	public Integer getOrdreNum() {
+		return ordreNum;
+	}
+
+	public void setOrdreNum(Integer ordreNum) {
+		this.ordreNum = ordreNum;
+	}
+    
 }
