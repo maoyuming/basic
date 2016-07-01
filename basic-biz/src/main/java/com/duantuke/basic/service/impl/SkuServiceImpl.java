@@ -225,7 +225,7 @@ public class SkuServiceImpl implements SkuService {
 			//根据房型id查询酒店id
 			RoomType roomType = roomTypeService.queryRoomtypeByRoomtypeId(skuId.getSkuId());
 			if(roomType!=null){
-				roomType.setOrdreNum(skuId.getNum());
+				roomType.setOrderNum(skuId.getNum());
 				roomTypes.add(roomType);
 			}
 		}
@@ -239,13 +239,13 @@ public class SkuServiceImpl implements SkuService {
 
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrdreNum());
+				request.setNum(roomType.getOrderNum());
 				roomMap.get(roomType.getSupplierId()).add(request);
 			}else{
 				List<SkuSubRequest> skuIds = new ArrayList<SkuSubRequest>();
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrdreNum());
+				request.setNum(roomType.getOrderNum());
 				skuIds.add(request);
 				roomMap.put(roomType.getSupplierId(),skuIds);
 			}
