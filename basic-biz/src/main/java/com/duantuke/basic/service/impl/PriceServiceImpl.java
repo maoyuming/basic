@@ -2,7 +2,6 @@ package com.duantuke.basic.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,26 +9,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.exception.OpenException;
+import com.duantuke.basic.face.bean.PriceInfo;
 import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.face.service.RoomTypeService;
 import com.duantuke.basic.mappers.DailyRateMapper;
 import com.duantuke.basic.mappers.RackRateMapper;
 import com.duantuke.basic.mappers.WeekendRateMapper;
-import com.duantuke.basic.po.BossExample;
 import com.duantuke.basic.po.DailyRate;
-import com.duantuke.basic.po.DailyRateExample;
 import com.duantuke.basic.po.RackRate;
 import com.duantuke.basic.po.RackRateExample;
-import com.duantuke.basic.po.RoomType;
 import com.duantuke.basic.po.WeekendRate;
-import com.duantuke.basic.po.WeekendRateExample;
 import com.duantuke.basic.util.DateUtil;
 
 @Service
@@ -154,6 +150,43 @@ public class PriceServiceImpl implements PriceService{
 			}
 		}
 		return map;
+	}
+
+	/**
+	 * 查询价格信息
+	 */
+	@Override
+	public Map<Long,List<PriceInfo>> queryHotelPriceInfos(Long hotelId, String begintime,
+			String endtime, List<Long> roomtypeIds) {
+		Map<Long,List<PriceInfo>> resultMap = new HashMap<Long, List<PriceInfo>>();
+		Map<Long, Map<String, BigDecimal>> map = this.queryHotelPrices(hotelId, begintime, endtime, roomtypeIds);
+		if(MapUtils.isNotEmpty(map)){
+			for (Entry<Long, Map<String, BigDecimal>> entry : map.entrySet()) {
+				Long key = entry.getKey();
+				List<PriceInfo> priceInfos = fillPriceInfo(entry.getValue());
+				resultMap.put(key, priceInfos);
+			}
+		}
+		return resultMap;
+	}
+	
+	
+	/**
+	 * 封装价格信息
+	 * @param priceMap
+	 * @return
+	 */
+	public List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap){
+		List<PriceInfo> list = new ArrayList<PriceInfo>();
+		if(MapUtils.isNotEmpty(priceMap)){
+			for (Entry<String,BigDecimal> entry : priceMap.entrySet()) {
+				PriceInfo info = new PriceInfo();
+				info.setDate(entry.getKey());
+				info.setPrice(entry.getValue());
+				list.add(info);
+			}
+		}
+		return list;
 	}
 
 	

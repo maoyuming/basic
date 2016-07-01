@@ -394,7 +394,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
-					roomTypeInfo.setPriceInfos(this.fillPriceInfo(priceMap.get(roomType.getSkuId())));
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -480,7 +480,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
-					roomTypeInfo.setPriceInfos(this.fillPriceInfo(priceMap.get(roomType.getSkuId())));
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -571,22 +571,6 @@ public class SkuServiceImpl implements SkuService {
 		return info;
 	}
 	
-	/**
-	 * 封装价格信息
-	 * @param priceMap
-	 * @return
-	 */
-	private List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap){
-		List<PriceInfo> list = new ArrayList<PriceInfo>();
-		if(MapUtils.isNotEmpty(priceMap)){
-			for (Entry<String,BigDecimal> entry : priceMap.entrySet()) {
-				PriceInfo info = new PriceInfo();
-				info.setDate(entry.getKey());
-				info.setPrice(entry.getValue());
-				list.add(info);
-			}
-		}
-		return list;
-	}
+	
 
 }
