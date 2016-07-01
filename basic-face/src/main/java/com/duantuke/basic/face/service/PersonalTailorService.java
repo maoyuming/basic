@@ -12,7 +12,7 @@ public interface PersonalTailorService {
 	public int addPersonalTailor(PersonalTailor personalTailor);
 	public int updatePersonalTailor(PersonalTailor personalTailor);
 	public int delPersonalTailorById(Long id);
-	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor);
+	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor,Integer pageNo,Integer pageSize);
 	public List<PersonalTailor> queryPersonalTailorsBycustomerId(Long customerId);
 	public PersonalTailor queryPersonalTailorById(Long id);
 }

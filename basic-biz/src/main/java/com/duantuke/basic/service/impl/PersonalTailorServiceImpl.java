@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.face.bean.PageItem;
 import com.duantuke.basic.face.service.PersonalTailorService;
 import com.duantuke.basic.mappers.PersonalTailorMapper;
 import com.duantuke.basic.po.PersonalTailor;
@@ -42,8 +43,19 @@ public class PersonalTailorServiceImpl implements PersonalTailorService {
 	}
 	
 	@Override
-	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor) {
-		return null;
+	public List<PersonalTailor> queryPersonalTailors(PersonalTailor personalTailor,Integer pageNo,Integer pageSize) {
+		PersonalTailorExample example = new PersonalTailorExample();
+		int totalCount = personalTailorMapper.countByExample(example);
+    	PageItem pageItem = new PageItem();
+    	pageItem.setPageSize(pageSize);
+    	pageItem.setIndex(pageNo);
+    	pageItem.setTotalItem(totalCount);
+
+		example.setLimitStart(pageItem.getBegin());
+		example.setLimitEnd(pageItem.getEnd());
+		PersonalTailorExample.Criteria criteria =  example.createCriteria();
+		criteria.andCustomerIdEqualTo(personalTailor.getCustomerId());
+		return personalTailorMapper.selectByExample(example);
 	}
 	@Override
 	public List<PersonalTailor> queryPersonalTailorsBycustomerId(Long customerId) {
