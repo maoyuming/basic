@@ -20,6 +20,7 @@ import com.alibaba.dubbo.common.json.JSON;
 import com.duantuke.basic.enums.SkuTypeEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.bean.MealInfo;
+import com.duantuke.basic.face.bean.PriceInfo;
 import com.duantuke.basic.face.bean.RoomTypeInfo;
 import com.duantuke.basic.face.bean.SkuInfo;
 import com.duantuke.basic.face.bean.SkuRequest;
@@ -393,6 +394,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
+					roomTypeInfo.setPriceInfos(this.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -478,6 +480,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
+					roomTypeInfo.setPriceInfos(this.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -566,6 +569,24 @@ public class SkuServiceImpl implements SkuService {
 		info.setInfo(mealInfos);
 		info.setTotalPrice(totalPrice);
 		return info;
+	}
+	
+	/**
+	 * 封装价格信息
+	 * @param priceMap
+	 * @return
+	 */
+	private List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap){
+		List<PriceInfo> list = new ArrayList<PriceInfo>();
+		if(MapUtils.isNotEmpty(priceMap)){
+			for (Entry<String,BigDecimal> entry : priceMap.entrySet()) {
+				PriceInfo info = new PriceInfo();
+				info.setDate(entry.getKey());
+				info.setPrice(entry.getValue());
+				list.add(info);
+			}
+		}
+		return list;
 	}
 
 }
