@@ -229,7 +229,7 @@
       #{updateuser,jdbcType=VARCHAR}, #{roomNumber,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Hotel" >
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Hotel" useGeneratedKeys="true" keyProperty="hotelId">
     insert into hotel
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="hotelId != null" >
