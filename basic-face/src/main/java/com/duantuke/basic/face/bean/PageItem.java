@@ -172,7 +172,7 @@ public class PageItem implements Serializable{
 
 	public static void main(String[] args) {
     	PageItem pageItem = new PageItem();
-    	pageItem.setPageSize(10);
+    	pageItem.setPageSize(9);
     	pageItem.setIndex(5);
     	pageItem.setTotalItem(191);
     	System.out.println(pageItem.getBegin());

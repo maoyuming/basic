@@ -20,6 +20,7 @@ import com.alibaba.dubbo.common.json.JSON;
 import com.duantuke.basic.enums.SkuTypeEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.bean.MealInfo;
+import com.duantuke.basic.face.bean.PriceInfo;
 import com.duantuke.basic.face.bean.RoomTypeInfo;
 import com.duantuke.basic.face.bean.SkuInfo;
 import com.duantuke.basic.face.bean.SkuRequest;
@@ -224,7 +225,7 @@ public class SkuServiceImpl implements SkuService {
 			//根据房型id查询酒店id
 			RoomType roomType = roomTypeService.queryRoomtypeByRoomtypeId(skuId.getSkuId());
 			if(roomType!=null){
-				roomType.setOrdreNum(skuId.getNum());
+				roomType.setOrderNum(skuId.getNum());
 				roomTypes.add(roomType);
 			}
 		}
@@ -238,13 +239,13 @@ public class SkuServiceImpl implements SkuService {
 
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrdreNum());
+				request.setNum(roomType.getOrderNum());
 				roomMap.get(roomType.getSupplierId()).add(request);
 			}else{
 				List<SkuSubRequest> skuIds = new ArrayList<SkuSubRequest>();
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrdreNum());
+				request.setNum(roomType.getOrderNum());
 				skuIds.add(request);
 				roomMap.put(roomType.getSupplierId(),skuIds);
 			}
@@ -393,6 +394,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -478,6 +480,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -567,5 +570,7 @@ public class SkuServiceImpl implements SkuService {
 		info.setTotalPrice(totalPrice);
 		return info;
 	}
+	
+	
 
 }
