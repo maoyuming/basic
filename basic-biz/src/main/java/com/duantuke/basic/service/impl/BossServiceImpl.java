@@ -140,6 +140,7 @@ public class BossServiceImpl implements BossService {
 				hotel.setReadonly(ReadonlyEnum.yes.getCode());
 				hotel.setUpdatetime(new Date());
 				hotel.setUpdateuser(boss.getSalePhone());
+				hotel.setHotelPhone(boss.getPhone());
 				hotel.setState(HotelStateEnum.init.getId());
 				
 
@@ -161,6 +162,7 @@ public class BossServiceImpl implements BossService {
 				hotel.setUpdatetime(new Date());
 				hotel.setCreateuser(boss.getSalePhone());
 				hotel.setUpdateuser(boss.getSalePhone());
+				hotel.setHotelPhone(boss.getPhone());
 				
 
 				hotel.setLatitude(boss.getLatitude());
