@@ -2095,6 +2095,66 @@ public class HotelExample {
             addCriterion("updateuser not between", value1, value2, "updateuser");
             return (Criteria) this;
         }
+
+        public Criteria andRoomNumberIsNull() {
+            addCriterion("room_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberIsNotNull() {
+            addCriterion("room_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberEqualTo(Integer value) {
+            addCriterion("room_number =", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotEqualTo(Integer value) {
+            addCriterion("room_number <>", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberGreaterThan(Integer value) {
+            addCriterion("room_number >", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("room_number >=", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberLessThan(Integer value) {
+            addCriterion("room_number <", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("room_number <=", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberIn(List<Integer> values) {
+            addCriterion("room_number in", values, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotIn(List<Integer> values) {
+            addCriterion("room_number not in", values, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberBetween(Integer value1, Integer value2) {
+            addCriterion("room_number between", value1, value2, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("room_number not between", value1, value2, "roomNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

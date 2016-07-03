@@ -32,14 +32,12 @@
     <result column="createuser" property="createuser" jdbcType="VARCHAR" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="room_number" property="roomNumber" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.duantuke.basic.po.Hotel" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
   </resultMap>
-  
-    
-  
-  <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.HotelInputBean" >
+    <resultMap id="BaseResultMap1" type="com.duantuke.basic.esbean.input.HotelInputBean" >
     <id column="hotel_id" property="hotelId" jdbcType="BIGINT" />
     <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
     <result column="hotel_contact_name" property="hotelContactName" jdbcType="VARCHAR" />
@@ -75,9 +73,8 @@
     <result column="travel" property="travel" jdbcType="INTEGER" />
     <result column="paid_score" property="paidScore" jdbcType="INTEGER" />
     <result column="people_number" property="peopleNumber" jdbcType="INTEGER" />
+    <result column="room_number" property="roomNumber" jdbcType="INTEGER" />
   </resultMap>
-  
-  
   
   <sql id="Example_Where_Clause" >
     <where >
@@ -142,17 +139,17 @@
     open_time, repair_time, business_license_front, business_license_back, isvisible, 
     idcardfront, idcardback, retention_time, default_leave_time, hotel_phone, qt_phone, 
     province_code, city_code, district_code, hotel_fax, readonly, state, pics, people_number, 
-    createtime, createuser, updatetime, updateuser
+    createtime, createuser, updatetime, updateuser, room_number
   </sql>
   <sql id="Blob_Column_List" >
     introduction
   </sql>
-  <sql id="Join_Column_List" >
+    <sql id="Join_Column_List" >
     h.hotel_id, h.hotel_name, h.hotel_contact_name, h.reg_time, h.detail_addr, h.longitude, h.latitude, 
     h.open_time, h.repair_time, h.business_license_front, h.business_license_back, h.isvisible, 
     h.idcardfront, h.idcardback, h.retention_time, h.default_leave_time, h.hotel_phone, h.qt_phone, 
     h.province_code, h.city_code, h.district_code, h.hotel_fax, h.readonly,h.state, h.pics, h.createtime, h.createuser, 
-    h.updatetime, h.updateuser,h.introduction,h.people_number
+    h.updatetime, h.updateuser,h.introduction,h.people_number,h.room_number
   </sql>
   
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.duantuke.basic.po.HotelExample" >
@@ -217,7 +214,8 @@
       district_code, hotel_fax, readonly, 
       state, pics, people_number, 
       createtime, createuser, updatetime, 
-      updateuser, introduction)
+      updateuser, room_number, introduction
+      )
     values (#{hotelId,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{hotelContactName,jdbcType=VARCHAR}, 
       #{regTime,jdbcType=TIMESTAMP}, #{detailAddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
       #{latitude,jdbcType=DECIMAL}, #{openTime,jdbcType=TIMESTAMP}, #{repairTime,jdbcType=TIMESTAMP}, 
@@ -228,9 +226,10 @@
       #{districtCode,jdbcType=INTEGER}, #{hotelFax,jdbcType=VARCHAR}, #{readonly,jdbcType=CHAR}, 
       #{state,jdbcType=INTEGER}, #{pics,jdbcType=VARCHAR}, #{peopleNumber,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{updateuser,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
+      #{updateuser,jdbcType=VARCHAR}, #{roomNumber,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Hotel" useGeneratedKeys="true" keyProperty="hotelId">
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Hotel" >
     insert into hotel
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="hotelId != null" >
@@ -322,6 +321,9 @@
       </if>
       <if test="updateuser != null" >
         updateuser,
+      </if>
+      <if test="roomNumber != null" >
+        room_number,
       </if>
       <if test="introduction != null" >
         introduction,
@@ -417,6 +419,9 @@
       </if>
       <if test="updateuser != null" >
         #{updateuser,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNumber != null" >
+        #{roomNumber,jdbcType=INTEGER},
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
@@ -522,6 +527,9 @@
       <if test="record.updateuser != null" >
         updateuser = #{record.updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="record.roomNumber != null" >
+        room_number = #{record.roomNumber,jdbcType=INTEGER},
+      </if>
       <if test="record.introduction != null" >
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -562,6 +570,7 @@
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
       updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      room_number = #{record.roomNumber,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -598,7 +607,8 @@
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       createuser = #{record.createuser,jdbcType=VARCHAR},
       updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{record.updateuser,jdbcType=VARCHAR}
+      updateuser = #{record.updateuser,jdbcType=VARCHAR},
+      room_number = #{record.roomNumber,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -693,6 +703,9 @@
       <if test="updateuser != null" >
         updateuser = #{updateuser,jdbcType=VARCHAR},
       </if>
+      <if test="roomNumber != null" >
+        room_number = #{roomNumber,jdbcType=INTEGER},
+      </if>
       <if test="introduction != null" >
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -730,6 +743,7 @@
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
       updateuser = #{updateuser,jdbcType=VARCHAR},
+      room_number = #{roomNumber,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where hotel_id = #{hotelId,jdbcType=BIGINT}
   </update>
@@ -763,12 +777,11 @@
       createtime = #{createtime,jdbcType=TIMESTAMP},
       createuser = #{createuser,jdbcType=VARCHAR},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      updateuser = #{updateuser,jdbcType=VARCHAR}
+      updateuser = #{updateuser,jdbcType=VARCHAR},
+      room_number = #{roomNumber,jdbcType=INTEGER}
     where hotel_id = #{hotelId,jdbcType=BIGINT}
   </update>
-    
-  
-   <select id="queryEsInputHotels" resultMap="BaseResultMap1">
+  <select id="queryEsInputHotels" resultMap="BaseResultMap1">
     SELECT 
     <include refid="Join_Column_List" />
     ,r.hotel_rank_id,r.rank,r.follow,r.roomnight,r.comment,r.travel
