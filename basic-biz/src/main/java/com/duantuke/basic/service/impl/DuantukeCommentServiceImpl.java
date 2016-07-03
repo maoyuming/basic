@@ -73,7 +73,7 @@ public class DuantukeCommentServiceImpl implements DuantukeCommentService{
 		}
 		example.setLimitStart(duantukeComment.getBegin());
 		example.setLimitEnd(duantukeComment.getPageSize());
-		return duantukeCommentMapper.selectByExample(example);
+		return duantukeCommentMapper.selectByExampleWithBLOBs(example);
 	}
 	
 }
