@@ -15,41 +15,42 @@ public class HotelInfo extends Hotel implements Serializable{
 	private List<MealInfo> meals;
 	private List<TeamSkuInfo> teamSkus;
 	//标签信息
-	private List<Map<String,String>> taggroup_1 = new ArrayList<Map<String,String>>();
-    private List<Map<String,String>> taggroup_2 = new ArrayList<Map<String,String>>();
-    private List<Map<String,String>> taggroup_3 = new ArrayList<Map<String,String>>();
-    private List<Map<String,String>> taggroup_4 = new ArrayList<Map<String,String>>();
+	private List<TagVo> taggroup_1 = new ArrayList<TagVo>();
+    private List<TagVo> taggroup_2 = new ArrayList<TagVo>();
+    private List<TagVo> taggroup_3 = new ArrayList<TagVo>();
+    private List<TagVo> taggroup_4 = new ArrayList<TagVo>();
     
 
-	public List<Map<String, String>> getTaggroup_1() {
+    
+	public List<TagVo> getTaggroup_1() {
 		return taggroup_1;
 	}
 
-	public void setTaggroup_1(List<Map<String, String>> taggroup_1) {
+	public void setTaggroup_1(List<TagVo> taggroup_1) {
 		this.taggroup_1 = taggroup_1;
 	}
 
-	public List<Map<String, String>> getTaggroup_2() {
+	public List<TagVo> getTaggroup_2() {
 		return taggroup_2;
 	}
 
-	public void setTaggroup_2(List<Map<String, String>> taggroup_2) {
+	public void setTaggroup_2(List<TagVo> taggroup_2) {
 		this.taggroup_2 = taggroup_2;
 	}
 
-	public List<Map<String, String>> getTaggroup_3() {
+	public List<TagVo> getTaggroup_3() {
 		return taggroup_3;
 	}
 
-	public void setTaggroup_3(List<Map<String, String>> taggroup_3) {
+	public void setTaggroup_3(List<TagVo> taggroup_3) {
 		this.taggroup_3 = taggroup_3;
 	}
 
-	public List<Map<String, String>> getTaggroup_4() {
+	public List<TagVo> getTaggroup_4() {
 		return taggroup_4;
 	}
 
-	public void setTaggroup_4(List<Map<String, String>> taggroup_4) {
+	public void setTaggroup_4(List<TagVo> taggroup_4) {
 		this.taggroup_4 = taggroup_4;
 	}
 
