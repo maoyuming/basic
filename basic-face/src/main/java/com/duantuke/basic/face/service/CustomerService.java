@@ -25,4 +25,6 @@ public interface CustomerService {
 	public RetInfo<Boolean> register(Customer customer);
 	
 	public boolean isExistCustomerByPhone(String phone) ;
+	
+	public RetInfo<Boolean> saveOrUpdateCustomers(Customer customer) ;
 }

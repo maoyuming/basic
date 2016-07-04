@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,10 +108,46 @@ public class BossServiceImpl implements BossService {
 	
 	}
 
+	
+	/**
+	 * 更新或者新增boss数据
+	 */
 	@Override
-	public RetInfo<Boolean> saveOrUpdateBosss(Boss Boss) {
-		// TODO Auto-generated method stub
-		return null;
+	public RetInfo<Boolean> saveOrUpdateBosss(Boss boss) {
+		RetInfo<Boolean> retInfo = new RetInfo<Boolean>();
+		retInfo.setResult(false);
+		//if bossid not null
+		if(boss!=null){
+			if(boss.getBossId()!=null){
+				//update by primary key
+				boss.setUpdatetime(new Date());
+				int count =  bossMapper.updateByPrimaryKeySelective(boss);
+				if(count>0){
+					retInfo.setResult(true);
+				}
+			}else if(StringUtils.isNotBlank(boss.getPhone())){
+				//根据手机号码查询主键
+				Boss boss2= this.queryBossByPhone(boss.getPhone());
+				if(boss2!=null){
+					boss.setBossId(boss2.getBossId());
+					boss.setUpdatetime(new Date());
+					
+					int count =  bossMapper.updateByPrimaryKeySelective(boss);
+					if(count>0){
+						retInfo.setResult(true);
+					}
+				}else{//不存在插入酒店
+					boss.setCreateuser(boss.getUpdateuser());
+					boss.setCreatetime(new Date());
+					boss.setUpdatetime(new Date());
+					int count = 	bossMapper.insertSelective(boss);
+					if(count>0){
+						retInfo.setResult(true);
+					}
+				}
+			}
+		}
+		return retInfo;
 	}
 
 	
@@ -127,6 +164,8 @@ public class BossServiceImpl implements BossService {
 		//check老板是否存在
 		if(isExistBossByPhone(boss.getPhone())){
 			info.setMsg("老板端手机号码已经存在");
+			boss.setUpdateuser(boss.getPhone());
+			this.saveOrUpdateBosss(boss);
 			return info;
 		}
 		//保存老板信息
