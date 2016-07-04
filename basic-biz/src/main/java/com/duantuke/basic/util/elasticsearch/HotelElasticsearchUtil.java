@@ -536,6 +536,7 @@ public class HotelElasticsearchUtil {
             Double queryminprice = hotelQueryBean.getQueryminprice();
             String querystarttime = hotelQueryBean.getQuerystarttime();
             String queryendtime = hotelQueryBean.getQueryendtime();
+            List<String> hotelIds = hotelQueryBean.getHotelIds();
             
             if (hotelName != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
@@ -561,6 +562,10 @@ public class HotelElasticsearchUtil {
             if (districtCode != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", districtCode.toString()).operator(Operator.AND)));
             }
+            if(CollectionUtils.isNotEmpty(hotelIds)){
+            	String[]a = new String[hotelIds.size()];
+            	QueryBuilders.idsQuery(hotelIds.toArray(a));
+            }
             if (tags != null && tags.size() > 0) {
             	for (String key:tags.keySet()) {
             		List<String> value = tags.get(key);
@@ -577,6 +582,7 @@ public class HotelElasticsearchUtil {
 					}
 				}
             }
+            //价格过滤
             List<String> days = new ArrayList<String>();
             Calendar startc = Calendar.getInstance();
             Calendar endc = Calendar.getInstance();

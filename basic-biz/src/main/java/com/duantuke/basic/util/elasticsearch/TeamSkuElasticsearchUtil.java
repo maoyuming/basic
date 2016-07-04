@@ -470,12 +470,20 @@ public class TeamSkuElasticsearchUtil {
             Integer pagesize = teamSkuQueryBean.getPagesize();
             String sortby = teamSkuQueryBean.getSortby();
             String sortorder = teamSkuQueryBean.getSortorder();
+            Integer queryMinPeopleNum = teamSkuQueryBean.getQueryMinPeopleNum();
+            Integer queryMaxPeopleNum = teamSkuQueryBean.getQueryMaxPeopleNum();
             
             if (name != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("name", name).operator(Operator.AND)));
             }
             if (descrition != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("descrition", descrition).operator(Operator.AND)));
+            }
+            if (queryMinPeopleNum != null) {
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.rangeQuery("peopleNumber").gte(queryMinPeopleNum)));
+            }
+            if (queryMaxPeopleNum != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.rangeQuery("peopleNumber").lte(queryMaxPeopleNum)));
             }
             if(CollectionUtils.isNotEmpty(filterBuilders)){
             	FilterBuilder[] builders = new FilterBuilder[]{};

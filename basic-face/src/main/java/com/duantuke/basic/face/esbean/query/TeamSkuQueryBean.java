@@ -20,6 +20,10 @@ public class TeamSkuQueryBean implements Serializable{
     private String sortorder; //默认升序
     private Double range;// 搜索范围，默认5000m
     
+    //人数区间
+    private Integer queryMinPeopleNum;
+    private Integer queryMaxPeopleNum;
+    
     
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
@@ -29,6 +33,24 @@ public class TeamSkuQueryBean implements Serializable{
     
     /** 搜索默认搜索半径（单位: 米） */
     public final static Integer SEARCH_RANGE_DEFAULT = 5000;
+    
+    
+
+	public Integer getQueryMinPeopleNum() {
+		return queryMinPeopleNum;
+	}
+
+	public void setQueryMinPeopleNum(Integer queryMinPeopleNum) {
+		this.queryMinPeopleNum = queryMinPeopleNum;
+	}
+
+	public Integer getQueryMaxPeopleNum() {
+		return queryMaxPeopleNum;
+	}
+
+	public void setQueryMaxPeopleNum(Integer queryMaxPeopleNum) {
+		this.queryMaxPeopleNum = queryMaxPeopleNum;
+	}
 
 	public String getName() {
 		return name;

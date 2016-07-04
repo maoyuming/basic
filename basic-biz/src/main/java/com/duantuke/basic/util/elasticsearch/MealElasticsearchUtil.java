@@ -471,6 +471,8 @@ public class MealElasticsearchUtil {
             Integer pagesize = mealQueryBean.getPagesize();
             String sortby = mealQueryBean.getSortby();
             String sortorder = mealQueryBean.getSortorder();
+            Integer queryMinPeopleNum = mealQueryBean.getQueryMinPeopleNum();
+            Integer queryMaxPeopleNum = mealQueryBean.getQueryMaxPeopleNum();
             
             if (meatVegetable != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("meatVegetable", meatVegetable).operator(Operator.AND)));
@@ -480,6 +482,13 @@ public class MealElasticsearchUtil {
             }
             if (descrition != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("descrition", descrition).operator(Operator.AND)));
+            }
+            if (queryMinPeopleNum != null) {
+                //filterBuilders.add(FilterBuilders.rangeFilter("peopleNumber").gte(queryMinPeopleNum));
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.rangeQuery("peopleNumber").gte(queryMinPeopleNum)));
+            }
+            if (queryMaxPeopleNum != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.rangeQuery("peopleNumber").lte(queryMaxPeopleNum)));
             }
             if(CollectionUtils.isNotEmpty(filterBuilders)){
             	FilterBuilder[] builders = new FilterBuilder[]{};
