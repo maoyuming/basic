@@ -1,6 +1,7 @@
 package com.duantuke.basic.face.esbean.query;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author he
@@ -13,6 +14,9 @@ public class MealQueryBean implements Serializable{
     private String meatVegetable;
     private String name;
     private String descrition;
+    //人数区间
+    private Integer queryMinPeopleNum;
+    private Integer queryMaxPeopleNum;
     
     private Integer page;//当前页
     private Integer pagesize;//每页分页数
@@ -30,6 +34,24 @@ public class MealQueryBean implements Serializable{
     
     /** 搜索默认搜索半径（单位: 米） */
     public final static Integer SEARCH_RANGE_DEFAULT = 5000;
+    
+    
+
+	public Integer getQueryMinPeopleNum() {
+		return queryMinPeopleNum;
+	}
+
+	public void setQueryMinPeopleNum(Integer queryMinPeopleNum) {
+		this.queryMinPeopleNum = queryMinPeopleNum;
+	}
+
+	public Integer getQueryMaxPeopleNum() {
+		return queryMaxPeopleNum;
+	}
+
+	public void setQueryMaxPeopleNum(Integer queryMaxPeopleNum) {
+		this.queryMaxPeopleNum = queryMaxPeopleNum;
+	}
 
 	public String getMeatVegetable() {
 		return meatVegetable;
