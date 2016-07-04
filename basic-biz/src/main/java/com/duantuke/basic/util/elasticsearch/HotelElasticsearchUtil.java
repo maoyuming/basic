@@ -578,20 +578,20 @@ public class HotelElasticsearchUtil {
 				}
             }
             List<String> days = new ArrayList<String>();
+            Calendar startc = Calendar.getInstance();
+            Calendar endc = Calendar.getInstance();
+            endc.add(Calendar.DAY_OF_MONTH, 1);
+            if(querystarttime==null){
+            	querystarttime = DateUtil.dateToStr(startc.getTime(), "yyyyMMdd");
+            }
+            if(queryendtime==null){
+            	queryendtime = DateUtil.dateToStr(endc.getTime(), "yyyyMMdd");
+            }
+            List<Date> datedays = DateUtil.listDays(DateUtil.strToDate(querystarttime, "yyyyMMdd"),DateUtil.strToDate(queryendtime, "yyyyMMdd"));
+            for (int i = 0; i < datedays.size(); i++) {
+            	days.add(DateUtil.dateToStr(datedays.get(i), "yyyyMMdd"));
+            }
             if(!(querymaxprice==null && queryminprice==null)){
-            	Calendar startc = Calendar.getInstance();
-        		Calendar endc = Calendar.getInstance();
-        		endc.add(Calendar.DAY_OF_MONTH, 1);
-            	if(querystarttime==null){
-            		querystarttime = DateUtil.dateToStr(startc.getTime(), "yyyyMMdd");
-            	}
-            	if(queryendtime==null){
-            		queryendtime = DateUtil.dateToStr(endc.getTime(), "yyyyMMdd");
-            	}
-            	List<Date> datedays = DateUtil.listDays(DateUtil.strToDate(querystarttime, "yyyyMMdd"),DateUtil.strToDate(queryendtime, "yyyyMMdd"));
-            	for (int i = 0; i < datedays.size(); i++) {
-					days.add(DateUtil.dateToStr(datedays.get(i), "yyyyMMdd"));
-				}
             	searchBuilder.setQuery(nestedCompareQuery(days,"prices", queryminprice,querymaxprice));
             }
             //LBS

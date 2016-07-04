@@ -80,9 +80,25 @@ public class HotelInputBean implements Serializable{
     private List<Map<String,Double>> prices = new ArrayList<Map<String,Double>>();
     //打分
     private Integer paidScore=0;
+    //人数
+    private Integer peopleNumber;
+    //房间数
+    private Integer roomNumber;
     
     
     
+	public Integer getPeopleNumber() {
+		return peopleNumber;
+	}
+	public void setPeopleNumber(Integer peopleNumber) {
+		this.peopleNumber = peopleNumber;
+	}
+	public Integer getRoomNumber() {
+		return roomNumber;
+	}
+	public void setRoomNumber(Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 	public Integer getPaidScore() {
 		return paidScore;
 	}

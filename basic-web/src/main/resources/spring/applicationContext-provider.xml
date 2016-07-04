@@ -93,6 +93,8 @@
     <!-- hotel  -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotelService" ref="hotelServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotelServiceImpl" class="com.duantuke.basic.service.impl.HotelServiceImpl" />  
+	<dubbo:service interface="com.duantuke.basic.face.service.TagService" ref="tagServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
+    <bean id="tagServiceImpl" class="com.duantuke.basic.service.impl.TagServiceImpl" />  
     <!-- 热词 -->
 	<dubbo:service interface="com.duantuke.basic.face.service.HotWordService" ref="hotWordServiceImpl"  timeout="${dubbo.timeout}" group="${dubbo.basic.group}" version="1.0.0" />
     <bean id="hotWordServiceImpl" class="com.duantuke.basic.service.impl.HotWordServiceImpl" />  

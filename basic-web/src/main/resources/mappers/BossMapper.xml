@@ -138,7 +138,7 @@
       #{updatetime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{isvisible,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Boss" >
+  <insert id="insertSelective" parameterType="com.duantuke.basic.po.Boss" useGeneratedKeys="true" keyProperty="bossId">
     insert into bosses
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="bossId != null" >
