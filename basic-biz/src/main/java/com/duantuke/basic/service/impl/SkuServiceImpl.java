@@ -427,7 +427,7 @@ public class SkuServiceImpl implements SkuService {
 		if(diff<=0){
 			throw new OpenException("时间区间错误");
 		}
-		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
+//		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
 		logger.info("总价："+totalPrice);
 		try {
 			logger.info("查询返回值：{}",JSON.json(roomTypeInfos));
