@@ -563,8 +563,8 @@ public class HotelElasticsearchUtil {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", districtCode.toString()).operator(Operator.AND)));
             }
             if(CollectionUtils.isNotEmpty(hotelIds)){
-            	String[]a = new String[hotelIds.size()];
-            	QueryBuilders.idsQuery(hotelIds.toArray(a));
+            	String[]a = new String[]{};
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.idsQuery().ids(hotelIds.toArray(a))));
             }
             if (tags != null && tags.size() > 0) {
             	for (String key:tags.keySet()) {
