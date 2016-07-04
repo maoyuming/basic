@@ -1,8 +1,10 @@
 package com.duantuke.basic.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.duantuke.basic.face.base.RetInfo;
 import com.duantuke.basic.face.service.CustomerService;
 import com.duantuke.basic.mappers.CustomerMapper;
-import com.duantuke.basic.po.Boss;
 import com.duantuke.basic.po.Customer;
 import com.duantuke.basic.po.CustomerExample;
 import com.google.gson.Gson;
@@ -70,6 +71,8 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		//check c端用户是否存在
 		if(isExistCustomerByPhone(customer.getPhone())){
+			customer.setUpdateuser(customer.getPhone());
+			this.updateCustomer(customer);
 			info.setMsg("c端手机号码已经存在");
 			info.setResult(true);
 			return info;
@@ -125,6 +128,48 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer queryCustomerById(Long customerId) {
 		return customerMapper.selectByPrimaryKey(customerId);
+	}
+	
+	
+	/**
+	 * 更新或者新增customer数据
+	 */
+	@Override
+	public RetInfo<Boolean> saveOrUpdateCustomers(Customer customer) {
+		RetInfo<Boolean> retInfo = new RetInfo<Boolean>();
+		retInfo.setResult(false);
+		//if bossid not null
+		if(customer!=null){
+			if(customer.getCustomerId()!=null){
+				//update by primary key
+				customer.setUpdatetime(new Date());
+				int count =  customerMapper.updateByPrimaryKeySelective(customer);
+				if(count>0){
+					retInfo.setResult(true);
+				}
+			}else if(StringUtils.isNotBlank(customer.getPhone())){
+				//根据手机号码查询主键
+				Customer customer2= this.queryCustomerByPhone(customer.getPhone());
+				if(customer2!=null){
+					customer.setCustomerId(customer2.getCustomerId());
+					customer.setUpdatetime(new Date());
+					
+					int count =  customerMapper.updateByPrimaryKeySelective(customer);
+					if(count>0){
+						retInfo.setResult(true);
+					}
+				}else{//不存在插入酒店
+					customer.setCreateuser(customer.getUpdateuser());
+					customer.setCreatetime(new Date());
+					customer.setUpdatetime(new Date());
+					int count = 	customerMapper.insertSelective(customer);
+					if(count>0){
+						retInfo.setResult(true);
+					}
+				}
+			}
+		}
+		return retInfo;
 	}
 
 
