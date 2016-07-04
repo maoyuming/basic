@@ -427,7 +427,7 @@ public class SkuServiceImpl implements SkuService {
 		if(diff<=0){
 			throw new OpenException("时间区间错误");
 		}
-		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
+//		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
 		logger.info("总价："+totalPrice);
 		try {
 			logger.info("查询返回值：{}",JSON.json(roomTypeInfos));
@@ -512,7 +512,7 @@ public class SkuServiceImpl implements SkuService {
 		if(diff<=0){
 			throw new OpenException("时间区间错误");
 		}
-		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
+//		totalPrice = totalPrice.multiply(BigDecimal.valueOf(diff));
 		logger.info("总价："+totalPrice);
 		try {
 			logger.info("查询返回值：{}",JSON.json(roomTypeInfos));
@@ -542,10 +542,10 @@ public class SkuServiceImpl implements SkuService {
 		Map<Long, Integer> mealNumMap = new HashMap<Long, Integer>();
 		
 		//如果sku集合为空，则查询所有房型
-		if(CollectionUtils.isEmpty(skuSubRequests)){
-			for (MealInfo mealInfo : mealInfos) {
+		if(CollectionUtils.isNotEmpty(skuSubRequests)){
+			for (SkuSubRequest mealInfo : skuSubRequests) {
 				mealIds.add(mealInfo.getSkuId());
-				mealNumMap.put(mealInfo.getSkuId(),mealInfo.getOrderNum());
+				mealNumMap.put(mealInfo.getSkuId(),mealInfo.getNum());
 			}
 			meals = mealService.queryMealByMealIds(mealIds);
 		}
