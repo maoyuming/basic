@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.dubbo.common.json.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.duantuke.basic.enums.SkuTypeEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.bean.MealInfo;
@@ -37,6 +38,10 @@ import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.RoomType;
 import com.duantuke.basic.po.TeamSku;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.promotion.domain.PromotionQueryIn;
+import com.duantuke.promotion.domain.PromotionResult;
+import com.duantuke.promotion.face.base.RetInfo;
+import com.duantuke.promotion.face.service.PromotionService;
 import com.google.gson.Gson;
 
 @Service
@@ -50,6 +55,8 @@ public class SkuServiceImpl implements SkuService {
 	private PriceService priceService;
 	@Autowired
 	private MealService mealService;
+	@Autowired
+	private PromotionService promotionService;
 
     @Autowired
     private Mapper dozerMapper;
@@ -79,11 +86,13 @@ public class SkuServiceImpl implements SkuService {
 						switch (skuTypeEnum) {
 						case roomtype:
 							BigDecimal roomPrice  = doQueryRoomtype(skuQueryIn, listAll, entry.getValue());
+							
 							totalPrice = totalPrice.add(roomPrice);
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
 							break;
 						case teamsku:
 							BigDecimal teamPrice  = doQueryTeamSku(skuQueryIn, listAll, entry.getValue());
+							
 							totalPrice = totalPrice.add(teamPrice);
 //						skuInfo.setRoomTypeInfos(roomTypeInfos);
 							break;
@@ -95,6 +104,23 @@ public class SkuServiceImpl implements SkuService {
 							
 						default:
 							break;
+						}
+						if(skuQueryIn.getCustomerId()!=null){
+							PromotionQueryIn promotionQueryIn = new PromotionQueryIn();
+							promotionQueryIn.setCustomerId(skuQueryIn.getCustomerId());
+							promotionQueryIn.setHotelId(skuQueryIn.getHotelId());
+							promotionQueryIn.setOrderPrice(totalPrice);
+							promotionQueryIn.setPromotionIds(skuQueryIn.getPromotionIds());
+							promotionQueryIn.setSkuType(entry.getKey());
+							
+							RetInfo<PromotionResult> retInfo = promotionService.queryPromotionPrice(promotionQueryIn);
+							if(retInfo.isResult()){
+								PromotionResult promotionResult = 	retInfo.getObj();
+								if(promotionResult!=null){
+									totalPrice  = promotionResult.getOrderPrice();
+									logger.info("促销后价格：{}", new JSONObject().toJSON(promotionResult));
+								}
+							}
 						}
 					}
 				}else{

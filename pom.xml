@@ -16,6 +16,7 @@
 		<junit.version>4.11</junit.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <basic-face.version>0.0.1-SNAPSHOT</basic-face.version>
+        <promotion-face.version>0.0.1-SNAPSHOT</promotion-face.version>
         <powermock.version>1.4.6</powermock.version>
         <commons-beanutils.version>1.9.2</commons-beanutils.version>
         
@@ -58,7 +59,12 @@
     </distributionManagement>
 
 	<dependencies>
-	
+	    
+		<dependency>
+		  <groupId>com.duantuke</groupId>
+  		  <artifactId>promotion-face</artifactId>
+          <version>${promotion-face.version}</version>
+		</dependency>
 	
 		<dependency>
 			<groupId>commons-configuration</groupId>
@@ -505,6 +511,7 @@
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
 				
 				<dubbo_basic_group>basic_mym</dubbo_basic_group>
+				<dubbo_promotion_group>promotion_test</dubbo_promotion_group>
 				
 				<!-- config_center -->
 				<config.localMode>true</config.localMode>
@@ -541,6 +548,7 @@
 				<dubbo_admin_guest_password>guestf</dubbo_admin_guest_password>
 
 				<dubbo_basic_group>basic_test</dubbo_basic_group>
+				<dubbo_promotion_group>promotion_test</dubbo_promotion_group>
 				
 				
 				<!-- config_center -->
