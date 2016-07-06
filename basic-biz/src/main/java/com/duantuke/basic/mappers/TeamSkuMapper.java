@@ -32,4 +32,6 @@ public interface TeamSkuMapper {
     int updateByPrimaryKey(TeamSku record);
     
     List<TeamSkuInputBean> queryEsInputTeamSkus(@Param("skuId") Long skuId);
+    
+    List<TeamSkuInputBean> queryEsInputTeamSkusByHotelId(@Param("hotelId") Long hotelId);
 }

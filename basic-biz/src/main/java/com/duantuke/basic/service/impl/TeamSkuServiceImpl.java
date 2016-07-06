@@ -117,6 +117,11 @@ public class TeamSkuServiceImpl implements ITeamSkuService {
 	public List<TeamSkuInputBean> queryEsInputTeamSkus(Long teamSkuId) {
 		return teamSkuMapper.queryEsInputTeamSkus(teamSkuId);
 	}
+
+	@Override
+	public List<TeamSkuInputBean> queryEsInputTeamSkusByHotelId(Long hotelId) {
+		return teamSkuMapper.queryEsInputTeamSkusByHotelId(hotelId);
+	}
 	
 
 }

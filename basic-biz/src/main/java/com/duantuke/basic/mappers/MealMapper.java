@@ -22,4 +22,5 @@ public interface MealMapper {
     int updateByExample(@Param("record") Meal record, @Param("example") MealExample example);
     
     List<MealInputBean> queryEsInputMeals(@Param("mealId") Long mealId);
+    List<MealInputBean> queryEsInputMealsByHotelid(@Param("hotelId") Long hotelId);
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.face.esbean.query.MealQueryBean;
+import com.duantuke.basic.face.esbean.query.TeamSkuQueryBean;
 
 /**
  * @author he
@@ -15,7 +17,7 @@ public interface HotelSearchService {
 	 * @param tags
 	 * 搜索es
 	 */
-	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean);
+	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean);
 	
 	/**
 	 * @param hotelId 不传则刷全部

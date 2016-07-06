@@ -333,4 +333,15 @@
       and m.sku_id = #{skuId}
     </if>
   </select>
+  <select id="queryEsInputTeamSkusByHotelId" resultMap="BaseResultMap1">
+    SELECT 
+    <include refid="Join_Column_List" />
+    ,s.name,s.pics,s.supplier_id,s.supplier_name,s.memo
+    from 
+    team_sku m JOIN skus s ON m.sku_id = s.sku_id
+    where s.type=3
+    <if test="hotelId != null" >
+      and s.supplier_id = #{hotelId}
+    </if>
+  </select>
 </mapper>
