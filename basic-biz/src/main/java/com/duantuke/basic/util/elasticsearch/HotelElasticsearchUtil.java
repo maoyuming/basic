@@ -578,9 +578,9 @@ public class HotelElasticsearchUtil {
             if(mealQueryBean!=null){
             	meatVegetable = mealQueryBean.getMeatVegetable();
             }
-            String descrition=null;
+            String description=null;
             if(mealQueryBean!=null){
-            	descrition = mealQueryBean.getDescription();
+            	description = mealQueryBean.getDescription();
             }
             Integer queryMinPeopleNum=null;
             if(mealQueryBean!=null){
@@ -595,9 +595,9 @@ public class HotelElasticsearchUtil {
             String teamskuname=null;
             if(teamSkuQueryBean!=null)
             	teamskuname = teamSkuQueryBean.getName();
-            String teamskudescrition=null;
+            String teamskudescription=null;
             if(teamSkuQueryBean!=null)
-            	teamskudescrition = teamSkuQueryBean.getDescription();
+            	teamskudescription = teamSkuQueryBean.getDescription();
             Integer teamskuqueryMinPeopleNum=null;
             if(teamSkuQueryBean!=null)
                 teamskuqueryMinPeopleNum = teamSkuQueryBean.getQueryMinPeopleNum();
@@ -657,8 +657,8 @@ public class HotelElasticsearchUtil {
             if(meatVegetable!=null){
             	searchBuilder.setQuery(nestedBoolQuery("meals.meatVegetable",meatVegetable, "meals"));
             }
-            if(descrition!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("meals.descrition",descrition, "meals"));
+            if(description!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("meals.description",description, "meals"));
             }
             if(!(queryMinPeopleNum==null && queryMaxPeopleNum==null)){
             	searchBuilder.setQuery(nestedComparePeopleNumQuery("meals.peopleNumber", queryMinPeopleNum,queryMaxPeopleNum,"meals"));
@@ -667,8 +667,8 @@ public class HotelElasticsearchUtil {
             if(teamskuname!=null){
             	searchBuilder.setQuery(nestedBoolQuery("teamskus.name",teamskuname, "teamskus"));
             }
-            if(teamskudescrition!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("teamskus.descrition",teamskudescrition, "teamskus"));
+            if(teamskudescription!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("teamskus.description",teamskudescription, "teamskus"));
             }
             if(!(teamskuqueryMinPeopleNum==null && teamskuqueryMaxPeopleNum==null)){
             	searchBuilder.setQuery(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus"));

@@ -287,7 +287,7 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.meal_rank_id,r.rank,r.consume,r.comment,r.travel
-    ,s.name,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
+    ,s.name,s.pics,s.description,s.supplier_id,s.supplier_name,s.memo
     from 
     (meal m
     LEFT JOIN meal_rank r ON m.sku_id = r.meal_id) JOIN skus s ON m.sku_id = s.sku_id
