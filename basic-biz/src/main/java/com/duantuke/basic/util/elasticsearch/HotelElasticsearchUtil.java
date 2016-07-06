@@ -580,7 +580,7 @@ public class HotelElasticsearchUtil {
             }
             String descrition=null;
             if(mealQueryBean!=null){
-            	descrition = mealQueryBean.getDescrition();
+            	descrition = mealQueryBean.getDescription();
             }
             Integer queryMinPeopleNum=null;
             if(mealQueryBean!=null){
@@ -597,7 +597,7 @@ public class HotelElasticsearchUtil {
             	teamskuname = teamSkuQueryBean.getName();
             String teamskudescrition=null;
             if(teamSkuQueryBean!=null)
-            	teamskudescrition = teamSkuQueryBean.getDescrition();
+            	teamskudescrition = teamSkuQueryBean.getDescription();
             Integer teamskuqueryMinPeopleNum=null;
             if(teamSkuQueryBean!=null)
                 teamskuqueryMinPeopleNum = teamSkuQueryBean.getQueryMinPeopleNum();
