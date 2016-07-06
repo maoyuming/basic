@@ -88,15 +88,11 @@ public class MealElasticsearchUtil {
     private Mapper dozerMapper;
 
     /**
+     * @throws IOException 
      *
      */
-    public MealElasticsearchUtil() {
-        try {
+    public MealElasticsearchUtil() throws IOException {
             this.initClient();
-        } catch (Exception e) {
-            logger.error("MealElasticsearchUtil error",e);
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -111,7 +107,7 @@ public class MealElasticsearchUtil {
             }
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil close",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -131,7 +127,7 @@ public class MealElasticsearchUtil {
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil batchAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return bulkResponse;
     }
@@ -148,7 +144,7 @@ public class MealElasticsearchUtil {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil signleAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return indexResponse;
     }
@@ -164,7 +160,7 @@ public class MealElasticsearchUtil {
             logger.info("MealElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil deleteAllDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -180,7 +176,7 @@ public class MealElasticsearchUtil {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil deleteDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return deleteResponse;
     }
@@ -200,7 +196,7 @@ public class MealElasticsearchUtil {
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
             logger.error("MealElasticsearchUtil updateDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -218,7 +214,7 @@ public class MealElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
             this.logger.error("MealElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -265,7 +261,6 @@ public class MealElasticsearchUtil {
      * @throws IOException
      */
     private void initClient() throws IOException {
-        try {
             this.prop = new Properties();
             InputStream in = this.getClass().getResourceAsStream("/elasticsearch.properties");
             this.prop.load(in);
@@ -308,9 +303,6 @@ public class MealElasticsearchUtil {
         	    	 logger.info("MealElasticsearchUtil Type and mapping failed !{}", ES_TYPE);
         	     }
             }
-        } catch (Exception e) {
-            this.logger.error("MealElasticsearchUtil init elasticsearch client is error", e);
-        }
     }
 
     /**
@@ -521,7 +513,7 @@ public class MealElasticsearchUtil {
             }
         } catch (Exception e) {
         	this.logger.error("MealElasticsearchUtil searchMeals error",e);
-            e.printStackTrace();
+            throw e;
         }
         return list;
     }

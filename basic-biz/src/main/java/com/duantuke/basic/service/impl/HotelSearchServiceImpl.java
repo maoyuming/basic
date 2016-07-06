@@ -29,7 +29,6 @@ import com.duantuke.basic.face.esbean.query.TeamSkuQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
 import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.face.service.TagService;
-import com.duantuke.basic.po.Meal;
 import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
 import com.duantuke.basic.service.IMealService;
@@ -318,6 +317,111 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 			doneSingal.await();
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl refreshestag InterruptedException",e);
+		}
+	}
+	
+
+	@Override
+	public void refreshesmeal(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshesmeal begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelId);
+		
+		Map<Long, List<MealInputBean>> mealsmap = new HashMap<Long, List<MealInputBean>>();
+		for (MealInputBean meal:meals) {
+			String supplierIdStr = meal.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<MealInputBean> list= mealsmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(meal);
+			}else{
+				list = new ArrayList<MealInputBean>();
+				list.add(meal);
+			}
+			mealsmap.put(supplierId, list);
+		}
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<MealInputBean> meals = mealsmap.get(hotelInputBean.getHotelId());
+						List<Map<String,Object>> li = new ArrayList<Map<String,Object>>();
+						for (MealInputBean meal:meals) {
+							Map<String,Object> map = dozerMapper.map(meal, Map.class);
+							li.add(map);
+						}
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "meals", li);
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshesmeal error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshesmeal InterruptedException",e);
+		}
+	}
+
+	@Override
+	public void refreshesteamsku(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshesteamsku begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelId);
+		Map<Long, List<TeamSkuInputBean>> teamskusmap = new HashMap<Long, List<TeamSkuInputBean>>();
+		
+		for (TeamSkuInputBean teamsku:teamskus) {
+			String supplierIdStr = teamsku.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<TeamSkuInputBean> list= teamskusmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(teamsku);
+			}else{
+				list = new ArrayList<TeamSkuInputBean>();
+				list.add(teamsku);
+			}
+			teamskusmap.put(supplierId, list);
+		}
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<TeamSkuInputBean> teamskus = teamskusmap.get(hotelInputBean.getHotelId());
+						List<Map<String,Object>> li = new ArrayList<Map<String,Object>>();
+						for (TeamSkuInputBean teamsku:teamskus) {
+							Map<String,Object> map = dozerMapper.map(teamsku, Map.class);
+							li.add(map);
+						}
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "teamskus", li);
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshesteamsku error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshesteamsku InterruptedException",e);
 		}
 	}
 
