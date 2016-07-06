@@ -34,4 +34,5 @@ public interface TeamSkuMapper {
     List<TeamSkuInputBean> queryEsInputTeamSkus(@Param("skuId") Long skuId);
     
     List<TeamSkuInputBean> queryEsInputTeamSkusByHotelId(@Param("hotelId") Long hotelId);
+
 }

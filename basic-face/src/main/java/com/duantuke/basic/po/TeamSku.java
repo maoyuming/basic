@@ -6,8 +6,6 @@ import java.util.Date;
 
 public class TeamSku extends Sku implements Serializable{
 
-    private String description;
-
     private BigDecimal cost;
 
     private BigDecimal price;
@@ -15,6 +13,7 @@ public class TeamSku extends Sku implements Serializable{
     private BigDecimal suggestPrice;
 
     private Integer peopleNumber;
+    
     private Integer orderNum;
 
     private Date createDate;
@@ -25,14 +24,15 @@ public class TeamSku extends Sku implements Serializable{
 
     private String updateBy;
 
+    
+    
+    public Integer getOrderNum() {
+		return orderNum;
+	}
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
 
     public BigDecimal getCost() {
         return cost;
@@ -97,14 +97,5 @@ public class TeamSku extends Sku implements Serializable{
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
     }
-
-	public Integer getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(Integer orderNum) {
-		this.orderNum = orderNum;
-	}
-    
     
 }

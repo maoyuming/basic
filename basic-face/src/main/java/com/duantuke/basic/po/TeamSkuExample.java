@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.duantuke.basic.po.MealExample.Criteria;
-
 public class TeamSkuExample {
     protected String orderByClause;
 
@@ -187,7 +185,6 @@ public class TeamSkuExample {
             addCriterion("m.sku_id not between", value1, value2, "skuId");
             return (Criteria) this;
         }
-
 
         public Criteria andCostIsNull() {
             addCriterion("m.cost is null");
@@ -488,6 +485,7 @@ public class TeamSkuExample {
             addCriterion("m.create_date not between", value1, value2, "createDate");
             return (Criteria) this;
         }
+
         public Criteria andCreateByIsNull() {
             addCriterion("m.create_by is null");
             return (Criteria) this;
@@ -1088,8 +1086,6 @@ public class TeamSkuExample {
             addCriterion("s.supplier_name not between", value1, value2, "supplierName");
             return (Criteria) this;
         }
-
-
     }
 
     public static class Criteria extends GeneratedCriteria {
