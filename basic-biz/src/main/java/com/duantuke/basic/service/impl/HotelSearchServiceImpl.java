@@ -20,13 +20,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.esbean.input.HotelInputBean;
+import com.duantuke.basic.esbean.input.MealInputBean;
+import com.duantuke.basic.esbean.input.TeamSkuInputBean;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.face.esbean.query.MealQueryBean;
+import com.duantuke.basic.face.esbean.query.TeamSkuQueryBean;
 import com.duantuke.basic.face.service.HotelSearchService;
 import com.duantuke.basic.face.service.PriceService;
 import com.duantuke.basic.face.service.TagService;
 import com.duantuke.basic.po.Tag;
 import com.duantuke.basic.service.IHotelService;
+import com.duantuke.basic.service.IMealService;
+import com.duantuke.basic.service.ITeamSkuService;
 import com.duantuke.basic.util.DateUtil;
 import com.duantuke.basic.util.ThreadPoolUtil;
 import com.duantuke.basic.util.elasticsearch.HotelElasticsearchUtil;
@@ -50,12 +56,16 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	private TagService tagService;
 	@Autowired
     private Mapper dozerMapper;
+	@Autowired
+	private IMealService imealService;
+	@Autowired
+	private ITeamSkuService iteamSkuService;
 
 	private Gson gson = new Gson();
 
 	@Override
-	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean) {
-		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{}", gson.toJson(hotelQueryBean));
+	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean) {
+		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{},{}", gson.toJson(hotelQueryBean),gson.toJson(mealQueryBean),gson.toJson(teamSkuQueryBean));
 		// page参数校验：如果page小于等于0，默认为1.
 		Integer page = hotelQueryBean.getPage();
 		if ((null == page) || (page <= 0)) {
@@ -75,7 +85,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		if(StringUtils.isNotEmpty(hotelQueryBean.getTagJson())){
 			tagmap = gson.fromJson(hotelQueryBean.getTagJson(), Map.class);
 		}
-		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tagmap);
+		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tagmap,mealQueryBean,teamSkuQueryBean);
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs result:{}", gson.toJson(result));
 		return result;
 	}
@@ -111,6 +121,11 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 							}
 						}
 						hotelInputBean.setPrices(getPrices(hotelInputBean.getHotelId()));
+						List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelInputBean.getHotelId());
+						hotelInputBean.setMeals(meals);
+						
+						List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelInputBean.getHotelId());
+						hotelInputBean.setTeamskus(teamskus);
 					}catch (Exception e) {
 						logger.error("HotelSearchServiceImpl initEs error", e);
 				    } finally {
@@ -153,6 +168,9 @@ public class HotelSearchServiceImpl implements HotelSearchService {
         		for (Long roomtypeid:pricemap.keySet()) {
         			Map<String,BigDecimal> infomap= pricemap.get(roomtypeid);
         			BigDecimal temprice = infomap.get(datestr);
+        			if(temprice==null){
+        				continue;
+        			}
         			if(temprice.compareTo(minprice)==-1){
         				minprice = temprice;
         			}

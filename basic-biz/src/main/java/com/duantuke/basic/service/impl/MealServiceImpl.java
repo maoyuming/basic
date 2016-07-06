@@ -112,6 +112,11 @@ public class MealServiceImpl implements IMealService {
 	public List<MealInputBean> queryEsInputMeals(Long mealId) {
 		return mealMapper.queryEsInputMeals(mealId);
 	}
+
+	@Override
+	public List<MealInputBean> queryEsInputMealsByHotelid(Long hotelId) {
+		return mealMapper.queryEsInputMealsByHotelid(hotelId);
+	}
 	
 
 }

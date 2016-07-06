@@ -85,8 +85,25 @@ public class HotelInputBean implements Serializable{
     //房间数
     private Integer roomNumber;
     
+    private List<MealInputBean> meals = new ArrayList<MealInputBean>();
+    private List<TeamSkuInputBean> teamskus = new ArrayList<TeamSkuInputBean>();
     
     
+    
+    
+    
+	public List<TeamSkuInputBean> getTeamskus() {
+		return teamskus;
+	}
+	public void setTeamskus(List<TeamSkuInputBean> teamskus) {
+		this.teamskus = teamskus;
+	}
+	public List<MealInputBean> getMeals() {
+		return meals;
+	}
+	public void setMeals(List<MealInputBean> meals) {
+		this.meals = meals;
+	}
 	public Integer getPeopleNumber() {
 		return peopleNumber;
 	}

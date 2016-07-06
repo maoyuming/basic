@@ -7,4 +7,5 @@ import com.duantuke.basic.face.service.MealService;
 
 public interface IMealService extends MealService {
 	public List<MealInputBean> queryEsInputMeals(Long mealId);
+	public List<MealInputBean> queryEsInputMealsByHotelid(Long hotelId);
 }

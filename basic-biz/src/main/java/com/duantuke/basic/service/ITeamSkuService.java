@@ -7,4 +7,5 @@ import com.duantuke.basic.face.service.TeamSkuService;
 
 public interface ITeamSkuService extends TeamSkuService {
 	public List<TeamSkuInputBean> queryEsInputTeamSkus(Long teamSkuId);
+	public List<TeamSkuInputBean> queryEsInputTeamSkusByHotelId(Long hotelId);
 }

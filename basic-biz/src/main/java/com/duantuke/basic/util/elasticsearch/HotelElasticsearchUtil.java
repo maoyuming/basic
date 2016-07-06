@@ -67,7 +67,10 @@ import com.duantuke.basic.esbean.input.HotelInputBean;
 import com.duantuke.basic.face.bean.PageItem;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.query.HotelQueryBean;
+import com.duantuke.basic.face.esbean.query.MealQueryBean;
+import com.duantuke.basic.face.esbean.query.TeamSkuQueryBean;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.basic.util.MD5Util;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
@@ -393,6 +396,14 @@ public class HotelElasticsearchUtil {
         xBuilder.field("type", "nested");
         xBuilder.endObject();
         
+        xBuilder.startObject("meals");
+        xBuilder.field("type", "nested");
+        xBuilder.endObject();
+        
+        xBuilder.startObject("teamskus");
+        xBuilder.field("type", "nested");
+        xBuilder.endObject();
+        
         xBuilder.startObject("hotelName");
         xBuilder.field("type", "string")
         .field("indexAnalyzer", "ik")  
@@ -493,6 +504,15 @@ public class HotelElasticsearchUtil {
 
         return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
+    public NestedQueryBuilder nestedBoolQuery(String key,String value, final String nestedPath) {
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+
+        MatchQueryBuilder matchQuery = QueryBuilders.matchQuery(key, value);
+        boolQueryBuilder.must(matchQuery);
+
+        return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
+    }
     public NestedQueryBuilder nestedCompareQuery(final List<String> fields, final String nestedPath,Double queryminprice,Double querymaxprice) {
     	
     	BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
@@ -507,8 +527,19 @@ public class HotelElasticsearchUtil {
 		}
     	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
+    public NestedQueryBuilder nestedComparePeopleNumQuery(final String field,Integer queryMinPeopleNum,Integer queryMaxPeopleNum,final String nestedPath) {
+    	
+    	BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+		RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery(field);
+		if(queryMinPeopleNum!=null)
+			rangeQuery.gte(queryMinPeopleNum);
+		if(queryMaxPeopleNum!=null)
+			rangeQuery.lte(queryMaxPeopleNum);
+		boolQueryBuilder.must(rangeQuery);
+    	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
+    }
 
-    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags) {
+    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean) {
         SearchHit[] hits = null;
         List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         try {
@@ -538,6 +569,43 @@ public class HotelElasticsearchUtil {
             String queryendtime = hotelQueryBean.getQueryendtime();
             List<String> hotelIds = hotelQueryBean.getHotelIds();
             
+            //meal
+            String mealname=null;
+            if(mealQueryBean!=null){
+            	mealname = mealQueryBean.getName();
+            }
+            String meatVegetable=null;
+            if(mealQueryBean!=null){
+            	meatVegetable = mealQueryBean.getMeatVegetable();
+            }
+            String descrition=null;
+            if(mealQueryBean!=null){
+            	descrition = mealQueryBean.getDescrition();
+            }
+            Integer queryMinPeopleNum=null;
+            if(mealQueryBean!=null){
+            	queryMinPeopleNum = mealQueryBean.getQueryMinPeopleNum();
+            }
+            Integer queryMaxPeopleNum=null;
+            if(mealQueryBean!=null){
+            	queryMaxPeopleNum = mealQueryBean.getQueryMaxPeopleNum();
+            }
+            
+            //teamsku
+            String teamskuname=null;
+            if(teamSkuQueryBean!=null)
+            	teamskuname = teamSkuQueryBean.getName();
+            String teamskudescrition=null;
+            if(teamSkuQueryBean!=null)
+            	teamskudescrition = teamSkuQueryBean.getDescrition();
+            Integer teamskuqueryMinPeopleNum=null;
+            if(teamSkuQueryBean!=null)
+                teamskuqueryMinPeopleNum = teamSkuQueryBean.getQueryMinPeopleNum();
+            Integer teamskuqueryMaxPeopleNum=null;
+            if(teamSkuQueryBean!=null)
+                teamskuqueryMaxPeopleNum = teamSkuQueryBean.getQueryMaxPeopleNum();
+            
+            //酒店信息搜索条件
             if (hotelName != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("hotelName", hotelName).operator(Operator.AND)));
             }
@@ -582,7 +650,31 @@ public class HotelElasticsearchUtil {
 					}
 				}
             }
-            //价格过滤
+            //搜索餐饮条件
+            if(mealname!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("meals.name",mealname, "meals"));
+            }
+            if(meatVegetable!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("meals.meatVegetable",meatVegetable, "meals"));
+            }
+            if(descrition!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("meals.descrition",descrition, "meals"));
+            }
+            if(!(queryMinPeopleNum==null && queryMaxPeopleNum==null)){
+            	searchBuilder.setQuery(nestedComparePeopleNumQuery("meals.peopleNumber", queryMinPeopleNum,queryMaxPeopleNum,"meals"));
+            }
+            //teamsku
+            if(teamskuname!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("teamskus.name",teamskuname, "teamskus"));
+            }
+            if(teamskudescrition!=null){
+            	searchBuilder.setQuery(nestedBoolQuery("teamskus.descrition",teamskudescrition, "teamskus"));
+            }
+            if(!(teamskuqueryMinPeopleNum==null && teamskuqueryMaxPeopleNum==null)){
+            	searchBuilder.setQuery(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus"));
+            }
+            
+            //酒店价格搜索条件
             List<String> days = new ArrayList<String>();
             Calendar startc = Calendar.getInstance();
             Calendar endc = Calendar.getInstance();
@@ -716,6 +808,20 @@ public class HotelElasticsearchUtil {
         	minPrice = null;
         }
         return minPrice;
+    }
+    
+    public static void main(String[] args) throws Exception {
+    	
+    	String time = "2016-07-05 14:25:44";
+    	
+    	String partnerCode ="bjjielv";
+    	String securityCode = "lGwoEaLzzU6YAyFiVZ87D8z";
+    	securityCode = MD5Util.encryption(securityCode).toUpperCase();
+    	String signature =  time + partnerCode + securityCode + "checkRoomAvail";
+    	signature =  MD5Util.encryption(signature).toUpperCase();
+    	System.out.println(signature);
+    	System.out.println("57A11575C38B4112A6A1B1E6110DE645");
+    	
     }
 
 }

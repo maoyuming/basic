@@ -207,7 +207,7 @@ public class UtilController extends BaseController {
 		if (!validateAuth(auth)) {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
-		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean);
+		List<HotelOutputBean> list = hotelSearchService.searchHotelsFromEs(hotelQueryBean,null,null);
 		String result = new Gson().toJson(list);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
