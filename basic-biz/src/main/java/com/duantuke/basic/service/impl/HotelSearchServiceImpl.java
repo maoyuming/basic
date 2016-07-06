@@ -95,7 +95,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		logger.info("HotelSearchServiceImpl initEs begin:{}", hotelId);
 		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
 		
-		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		//final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
 		//多线程
 		for (final HotelInputBean hotelInputBean:esInputlist) {
 			ThreadPoolUtil.pool.execute(new Runnable() {
@@ -126,16 +126,17 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 						
 						List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelInputBean.getHotelId());
 						hotelInputBean.setTeamskus(teamskus);
+						esutil.signleAddDocument(hotelInputBean, hotelInputBean.getHotelId()+"");
 					}catch (Exception e) {
 						logger.error("HotelSearchServiceImpl initEs error", e);
-				    } finally {
-					   doneSingal.countDown();
-					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
-				    }
+				    } //finally {
+					   //doneSingal.countDown();
+					  // ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    //}
 				}
 			});
 		}
-		try {
+		/*try {
 			doneSingal.await();
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl initEs InterruptedException",e);
@@ -144,7 +145,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 			esutil.batchAddDocument(esInputlist);
 		}else{
 			logger.warn("HotelSearchServiceImpl initEs warn list is empty:{}", hotelId);
-		}
+		}*/
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
 	}
 	
