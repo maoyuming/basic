@@ -466,7 +466,7 @@ public class MealElasticsearchUtil {
             // 遍历查询条件，并进行过滤
             String meatVegetable = mealQueryBean.getMeatVegetable();
             String name = mealQueryBean.getName();
-            String descrition = mealQueryBean.getDescrition();
+            String description = mealQueryBean.getDescription();
             Integer page = mealQueryBean.getPage();
             Integer pagesize = mealQueryBean.getPagesize();
             String sortby = mealQueryBean.getSortby();
@@ -480,8 +480,8 @@ public class MealElasticsearchUtil {
             if (name != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("name", name).operator(Operator.AND)));
             }
-            if (descrition != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("descrition", descrition).operator(Operator.AND)));
+            if (description != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("description", description).operator(Operator.AND)));
             }
             if (queryMinPeopleNum != null) {
                 //filterBuilders.add(FilterBuilders.rangeFilter("peopleNumber").gte(queryMinPeopleNum));

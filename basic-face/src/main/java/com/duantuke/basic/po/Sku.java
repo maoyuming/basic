@@ -15,7 +15,7 @@ public class Sku implements Serializable{
 
     private String pics;
 
-    private String descrition;
+    private String description;
 
     private Long supplierId;
 
@@ -63,12 +63,12 @@ public class Sku implements Serializable{
         this.pics = pics == null ? null : pics.trim();
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition == null ? null : descrition.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Long getSupplierId() {

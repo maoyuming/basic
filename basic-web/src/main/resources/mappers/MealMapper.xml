@@ -16,7 +16,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="pics" property="pics" jdbcType="VARCHAR" />
-    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
@@ -39,7 +39,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="pics" property="pics" jdbcType="VARCHAR" />
-    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
     <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
@@ -104,7 +104,7 @@
   </sql>
   <sql id="Base_Column_List" >
     m.sku_id, m.meat_vegetable, m.cost, m.price, m.suggest_price, m.people_number, m.create_time, m.create_by, 
-    m.update_time, m.update_by,s.`name`,s.`type`,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
+    m.update_time, m.update_by,s.`name`,s.`type`,s.pics,s.description,s.supplier_id,s.supplier_name,s.memo
   </sql>
   <sql id="Join_Column_List" >
     m.sku_id, m.meat_vegetable, m.cost, m.price, m.suggest_price, m.people_number, m.create_time, m.create_by, 
@@ -274,7 +274,7 @@
     SELECT 
     <include refid="Join_Column_List" />
     ,r.meal_rank_id,r.rank,r.consume,r.comment,r.travel
-    ,s.name,s.pics,s.descrition,s.supplier_id,s.supplier_name,s.memo
+    ,s.name,s.pics,s.description,s.supplier_id,s.supplier_name,s.memo
     from 
     (meal m
     LEFT JOIN meal_rank r ON m.sku_id = r.meal_id) JOIN skus s ON m.sku_id = s.sku_id

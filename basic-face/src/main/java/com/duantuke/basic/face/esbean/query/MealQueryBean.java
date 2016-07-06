@@ -13,7 +13,7 @@ public class MealQueryBean implements Serializable{
 
     private String meatVegetable;
     private String name;
-    private String descrition;
+    private String description;
     //人数区间
     private Integer queryMinPeopleNum;
     private Integer queryMaxPeopleNum;
@@ -69,12 +69,13 @@ public class MealQueryBean implements Serializable{
 		this.name = name;
 	}
 
-	public String getDescrition() {
-		return descrition;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getPage() {

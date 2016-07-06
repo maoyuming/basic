@@ -27,7 +27,7 @@ public class MealOutputBean implements Serializable{
     //from sku
     private String name;//名称
     private String pics;//图片
-    private String descrition;//描述
+    private String description;//描述
     private String supplierId;//提供者
     private String supplierName;//提供者
     private String memo;//备注
@@ -87,11 +87,11 @@ public class MealOutputBean implements Serializable{
 	public void setPics(String pics) {
 		this.pics = pics;
 	}
-	public String getDescrition() {
-		return descrition;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getSupplierId() {
 		return supplierId;

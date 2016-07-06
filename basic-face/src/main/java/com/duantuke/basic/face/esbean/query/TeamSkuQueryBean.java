@@ -11,7 +11,7 @@ public class TeamSkuQueryBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
     private String name;
-    private String descrition;
+    private String description;
     
     private Integer page;//当前页
     private Integer pagesize;//每页分页数
@@ -60,12 +60,12 @@ public class TeamSkuQueryBean implements Serializable{
 		this.name = name;
 	}
 
-	public String getDescrition() {
-		return descrition;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getPage() {

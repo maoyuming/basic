@@ -14,8 +14,6 @@ public class TeamSkuOutputBean implements Serializable{
 	//from meal
 	private Long skuId;
 
-    private String description;
-
     private BigDecimal cost;
 
     private BigDecimal price;
@@ -27,7 +25,7 @@ public class TeamSkuOutputBean implements Serializable{
     //from sku
     private String name;//名称
     private String pics;//图片
-    private String descrition;//描述
+    private String description;//描述
     private String supplierId;//提供者
     private String supplierName;//提供者
     private String memo;//备注
@@ -78,12 +76,6 @@ public class TeamSkuOutputBean implements Serializable{
 	}
 	public void setPics(String pics) {
 		this.pics = pics;
-	}
-	public String getDescrition() {
-		return descrition;
-	}
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
 	}
 	public String getSupplierId() {
 		return supplierId;

@@ -465,7 +465,7 @@ public class TeamSkuElasticsearchUtil {
             List<FilterBuilder> filterBuilders = new ArrayList<FilterBuilder>();
             // 遍历查询条件，并进行过滤
             String name = teamSkuQueryBean.getName();
-            String descrition = teamSkuQueryBean.getDescrition();
+            String description = teamSkuQueryBean.getDescription();
             Integer page = teamSkuQueryBean.getPage();
             Integer pagesize = teamSkuQueryBean.getPagesize();
             String sortby = teamSkuQueryBean.getSortby();
@@ -476,8 +476,8 @@ public class TeamSkuElasticsearchUtil {
             if (name != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("name", name).operator(Operator.AND)));
             }
-            if (descrition != null) {
-                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("descrition", descrition).operator(Operator.AND)));
+            if (description != null) {
+                filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("description", description).operator(Operator.AND)));
             }
             if (queryMinPeopleNum != null) {
             	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.rangeQuery("peopleNumber").gte(queryMinPeopleNum)));
