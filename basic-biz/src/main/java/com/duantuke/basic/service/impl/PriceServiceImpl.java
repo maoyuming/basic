@@ -93,12 +93,11 @@ public class PriceServiceImpl implements PriceService{
 
 		// 平日价
 		RackRateExample rackRateExample = new RackRateExample();
+		RackRateExample.Criteria criteria = rackRateExample.createCriteria();
 		if (hotelId != null) {
-			RackRateExample.Criteria criteria = rackRateExample.or();
 			criteria.andHotelIdEqualTo(hotelId);
 		}
 		if (CollectionUtils.isNotEmpty(roomtypeIds)) {
-			RackRateExample.Criteria criteria = rackRateExample.or();
 			criteria.andRoomtypeIdIn(roomtypeIds);
 		}
 		// 1、查酒店的门市价
