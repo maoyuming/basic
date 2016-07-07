@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 public class PriceInfo implements Serializable{
     private String date;
     private BigDecimal price;
+
+	private BigDecimal originalPrice;//原价
     private BigDecimal promotionPrice;//优惠金额
     
 	public String getDate() {
@@ -25,6 +27,12 @@ public class PriceInfo implements Serializable{
 	}
 	public void setPromotionPrice(BigDecimal promotionPrice) {
 		this.promotionPrice = promotionPrice;
+	}
+	public BigDecimal getOriginalPrice() {
+		return originalPrice;
+	}
+	public void setOriginalPrice(BigDecimal originalPrice) {
+		this.originalPrice = originalPrice;
 	}
     
     

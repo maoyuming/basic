@@ -73,6 +73,7 @@ public class SkuServiceImpl implements SkuService {
 		SkuResponse skuResponse = new SkuResponse();
 		try {
 			skuResponse.setTotalPrice(totalPrice);
+			skuResponse.setOriginalPrice(totalPrice);
 //			skuResponse.setSupplierId(skuQueryIn.getHotelId());
 			
 			
@@ -150,8 +151,11 @@ public class SkuServiceImpl implements SkuService {
 				
 			}
 		}
-		
-		
+		if(skuResponse.getTotalPrice()!=null&&skuResponse.getOriginalPrice()!=null){
+			skuResponse.setPromotionPrice(skuResponse.getOriginalPrice().subtract(skuResponse.getTotalPrice()));
+		}else{
+			skuResponse.setPromotionPrice(BigDecimal.ZERO);
+		}
 		return skuResponse;
 	}
 	

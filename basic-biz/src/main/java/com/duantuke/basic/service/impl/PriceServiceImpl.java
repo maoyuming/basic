@@ -182,6 +182,7 @@ public class PriceServiceImpl implements PriceService{
 				PriceInfo info = new PriceInfo();
 				info.setDate(entry.getKey());
 				info.setPrice(entry.getValue());
+				//TODO:此处要封装多个价格
 				list.add(info);
 			}
 		}
