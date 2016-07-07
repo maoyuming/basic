@@ -12,6 +12,14 @@
     <result column="updateuser" property="updateuser" jdbcType="VARCHAR" />
     <result column="business_type" property="businessType" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="com.duantuke.basic.po.Tag" >
+    <id column="tag_id" property="tagId" jdbcType="BIGINT" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="tag_group_id" property="tagGroupId" jdbcType="BIGINT" />
+    <result column="tag_value" property="tagValue" jdbcType="VARCHAR" />
+    <result column="business_type" property="businessType" jdbcType="VARCHAR" />
+    <result column="hotel_id" property="hotelId" jdbcType="BIGINT" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -280,9 +288,10 @@
       business_type = #{businessType,jdbcType=VARCHAR}
     where tag_id = #{tagId,jdbcType=BIGINT}
   </update>
-    <select id="queryTagsByHotelId" resultMap="BaseResultMap">
+    <select id="queryTagsByHotelId" resultMap="BaseResultMap1">
     SELECT 
     <include refid="Join_Column_List" />
+    ,r.hotel_id
     from 
     Tag t
     JOIN hotel_r_tag r ON t.tag_id = r.tag_id

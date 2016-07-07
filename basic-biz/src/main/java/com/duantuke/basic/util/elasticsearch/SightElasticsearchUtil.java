@@ -93,14 +93,15 @@ public class SightElasticsearchUtil {
     private Mapper dozerMapper;
 
     /**
+     * @throws Exception 
      *
      */
-    public SightElasticsearchUtil() {
+    public SightElasticsearchUtil() throws Exception {
         try {
             this.initClient();
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil error",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -116,7 +117,7 @@ public class SightElasticsearchUtil {
             }
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil close",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -136,7 +137,7 @@ public class SightElasticsearchUtil {
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil batchAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return bulkResponse;
     }
@@ -153,7 +154,7 @@ public class SightElasticsearchUtil {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil signleAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return indexResponse;
     }
@@ -169,7 +170,7 @@ public class SightElasticsearchUtil {
             logger.info("SightElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil deleteAllDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -185,7 +186,7 @@ public class SightElasticsearchUtil {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil deleteDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return deleteResponse;
     }
@@ -205,7 +206,7 @@ public class SightElasticsearchUtil {
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
             logger.error("SightElasticsearchUtil updateDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -223,7 +224,7 @@ public class SightElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
             this.logger.error("SightElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -574,7 +575,7 @@ public class SightElasticsearchUtil {
             }
         } catch (Exception e) {
         	this.logger.error("SightElasticsearchUtil searchSights error",e);
-            e.printStackTrace();
+            throw e;
         }
         return list;
     }

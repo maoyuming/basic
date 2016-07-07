@@ -7,6 +7,8 @@ public class Tag implements Serializable{
 	private static final long serialVersionUID = 1L;
 
     private Long tagId;
+    
+    private Long hotelId;
 
     private String tagName;
 
@@ -23,8 +25,18 @@ public class Tag implements Serializable{
     private String updateuser;
 
     private String businessType;
+    
+    
 
-    public Long getTagId() {
+    public Long getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public Long getTagId() {
         return tagId;
     }
 

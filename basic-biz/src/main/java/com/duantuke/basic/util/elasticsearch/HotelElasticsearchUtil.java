@@ -100,15 +100,11 @@ public class HotelElasticsearchUtil {
     private Mapper dozerMapper;
 
     /**
+     * @throws IOException 
      *
      */
-    public HotelElasticsearchUtil() {
-        try {
-            this.initClient();
-        } catch (Exception e) {
-            logger.error("HotelElasticsearchUtil error",e);
-            e.printStackTrace();
-        }
+    public HotelElasticsearchUtil() throws Exception {
+        this.initClient();
     }
 
     /**
@@ -160,7 +156,7 @@ public class HotelElasticsearchUtil {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
             logger.error("HotelElasticsearchUtil signleAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return indexResponse;
     }
@@ -176,7 +172,7 @@ public class HotelElasticsearchUtil {
             logger.info("HotelElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
             logger.error("HotelElasticsearchUtil deleteAllDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -192,7 +188,7 @@ public class HotelElasticsearchUtil {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
             logger.error("HotelElasticsearchUtil deleteDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return deleteResponse;
     }
@@ -212,7 +208,7 @@ public class HotelElasticsearchUtil {
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
             logger.error("HotelElasticsearchUtil updateDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -230,7 +226,7 @@ public class HotelElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
             this.logger.error("HotelElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -276,8 +272,7 @@ public class HotelElasticsearchUtil {
     /**
      * @throws IOException
      */
-    private void initClient() throws IOException {
-        try {
+    private void initClient() throws Exception {
             this.prop = new Properties();
             InputStream in = this.getClass().getResourceAsStream("/elasticsearch.properties");
             this.prop.load(in);
@@ -320,9 +315,6 @@ public class HotelElasticsearchUtil {
         	    	 logger.info("HotelElasticsearchUtil Type and mapping failed !{}", ES_TYPE);
         	     }
             }
-        } catch (Exception e) {
-            this.logger.error("HotelElasticsearchUtil init elasticsearch client is error", e);
-        }
     }
 
     /**
@@ -366,7 +358,7 @@ public class HotelElasticsearchUtil {
      * @return
      * @throws IOException
      */
-    private XContentBuilder createGeoMappingBuilder() throws IOException {
+    private XContentBuilder createGeoMappingBuilder() throws Exception  {
         XContentBuilder xBuilder = XContentFactory.jsonBuilder();
 
         xBuilder.startObject();
@@ -438,6 +430,7 @@ public class HotelElasticsearchUtil {
             hits = queryEsPageing(searchBuilder);
         } catch (Exception e) {
             this.logger.error("HotelElasticsearchUtil searchHotelByHotelId error",e);
+            throw e;
         }
         return hits;
     }
@@ -539,7 +532,7 @@ public class HotelElasticsearchUtil {
     	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean) {
+    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean){
         SearchHit[] hits = null;
         List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         try {
@@ -736,7 +729,6 @@ public class HotelElasticsearchUtil {
             }
         } catch (Exception e) {
         	this.logger.error("HotelElasticsearchUtil searchHotels error",e);
-            e.printStackTrace();
         }
         return list;
     }

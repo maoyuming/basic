@@ -88,14 +88,15 @@ public class TeamSkuElasticsearchUtil {
     private Mapper dozerMapper;
 
     /**
+     * @throws Exception 
      *
      */
-    public TeamSkuElasticsearchUtil() {
+    public TeamSkuElasticsearchUtil() throws Exception {
         try {
             this.initClient();
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil error",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -111,7 +112,7 @@ public class TeamSkuElasticsearchUtil {
             }
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil close",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -131,7 +132,7 @@ public class TeamSkuElasticsearchUtil {
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil batchAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return bulkResponse;
     }
@@ -148,7 +149,7 @@ public class TeamSkuElasticsearchUtil {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil signleAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return indexResponse;
     }
@@ -164,7 +165,7 @@ public class TeamSkuElasticsearchUtil {
             logger.info("TeamSkuElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil deleteAllDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -180,7 +181,7 @@ public class TeamSkuElasticsearchUtil {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil deleteDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return deleteResponse;
     }
@@ -200,7 +201,7 @@ public class TeamSkuElasticsearchUtil {
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
             logger.error("TeamSkuElasticsearchUtil updateDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -218,7 +219,7 @@ public class TeamSkuElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
             this.logger.error("TeamSkuElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -516,7 +517,7 @@ public class TeamSkuElasticsearchUtil {
             }
         } catch (Exception e) {
         	this.logger.error("TeamSkuElasticsearchUtil searchTeamSkus error",e);
-            e.printStackTrace();
+            throw e;
         }
         return list;
     }

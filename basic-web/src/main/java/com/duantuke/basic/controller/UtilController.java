@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.duantuke.basic.enums.RefreshFieldEnum;
 import com.duantuke.basic.face.esbean.output.HotelOutputBean;
 import com.duantuke.basic.face.esbean.output.JourneyOutputBean;
 import com.duantuke.basic.face.esbean.output.MealOutputBean;
@@ -138,37 +139,28 @@ public class UtilController extends BaseController {
 	}
 	/**
 	 * @return 刷新价格到es
+	 * field RefreshFieldEnum
 	 */
-	@RequestMapping(value = "/refreshesprice", method = RequestMethod.POST)
-	public ResponseEntity<String> refreshesprice(Long hotelId, String auth) {
+	@RequestMapping(value = "/refreshesfield", method = RequestMethod.POST)
+	public ResponseEntity<String> refreshesfield(Long hotelId, String auth,Integer field) {
 		String result = "";
 		if (!validateAuth(auth)) {
 			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
 		}
 		try {
-			hotelSearchService.refreshesprice(hotelId);
-			result = "refreshesprice完成";
+			if(field.equals(RefreshFieldEnum.price.getCode())){
+				hotelSearchService.refreshesprice(hotelId);
+			}else if(field.equals(RefreshFieldEnum.tag.getCode())){
+				hotelSearchService.refreshestag(hotelId);
+			}else if(field.equals(RefreshFieldEnum.meal.getCode())){
+				hotelSearchService.refreshesmeal(hotelId);
+			}else if(field.equals(RefreshFieldEnum.teamsku.getCode())){
+				hotelSearchService.refreshesteamsku(hotelId);
+			}
+			result = "refreshes"+RefreshFieldEnum.findByCode(field).getName()+"完成";
 		} catch (Exception e) {
 			result = e.getMessage();
 			logger.error("refreshesprice error", e);
-		}
-		return new ResponseEntity<String>(result, HttpStatus.OK);
-	}
-	/**
-	 * @return 刷新tag到es
-	 */
-	@RequestMapping(value = "/refreshestag", method = RequestMethod.POST)
-	public ResponseEntity<String> refreshestag(Long hotelId, String auth) {
-		String result = "";
-		if (!validateAuth(auth)) {
-			return new ResponseEntity<String>("auth参数错误", HttpStatus.OK);
-		}
-		try {
-			hotelSearchService.refreshestag(hotelId);
-			result = "refreshestag完成";
-		} catch (Exception e) {
-			result = e.getMessage();
-			logger.error("refreshestag error", e);
 		}
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}

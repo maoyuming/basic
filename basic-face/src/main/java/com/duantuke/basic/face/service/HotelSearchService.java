@@ -34,6 +34,16 @@ public interface HotelSearchService {
 	 * 刷tag 
 	 */
 	void refreshestag(Long hotelId) throws Exception;
+	/**
+	 * @param hotelId 不传则刷全部
+	 * 刷meal 
+	 */
+	void refreshesmeal(Long hotelId) throws Exception;
+	/**
+	 * @param hotelId 不传则刷全部
+	 * 刷teamsku 
+	 */
+	void refreshesteamsku(Long hotelId) throws Exception;
 	
 	/**
 	 * @param hotelId

@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>basic-web</artifactId>
 	<packaging>war</packaging>
-	<name>basic-web Maven Webapp</name>
+	<name>basic-service</name>
 	<url>http://maven.apache.org</url>
 	<build>
 		<finalName>basic-web</finalName>

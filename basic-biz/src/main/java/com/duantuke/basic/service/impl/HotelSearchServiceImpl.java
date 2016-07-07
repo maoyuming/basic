@@ -94,8 +94,57 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 	public void initEs(Long hotelId) {
 		logger.info("HotelSearchServiceImpl initEs begin:{}", hotelId);
 		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		List<Tag> tags = tagService.queryTagsByHotelId(hotelId);
+		List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelId);
+		List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelId);
 		
-		//final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		Map<Long, List<Tag>> tagsmap = new HashMap<Long, List<Tag>>();
+		Map<Long, List<MealInputBean>> mealsmap = new HashMap<Long, List<MealInputBean>>();
+		Map<Long, List<TeamSkuInputBean>> teamskusmap = new HashMap<Long, List<TeamSkuInputBean>>();
+		
+		for (Tag tag:tags) {
+			Long supplierId = tag.getHotelId();
+			if(supplierId==null)
+				continue;
+			List<Tag> list= tagsmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(tag);
+			}else{
+				list = new ArrayList<Tag>();
+				list.add(tag);
+			}
+			tagsmap.put(supplierId, list);
+		}
+		for (MealInputBean meal:meals) {
+			String supplierIdStr = meal.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<MealInputBean> list= mealsmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(meal);
+			}else{
+				list = new ArrayList<MealInputBean>();
+				list.add(meal);
+			}
+			mealsmap.put(supplierId, list);
+		}
+		for (TeamSkuInputBean teamsku:teamskus) {
+			String supplierIdStr = teamsku.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<TeamSkuInputBean> list= teamskusmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(teamsku);
+			}else{
+				list = new ArrayList<TeamSkuInputBean>();
+				list.add(teamsku);
+			}
+			teamskusmap.put(supplierId, list);
+		}
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
 		//多线程
 		for (final HotelInputBean hotelInputBean:esInputlist) {
 			ThreadPoolUtil.pool.execute(new Runnable() {
@@ -107,36 +156,40 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 						}
 						hotelInputBean.setCreatetime(DateUtil.dateToStr(DateUtil.getNowDate(), "yyyy-MM-dd HH:mm"));
 						//保存tag
-						List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
-						for (Tag tag:taglist) {
-							Map<String,String> map = dozerMapper.map(tag, Map.class);
-							if(tag.getTagGroupId().equals(1l)){
-								hotelInputBean.getTaggroup_1().add(map);
-							}else if(tag.getTagGroupId().equals(2l)){
-								hotelInputBean.getTaggroup_2().add(map);
-							}else if(tag.getTagGroupId().equals(3l)){
-								hotelInputBean.getTaggroup_3().add(map);
-							}else if(tag.getTagGroupId().equals(4l)){
-								hotelInputBean.getTaggroup_4().add(map);
+						//List<Tag> taglist = tagService.queryTagsByHotelId(hotelInputBean.getHotelId());
+						List<Tag> taglist = tagsmap.get(hotelInputBean.getHotelId());
+						if(CollectionUtils.isNotEmpty(taglist)){
+							for (Tag tag:taglist) {
+								Map<String,String> map = dozerMapper.map(tag, Map.class);
+								if(tag.getTagGroupId().equals(1l)){
+									hotelInputBean.getTaggroup_1().add(map);
+								}else if(tag.getTagGroupId().equals(2l)){
+									hotelInputBean.getTaggroup_2().add(map);
+								}else if(tag.getTagGroupId().equals(3l)){
+									hotelInputBean.getTaggroup_3().add(map);
+								}else if(tag.getTagGroupId().equals(4l)){
+									hotelInputBean.getTaggroup_4().add(map);
+								}
 							}
 						}
 						hotelInputBean.setPrices(getPrices(hotelInputBean.getHotelId()));
-						List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelInputBean.getHotelId());
+						//List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelInputBean.getHotelId());
+						List<MealInputBean> meals = mealsmap.get(hotelInputBean.getHotelId());
 						hotelInputBean.setMeals(meals);
 						
-						List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelInputBean.getHotelId());
+						//List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelInputBean.getHotelId());
+						List<TeamSkuInputBean> teamskus = teamskusmap.get(hotelInputBean.getHotelId());
 						hotelInputBean.setTeamskus(teamskus);
-						esutil.signleAddDocument(hotelInputBean, hotelInputBean.getHotelId()+"");
 					}catch (Exception e) {
 						logger.error("HotelSearchServiceImpl initEs error", e);
-				    } //finally {
-					   //doneSingal.countDown();
-					  // ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
-				    //}
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
 				}
 			});
 		}
-		/*try {
+		try {
 			doneSingal.await();
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl initEs InterruptedException",e);
@@ -145,7 +198,7 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 			esutil.batchAddDocument(esInputlist);
 		}else{
 			logger.warn("HotelSearchServiceImpl initEs warn list is empty:{}", hotelId);
-		}*/
+		}
 		logger.info("HotelSearchServiceImpl initEs end:{}", hotelId);
 	}
 	
@@ -264,6 +317,111 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 			doneSingal.await();
 		} catch (InterruptedException e) {
 			logger.error("HotelSearchServiceImpl refreshestag InterruptedException",e);
+		}
+	}
+	
+
+	@Override
+	public void refreshesmeal(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshesmeal begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		List<MealInputBean> meals = imealService.queryEsInputMealsByHotelid(hotelId);
+		
+		Map<Long, List<MealInputBean>> mealsmap = new HashMap<Long, List<MealInputBean>>();
+		for (MealInputBean meal:meals) {
+			String supplierIdStr = meal.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<MealInputBean> list= mealsmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(meal);
+			}else{
+				list = new ArrayList<MealInputBean>();
+				list.add(meal);
+			}
+			mealsmap.put(supplierId, list);
+		}
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<MealInputBean> meals = mealsmap.get(hotelInputBean.getHotelId());
+						List<Map<String,Object>> li = new ArrayList<Map<String,Object>>();
+						for (MealInputBean meal:meals) {
+							Map<String,Object> map = dozerMapper.map(meal, Map.class);
+							li.add(map);
+						}
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "meals", li);
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshesmeal error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshesmeal InterruptedException",e);
+		}
+	}
+
+	@Override
+	public void refreshesteamsku(Long hotelId) throws Exception {
+		logger.info("HotelSearchServiceImpl refreshesteamsku begin:{}", hotelId);
+		List<HotelInputBean> esInputlist = ihotelService.queryEsInputHotels(hotelId);
+		List<TeamSkuInputBean> teamskus = iteamSkuService.queryEsInputTeamSkusByHotelId(hotelId);
+		Map<Long, List<TeamSkuInputBean>> teamskusmap = new HashMap<Long, List<TeamSkuInputBean>>();
+		
+		for (TeamSkuInputBean teamsku:teamskus) {
+			String supplierIdStr = teamsku.getSupplierId();
+			if(supplierIdStr==null)
+				continue;
+			Long supplierId = Long.parseLong(supplierIdStr);
+			List<TeamSkuInputBean> list= teamskusmap.get(supplierId);
+			if(CollectionUtils.isNotEmpty(list)){
+				list.add(teamsku);
+			}else{
+				list = new ArrayList<TeamSkuInputBean>();
+				list.add(teamsku);
+			}
+			teamskusmap.put(supplierId, list);
+		}
+		
+		final CountDownLatch doneSingal = new CountDownLatch(esInputlist.size());
+		
+		for (final HotelInputBean hotelInputBean:esInputlist) {
+			ThreadPoolUtil.pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<TeamSkuInputBean> teamskus = teamskusmap.get(hotelInputBean.getHotelId());
+						List<Map<String,Object>> li = new ArrayList<Map<String,Object>>();
+						for (TeamSkuInputBean teamsku:teamskus) {
+							Map<String,Object> map = dozerMapper.map(teamsku, Map.class);
+							li.add(map);
+						}
+						esutil.updateDocument(hotelInputBean.getHotelId()+"", "teamskus", li);
+					}catch (Exception e) {
+						logger.error("HotelSearchServiceImpl refreshesteamsku error", e);
+				    } finally {
+					   doneSingal.countDown();
+					   ThreadPoolUtil.threadSleep(ThreadPoolUtil.threadSleep);
+				    }
+				}
+			});
+		}
+		try {
+			doneSingal.await();
+		} catch (InterruptedException e) {
+			logger.error("HotelSearchServiceImpl refreshesteamsku InterruptedException",e);
 		}
 	}
 

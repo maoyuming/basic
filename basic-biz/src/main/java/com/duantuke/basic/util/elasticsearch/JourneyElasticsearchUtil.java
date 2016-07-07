@@ -89,15 +89,11 @@ public class JourneyElasticsearchUtil {
     private Mapper dozerMapper;
 
     /**
+     * @throws Exception 
      *
      */
-    public JourneyElasticsearchUtil() {
-        try {
-            this.initClient();
-        } catch (Exception e) {
-            logger.error("JourneyElasticsearchUtil error",e);
-            e.printStackTrace();
-        }
+    public JourneyElasticsearchUtil() throws Exception {
+        this.initClient();
     }
 
     /**
@@ -112,7 +108,7 @@ public class JourneyElasticsearchUtil {
             }
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil close",e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -132,7 +128,7 @@ public class JourneyElasticsearchUtil {
             bulkResponse = requestBuilder.execute().actionGet();
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil batchAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return bulkResponse;
     }
@@ -149,7 +145,7 @@ public class JourneyElasticsearchUtil {
             indexResponse = this.prepareIndex(obj,id).execute().actionGet();
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil signleAddDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return indexResponse;
     }
@@ -165,7 +161,7 @@ public class JourneyElasticsearchUtil {
             logger.info("JourneyElasticsearchUtil deleteAllDocument from index: {}, type: {}, state is {}", ES_INDEX, ES_TYPE, status);
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil deleteAllDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -181,7 +177,7 @@ public class JourneyElasticsearchUtil {
             deleteResponse = this.prepareDelete().setId(id).execute().actionGet();
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil deleteDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return deleteResponse;
     }
@@ -201,7 +197,7 @@ public class JourneyElasticsearchUtil {
             this.logger.info("updateDocument id: {}, use object: {}.", id, docs);
         } catch (Exception e) {
             logger.error("JourneyElasticsearchUtil updateDocument error", e);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -219,7 +215,7 @@ public class JourneyElasticsearchUtil {
             updateResponse = this.prepareUpdate().setId(id).setDoc(field, value).execute().actionGet();
         } catch (Exception e) {
             this.logger.error("JourneyElasticsearchUtil updateDocument method error:{},id,:{}, field: {}, value: {}", e.getLocalizedMessage(), id,field, value);
-            e.printStackTrace();
+            throw e;
         }
         return updateResponse;
     }
@@ -554,7 +550,7 @@ public class JourneyElasticsearchUtil {
             }
         } catch (Exception e) {
         	this.logger.error("JourneyElasticsearchUtil searchJourneys error",e);
-            e.printStackTrace();
+            throw e;
         }
         return list;
     }
