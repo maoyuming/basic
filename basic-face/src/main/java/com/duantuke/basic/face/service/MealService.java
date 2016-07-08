@@ -2,8 +2,8 @@ package com.duantuke.basic.face.service;
 
 import java.util.List;
 
+import com.duantuke.basic.face.bean.MealInfo;
 import com.duantuke.basic.po.Meal;
-import com.duantuke.basic.po.RoomType;
 
 /**
  * @author he
@@ -20,4 +20,5 @@ public interface MealService {
 	public List<Meal> queryMealByHotleId(Long hotelId);
 	public Meal queryMealByMealId(Long roomtypeId);
 	public List<Meal> queryMealByMealIds(List<Long> mealIds);
+	public List<MealInfo> queryMealInfo(List<Meal> meals,Long hotelId);
 }

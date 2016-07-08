@@ -27,6 +27,9 @@ import com.duantuke.basic.po.RackRate;
 import com.duantuke.basic.po.RackRateExample;
 import com.duantuke.basic.po.WeekendRate;
 import com.duantuke.basic.util.DateUtil;
+import com.duantuke.promotion.domain.PromotionDefinitionResult;
+import com.duantuke.promotion.enums.PromotionTypeEnum;
+import com.duantuke.promotion.face.service.PromotionService;
 
 @Service
 public class PriceServiceImpl implements PriceService{
@@ -35,6 +38,8 @@ public class PriceServiceImpl implements PriceService{
 	private DailyRateMapper dailyRateMapper;
 	@Autowired
 	private RoomTypeService roomTypeService;
+	@Autowired
+	private PromotionService promotionService;
 	@Autowired
 	private WeekendRateMapper weekendRateMapper;
 	@Autowired
@@ -157,12 +162,20 @@ public class PriceServiceImpl implements PriceService{
 	@Override
 	public Map<Long,List<PriceInfo>> queryHotelPriceInfos(Long hotelId, String begintime,
 			String endtime, List<Long> roomtypeIds) {
+		return this.queryHotelPriceInfos(hotelId, begintime, endtime, roomtypeIds, null);
+	}
+	/**
+	 * 查询价格信息
+	 */
+	@Override
+	public Map<Long,List<PriceInfo>> queryHotelPriceInfos(Long hotelId, String begintime,
+			String endtime, List<Long> roomtypeIds,Integer skuType) {
 		Map<Long,List<PriceInfo>> resultMap = new HashMap<Long, List<PriceInfo>>();
 		Map<Long, Map<String, BigDecimal>> map = this.queryHotelPrices(hotelId, begintime, endtime, roomtypeIds);
 		if(MapUtils.isNotEmpty(map)){
 			for (Entry<Long, Map<String, BigDecimal>> entry : map.entrySet()) {
 				Long key = entry.getKey();
-				List<PriceInfo> priceInfos = fillPriceInfo(entry.getValue());
+				List<PriceInfo> priceInfos = fillPriceInfo(entry.getValue(), hotelId, skuType);
 				resultMap.put(key, priceInfos);
 			}
 		}
@@ -175,14 +188,25 @@ public class PriceServiceImpl implements PriceService{
 	 * @param priceMap
 	 * @return
 	 */
-	public List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap){
+	public List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap,Long hotelId,Integer skuType){
 		List<PriceInfo> list = new ArrayList<PriceInfo>();
 		if(MapUtils.isNotEmpty(priceMap)){
 			for (Entry<String,BigDecimal> entry : priceMap.entrySet()) {
 				PriceInfo info = new PriceInfo();
 				info.setDate(entry.getKey());
-				info.setPrice(entry.getValue());
-				//TODO:此处要封装多个价格
+				info.setOriginalPrice(entry.getValue());
+				//此处要封装多个价格
+				
+				//查询系统单品直降的优惠券
+				PromotionDefinitionResult definitionResult = promotionService.querySysPromotion(hotelId, skuType, entry.getValue(), PromotionTypeEnum.single_straight_down);
+				if(definitionResult!=null){
+					if(definitionResult.getPrice()!=null){
+						//金额处理，为负数转换
+						info.setPrice(definitionResult.getPrice().compareTo(BigDecimal.ZERO)>0?definitionResult.getPrice():BigDecimal.ONE);
+						
+						info.setPromotionPrice(info.getOriginalPrice().subtract(info.getPrice()));
+					}
+				}
 				list.add(info);
 			}
 		}

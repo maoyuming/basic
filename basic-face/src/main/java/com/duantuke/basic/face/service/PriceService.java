@@ -50,13 +50,25 @@ public interface PriceService {
      */
     public Map<Long,List<PriceInfo>> queryHotelPriceInfos(Long hotelId, String begintime, String endtime,List<Long> roomtypeIds);
     
+    /**
+     * 查询价格
+     * @param hotelId
+     * @param begintime
+     * @param endtime
+     * @param roomtypeIds
+     * @param skuType
+     * @return
+     */
+    public Map<Long,List<PriceInfo>> queryHotelPriceInfos(Long hotelId, String begintime,
+			String endtime, List<Long> roomtypeIds,Integer skuType);
+    
 
     /**
      * 将map的价格转换为list
      * @param priceMap
      * @return
      */
-	public List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap);
+	public List<PriceInfo> fillPriceInfo(Map<String,BigDecimal> priceMap,Long hotelId,Integer skuType);
     
     
 }

@@ -424,7 +424,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
-					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId()),skuQueryIn.getHotelId(),SkuTypeEnum.roomtype.getCode()));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
@@ -510,7 +510,7 @@ public class SkuServiceImpl implements SkuService {
 				
 				
 				if(MapUtils.isNotEmpty(priceMap)){
-					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId())));
+					roomTypeInfo.setPriceInfos(priceService.fillPriceInfo(priceMap.get(roomType.getSkuId()),skuQueryIn.getHotelId(),SkuTypeEnum.teamsku.getCode()));
 					roomTypeInfo.setPrices(priceMap.get(roomType.getSkuId()));
 					if(MapUtils.isNotEmpty(roomTypeInfo.getPrices())){
 //						int index=0;
