@@ -73,7 +73,7 @@ public class SkuServiceImpl implements SkuService {
 		SkuResponse skuResponse = new SkuResponse();
 		try {
 			skuResponse.setTotalPrice(totalPrice);
-			skuResponse.setOriginalPrice(totalPrice);
+			
 //			skuResponse.setSupplierId(skuQueryIn.getHotelId());
 			
 			
@@ -106,6 +106,8 @@ public class SkuServiceImpl implements SkuService {
 						default:
 							break;
 						}
+						
+						skuResponse.setOriginalPrice(totalPrice);
 						if(skuQueryIn.getCustomerId()!=null){
 							PromotionQueryIn promotionQueryIn = new PromotionQueryIn();
 							promotionQueryIn.setCustomerId(skuQueryIn.getCustomerId());
@@ -118,7 +120,7 @@ public class SkuServiceImpl implements SkuService {
 							if(retInfo.isResult()){
 								PromotionResult promotionResult = 	retInfo.getObj();
 								if(promotionResult!=null){
-									totalPrice  = promotionResult.getOrderPrice();
+									totalPrice  = promotionResult.getPrice();
 									logger.info("促销后价格：{}", new JSONObject().toJSON(promotionResult));
 								}
 							}
@@ -142,10 +144,7 @@ public class SkuServiceImpl implements SkuService {
 			logger.error("查询sku异常",e);
 			throw new OpenException(e);
 		}finally{
-			
 			try {
-				
-				
 				logger.info("查询sku结束，{}",JSON.json(skuResponse));
 			} catch (IOException e) {
 				

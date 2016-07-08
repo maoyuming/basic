@@ -1,6 +1,7 @@
 package com.duantuke.basic.face.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -88,6 +89,5 @@ public class SkuRequest implements Serializable{
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	
 	
 }
