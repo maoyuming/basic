@@ -195,6 +195,8 @@ public class PriceServiceImpl implements PriceService{
 				PriceInfo info = new PriceInfo();
 				info.setDate(entry.getKey());
 				info.setOriginalPrice(entry.getValue());
+				info.setPrice(entry.getValue());
+				info.setPromotionPrice(BigDecimal.ZERO);
 				//此处要封装多个价格
 				
 				//查询系统单品直降的优惠券
