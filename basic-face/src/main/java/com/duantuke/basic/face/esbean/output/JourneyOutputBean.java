@@ -1,6 +1,9 @@
 package com.duantuke.basic.face.esbean.output;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author he
@@ -31,6 +34,15 @@ public class JourneyOutputBean implements Serializable{
     private Integer view;//浏览数 
     private Integer journeyLike;//点赞数 
     private Integer share;//分享数 
+    private String hotelIds;
+    
+    
+public String getHotelIds() {
+		return hotelIds;
+	}
+	public void setHotelIds(String hotelIds) {
+		this.hotelIds = hotelIds;
+	}
 	public Long getJourneyId() {
 		return journeyId;
 	}

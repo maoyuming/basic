@@ -587,6 +587,19 @@ public class JourneyElasticsearchUtil {
         for (SearchHit searchHit : hits) {
             Map<String, Object> map = searchHit.getSource();
             JourneyOutputBean journeyOutputBean = dozerMapper.map(map, JourneyOutputBean.class);
+            List<Map<String,String>> hotelIds = (List<Map<String,String>>)map.get("hotelIds");
+            StringBuffer hotelIdStr = new StringBuffer();
+            for (Map<String,String> hotelidmap:hotelIds) {
+				for (String value:hotelidmap.values()) {
+					hotelIdStr.append(value).append(",");
+				} 
+			}
+            if(hotelIdStr.length()>0){
+            	String hotelids = hotelIdStr.substring(0, hotelIdStr.length()-1);
+            	journeyOutputBean.setHotelIds(hotelids);
+            }else{
+            	journeyOutputBean.setHotelIds("");
+            }
             list.add(journeyOutputBean);
         }
         return list;
