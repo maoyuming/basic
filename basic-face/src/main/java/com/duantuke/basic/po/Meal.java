@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Meal extends Sku implements Serializable{
-    private Long skuId;
+    //private Long skuId;
 
     private String meatVegetable;
 
@@ -29,13 +29,13 @@ public class Meal extends Sku implements Serializable{
 
     private String updateBy;
 
-    public Long getSkuId() {
+/*    public Long getSkuId() {
         return skuId;
     }
 
     public void setSkuId(Long skuId) {
         this.skuId = skuId;
-    }
+    }*/
 
     public String getMeatVegetable() {
         return meatVegetable;
