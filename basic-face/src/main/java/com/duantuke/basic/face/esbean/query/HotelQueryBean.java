@@ -50,8 +50,10 @@ public class HotelQueryBean implements Serializable{
     //预订开始时间和结束时间
     private String querystarttime;
     private String queryendtime;
-    //hotelids
-    private List<String> hotelIds;
+    
+    private String queryhotelids;//以逗号分隔
+    
+    private String excepthotelid;//不包含哪个酒店
     
     /** 搜索默认页码 */
     public final static Integer SEARCH_PAGE_DEFAULT = 1;
@@ -65,11 +67,17 @@ public class HotelQueryBean implements Serializable{
     
     
     
-	public List<String> getHotelIds() {
-		return hotelIds;
+	public String getExcepthotelid() {
+		return excepthotelid;
 	}
-	public void setHotelIds(List<String> hotelIds) {
-		this.hotelIds = hotelIds;
+	public void setExcepthotelid(String excepthotelid) {
+		this.excepthotelid = excepthotelid;
+	}
+	public String getQueryhotelids() {
+		return queryhotelids;
+	}
+	public void setQueryhotelids(String queryhotelids) {
+		this.queryhotelids = queryhotelids;
 	}
 	public Double getQueryminprice() {
 		return queryminprice;

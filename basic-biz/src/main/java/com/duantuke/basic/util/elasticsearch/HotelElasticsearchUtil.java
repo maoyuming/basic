@@ -560,7 +560,8 @@ public class HotelElasticsearchUtil {
             Double queryminprice = hotelQueryBean.getQueryminprice();
             String querystarttime = hotelQueryBean.getQuerystarttime();
             String queryendtime = hotelQueryBean.getQueryendtime();
-            List<String> hotelIds = hotelQueryBean.getHotelIds();
+            String queryhotelids = hotelQueryBean.getQueryhotelids();
+            String excepthotelid = hotelQueryBean.getExcepthotelid();
             
             //meal
             String mealname=null;
@@ -623,10 +624,16 @@ public class HotelElasticsearchUtil {
             if (districtCode != null) {
                 filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.matchQuery("discode", districtCode.toString()).operator(Operator.AND)));
             }
-            if(CollectionUtils.isNotEmpty(hotelIds)){
-            	String[]a = new String[]{};
-            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.idsQuery().ids(hotelIds.toArray(a))));
+            if(queryhotelids!=null){
+            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.idsQuery().ids(queryhotelids.split(","))));
             }
+            if(excepthotelid!=null){
+            	filterBuilders.add(FilterBuilders.boolFilter().mustNot(FilterBuilders.termFilter("hotelId", excepthotelid)));
+            }
+//            if(CollectionUtils.isNotEmpty(hotelIds)){
+//            	String[]a = new String[]{};
+//            	filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.idsQuery().ids(hotelIds.toArray(a))));
+//            }
             if (tags != null && tags.size() > 0) {
             	for (String key:tags.keySet()) {
             		List<String> value = tags.get(key);
