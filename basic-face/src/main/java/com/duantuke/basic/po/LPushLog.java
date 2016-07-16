@@ -1,11 +1,10 @@
 package com.duantuke.basic.po;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.duantuke.basic.face.bean.PageItem;
 
-public class LPushLog  extends PageItem implements Serializable{
+public class LPushLog extends PageItem{
     private Long id;
 
     private String title;
@@ -13,6 +12,8 @@ public class LPushLog  extends PageItem implements Serializable{
     private String content;
 
     private String type;
+
+    private Integer userType;
 
     private Date time;
 
@@ -70,6 +71,14 @@ public class LPushLog  extends PageItem implements Serializable{
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public Date getTime() {
