@@ -122,6 +122,7 @@ public class PageItem implements Serializable{
     }
 
     public int getBegin() {
+    	begin = (index - 1) * pageSize;
         return begin;
     }
 
@@ -130,6 +131,7 @@ public class PageItem implements Serializable{
     }
 
     public int getEnd() {
+    	end = pageSize;
         return end;
     }
 
