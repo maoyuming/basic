@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.MessageReadStatusEnum;
+import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.PushLogService;
 import com.duantuke.basic.mappers.LPushLogMapper;
 import com.duantuke.basic.po.LPushLog;
@@ -48,6 +49,29 @@ public class PushLogServiceImpl implements PushLogService {
 		LPushLog record = new LPushLog();
 		record.setReadstatus(MessageReadStatusEnum.read.getCode()+"");
 		return lPushLogMapper.updateByExampleSelective(record,example);
+	}
+
+	@Override
+	public List<LPushLog> queryPushLogByMid(LPushLog lPushLog) {
+
+		if(lPushLog==null){
+			throw new OpenException("参数为空");
+		}
+		
+		if(lPushLog.getMid()==null){
+			throw new OpenException("用户id为空");
+		}
+
+		LPushLogExample example = new LPushLogExample();
+		LPushLogExample.Criteria hoCriteria = example.createCriteria();
+		hoCriteria.andMidEqualTo(lPushLog.getMid());
+		example.setLimitStart(lPushLog.getBegin());
+		example.setLimitEnd(lPushLog.getEnd());
+		example.setOrderByClause("time desc");
+		List<LPushLog> models =  lPushLogMapper.selectByExample(example);
+		return models;
+	
+	
 	}
 
 

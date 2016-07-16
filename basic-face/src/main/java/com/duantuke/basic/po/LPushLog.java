@@ -3,7 +3,9 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class LPushLog implements Serializable{
+import com.duantuke.basic.face.bean.PageItem;
+
+public class LPushLog  extends PageItem implements Serializable{
     private Long id;
 
     private String title;

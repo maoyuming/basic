@@ -12,6 +12,12 @@ public interface PushLogService {
 	 * @return
 	 */
 	public List<LPushLog> queryPushLogByMid(Long mid);
+	/**
+	 * 根据mid查询消息列表
+	 * @param mid
+	 * @return
+	 */
+	public List<LPushLog> queryPushLogByMid(LPushLog lPushLog);
 	
 	public int updateReadStatus(Long customerId,Long id);
 }
