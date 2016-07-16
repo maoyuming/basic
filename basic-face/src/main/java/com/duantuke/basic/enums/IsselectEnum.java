@@ -1,0 +1,32 @@
+package com.duantuke.basic.enums;
+
+/**
+ * 标记是否有效，
+ * T有效，F无效
+ * @author tankai
+ *
+ */
+public enum IsselectEnum {
+     yes("T","有效"),
+     no("F","无效"),
+     ;
+     private String code;
+     private String name;
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	private IsselectEnum(String code, String name) {
+		this.code = code;
+		this.name = name;
+	}
+     
+}

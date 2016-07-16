@@ -34,6 +34,6 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
         
-         <table tableName="team_sku" domainObjectName="TeamSku"></table> 
+         <table tableName="province" domainObjectName="Province"></table> 
 	</context>
 </generatorConfiguration>

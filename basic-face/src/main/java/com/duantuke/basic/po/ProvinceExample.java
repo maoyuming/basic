@@ -634,6 +634,76 @@ public class ProvinceExample {
             addCriterion("longitude not between", value1, value2, "longitude");
             return (Criteria) this;
         }
+
+        public Criteria andIsselectIsNull() {
+            addCriterion("isselect is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectIsNotNull() {
+            addCriterion("isselect is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectEqualTo(String value) {
+            addCriterion("isselect =", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectNotEqualTo(String value) {
+            addCriterion("isselect <>", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectGreaterThan(String value) {
+            addCriterion("isselect >", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectGreaterThanOrEqualTo(String value) {
+            addCriterion("isselect >=", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectLessThan(String value) {
+            addCriterion("isselect <", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectLessThanOrEqualTo(String value) {
+            addCriterion("isselect <=", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectLike(String value) {
+            addCriterion("isselect like", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectNotLike(String value) {
+            addCriterion("isselect not like", value, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectIn(List<String> values) {
+            addCriterion("isselect in", values, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectNotIn(List<String> values) {
+            addCriterion("isselect not in", values, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectBetween(String value1, String value2) {
+            addCriterion("isselect between", value1, value2, "isselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsselectNotBetween(String value1, String value2) {
+            addCriterion("isselect not between", value1, value2, "isselect");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

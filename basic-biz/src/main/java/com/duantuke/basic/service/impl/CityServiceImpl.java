@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.enums.IsselectEnum;
 import com.duantuke.basic.face.base.RetInfo;
 import com.duantuke.basic.face.service.CityService;
 import com.duantuke.basic.mappers.CityMapper;
@@ -33,6 +34,8 @@ public class CityServiceImpl implements CityService {
 
 			CityExample example = new CityExample();
 
+			CityExample.Criteria hoCriteria = example.createCriteria();
+			hoCriteria.andIsselectEqualTo(IsselectEnum.yes.getCode());
 			example.setOrderByClause("sort asc");
 			return cityMapper.selectByExample(example);
 		} catch (Exception e) {
@@ -44,7 +47,9 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public List<City> queryAllCitysByProvinceCode(Integer proid) {
 		CityExample example = new CityExample();
-		example.createCriteria().andProidEqualTo(proid);
+		CityExample.Criteria hoCriteria = example.createCriteria();
+		hoCriteria.andProidEqualTo(proid);
+		hoCriteria.andIsselectEqualTo(IsselectEnum.yes.getCode());
 		example.setOrderByClause("sort asc");
 		return cityMapper.selectByExample(example);
 	}
@@ -60,6 +65,8 @@ public class CityServiceImpl implements CityService {
 		}
 		CityExample example = new CityExample();
 		CityExample.Criteria hoCriteria = example.createCriteria();
+		
+		hoCriteria.andIsselectEqualTo(IsselectEnum.yes.getCode());
 		hoCriteria.andCodeEqualTo(Long.valueOf(citycode));
 		example.setOrderByClause("sort asc");
 		List<City> models =  cityMapper.selectByExample( example);

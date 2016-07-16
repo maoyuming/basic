@@ -10,6 +10,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="latitude" property="latitude" jdbcType="DECIMAL" />
     <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="isselect" property="isselect" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, code, query_name, name, sort, remark, latitude, longitude
+    id, code, query_name, name, sort, remark, latitude, longitude, isselect
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.duantuke.basic.po.ProvinceExample" >
     select
@@ -108,10 +109,12 @@
   <insert id="insert" parameterType="com.duantuke.basic.po.Province" >
     insert into province (id, code, query_name, 
       name, sort, remark, 
-      latitude, longitude)
+      latitude, longitude, isselect
+      )
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{queryName,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
+      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{isselect,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.duantuke.basic.po.Province" >
     insert into province
@@ -140,6 +143,9 @@
       <if test="longitude != null" >
         longitude,
       </if>
+      <if test="isselect != null" >
+        isselect,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -165,6 +171,9 @@
       </if>
       <if test="longitude != null" >
         #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="isselect != null" >
+        #{isselect,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -201,6 +210,9 @@
       <if test="record.longitude != null" >
         longitude = #{record.longitude,jdbcType=DECIMAL},
       </if>
+      <if test="record.isselect != null" >
+        isselect = #{record.isselect,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -215,7 +227,8 @@
       sort = #{record.sort,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
       latitude = #{record.latitude,jdbcType=DECIMAL},
-      longitude = #{record.longitude,jdbcType=DECIMAL}
+      longitude = #{record.longitude,jdbcType=DECIMAL},
+      isselect = #{record.isselect,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,6 +257,9 @@
       <if test="longitude != null" >
         longitude = #{longitude,jdbcType=DECIMAL},
       </if>
+      <if test="isselect != null" >
+        isselect = #{isselect,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -255,7 +271,8 @@
       sort = #{sort,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=DECIMAL},
-      longitude = #{longitude,jdbcType=DECIMAL}
+      longitude = #{longitude,jdbcType=DECIMAL},
+      isselect = #{isselect,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

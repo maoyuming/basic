@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.enums.IsselectEnum;
 import com.duantuke.basic.face.base.RetInfo;
 import com.duantuke.basic.face.service.ProvinceService;
 import com.duantuke.basic.mappers.ProvinceMapper;
@@ -31,6 +32,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 		logger.info(ProvinceServiceImpl.class.getName()+":queryAllProvinces begin");
 		try {
 			ProvinceExample example = new ProvinceExample();
+
+			ProvinceExample.Criteria hoCriteria = example.createCriteria();
+			hoCriteria.andIsselectEqualTo(IsselectEnum.yes.getCode());
 			example.setOrderByClause("sort asc");
 			return provinceMapper.selectByExample(example);
 		} catch (Exception e) {
@@ -51,6 +55,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 		ProvinceExample example = new ProvinceExample();
 		ProvinceExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andCodeEqualTo(Long.valueOf(provCode));
+		hoCriteria.andIsselectEqualTo(IsselectEnum.yes.getCode());
 		example.setOrderByClause("sort asc");
 		
 		List<Province> models =  provinceMapper.selectByExample( example);

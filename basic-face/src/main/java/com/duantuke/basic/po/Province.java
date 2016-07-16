@@ -20,6 +20,8 @@ public class Province implements Serializable{
 
     private BigDecimal longitude;
 
+    private String isselect;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +84,13 @@ public class Province implements Serializable{
 
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
+    }
+
+    public String getIsselect() {
+        return isselect;
+    }
+
+    public void setIsselect(String isselect) {
+        this.isselect = isselect == null ? null : isselect.trim();
     }
 }
