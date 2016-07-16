@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.MessageReadStatusEnum;
+import com.duantuke.basic.enums.UserTypeEnum;
 import com.duantuke.basic.exception.OpenException;
 import com.duantuke.basic.face.service.PushLogService;
 import com.duantuke.basic.mappers.LPushLogMapper;
@@ -27,6 +28,7 @@ public class PushLogServiceImpl implements PushLogService {
 	private LPushLogMapper lPushLogMapper;
 
 	@Override
+	@Deprecated
 	public List<LPushLog> queryPushLogByMid(Long mid) {
 
 		LPushLogExample example = new LPushLogExample();
@@ -65,6 +67,7 @@ public class PushLogServiceImpl implements PushLogService {
 		LPushLogExample example = new LPushLogExample();
 		LPushLogExample.Criteria hoCriteria = example.createCriteria();
 		hoCriteria.andMidEqualTo(lPushLog.getMid());
+		hoCriteria.andUserTypeEqualTo(lPushLog.getUserType()==null?UserTypeEnum.customer.getCode():lPushLog.getUserType());//默认b端用户
 		example.setLimitStart(lPushLog.getBegin());
 		example.setLimitEnd(lPushLog.getEnd());
 		example.setOrderByClause("time desc");
