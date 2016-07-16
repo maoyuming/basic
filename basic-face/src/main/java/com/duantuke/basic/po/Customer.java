@@ -3,13 +3,8 @@ package com.duantuke.basic.po;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Customer  implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Long customerId;
+public class Customer implements Serializable{
+    private Long customerId;
 
     private String loginName;
 
@@ -28,6 +23,8 @@ public class Customer  implements Serializable{
     private String alipay;
 
     private String weixin;
+
+    private String pic;
 
     private Date createtime;
 
@@ -117,6 +114,14 @@ public class Customer  implements Serializable{
 
     public void setWeixin(String weixin) {
         this.weixin = weixin == null ? null : weixin.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic == null ? null : pic.trim();
     }
 
     public Date getCreatetime() {
