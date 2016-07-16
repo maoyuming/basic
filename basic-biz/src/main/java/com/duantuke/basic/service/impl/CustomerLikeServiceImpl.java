@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duantuke.basic.enums.BusinessTypeEnum;
 import com.duantuke.basic.enums.IsvisibleEnum;
 import com.duantuke.basic.face.service.CustomerLikeService;
 import com.duantuke.basic.mappers.CustomerLikeHotelMapper;
@@ -47,6 +48,7 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
+		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.sight.getCode()+""));
 		
 		return customerLikeSightMapper.selectByExample(example);
 	}
@@ -64,6 +66,7 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		
 		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
+		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.hotel.getCode()+""));
 		
 		return customerLikeHotelMapper.selectByExample(example);
 	}
@@ -79,7 +82,7 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
-		
+		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.journey.getCode()+""));
 		return customerLikeJourneyMapper.selectByExample(example);
 	
 	}

@@ -791,6 +791,66 @@ public class CustomerLikeJourneyExample {
             return (Criteria) this;
         }
         
+        public Criteria andBusinessTypeIsNull() {
+            addCriterion("d.business_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeIsNotNull() {
+            addCriterion("d.business_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeEqualTo(Short value) {
+            addCriterion("d.business_type =", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotEqualTo(Short value) {
+            addCriterion("d.business_type <>", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeGreaterThan(Short value) {
+            addCriterion("d.business_type >", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeGreaterThanOrEqualTo(Short value) {
+            addCriterion("d.business_type >=", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeLessThan(Short value) {
+            addCriterion("d.business_type <", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeLessThanOrEqualTo(Short value) {
+            addCriterion("d.business_type <=", value, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeIn(List<Short> values) {
+            addCriterion("d.business_type in", values, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotIn(List<Short> values) {
+            addCriterion("d.business_type not in", values, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeBetween(Short value1, Short value2) {
+            addCriterion("d.business_type between", value1, value2, "businessType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessTypeNotBetween(Short value1, Short value2) {
+            addCriterion("d.business_type not between", value1, value2, "businessType");
+            return (Criteria) this;
+        }
+        
     }
 
     public static class Criteria extends GeneratedCriteria {
