@@ -1,21 +1,21 @@
 package com.duantuke.basic.enums;
 
 /**
- * 消息状态:1未读；2已读
+ * 消息状态:F未读；T已读
  * @author tankai
  *
  */
 public enum MessageReadStatusEnum {
-     unread(1,"未读"),
-     read(2,"已读"),
+     unread("T","未读"),
+     read("F","已读"),
      
      ;
-     private Integer code;
+     private String code;
      private String name;
-	public Integer getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(Integer code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getName() {
@@ -24,7 +24,7 @@ public enum MessageReadStatusEnum {
 	public void setName(String name) {
 		this.name = name;
 	}
-	private MessageReadStatusEnum(Integer code, String name) {
+	private MessageReadStatusEnum(String code, String name) {
 		this.code = code;
 		this.name = name;
 	}

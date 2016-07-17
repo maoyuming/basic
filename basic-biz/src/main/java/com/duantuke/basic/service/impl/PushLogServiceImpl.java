@@ -49,7 +49,7 @@ public class PushLogServiceImpl implements PushLogService {
 		hoCriteria.andIdEqualTo(id);
 		
 		LPushLog record = new LPushLog();
-		record.setReadstatus(MessageReadStatusEnum.read.getCode()+"");
+		record.setReadstatus(MessageReadStatusEnum.read.getCode());
 		return lPushLogMapper.updateByExampleSelective(record,example);
 	}
 
