@@ -532,7 +532,11 @@ public class HotelElasticsearchUtil {
     	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean){
+    /**
+     * @param from 1meal 2team
+     * @return
+     */
+    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean,Integer from){
         SearchHit[] hits = null;
         List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         try {
@@ -673,6 +677,16 @@ public class HotelElasticsearchUtil {
             if(!(teamskuqueryMinPeopleNum==null && teamskuqueryMaxPeopleNum==null)){
             	searchBuilder.setQuery(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus"));
             }
+            if(from!=null){
+            	if(from.equals(1)){
+            		//吃
+            		searchBuilder.setQuery(QueryBuilders.nestedQuery("meals", FilterBuilders.existsFilter("meals")));
+            	}else if(from.equals(2)){
+            		//团体
+            		searchBuilder.setQuery(QueryBuilders.nestedQuery("teamskus", FilterBuilders.existsFilter("teamskus")));
+            	}
+            	
+            }
             
             //酒店价格搜索条件
             List<String> days = new ArrayList<String>();
@@ -727,6 +741,8 @@ public class HotelElasticsearchUtil {
                 searchBuilder.setFrom((page - 1) * pagesize).setSize(pagesize);
             }
 
+            
+            
             SearchResponse searchResponse = searchBuilder.execute().actionGet();
             SearchHits searchHits = searchResponse.getHits();
             hits = searchHits.getHits();
