@@ -6,8 +6,8 @@ package com.duantuke.basic.enums;
  *
  */
 public enum MessageReadStatusEnum {
-     unread("T","未读"),
-     read("F","已读"),
+     unread("F","未读"),
+     read("T","已读"),
      
      ;
      private String code;
