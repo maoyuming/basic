@@ -499,7 +499,8 @@ public class JourneyElasticsearchUtil {
 					Map<String, String> propertyValues = new HashMap<String, String>();
 					for (String searchcontent:value) {
 						propertyValues.put(key + ".hotelId", searchcontent);
-						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						//searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery(propertyValues, key)));
 					}
 				}
             }
@@ -512,7 +513,8 @@ public class JourneyElasticsearchUtil {
 					Map<String, String> propertyValues = new HashMap<String, String>();
 					for (String searchcontent:value) {
 						propertyValues.put(key + ".sightId", searchcontent);
-						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						//searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery(propertyValues, key)));
 					}
 				}
             }

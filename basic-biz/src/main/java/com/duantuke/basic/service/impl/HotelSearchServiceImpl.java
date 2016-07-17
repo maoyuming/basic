@@ -65,6 +65,9 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 
 	@Override
 	public List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean) {
+		return search(hotelQueryBean,mealQueryBean,teamSkuQueryBean,null);
+	}
+	private List<HotelOutputBean> search(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean,Integer from) {
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs param:{},{}", gson.toJson(hotelQueryBean),gson.toJson(mealQueryBean),gson.toJson(teamSkuQueryBean));
 		// page参数校验：如果page小于等于0，默认为1.
 		Integer page = hotelQueryBean.getPage();
@@ -85,10 +88,23 @@ public class HotelSearchServiceImpl implements HotelSearchService {
 		if(StringUtils.isNotEmpty(hotelQueryBean.getTagJson())){
 			tagmap = gson.fromJson(hotelQueryBean.getTagJson(), Map.class);
 		}
-		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tagmap,mealQueryBean,teamSkuQueryBean);
+		List<HotelOutputBean> result = esutil.searchHotels(hotelQueryBean,tagmap,mealQueryBean,teamSkuQueryBean,from);
 		logger.info("HotelSearchServiceImpl searchHotelsFromEs result:{}", gson.toJson(result));
 		return result;
 	}
+
+	@Override
+	public List<HotelOutputBean> searchHotelsFromEsByTeam(HotelQueryBean hotelQueryBean,
+			TeamSkuQueryBean teamSkuQueryBean) {
+	     return search(hotelQueryBean,null,teamSkuQueryBean,2);
+	}
+
+
+	@Override
+	public List<HotelOutputBean> searchHotelsFromEsByMeal(HotelQueryBean hotelQueryBean, MealQueryBean mealQueryBean) {
+		return search(hotelQueryBean,mealQueryBean,null,1);
+	}
+
 
 	@Override
 	public void initEs(Long hotelId) {

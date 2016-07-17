@@ -18,6 +18,8 @@ public interface HotelSearchService {
 	 * 搜索es
 	 */
 	List<HotelOutputBean> searchHotelsFromEs(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean);
+	List<HotelOutputBean> searchHotelsFromEsByTeam(HotelQueryBean hotelQueryBean,TeamSkuQueryBean teamSkuQueryBean);
+	List<HotelOutputBean> searchHotelsFromEsByMeal(HotelQueryBean hotelQueryBean,MealQueryBean mealQueryBean);
 	
 	/**
 	 * @param hotelId 不传则刷全部

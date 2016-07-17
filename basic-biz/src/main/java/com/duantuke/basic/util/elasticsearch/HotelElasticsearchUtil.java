@@ -396,11 +396,11 @@ public class HotelElasticsearchUtil {
         xBuilder.field("type", "nested");
         xBuilder.endObject();
         
-        xBuilder.startObject("hotelName");
-        xBuilder.field("type", "string")
-        .field("indexAnalyzer", "ik")  
-        .field("searchAnalyzer", "ik");
-        xBuilder.endObject();
+//        xBuilder.startObject("hotelName");
+//        xBuilder.field("type", "string")
+//        .field("indexAnalyzer", "ik")  
+//        .field("searchAnalyzer", "ik");
+//        xBuilder.endObject();
         
         xBuilder.endObject();
         xBuilder.endObject();
@@ -532,7 +532,11 @@ public class HotelElasticsearchUtil {
     	return QueryBuilders.nestedQuery(nestedPath, boolQueryBuilder);
     }
 
-    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean){
+    /**
+     * @param from 1meal 2team
+     * @return
+     */
+    public List<HotelOutputBean> searchHotels(HotelQueryBean hotelQueryBean,Map<String,List<String>> tags,MealQueryBean mealQueryBean,TeamSkuQueryBean teamSkuQueryBean,Integer from){
         SearchHit[] hits = null;
         List<HotelOutputBean> list = new ArrayList<HotelOutputBean>();
         try {
@@ -646,32 +650,52 @@ public class HotelElasticsearchUtil {
 						if(businessType!=null){
 							propertyValues.put(key + ".businessType", businessType);
 						}
-						searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						//searchBuilder.setQuery(nestedBoolQuery(propertyValues, key));
+						filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery(propertyValues, key)));
 					}
 				}
             }
             //搜索餐饮条件
             if(mealname!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("meals.name",mealname, "meals"));
+            	//searchBuilder.setQuery(nestedBoolQuery("meals.name",mealname, "meals"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery("meals.name",mealname, "meals")));
             }
             if(meatVegetable!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("meals.meatVegetable",meatVegetable, "meals"));
+            	//searchBuilder.setQuery(nestedBoolQuery("meals.meatVegetable",meatVegetable, "meals"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery("meals.meatVegetable",meatVegetable, "meals")));
             }
             if(description!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("meals.description",description, "meals"));
+            	//searchBuilder.setQuery(nestedBoolQuery("meals.description",description, "meals"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery("meals.description",description, "meals")));
             }
             if(!(queryMinPeopleNum==null && queryMaxPeopleNum==null)){
-            	searchBuilder.setQuery(nestedComparePeopleNumQuery("meals.peopleNumber", queryMinPeopleNum,queryMaxPeopleNum,"meals"));
+            	//searchBuilder.setQuery(nestedComparePeopleNumQuery("meals.peopleNumber", queryMinPeopleNum,queryMaxPeopleNum,"meals"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedComparePeopleNumQuery("meals.peopleNumber", queryMinPeopleNum,queryMaxPeopleNum,"meals")));
             }
             //teamsku
             if(teamskuname!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("teamskus.name",teamskuname, "teamskus"));
+            	//searchBuilder.setQuery(nestedBoolQuery("teamskus.name",teamskuname, "teamskus"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery("teamskus.name",teamskuname, "teamskus")));
             }
             if(teamskudescription!=null){
-            	searchBuilder.setQuery(nestedBoolQuery("teamskus.description",teamskudescription, "teamskus"));
+            	//searchBuilder.setQuery(nestedBoolQuery("teamskus.description",teamskudescription, "teamskus"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedBoolQuery("teamskus.description",teamskudescription, "teamskus")));
             }
             if(!(teamskuqueryMinPeopleNum==null && teamskuqueryMaxPeopleNum==null)){
-            	searchBuilder.setQuery(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus"));
+            	//searchBuilder.setQuery(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus"));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedComparePeopleNumQuery("teamskus.peopleNumber", teamskuqueryMinPeopleNum,teamskuqueryMaxPeopleNum,"teamskus")));
+            }
+            if(from!=null){
+            	if(from.equals(1)){
+            		//吃
+            		//searchBuilder.setQuery(QueryBuilders.nestedQuery("meals", FilterBuilders.existsFilter("meals")));
+            		filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.nestedQuery("meals", FilterBuilders.existsFilter("meals"))));
+            	}else if(from.equals(2)){
+            		//团体
+            		//searchBuilder.setQuery(QueryBuilders.nestedQuery("teamskus", FilterBuilders.existsFilter("teamskus")));
+            		filterBuilders.add(FilterBuilders.queryFilter(QueryBuilders.nestedQuery("teamskus", FilterBuilders.existsFilter("teamskus"))));
+            	}
+            	
             }
             
             //酒店价格搜索条件
@@ -690,7 +714,8 @@ public class HotelElasticsearchUtil {
             	days.add(DateUtil.dateToStr(datedays.get(i), "yyyyMMdd"));
             }
             if(!(querymaxprice==null && queryminprice==null)){
-            	searchBuilder.setQuery(nestedCompareQuery(days,"prices", queryminprice,querymaxprice));
+            	//searchBuilder.setQuery(nestedCompareQuery(days,"prices", queryminprice,querymaxprice));
+            	filterBuilders.add(FilterBuilders.queryFilter(nestedCompareQuery(days,"prices", queryminprice,querymaxprice)));
             }
             //LBS
             if(longitude!=null &&latitude!=null){
@@ -727,6 +752,8 @@ public class HotelElasticsearchUtil {
                 searchBuilder.setFrom((page - 1) * pagesize).setSize(pagesize);
             }
 
+            
+            
             SearchResponse searchResponse = searchBuilder.execute().actionGet();
             SearchHits searchHits = searchResponse.getHits();
             hits = searchHits.getHits();
