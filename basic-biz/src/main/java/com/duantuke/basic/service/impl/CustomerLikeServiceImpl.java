@@ -46,7 +46,9 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		logger.info("查询用户customer：{}的收藏景点",customerId);
 		CustomerLikeSightExample example = new CustomerLikeSightExample();
 		CustomerLikeSightExample.Criteria criteria = example.createCriteria();
-
+		if(pageItem==null){
+			pageItem = new PageItem();
+		}
 		example.setLimitStart(pageItem.getBegin());
 		example.setLimitEnd(pageItem.getEnd());
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
@@ -66,7 +68,9 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		logger.info("查询用户customer：{}的收藏酒店",customerId);
 		CustomerLikeHotelExample example = new CustomerLikeHotelExample();
 		CustomerLikeHotelExample.Criteria criteria = example.createCriteria();
-
+		if(pageItem==null){
+			pageItem = new PageItem();
+		}
 		example.setLimitStart(pageItem.getBegin());
 		example.setLimitEnd(pageItem.getEnd());
 		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
@@ -84,6 +88,9 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 		logger.info("查询用户customer：{}的收藏酒店",customerId);
 		CustomerLikeJourneyExample example = new CustomerLikeJourneyExample();
 		CustomerLikeJourneyExample.Criteria criteria = example.createCriteria();
+		if(pageItem==null){
+			pageItem = new PageItem();
+		}
 		example.setLimitStart(pageItem.getBegin());
 		example.setLimitEnd(pageItem.getEnd());
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
