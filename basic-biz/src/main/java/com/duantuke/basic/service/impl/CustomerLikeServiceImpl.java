@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.duantuke.basic.enums.BusinessTypeEnum;
 import com.duantuke.basic.enums.IsvisibleEnum;
+import com.duantuke.basic.face.bean.PageItem;
 import com.duantuke.basic.face.service.CustomerLikeService;
 import com.duantuke.basic.mappers.CustomerLikeHotelMapper;
 import com.duantuke.basic.mappers.CustomerLikeJourneyMapper;
@@ -41,11 +42,13 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 	 * 根据用户id查询收藏的景点列表
 	 */
 	@Override
-	public List<Sight> querySights(Long customerId) {
+	public List<Sight> querySights(Long customerId,PageItem pageItem) {
 		logger.info("查询用户customer：{}的收藏景点",customerId);
 		CustomerLikeSightExample example = new CustomerLikeSightExample();
 		CustomerLikeSightExample.Criteria criteria = example.createCriteria();
-		
+
+		example.setLimitStart(pageItem.getBegin());
+		example.setLimitEnd(pageItem.getEnd());
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
 		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.sight.getCode()+""));
@@ -59,11 +62,13 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 	 * 根据用户id查询收藏的酒店列表
 	 */
 	@Override
-	public List<Hotel> queryHotels(Long customerId) {
+	public List<Hotel> queryHotels(Long customerId,PageItem pageItem) {
 		logger.info("查询用户customer：{}的收藏酒店",customerId);
 		CustomerLikeHotelExample example = new CustomerLikeHotelExample();
 		CustomerLikeHotelExample.Criteria criteria = example.createCriteria();
-		
+
+		example.setLimitStart(pageItem.getBegin());
+		example.setLimitEnd(pageItem.getEnd());
 		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
 		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.hotel.getCode()+""));
@@ -74,12 +79,13 @@ public class CustomerLikeServiceImpl implements CustomerLikeService {
 
 
 	@Override
-	public List<Journey> queryJourneys(Long customerId) {
+	public List<Journey> queryJourneys(Long customerId,PageItem pageItem) {
 
 		logger.info("查询用户customer：{}的收藏酒店",customerId);
 		CustomerLikeJourneyExample example = new CustomerLikeJourneyExample();
 		CustomerLikeJourneyExample.Criteria criteria = example.createCriteria();
-		
+		example.setLimitStart(pageItem.getBegin());
+		example.setLimitEnd(pageItem.getEnd());
 //		criteria.andIsvisibleEqualTo(IsvisibleEnum.yes.getCode());
 		criteria.andCustomerIdEqualTo(customerId);
 		criteria.andBusinessTypeEqualTo(Short.valueOf(BusinessTypeEnum.journey.getCode()+""));
