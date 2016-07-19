@@ -331,10 +331,12 @@ public class SkuServiceImpl implements SkuService {
 			for (SkuSubRequest skuSubRequest : skuSubRequests) {
 				skuIds.add(skuSubRequest.getSkuId());
 				skuNumMap.put(skuSubRequest.getSkuId(), skuSubRequest.getNum());
+				
 			}
 		}
-		roomTypes = teamSkuService.queryTeamSkuBySkuIds(skuIds);
 		
+
+		roomTypes = teamSkuService.queryTeamSkuBySkuIds(skuIds);
 		
 		if(CollectionUtils.isEmpty(roomTypes)){
 			logger.info("房型id没有对应酒店，{}",new Gson().toJson(skuSubRequests));
@@ -346,13 +348,13 @@ public class SkuServiceImpl implements SkuService {
 
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrderNum());
+				request.setNum(skuNumMap.get(roomType.getSkuId()));
 				roomMap.get(roomType.getSupplierId()).add(request);
 			}else{
 				List<SkuSubRequest> skuSubRequestList = new ArrayList<SkuSubRequest>();
 				SkuSubRequest request = new SkuSubRequest();
 				request.setSkuId(roomType.getSkuId());
-				request.setNum(roomType.getOrderNum());
+				request.setNum(skuNumMap.get(roomType.getSkuId()));
 				skuSubRequestList.add(request);
 				roomMap.put(roomType.getSupplierId(),skuSubRequestList);
 			}
