@@ -485,7 +485,7 @@ public class SkuServiceImpl implements SkuService {
 		Map<Long, Integer> skuNumMap = new HashMap<Long, Integer>();
 		List<Long> roomtypeIds = new ArrayList<Long>();
 		//如果sku集合为空，则查询所有房型
-		if(CollectionUtils.isNotEmpty(roomtypeIds)){
+		if(CollectionUtils.isNotEmpty(skuSubRequests)){
 			
 			for (SkuSubRequest skuSubRequest : skuSubRequests) {
 				roomtypeIds.add(skuSubRequest.getSkuId());
