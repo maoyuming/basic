@@ -10,7 +10,8 @@ public enum RecommendItemStateEnum {
      wait(0,"待审核"),
      pass(1,"审核通过"),
      nopass(2,"审核不通过"),
-     expire(3,"已过期"),
+     ing(3,"发布中"),
+     expire(4,"已过期"),
      
      ;
      private Integer code;
